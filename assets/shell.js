@@ -21,7 +21,16 @@
       '--cw-purple-700: #732DEC; --cw-purple-800: #5A3279; --cw-orange: #FEB500;' +
       '--cw-orange-light: #ffc933; --cw-red: #FF5959;' +
     '}' +
-    '#sidebar { background: var(--lavanda-bg); border-right-color: var(--borda); }' +
+    '#sidebar { background: linear-gradient(180deg, var(--roxo-primario) 0%, var(--roxo-profundo) 100%); border-right-color: var(--roxo-profundo); }' +
+    '#sidebar .sidebar-logo { background: #fff; }' +
+    '#sidebar .sidebar-topwave { fill: var(--roxo-primario); }' +
+    '#sidebar .nav-item { color: rgba(255,255,255,0.82); }' +
+    '#sidebar .nav-item:hover { color: #fff; background: rgba(255,255,255,0.08); }' +
+    '#sidebar .nav-chevron, #sidebar .nav-group-trigger { color: rgba(255,255,255,0.65); }' +
+    '#sidebar .nav-group-trigger.has-active, #sidebar .nav-group-trigger:hover { color: #fff; }' +
+    '#sidebar .nav-sub-inner::before { background: rgba(255,255,255,0.25); }' +
+    '#sidebar .nav-subitem { color: rgba(255,255,255,0.7); }' +
+    '#sidebar .nav-divider { background: rgba(255,255,255,0.15); }' +
     '#sidebar .sidebar-user { box-shadow: var(--shadow-manual); }' +
     '#sidebar .sidebar-user-avatar { background: linear-gradient(135deg,#f6c6b8,#f3a8c9); box-shadow: 0 0 0 2px var(--lavanda-bg), 0 2px 8px rgba(107,63,160,0.2); }' +
     '#sidebar .sidebar-user-logout { width: 34px; height: 34px; border-radius: 50%; border: 0; background: var(--lavanda-bg); color: var(--roxo-primario); display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: background-color .15s ease; }' +
@@ -31,8 +40,6 @@
     '#sidebar .nav-item-icon { background: var(--lavanda-bg); color: var(--roxo-vibrante); border-radius: 12px; }' +
     '#sidebar .nav-item:hover .nav-item-icon { background: var(--lavanda-destaque); }' +
     '#sidebar .nav-item.active .nav-item-icon { background: #fff; color: var(--roxo-vibrante); box-shadow: 0 3px 8px rgba(107,63,160,.18); }' +
-    '#sidebar .nav-chevron, #sidebar .nav-group-trigger { color: var(--cinza-claro); }' +
-    '#sidebar .nav-divider { background: var(--borda); }' +
     '#sidebar .nav-badge { background: linear-gradient(90deg,#7B2FF7,#9C3CF9); box-shadow: 0 3px 8px rgba(139,47,247,0.3); }' +
     '#sidebar .nav-badge--warn { background: var(--dourado); box-shadow: 0 3px 8px rgba(254,181,0,0.35); color: var(--roxo-profundo); }' +
     '#sidebar .nav-badge--info { background: linear-gradient(90deg,#7B2FF7,#9C3CF9); }' +
@@ -167,12 +174,14 @@
     '<button type="button" class="sidebar-user-logout" title="Sair da conta" onclick="sessionStorage.removeItem(\'cw_test_authorized\'); window.location=\'/index.html\';"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg></button>' +
     '</div>';
 
-  var sidebarTopWaveHtml = '<svg class="sidebar-topwave" viewBox="0 0 264 22" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,0 C 60,22 200,22 264,0 L264,22 L0,22 Z" fill="#fff"></path></svg>';
+  var sidebarTopWaveHtml = '<svg class="sidebar-topwave" viewBox="0 0 264 22" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,0 C 60,22 200,22 264,0 L264,22 L0,22 Z"></path></svg>';
 
   var sidebarSuggestHtml = '<div class="sidebar-suggest"><div class="ssb-body"><div class="ssb-body-inner">' +
-    '<div class="sidebar-suggest-box"><img class="ssb-mascot" src="/assets/mascots/cardapinho.png" alt="Cardapinho"><span class="ssb-text">Sua ideia molda o futuro da plataforma. Compartilhe e vote!</span>' +
+    '<div class="sidebar-suggest-box"><img class="ssb-mascot" src="/assets/mascots/cardapinho.png" alt="Cardapinho">' +
+    '<div class="ssb-title">Sugestões</div>' +
+    '<span class="ssb-text">Sua ideia molda o futuro da plataforma. Compartilhe e vote!</span>' +
     '<div class="ssb-row"><a class="ssb-link" href="#">Ver Sugestões</a><a class="ssb-btn-sm" href="#">+ Sugerir</a></div></div>' +
-    '</div></div><div class="ssb-bar"><span class="ssb-bar-icon">💡</span><span class="ssb-bar-label">Ideias &amp; Produto</span></div></div>';
+    '</div></div><div class="ssb-bar"><span class="ssb-bar-icon">💡</span><span class="ssb-bar-label">Sugestões</span></div></div>';
 
   var sidebarWaveHtml = '<div class="sidebar-wave">' +
     '<svg class="sw-back" viewBox="0 0 264 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,100 L0,45 C 40,10 90,0 140,15 C 190,30 230,55 264,35 L264,100 Z"></path></svg>' +
