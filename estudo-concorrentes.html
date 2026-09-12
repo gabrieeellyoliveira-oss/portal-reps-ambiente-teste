@@ -123,7 +123,7 @@
                   <tbody id="mxBody"></tbody>
                 </table>
               </div>
-              <div class="cp-mx-foot">Mostrando 10 de 27 concorrentes na matriz · use a caixa de seleção acima para ver todos</div>
+              <div class="cp-mx-foot">27 de 27 concorrentes na matriz</div>
             </div>
           </div>
         </main>
@@ -174,7 +174,7 @@
         {name:'Rotas de entrega', sub:'9 de 27 entregam completo · 3 com ressalva'},
         {name:'Integração com totem', sub:'8 de 27 entregam completo · 1 com ressalva'}
       ];
-      var TOP10 = COMPETITORS.slice(0, 10);
+      var TOP10 = COMPETITORS;
       document.getElementById('mxHead').innerHTML = '<th class="c-feat"><span class="lbl">Funcionalidade</span></th><th class="c-cw">Cardápio<br>Web</th>' +
         TOP10.map(function (c) { return '<th class="c-comp"><button class="comp-btn" onclick="openDetail(\'' + c.name + '\')">' + c.name + '</button></th>'; }).join('');
       var MARKS = ['y','y','p','n'];
