@@ -30,6 +30,13 @@
       .ps-sum-total{font-weight:800;font-size:1rem;}
       .ps-submit { width: 100%; margin-top: 14px; padding: 13px; border: none; border-radius: 12px; background: linear-gradient(135deg, #5b21b6, #7c3aed); color: #fff; font-size: 0.92rem; font-weight: 800; cursor: pointer; }
       .ps-summary-note{font-size:.72rem;color:#9ca3af;margin-top:8px;}
+      .ps-impl-switch-row { display: flex; align-items: flex-start; gap: 13px; cursor: pointer; background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 12px; padding: 13px 16px; transition: all .18s; }
+      .ps-impl-switch-row:has(input:checked) { background: #f5f3ff; border-color: #c4b5fd; }
+      .ps-impl-switch-row input { display: none; }
+      .ps-impl-track { width: 44px; height: 24px; border-radius: 20px; background: #cbd5e1; flex-shrink: 0; position: relative; transition: background .18s; margin-top: 2px; }
+      .ps-impl-thumb { position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.25); transition: left .18s; }
+      .ps-impl-switch-row input:checked + .ps-impl-track { background: #7c3aed; }
+      .ps-impl-switch-row input:checked + .ps-impl-track .ps-impl-thumb { left: 23px; }
     </style>
   </head>
   <body>
@@ -87,6 +94,22 @@
                     <p style="font-size:.8rem;color:#9ca3af;margin:6px 0 0;">Plano feito para empresas que trabalham tanto com delivery quanto com salão dentro da sua operação.</p>
                     <div class="ps-modules"><span class="ps-modules-title">Módulos opcionais</span><label><input type="checkbox"> Estoque avançado + R$ 89,97</label><label><input type="checkbox"> Gestão de entregas + R$ 164,97</label><label><input type="checkbox"> Integração com marketplaces + R$ 89,97</label></div>
                   </label>
+                </div>
+              </div>
+              <div class="ps-card">
+                <div class="ps-step-head"><span class="ps-step-num">5</span><h3 style="margin:0;">Implementação</h3></div>
+                <label class="ps-impl-switch-row">
+                  <input type="checkbox">
+                  <span class="ps-impl-track"><span class="ps-impl-thumb"></span></span>
+                  <span class="ps-impl-labels">
+                    <strong>Pedir implementação gratuita da Cardápio Web</strong>
+                    <small>Nosso time entra em contato e faz toda a implementação para o cliente, sem custo.</small>
+                  </span>
+                </label>
+                <div>
+                  <label>Observação para implementação:</label>
+                  <textarea class="form-input"></textarea>
+                  <span class="ps-hint">Vai junto para o time de implementação da Cardápio Web (Pipedrive).</span>
                 </div>
               </div>
             </div>
