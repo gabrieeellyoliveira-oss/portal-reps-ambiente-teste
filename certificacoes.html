@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Certificações — Portal de Representantes | Cardápio Web</title>
+    <link rel="icon" type="image/jpeg" href="/assets/cw-logo-dark-e78e4446.jpg">
+    <link rel="stylesheet" href="/assets/application-cc2f1a53.css" />
+    <style>
+      .avatar-circle{width:34px;height:34px;border-radius:50%;background:#5b21b6;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;}
+      .cf { max-width: 1180px; }
+      .cf-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap; padding: 6px 4px 22px; border-bottom: 1px solid #ece8f6; margin-bottom: 26px; }
+      .cf-head h1 { font-size: 1.75rem; font-weight: 900; letter-spacing: -.6px; color: #1a1330; margin: 0 0 6px; line-height: 1; }
+      .cf-head p { margin: 0; font-size: .86rem; color: #6b6480; max-width: 560px; line-height: 1.5; }
+      .cf-sum { display: flex; gap: 22px; align-items: center; }
+      .cf-sum div { text-align: right; }
+      .cf-sum b { display: block; font-size: 1.35rem; font-weight: 900; color: #1a1330; letter-spacing: -.5px; line-height: 1; }
+      .cf-sum span { font-size: .66rem; font-weight: 700; letter-spacing: .8px; text-transform: uppercase; color: #9a93ad; }
+      .cf-sum b.gold { color: #b45309; }
+      .cf-list { display: flex; flex-direction: column; gap: 18px; }
+      .cf-card { position: relative; display: flex; gap: 20px; background: #fff; border: 1px solid #ece8f6; border-radius: 18px; padding: 20px; }
+      .cf-art { flex: none; }
+      .cf-art .doc { width: 100px; height: 100px; border-radius: 14px; background: #f4f0fb; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+      .cf-art .doc img { width: 60%; }
+      .cf-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+      .cf-kicker { display: flex; align-items: center; gap: 10px; font-size: .68rem; font-weight: 800; letter-spacing: .6px; text-transform: uppercase; color: #9a93ad; }
+      .cf-kicker .num { color: #7c3aed; }
+      .cf-kicker .st { background: #ecfdf5; color: #059669; padding: 2px 8px; border-radius: 999px; font-size: .62rem; }
+      .cf-body h2 { margin: 0; font-size: 1.05rem; }
+      .cf-body h2 a { color: #1a1330; text-decoration: none; }
+      .cf-body p { margin: 0; font-size: .8rem; color: #6b6480; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+      .cf-steps { display: flex; align-items: center; gap: 0; margin-bottom: 14px; }
+      .cf-step { display: flex; align-items: center; gap: 9px; min-width: 0; }
+      .cf-step .dot { width: 26px; height: 26px; border-radius: 50%; border: 2px solid #e2dcf2; background: #fff; display: flex; align-items: center; justify-content: center; font-size: .66rem; font-weight: 900; color: #9a93ad; flex: none; }
+      .cf-step.on .dot { border-color: #7c3aed; color: #7c3aed; box-shadow: 0 0 0 4px rgba(124,58,237,.12); }
+      .cf-step.ok .dot { border-color: #10b981; background: #10b981; color: #fff; }
+      .cf-step .lb { line-height: 1.15; }
+      .cf-step .lb b { display: block; font-size: .74rem; font-weight: 800; color: #1a1330; }
+      .cf-step .lb small { font-size: .66rem; color: #8f88a3; font-weight: 600; white-space: nowrap; }
+      .cf-step.on .lb b { color: #6d28d9; }
+      .cf-line { flex: 1; height: 2px; background: #ece8f6; margin: 0 12px; min-width: 22px; max-width: 70px; border-radius: 2px; }
+      .cf-meta { display: flex; gap: 14px; flex-wrap: wrap; font-size: .7rem; color: #8f88a3; font-weight: 600; }
+      .cf-meta span::before { content: "·"; margin-right: 14px; color: #d9d3e8; }
+      .cf-meta span:first-child::before { content: none; margin: 0; }
+      .cf-side { display: flex; flex-direction: column; align-items: flex-end; justify-content: center; gap: 14px; min-width: 140px; flex: none; }
+      .cf-btn { background: linear-gradient(135deg,#5b21b6,#7c3aed); color: #fff; border: none; border-radius: 10px; padding: 10px 20px; font-size: .82rem; font-weight: 700; cursor: pointer; }
+    </style>
+  </head>
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar" id="sidebar"></aside>
+      <div class="main-wrapper">
+        <header class="top-header" id="top-header"></header>
+        <main class="page-content">
+          <div class="cf">
+            <div class="cf-head">
+              <div>
+                <h1>Certificações</h1>
+                <p>Assista às aulas, faça a prova e emita seu certificado oficial Cardápio Web — pronto para o LinkedIn.</p>
+              </div>
+              <div class="cf-sum">
+                <div><b>2</b><span>disponíveis</span></div>
+                <div><b>0</b><span>em andamento</span></div>
+                <div><b class="gold">0</b><span>conquistadas</span></div>
+              </div>
+            </div>
+            <div class="cf-list" id="cfList"></div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <script src="/assets/shell.js" data-title="Certificações"></script>
+    <script>
+      var CERTS = [
+        {n:1, title:'Certificação Implementação Cardápio Web', desc:'Certificado de conclusão do módulo de Implementação Cardápio Web, obtido mediante aprovação na avaliação prática do treinamento. Habilita o representante a executar o processo de implementação de novos clientes de forma independente, seguindo o playbook oficial do Programa de Representantes.', aulas:'0/5 assistidas'},
+        {n:2, title:'Certificação Suporte Cardápio Web', desc:'Treinamento de Suporte Cardápio Web, destinado a representantes do Programa de Representantes. Capacita o representante a atuar no atendimento pós-implementação: identificação e resolução de problemas recorrentes, orientação ao cliente no uso da plataforma e escalonamento correto de chamados que exigem suporte técnico especializado, garantindo continuidade operacional e retenção do cliente.', aulas:'0/5 assistidas'}
+      ];
+      document.getElementById('cfList').innerHTML = CERTS.map(function (c) {
+        return '<article class="cf-card"><a class="cf-art"><div class="doc"><img src="/assets/cw-logo-dark-e78e4446.jpg"></div></a>' +
+          '<div class="cf-body"><div class="cf-kicker"><span class="num">' + String(c.n).padStart(2,'0') + '</span> Certificação oficial <span class="st">Nova</span></div>' +
+          '<h2><a>' + c.title + '</a></h2><p>' + c.desc + '</p>' +
+          '<div class="cf-steps"><div class="cf-step on"><span class="dot">1</span><span class="lb"><b>Aulas</b><small>' + c.aulas + '</small></span></div>' +
+          '<div class="cf-line"></div><div class="cf-step"><span class="dot">2</span><span class="lb"><b>Prova</b><small>10 perguntas · 50 min</small></span></div>' +
+          '<div class="cf-line"></div><div class="cf-step"><span class="dot">3</span><span class="lb"><b>Certificado</b><small>PDF + LinkedIn</small></span></div></div>' +
+          '<div class="cf-meta"><span>5 aulas</span><span>10 perguntas</span><span>aprova com 7 de 10 pts</span><span>carência de 7 dias</span></div></div>' +
+          '<div class="cf-side"><button class="cf-btn">Começar</button></div></article>';
+      }).join('');
+    </script>
+  </body>
+</html>
