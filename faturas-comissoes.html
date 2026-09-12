@@ -72,6 +72,7 @@
         </main>
       </div>
     </div>
+    <script src="/assets/fakedata.js"></script>
     <script src="/assets/shell.js" data-title="Fatura / Comissão"></script>
     <script>
       function showTab(t) {
@@ -80,6 +81,11 @@
         document.getElementById('comissoes-panel').style.display = t === 'comissoes' ? '' : 'none';
       }
       var REPS = ['Adiel Bruno Santos de Melo (#22249)','Alessandro Rodrigues da Silva (#16804)','Alex Salomão dos Anjos (#23273)','Alexssander Rodrigo de Oliveira (#20402)','Alisson Gomes dos Santos (#23272)','Anderson Rodrigo Andrade do Nascimento (#21787)','André Ângelo Ferreira da Silva (#22484)','Andre Luis Magrini Tietz (#25648)','Antonio Jean da Silva (#22250)','Marco Aurélio Melo Luna (#16408)'];
+      // Completa até o total real de 121 representantes com dados fictícios gerados
+      for (var ri = 0; REPS.length < 121; ri++) {
+        var idx = 6000 + ri;
+        REPS.push(FakeData.genPerson(idx) + ' (#' + (17000 + idx % 9000) + ')');
+      }
       document.getElementById('repSelect').innerHTML = REPS.map(function(r){ return '<option' + (r.indexOf('Marco Aurélio')===0 ? ' selected' : '') + '>'+r+'</option>'; }).join('');
 
       var COMM_ROWS = [
