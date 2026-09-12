@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Gestão de Encontros — Portal de Representantes | Cardápio Web</title>
+    <link rel="icon" type="image/jpeg" href="/assets/cw-logo-dark-e78e4446.jpg">
+    <link rel="stylesheet" href="/assets/application-cc2f1a53.css" />
+    <style>
+      .avatar-circle{width:34px;height:34px;border-radius:50%;background:#5b21b6;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;}
+    </style>
+  </head>
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar" id="sidebar"></aside>
+      <div class="main-wrapper">
+        <header class="top-header" id="top-header"></header>
+        <main class="page-content">
+          <div class="mt-head">
+            <div><h1 class="mt-title">Gestão de Encontros</h1><p class="mt-sub">Cadastre encontros, acompanhe inscrições e confirme presenças (check-in).</p></div>
+            <div><a class="mt-btn mt-btn-ghost">👁 Ver como Rep</a> <a class="mt-btn mt-btn-primary">+ Novo Encontro</a></div>
+          </div>
+          <div class="amt-section">
+            <div class="mt-month-head"><span class="mt-month-label">Próximos encontros</span><span class="mt-month-line"></span><span class="mt-month-count">0</span></div>
+            <p>Nenhum encontro aqui.</p>
+          </div>
+          <div class="amt-section">
+            <div class="mt-month-head"><span class="mt-month-label">Encontros passados</span><span class="mt-month-line"></span><span class="mt-month-count">6</span></div>
+            <table class="data-table">
+              <thead><tr><th>Data</th><th>Encontro</th><th>Tipo</th><th class="text-center">Inscritos</th><th class="text-center">Presenças</th><th>Status</th><th class="text-center">Ações</th></tr></thead>
+              <tbody>
+                <tr><td><div class="rep-name-main">08/09/26</div><div class="rep-name-sub">19:00</div></td><td><span class="rep-name-main">Mentoria dos Representantes - Tira Dúvidas</span></td><td><span class="amt-kind amt-kind-online">🎥 Online</span></td><td class="text-center">0</td><td class="text-center" style="color:#16a34a;font-weight:700;">12</td><td><span class="status-badge status-active">Publicado</span></td><td class="text-center"><div class="action-buttons"><a class="action-btn">↻</a><a class="action-btn action-edit">✎</a><button class="action-btn action-delete">🗑</button></div></td></tr>
+                <tr><td><div class="rep-name-main">25/08/26</div><div class="rep-name-sub">16:30</div></td><td><span class="rep-name-main">Treinamento: Portal CW</span><div class="rep-name-sub">Treinamento voltado para as abas mais utilizadas durante o dia-a-di...</div></td><td><span class="amt-kind amt-kind-online">🎥 Online</span></td><td class="text-center">4</td><td class="text-center" style="color:#16a34a;font-weight:700;">3</td><td><span class="status-badge status-active">Publicado</span></td><td class="text-center"><div class="action-buttons"><a class="action-btn">↻</a><a class="action-btn action-edit">✎</a><button class="action-btn action-delete">🗑</button></div></td></tr>
+                <tr><td><div class="rep-name-main">24/08/26</div><div class="rep-name-sub">19:00</div></td><td><span class="rep-name-main">Como criar um Cardápio Campeão</span></td><td><span class="amt-kind amt-kind-online">🎥 Online</span></td><td class="text-center">2</td><td class="text-center" style="color:#16a34a;font-weight:700;">13</td><td><span class="status-badge status-active">Publicado</span></td><td class="text-center"><div class="action-buttons"><a class="action-btn">↻</a><a class="action-btn action-edit">✎</a><button class="action-btn action-delete">🗑</button></div></td></tr>
+                <tr><td><div class="rep-name-main">17/08/26</div><div class="rep-name-sub">20:00</div></td><td><span class="rep-name-main">Guia Prático de Vendas: Do 0 ao 1º Cliente</span></td><td><span class="amt-kind amt-kind-online">🎥 Online</span></td><td class="text-center">2</td><td class="text-center" style="color:#16a34a;font-weight:700;">8</td><td><span class="status-badge status-active">Publicado</span></td><td class="text-center"><div class="action-buttons"><a class="action-btn">↻</a><a class="action-btn action-edit">✎</a><button class="action-btn action-delete">🗑</button></div></td></tr>
+                <tr><td><div class="rep-name-main">10/08/26</div><div class="rep-name-sub">20:00</div></td><td><span class="rep-name-main">Cardápio Web como Ecommerce do Restaurantes</span><div class="rep-name-sub">Vamos falar sobre o que é o Ecommercer dos Restaurantes e os nossos...</div></td><td><span class="amt-kind amt-kind-online">🎥 Online</span></td><td class="text-center">0</td><td class="text-center" style="color:#16a34a;font-weight:700;">6</td><td><span class="status-badge status-active">Publicado</span></td><td class="text-center"><div class="action-buttons"><a class="action-btn">↻</a><a class="action-btn action-edit">✎</a><button class="action-btn action-delete">🗑</button></div></td></tr>
+                <tr><td><div class="rep-name-main">03/08/26</div><div class="rep-name-sub">20:00</div></td><td><span class="rep-name-main">Encontro de Representantes - Atualizações e Tira Dúvidas</span><div class="rep-name-sub">Nesse encontro vamos apresentar as novas atualizações do portal do...</div></td><td><span class="amt-kind amt-kind-online">🎥 Online</span></td><td class="text-center">3</td><td class="text-center" style="color:#16a34a;font-weight:700;">8</td><td><span class="status-badge status-active">Publicado</span></td><td class="text-center"><div class="action-buttons"><a class="action-btn">↻</a><a class="action-btn action-edit">✎</a><button class="action-btn action-delete">🗑</button></div></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </main>
+      </div>
+    </div>
+    <script src="/assets/shell.js" data-title="Gestão de Encontros"></script>
+  </body>
+</html>

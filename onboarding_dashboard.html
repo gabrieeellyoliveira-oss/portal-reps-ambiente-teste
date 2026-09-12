@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Dashboard de Capacitação — Portal de Representantes | Cardápio Web</title>
+    <link rel="icon" type="image/jpeg" href="/assets/cw-logo-dark-e78e4446.jpg">
+    <link rel="stylesheet" href="/assets/application-cc2f1a53.css" />
+    <style>
+      .avatar-circle{width:34px;height:34px;border-radius:50%;background:#5b21b6;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;}
+    </style>
+  </head>
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar" id="sidebar"></aside>
+      <div class="main-wrapper">
+        <header class="top-header" id="top-header"></header>
+        <main class="page-content">
+          <div class="onb-page-header"><div><h1 class="onb-page-title">Dashboard de Capacitação</h1><p class="onb-page-subtitle">Visão geral do onboarding e roleplay dos representantes</p></div></div>
+          <div class="onb-kpi-grid">
+            <a class="onb-kpi-card"><div class="onb-kpi-icon">📋</div><div class="onb-kpi-info"><div class="onb-kpi-value">110</div><div class="onb-kpi-label">Rep's Matriculados</div></div></a>
+            <a class="onb-kpi-card"><div class="onb-kpi-icon">✅</div><div class="onb-kpi-info"><div class="onb-kpi-value">5</div><div class="onb-kpi-label">Onboardings Completos</div></div></a>
+            <a class="onb-kpi-card"><div class="onb-kpi-icon">⏳</div><div class="onb-kpi-info"><div class="onb-kpi-value">42</div><div class="onb-kpi-label">Em Progresso</div></div></a>
+            <a class="onb-kpi-card"><div class="onb-kpi-icon">📊</div><div class="onb-kpi-info"><div class="onb-kpi-value">9%</div><div class="onb-kpi-label">Progresso Médio</div></div></a>
+          </div>
+          <div class="onb-dashboard-grid">
+            <div class="onb-dash-card onb-dash-card-wide">
+              <div class="onb-dash-card-header"><h3>Progresso dos Representantes <span>top 10 · clique num card acima para filtrar</span></h3><a class="btn-cw-ghost-sm">Ver Templates →</a></div>
+              <div class="onb-table-wrapper">
+                <table class="onb-table">
+                  <thead><tr><th>Representante</th><th>Template</th><th>Progresso</th><th>Status</th><th>Iniciado em</th></tr></thead>
+                  <tbody id="tbody"></tbody>
+                </table>
+              </div>
+            </div>
+            <div class="onb-dash-card">
+              <div class="onb-dash-card-header"><h3>Roleplay — Visão Geral</h3></div>
+              <div class="onb-roleplay-metrics">
+                <div class="onb-metric-row"><span class="onb-metric-label">Total de Avaliações</span><span class="onb-metric-value">0</span></div>
+                <div class="onb-metric-row"><span class="onb-metric-label">Nota Média</span><span class="onb-metric-value">0</span></div>
+                <div class="onb-metric-divider"></div>
+                <h4 class="onb-metric-subtitle">Distribuição de Badges</h4>
+                <div class="onb-badge-row"><span class="onb-badge-label">🔴 Novato</span><span class="onb-badge-count">0</span></div>
+                <div class="onb-badge-row"><span class="onb-badge-label">🟠 Aprendiz</span><span class="onb-badge-count">0</span></div>
+                <div class="onb-badge-row"><span class="onb-badge-label">🟡 Intermediário</span><span class="onb-badge-count">0</span></div>
+                <div class="onb-badge-row"><span class="onb-badge-label">🔵 Avançado</span><span class="onb-badge-count">0</span></div>
+                <div class="onb-badge-row"><span class="onb-badge-label">🟣 Expert</span><span class="onb-badge-count">0</span></div>
+              </div>
+            </div>
+            <div class="onb-dash-card">
+              <div class="onb-dash-card-header"><h3>🏆 Ranking Roleplay <a class="btn-cw-ghost-sm">Ver Todas →</a></h3></div>
+              <div class="onb-ranking-list">
+                <div class="text-center text-muted">Nenhum roleplay realizado.</div>
+              </div>
+            </div>
+            <div class="onb-dash-card onb-dash-card-wide">
+              <div class="onb-dash-card-header"><h3>🎓 Ranking de Treinamentos — Quem mais concluiu <a class="btn-cw-ghost-sm">Ver Treinamentos →</a></h3></div>
+              <div class="onb-table-wrapper">
+                <table class="onb-table">
+                  <thead><tr><th>#</th><th>Representante</th><th>XP</th><th>Nível</th><th>Conteúdos Concluídos</th><th>Progresso</th></tr></thead>
+                  <tbody id="rankTbody"></tbody>
+                </table>
+              </div>
+            </div>
+            <div class="onb-dash-card onb-dash-card-wide onb-alerts-card">
+              <div class="onb-dash-card-header"><h3>⚠️ Alertas</h3></div>
+              <div class="onb-alerts-grid">
+                <div class="onb-alert-section">
+                  <h4 class="onb-alert-title">🔴 Notas Baixas (&lt; 6.0)</h4>
+                  <div class="onb-alert-empty">✅ Nenhum representante com nota baixa</div>
+                </div>
+                <div class="onb-alert-section">
+                  <h4 class="onb-alert-title">🟠 Sem Roleplay há 3+ meses</h4>
+                  <div class="onb-alert-empty">✅ Todos em dia</div>
+                  <h4 class="onb-alert-title">🚫 Nunca fizeram roleplay</h4>
+                  <div id="neverRoleplay"></div>
+                  <div class="text-center text-muted" style="padding:8px;font-size:.8rem;">+ 93 outros representantes sem roleplay</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <script src="/assets/shell.js" data-title="Dashboard de Capacitação"></script>
+    <script>
+      var ROWS = [
+        {name:'Isac Augusto Bezerra de Barros', p:100, color:'#10b981', status:'Concluído', date:'27/07/2026'},
+        {name:'Marco Aurélio Melo Luna', p:100, color:'#10b981', status:'Concluído', date:'15/04/2026'},
+        {name:'Rogério Carlos Cristianini Junior', p:96, color:'#f59e0b', status:'Concluído', date:'16/06/2026'},
+        {name:'Arenilton Lima E Silva Assunção', p:96, color:'#f59e0b', status:'Concluído', date:'16/04/2026'},
+        {name:'Rafael Patrício Ferreira', p:96, color:'#f59e0b', status:'Concluído', date:'15/04/2026'},
+        {name:'Rodrigo Tadeu de Souza', p:96, color:'#f59e0b', status:'Em Progresso', date:'29/04/2026'},
+        {name:'Paulo Henrique Dias Torres', p:88, color:'#f59e0b', status:'Em Progresso', date:'16/06/2026'},
+        {name:'Fredy Abel Giménez Villar', p:88, color:'#f59e0b', status:'Em Progresso', date:'17/04/2026'},
+        {name:'Walter Alves da Silva Filho', p:85, color:'#f59e0b', status:'Em Progresso', date:'15/04/2026'},
+        {name:'Helber Leandro', p:85, color:'#f59e0b', status:'Em Progresso', date:'19/06/2026'}
+      ];
+      document.getElementById('tbody').innerHTML = ROWS.map(function (r) {
+        var initials = r.name.split(' ').slice(0,2).map(function(w){return w[0];}).join('').toUpperCase();
+        return '<tr><td><div class="onb-rep-cell"><div class="tr-rank-avatar"><span>' + initials + '</span></div><span>' + r.name + '</span></div></td>' +
+          '<td class="text-muted">Onboarding de Representante</td>' +
+          '<td><div class="onb-progress-cell"><div class="onb-progress-bar-mini"><div class="onb-progress-fill" style="width:' + r.p + '%;background:' + r.color + ';"></div></div><span class="onb-progress-text">' + r.p + '%</span></div></td>' +
+          '<td><span class="onb-status-badge">' + r.status + '</span></td>' +
+          '<td class="text-muted">' + r.date + '</td></tr>';
+      }).join('');
+
+      var RANK = [
+        {rank:'🥇', name:'Vivianna Maria Costa do Nascimento', xp:'⚡ 550', lvl:'Nv. 5', cont:'27/31', pct:87},
+        {rank:'🥈', name:'Fernando Braga de Sousa', xp:'⚡ 550', lvl:'Nv. 5', cont:'27/31', pct:87},
+        {rank:'🥉', name:'Marco Aurélio Melo Luna', xp:'⚡ 590', lvl:'Nv. 5', cont:'26/31', pct:84},
+        {rank:'4º', name:'Paulo Henrique Dias Torres', xp:'⚡ 500', lvl:'Nv. 5', cont:'24/31', pct:77},
+        {rank:'5º', name:'Rafael Patrício Ferreira', xp:'⚡ 480', lvl:'Nv. 4', cont:'22/31', pct:71},
+        {rank:'6º', name:'Guilherme do Amaral Silveira', xp:'⚡ 370', lvl:'Nv. 3', cont:'18/31', pct:58},
+        {rank:'7º', name:'Thiago Francisco Vargas', xp:'⚡ 280', lvl:'Nv. 2', cont:'18/31', pct:58},
+        {rank:'8º', name:'Isac Augusto Bezerra de Barros', xp:'⚡ 420', lvl:'Nv. 4', cont:'16/31', pct:52},
+        {rank:'9º', name:'Luiz Claudio da Silva Borges', xp:'⚡ 350', lvl:'Nv. 3', cont:'16/31', pct:52},
+        {rank:'10º', name:'Wdeyverson Madeira de Freitas', xp:'⚡ 235', lvl:'Nv. 2', cont:'16/31', pct:52}
+      ];
+      document.getElementById('rankTbody').innerHTML = RANK.map(function (r) {
+        var initials = r.name.split(' ').slice(0,2).map(function(w){return w[0];}).join('').toUpperCase();
+        return '<tr><td>' + r.rank + '</td>' +
+          '<td><div class="onb-rep-cell"><div class="tr-rank-avatar"><span>' + initials + '</span></div><span>' + r.name + '</span></div></td>' +
+          '<td>' + r.xp + '</td>' +
+          '<td><span class="onb-status-badge">' + r.lvl + '</span></td>' +
+          '<td class="text-center">' + r.cont + '</td>' +
+          '<td><div class="onb-progress-cell"><div class="onb-progress-bar-mini"><div class="onb-progress-fill" style="width:' + r.pct + '%;background:#f59e0b;"></div></div><span class="onb-progress-text">' + r.pct + '%</span></div></td></tr>';
+      }).join('');
+
+      var NEVER = ['Gabriel Coelho','Eduardo Magalhães','Rodrigo Tadeu de Souza','Marco Aurélio Melo Luna','Arenilton Lima E Silva Assunção','Paulo Vinicius Cavalcante Macedo','Eliab Américo Coutinho','Rafael Patrício Ferreira','Luiz Omar Pereira da Silva','Mozart Moura','Fredy Abel Giménez Villar','Walter Alves da Silva Filho','Alessandro Rodrigues da Silva','Guilherme do Amaral Silveira'];
+      document.getElementById('neverRoleplay').innerHTML = NEVER.map(function (n) {
+        return '<div class="onb-alert-item danger"><div class="onb-alert-rep">' + n + '</div><div class="onb-alert-detail">Nenhum roleplay registrado</div></div>';
+      }).join('');
+    </script>
+  </body>
+</html>

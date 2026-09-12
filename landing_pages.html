@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Página de Captura — Portal de Representantes | Cardápio Web</title>
+    <link rel="icon" type="image/jpeg" href="/assets/cw-logo-dark-e78e4446.jpg">
+    <link rel="stylesheet" href="/assets/application-cc2f1a53.css" />
+    <style>
+      .avatar-circle{width:34px;height:34px;border-radius:50%;background:#5b21b6;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;}
+    </style>
+  </head>
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar" id="sidebar"></aside>
+      <div class="main-wrapper">
+        <header class="top-header" id="top-header"></header>
+        <main class="page-content">
+          <div class="lp-header">
+            <div class="lp-header-left"><h1>🌐 Páginas de Captura</h1><p class="text-muted">Crie landing pages profissionais e capture leads diretamente para seu CRM.</p></div>
+            <button class="btn btn-primary btn-sm">+ Nova Página</button>
+          </div>
+          <div class="lp-filter-bar">
+            <label>Representante: </label>
+            <select class="form-input"><option>Todos</option></select>
+          </div>
+          <div class="lp-stats-bar">
+            <div class="lp-stat"><span class="lp-stat-icon">📄</span><div><span class="lp-stat-value">12</span><span class="lp-stat-label">Total</span></div></div>
+            <div class="lp-stat"><span class="lp-stat-icon">🟢</span><div><span class="lp-stat-value">10</span><span class="lp-stat-label">Publicadas</span></div></div>
+            <div class="lp-stat"><span class="lp-stat-icon">👁</span><div><span class="lp-stat-value">530</span><span class="lp-stat-label">Visitas</span></div></div>
+            <div class="lp-stat"><span class="lp-stat-icon">📥</span><div><span class="lp-stat-value">24</span><span class="lp-stat-label">Leads</span></div></div>
+          </div>
+          <div class="lp-cards-grid" id="grid"></div>
+        </main>
+      </div>
+    </div>
+    <script src="/assets/shell.js" data-title="Página de Captura"></script>
+    <script>
+      var CARDS = [
+        {title:'Cardápio Digital completo para restau...', sub:'Cardápio digital, sistema de gestão e integraçã...', slug:'/p/rodrigo-cardapio-web', rep:'Rodrigo Almeida Santos', visits:69, leads:3, conv:'4.3%'},
+        {title:'Cardápio Digital completo para restau...', sub:'Cardápio digital, sistema de gestão e integraçã...', slug:'/p/sao-luis-diego-rocha', rep:'Diego Martins Rocha', visits:198, leads:15, conv:'7.6%'}
+      ];
+      document.getElementById('grid').innerHTML = CARDS.map(function (c) {
+        return '<div class="lp-card"><div class="lp-card-preview"><div class="lp-card-preview-content">' +
+          '<span class="lp-card-preview-title">' + c.title + '</span><span class="lp-card-preview-subtitle">' + c.sub + '</span></div>' +
+          '<div class="lp-card-status"><span class="lp-status-badge">● Publicada</span></div></div>' +
+          '<div class="lp-card-body">' +
+          '<div class="lp-card-slug"><span>🔗</span><code>' + c.slug + '</code><button class="lp-copy-btn">⧉</button></div>' +
+          '<div class="lp-card-rep">👤 ' + c.rep + '</div>' +
+          '<div class="lp-card-metrics">' +
+          '<div class="lp-metric"><span class="lp-metric-value">' + c.visits + '</span><span class="lp-metric-label">👁 Visitas</span></div>' +
+          '<div class="lp-metric"><span class="lp-metric-value">' + c.leads + '</span><span class="lp-metric-label">📥 Leads</span></div>' +
+          '<div class="lp-metric"><span class="lp-metric-value">' + c.conv + '</span><span class="lp-metric-label">📊 Conv.</span></div>' +
+          '</div>' +
+          '<div class="lp-card-actions"><button class="btn btn-sm btn-outline">✎ Editar</button><button class="btn btn-sm btn-outline">👁 Ver</button><button class="btn btn-sm btn-warning-outline">⏸ Despublicar</button><button class="btn btn-sm btn-danger-outline">🗑</button></div>' +
+          '</div></div>';
+      }).join('');
+    </script>
+  </body>
+</html>

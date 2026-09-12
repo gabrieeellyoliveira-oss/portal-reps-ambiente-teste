@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Nova Assinatura — Portal de Representantes | Cardápio Web</title>
+    <link rel="icon" type="image/jpeg" href="/assets/cw-logo-dark-e78e4446.jpg">
+    <link rel="stylesheet" href="/assets/application-cc2f1a53.css" />
+    <style>
+      .avatar-circle{width:34px;height:34px;border-radius:50%;background:#5b21b6;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;}
+      .ps-hero { background: linear-gradient(135deg, #4c1d95, #7c3aed); border-radius: 16px; padding: 24px 28px; color: #fff; margin-bottom: 20px; }
+      .ps-layout { display: grid; grid-template-columns: 1fr 300px; gap: 18px; align-items: start; }
+      .ps-main{display:flex;flex-direction:column;gap:18px;}
+      .ps-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 14px; padding: 20px 22px; }
+      .ps-step-head { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+      .ps-step-num { width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; background: linear-gradient(135deg, #5b21b6, #7c3aed); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.82rem; font-weight: 800; }
+      .ps-hint{font-size:.75rem;color:#9ca3af;margin-top:-8px;margin-bottom:12px;}
+      .ps-segments{display:flex;gap:6px;flex-wrap:wrap;}
+      .ps-seg-chip span{border:1px solid #ddd;border-radius:16px;padding:4px 10px;font-size:.78rem;cursor:pointer;}
+      .ps-plans{display:flex;flex-direction:column;gap:12px;}
+      .ps-plan-card { display: block; border: 2px solid #e5e7eb; border-radius: 14px; padding: 16px 18px; cursor: pointer; position: relative; }
+      .ps-plan-card.ps-selected { border-color: #7c3aed; background: #faf5ff; box-shadow: 0 6px 20px rgba(124,58,237,.12); }
+      .ps-plan-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+      .ps-plan-price { font-size: 1rem; font-weight: 800; color: #7c3aed; white-space: nowrap; }
+      .ps-modules { margin-top: 12px; border-top: 1px dashed #e5e7eb; padding-top: 10px; display: flex; flex-direction: column; gap: 6px; }
+      .ps-modules-title { font-size: 0.7rem; font-weight: 700; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.5px; }
+      .ps-summary-card{background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:18px;position:sticky;top:20px;}
+      .ps-sum-row{display:flex;justify-content:space-between;font-size:.85rem;margin:6px 0;}
+      .ps-sum-divider{border-top:1px solid #eee;margin:10px 0;}
+      .ps-sum-total{font-weight:800;font-size:1rem;}
+      .ps-submit { width: 100%; margin-top: 14px; padding: 13px; border: none; border-radius: 12px; background: linear-gradient(135deg, #5b21b6, #7c3aed); color: #fff; font-size: 0.92rem; font-weight: 800; cursor: pointer; }
+      .ps-summary-note{font-size:.72rem;color:#9ca3af;margin-top:8px;}
+    </style>
+  </head>
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar" id="sidebar"></aside>
+      <div class="main-wrapper">
+        <header class="top-header" id="top-header"></header>
+        <main class="page-content">
+          <div class="ps-hero">
+            <h2 style="margin:0;">💳 Nova Conta + Estabelecimento + Assinatura</h2>
+            <p style="margin:6px 0 0;font-size:.85rem;">Crie a conta do proprietário, o estabelecimento e a assinatura direto no Portal de Parceiros — no final você recebe o <b>link de pagamento</b> para enviar ao cliente.</p>
+          </div>
+          <div class="ps-layout">
+            <div class="ps-main">
+              <div class="ps-card">
+                <div class="ps-step-head"><span class="ps-step-num">1</span><h3 style="margin:0;">Representante</h3></div>
+                <select class="form-input"><option>— Selecione o representante —</option></select>
+              </div>
+              <div class="ps-card">
+                <div class="ps-step-head"><span class="ps-step-num">2</span><h3 style="margin:0;">Conta do Proprietário</h3></div>
+                <div class="form-group"><label>Nome completo do responsável *</label><input class="form-input" placeholder="Nome da PESSOA de contato — ex: Maria da Silva"></div>
+                <div class="form-group"><label>CPF / CNPJ *</label><input class="form-input" placeholder="Somente números"></div>
+                <div class="form-group"><label>E-mail *</label><input class="form-input" placeholder="email@cliente.com"></div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                  <div class="form-group"><label>Telefone / WhatsApp *</label><input class="form-input" placeholder="(85) 99999-9999"></div>
+                  <div class="form-group"><label>CEP *</label><input class="form-input" placeholder="00000-000"></div>
+                </div>
+                <div class="form-group"><label>Rua *</label><input class="form-input" placeholder="Rua, Avenida..."></div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                  <div class="form-group"><label>Número *</label><input class="form-input" placeholder="123"></div>
+                  <div class="form-group"><label>Bairro *</label><input class="form-input" placeholder="Bairro"></div>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                  <div class="form-group"><label>Cidade *</label><input class="form-input" placeholder="Cidade"></div>
+                  <div class="form-group"><label>UF *</label><input class="form-input" placeholder="CE"></div>
+                </div>
+              </div>
+              <div class="ps-card">
+                <div class="ps-step-head"><span class="ps-step-num">3</span><h3 style="margin:0;">Estabelecimento</h3></div>
+                <div class="form-group"><label>Nome do estabelecimento *</label><input class="form-input" placeholder="Ex: Pizzaria do João"></div>
+                <div class="form-group"><label>Identificador (URL) *</label><input class="form-input" placeholder="pizzaria_do_joao"></div>
+                <label class="ps-modules-title">Segmento(s) *</label>
+                <div class="ps-segments">
+                  <label class="ps-seg-chip"><input type="checkbox"><span>Açaíteria</span></label><label class="ps-seg-chip"><input type="checkbox"><span>Bar</span></label><label class="ps-seg-chip"><input type="checkbox"><span>Barraca de praia</span></label><label class="ps-seg-chip"><input type="checkbox"><span>Cafeteria</span></label><label class="ps-seg-chip"><input type="checkbox"><span>Hamburgueria</span></label><label class="ps-seg-chip"><input type="checkbox"><span>Lanchonete</span></label><label class="ps-seg-chip"><input type="checkbox"><span>Padaria</span></label><label class="ps-seg-chip"><input type="checkbox"><span>Pizzaria</span></label><label class="ps-seg-chip"><input type="checkbox"><span>Restaurante</span></label><label class="ps-seg-chip"><input type="checkbox"><span>Sushi</span></label>
+                </div>
+              </div>
+              <div class="ps-card">
+                <div class="ps-step-head"><span class="ps-step-num">4</span><h3 style="margin:0;">Plano e Módulos</h3></div>
+                <div class="ps-plans">
+                  <label class="ps-plan-card ps-selected"><div class="ps-plan-top"><strong>[2026][MEN] Plano Mesas</strong><span class="ps-plan-price">R$ 169,99/mês</span></div>
+                    <p style="font-size:.8rem;color:#9ca3af;margin:6px 0 0;">Plano feito para empresas que trabalham tanto com delivery quanto com salão dentro da sua operação.</p>
+                    <div class="ps-modules"><span class="ps-modules-title">Módulos opcionais</span><label><input type="checkbox"> Estoque avançado + R$ 29,99</label><label><input type="checkbox"> Gestão de entregas + R$ 54,99</label><label><input type="checkbox"> Integração com marketplaces + R$ 29,99</label></div>
+                  </label>
+                  <label class="ps-plan-card"><div class="ps-plan-top"><strong>[2026][TRI] Plano Mesas</strong><span class="ps-plan-price">R$ 479,97/quarterly</span></div>
+                    <p style="font-size:.8rem;color:#9ca3af;margin:6px 0 0;">Plano feito para empresas que trabalham tanto com delivery quanto com salão dentro da sua operação.</p>
+                    <div class="ps-modules"><span class="ps-modules-title">Módulos opcionais</span><label><input type="checkbox"> Estoque avançado + R$ 89,97</label><label><input type="checkbox"> Gestão de entregas + R$ 164,97</label><label><input type="checkbox"> Integração com marketplaces + R$ 89,97</label></div>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="ps-summary-card">
+              <h4 style="margin-top:0;">🧾 Resumo da Assinatura</h4>
+              <div class="ps-sum-row"><span>Estabelecimento</span><span>—</span></div>
+              <div class="ps-sum-row"><span>Plano</span><span>—</span></div>
+              <div class="ps-sum-row"><span>Módulos</span><span>0</span></div>
+              <div class="ps-sum-divider"></div>
+              <div class="ps-sum-row ps-sum-total"><span>Total mensal</span><span>R$ 0,00</span></div>
+              <div class="ps-sum-row"><span>💰 Comissão do rep</span><span>R$ 0,00/mês</span></div>
+              <button class="ps-submit">🚀 Criar Assinatura e Gerar Link</button>
+              <p class="ps-summary-note">A conta, o estabelecimento e a assinatura são criados de uma vez no Portal (operação atômica). O link de pagamento (Asaas) aparece no final.</p>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <script src="/assets/shell.js" data-title="Nova Assinatura"></script>
+  </body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Mapa de Oportunidades — Portal de Representantes | Cardápio Web</title>
+    <link rel="icon" type="image/jpeg" href="/assets/cw-logo-dark-e78e4446.jpg">
+    <link rel="stylesheet" href="/assets/application-cc2f1a53.css" />
+    <style>
+      .avatar-circle{width:34px;height:34px;border-radius:50%;background:#5b21b6;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;}
+      .map-full-layout{display:flex;gap:0;height:calc(100vh - 64px);}
+      .map-area{flex:1;background:repeating-linear-gradient(45deg,#f3f0fa,#f3f0fa 10px,#ece7f8 10px,#ece7f8 20px);display:flex;align-items:center;justify-content:center;color:var(--cw-gray-500);font-size:.85rem;text-align:center;padding:20px;}
+      .map-sidebar{width:320px;flex-shrink:0;border-left:1px solid #eee;background:#fff;display:flex;flex-direction:column;}
+      .sidebar-tabs{display:flex;border-bottom:1px solid #eee;}
+      .sidebar-tab{flex:1;padding:12px;border:0;background:none;font-size:.8rem;cursor:pointer;color:#6b7280;}
+      .sidebar-tab.active{color:#5b21b6;border-bottom:2px solid #5b21b6;font-weight:700;}
+      .sidebar-empty-state{padding:40px 20px;text-align:center;color:#9ca3af;font-size:.82rem;}
+      .sidebar-empty-icon{font-size:1.8rem;margin-bottom:8px;}
+      .zone-picker-overlay{position:fixed;inset:0;background:rgba(30,20,50,.45);display:flex;align-items:center;justify-content:center;z-index:50;}
+      .zone-picker-card{background:#fff;border-radius:14px;padding:32px;width:320px;text-align:center;box-shadow:0 20px 50px rgba(0,0,0,.2);}
+      .zone-picker-icon{font-size:2rem;}
+      .zone-picker-select{width:100%;padding:8px;margin:14px 0;border:1px solid #ddd;border-radius:8px;}
+    </style>
+  </head>
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar" id="sidebar"></aside>
+      <div class="main-wrapper">
+        <header class="top-header" id="top-header"></header>
+        <main class="page-content">
+          <div class="zone-picker-overlay" id="picker">
+            <div class="zone-picker-card">
+              <div class="zone-picker-icon">🗺️</div>
+              <h2 style="margin:8px 0 4px;">Mapa de Prospecção</h2>
+              <p style="color:var(--cw-gray-500);font-size:.85rem;">Selecione a região para carregar</p>
+              <select class="form-input zone-picker-select" id="zoneSelect"></select>
+              <button class="btn btn-primary zone-picker-btn" onclick="document.getElementById('picker').style.display='none'">Carregar Região</button>
+            </div>
+          </div>
+          <div class="map-full-layout">
+            <div class="map-area">
+              [Mapa de prospecção — componente interativo com pontos geolocalizados de estabelecimentos.<br>Não replicado neste clone estático por depender de API de mapas + dados reais de localização de prospects.]
+            </div>
+            <div class="map-sidebar">
+              <div class="sidebar-tabs">
+                <button class="sidebar-tab active">📍 Detalhes</button>
+                <button class="sidebar-tab">📋 Sem Oportunidade</button>
+              </div>
+              <div class="sidebar-panel active">
+                <div class="sidebar-empty-state">
+                  <div class="sidebar-empty-icon">📍</div>
+                  <p>Clique em um pin no mapa para ver detalhes</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <script src="/assets/shell.js" data-title="Mapa de Oportunidades"></script>
+    <script>
+      var ZONES = ['Zona Victor','Zona Klewerton','Zona Carlos Eduardo - Ituiutaba','Zona Antônio','Zona Paulo','Zona Paulo','São Luís - MA','Fortaleza Centro','Fortaleza','Zona Guilherme','Zona Walter','Zona de Picos','Parnaíba','Zona Nilton','Zona Alessandro','Zona Compumax','Zona Luiz Omar','Zona Fredy'];
+      document.getElementById('zoneSelect').innerHTML = ZONES.map(function(z){ return '<option>'+z+'</option>'; }).join('');
+    </script>
+  </body>
+</html>

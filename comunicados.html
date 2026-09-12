@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Comunicados — Portal de Representantes | Cardápio Web</title>
+    <link rel="icon" type="image/jpeg" href="/assets/cw-logo-dark-e78e4446.jpg">
+    <link rel="stylesheet" href="/assets/application-cc2f1a53.css" />
+    <style>
+      .avatar-circle{width:34px;height:34px;border-radius:50%;background:#5b21b6;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;}
+      .cm-thumb{width:60px;height:36px;border-radius:6px;object-fit:cover;}
+    </style>
+  </head>
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar" id="sidebar"></aside>
+      <div class="main-wrapper">
+        <header class="top-header" id="top-header"></header>
+        <main class="page-content">
+          <div class="mt-head">
+            <div><h1>Comunicados</h1><p>Popup de vídeo exibido para todos os usuários — 1x ao dia por pessoa, até marcar como assistido. Só o comunicado <strong>ativo mais recente</strong> é exibido.</p></div>
+            <a class="btn btn-primary btn-sm">+ Novo Comunicado</a>
+          </div>
+          <div class="table-card">
+            <table class="data-table" style="width:100%;">
+              <thead><tr><th>Comunicado</th><th>Vídeo</th><th class="text-center">Exibido p/</th><th class="text-center">Mais tarde</th><th class="text-center">Assistiram</th><th>Status</th><th class="text-center">Ações</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><span class="rep-name-main">Já assistiu o nosso tutorial? O passo a passo para conhecer o sistema</span><div class="rep-name-sub">05/08/2026 · Administrador</div></td>
+                  <td><a href="#"><img src="https://img.youtube.com/vi/q4c9DqztkGs/hqdefault.jpg" class="cm-thumb"></a></td>
+                  <td class="text-center"><strong>86</strong></td>
+                  <td class="text-center"><strong>18</strong></td>
+                  <td class="text-center"><strong>21</strong></td>
+                  <td><span class="status-badge status-active">No ar</span></td>
+                  <td class="text-center"><div class="action-buttons"><a class="action-btn action-edit">✎</a><button class="action-btn">⏸</button><button class="action-btn action-delete">🗑</button></div></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </main>
+      </div>
+    </div>
+    <script src="/assets/shell.js" data-title="Comunicados"></script>
+  </body>
+</html>

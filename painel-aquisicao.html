@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Painel de Aquisição — Portal de Representantes | Cardápio Web</title>
+    <link rel="icon" type="image/jpeg" href="/assets/cw-logo-dark-e78e4446.jpg">
+    <link rel="stylesheet" href="/assets/application-cc2f1a53.css" />
+    <style>
+      .avatar-circle{width:34px;height:34px;border-radius:50%;background:#5b21b6;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;}
+      .dash-card{background:#fff;border:1px solid #eef0f4;border-radius:14px;padding:16px;margin-bottom:16px;}
+      .section-title{margin:0 0 4px;font-size:1rem;}
+      .acq-head { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:16px; }
+      .acq-pipe-chip { display:inline-flex; align-items:center; gap:7px; font-size:0.78rem; font-weight:800; color:#6d28d9; background:#f3efff; border:1px solid #e4dcfb; border-radius:8px; padding:6px 14px; }
+      .acq-sync-at { font-size:0.72rem; color:#9ca3af; margin-left:10px; }
+      .acq-sync-btn { display:inline-flex; align-items:center; gap:7px; font-size:0.8rem; font-weight:700; color:#fff; background:linear-gradient(135deg,#5b21b6,#7c3aed); border:none; border-radius:10px; padding:9px 16px; cursor:pointer; box-shadow:0 6px 18px rgba(124,58,237,.25); }
+      .acq-kpis { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:16px; }
+      .acq-kpi { background:#fff; border:1px solid #eef0f4; border-radius:14px; padding:14px 18px; display:flex; flex-direction:column; gap:2px; }
+      .acq-kpi--bad { border-color:#fecaca; background:#fffafa; }
+      .acq-kpi--warn { border-color:#fde68a; background:#fffdf5; }
+      .acq-kpi-label { font-size:0.68rem; font-weight:800; text-transform:uppercase; letter-spacing:.04em; color:#6b7280; }
+      .acq-kpi-value { font-size:1.8rem; font-weight:800; color:#17123b; line-height:1.2; }
+      .acq-kpi-sub { font-size:0.7rem; color:#9ca3af; font-weight:600; }
+      .acq-seg { display:inline-flex; background:#f4f2fb; border-radius:10px; padding:3px; }
+      .acq-seg-btn { border:none; background:transparent; border-radius:8px; padding:7px 16px; font-size:0.78rem; font-weight:700; color:#6b7280; cursor:pointer; }
+      .acq-seg-btn.acq-seg-on { background:#fff; color:#6d28d9; box-shadow:0 2px 8px rgba(91,33,182,.12); }
+      .acq-leads-chart { min-height:200px; }
+      .acq-leads-chart svg { display:block; width:100%; height:210px; }
+      .acq-funnel { display:flex; flex-direction:column; gap:9px; }
+      .acq-stage { display:grid; grid-template-columns:230px 1fr; gap:14px; align-items:center; }
+      .acq-stage-info { display:flex; flex-direction:column; }
+      .acq-stage-name { font-size:0.82rem; font-weight:800; color:#1f2937; }
+      .acq-stage-conv { font-size:0.68rem; font-weight:700; }
+      .acq-stage-conv.ok { color:#059669; } .acq-stage-conv.mid { color:#b45309; } .acq-stage-conv.bad { color:#dc2626; }
+      .acq-bar-track { background:#f4f2fb; border-radius:10px; height:38px; overflow:hidden; }
+      .acq-bar { height:100%; border-radius:10px; display:flex; align-items:center; gap:10px; padding:0 12px; min-width:0; }
+      .acq-bar-count { font-size:0.9rem; font-weight:800; color:#fff; }
+      .acq-bar-pct { font-size:0.68rem; font-weight:700; color:rgba(255,255,255,.85); }
+      .acq-stage--won .acq-stage-name { color:#047857; }
+      .acq-insights { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-bottom:16px; }
+      .acq-insight { display:flex; gap:12px; background:#fff; border:1px solid #eef0f4; border-radius:14px; padding:14px 16px; }
+      .acq-insight-ico { width:36px; height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+      .acq-insight-title { font-size:0.82rem; font-weight:800; color:#1f2937; margin-bottom:2px; }
+      .acq-insight-text { font-size:0.78rem; color:#4b5563; line-height:1.55; }
+      .acq-insight-text strong { color:#17123b; }
+    </style>
+  </head>
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar" id="sidebar"></aside>
+      <div class="main-wrapper">
+        <header class="top-header" id="top-header"></header>
+        <main class="page-content">
+          <div class="acq-head">
+            <div><span class="acq-pipe-chip">📌 [REP] Funil de Prospecção de Representantes — Pipedrive</span><span class="acq-sync-at">sincronizado menos de um minuto atrás</span></div>
+            <div><span class="acq-sync-btn">🔑 Token</span> <button class="acq-sync-btn">↻ Sincronizar agora</button></div>
+          </div>
+          <div class="acq-kpis">
+            <div class="acq-kpi"><span class="acq-kpi-label">Leads no formulário</span><span class="acq-kpi-value">366</span><span class="acq-kpi-sub">cadastros no portal</span></div>
+            <div class="acq-kpi"><span class="acq-kpi-label">Entraram no funil</span><span class="acq-kpi-value">908</span><span class="acq-kpi-sub">232 abertos · 181 ganhos · 495 perdidos</span></div>
+            <div class="acq-kpi acq-kpi--bad"><span class="acq-kpi-label">Form → sem Pipedrive</span><span class="acq-kpi-value">109</span><span class="acq-kpi-sub">preencheram e não viraram negócio</span></div>
+            <div class="acq-kpi acq-kpi--warn"><span class="acq-kpi-label">Pipedrive → sem form</span><span class="acq-kpi-value">589</span><span class="acq-kpi-sub">negócios sem cadastro no portal</span></div>
+          </div>
+          <div class="dash-card">
+            <div style="display:flex;justify-content:space-between;"><h4 class="section-title">Leads entrando no funil</h4><div class="acq-seg"><button class="acq-seg-btn acq-seg-on">Por mês</button><button class="acq-seg-btn">Por dia</button></div></div>
+            <p style="font-size:.78rem;color:#9ca3af;margin:2px 0 0;">Últimos 13 meses — negócios criados no funil por mês</p>
+            <div class="acq-leads-chart" id="chart"></div>
+          </div>
+          <div class="dash-card">
+            <h4 class="section-title">Funil de aquisição — etapa a etapa</h4>
+            <p style="font-size:.78rem;color:#9ca3af;margin:2px 0 12px;">Quantos leads chegaram pelo menos até etapa · % sobre o total que entrou no funil · conversão sobre a etapa anterior</p>
+            <div class="acq-funnel" id="funnel"></div>
+          </div>
+          <div class="acq-insights" id="insights"></div>
+        </main>
+      </div>
+    </div>
+    <script src="/assets/shell.js" data-title="Painel de Aquisição"></script>
+    <script>
+      var MONTHS = [['ago/25',0],['set/25',0],['out/25',0],['nov/25',0],['dez/25',0],['jan/26',0],['fev/26',48],['mar/26',119],['abr/26',37],['mai/26',25],['jun/26',112],['jul/26',227],['ago/26',153]];
+      var max = 227, w = 100/MONTHS.length;
+      var svg = '<svg viewBox="0 0 ' + (MONTHS.length*40) + ' 210" preserveAspectRatio="none">';
+      MONTHS.forEach(function (m, i) {
+        var h = Math.round((m[1]/max)*170);
+        svg += '<rect class="acq-lead-bar" x="' + (i*40+8) + '" y="' + (190-h) + '" width="24" height="' + h + '" rx="4" fill="#8b5cf6"><title>' + m[0] + ': ' + m[1] + ' lead(s)</title></rect>';
+        svg += '<text x="' + (i*40+20) + '" y="205" font-size="9" text-anchor="middle" fill="#9ca3af">' + m[0] + '</text>';
+      });
+      svg += '</svg>';
+      document.getElementById('chart').innerHTML = svg;
+
+      var STAGES = [
+        {name:'Representante Novo', conv:null, count:908, pct:'100.0%', w:'100.0%', grad:'linear-gradient(90deg, #6d28d9, #8b5cf6 55%)'},
+        {name:'Atendimento IA', conv:'64% da anterior', count:578, pct:'63.7%', w:'63.7%', grad:'linear-gradient(90deg, #6d28d9, #8b5cf6 59%)'},
+        {name:'Abertura', conv:'95% da anterior', count:551, pct:'60.7%', w:'60.7%', grad:'linear-gradient(90deg, #6d28d9, #8b5cf6 61%)'},
+        {name:'2º Dia (FUP 1)', conv:'85% da anterior', count:468, pct:'51.5%', w:'51.5%', grad:'linear-gradient(90deg, #6d28d9, #8b5cf6 67%)'},
+        {name:'4º Dia (FUP 2)', conv:'83% da anterior', count:390, pct:'43.0%', w:'43.0%', grad:'linear-gradient(90deg, #6d28d9, #8b5cf6 73%)'},
+        {name:'6º Dia (FUP 3)', conv:'81% da anterior', count:317, pct:'34.9%', w:'34.9%', grad:'linear-gradient(90deg, #6d28d9, #8b5cf6 79%)'},
+        {name:'8º Dia (FUP 4)', conv:'66% da anterior', count:210, pct:'23.1%', w:'23.1%', grad:'linear-gradient(90deg, #6d28d9, #8b5cf6 85%)'},
+        {name:'Break Up', conv:'87% da anterior', count:182, pct:'20.0%', w:'20.0%', grad:'linear-gradient(90deg, #6d28d9, #8b5cf6 91%)'},
+        {name:'Ganhos (viraram reps)', conv:null, count:181, pct:'19.9%', w:'19.9%', grad:'linear-gradient(90deg, #059669, #10b981)', won:true}
+      ];
+      document.getElementById('funnel').innerHTML = STAGES.map(function (s) {
+        return '<div class="acq-stage' + (s.won?' acq-stage--won':'') + '"><div class="acq-stage-info"><span class="acq-stage-name">' + s.name + '</span>' +
+          (s.conv ? '<span class="acq-stage-conv mid">↳ ' + s.conv + '</span>' : '') + '</div>' +
+          '<div class="acq-bar-track"><div class="acq-bar" style="width:' + s.w + ';background:' + s.grad + ';"><span class="acq-bar-count">' + s.count + '</span><span class="acq-bar-pct">' + s.pct + '</span></div></div></div>';
+      }).join('');
+
+      var INSIGHTS = [
+        {ico:'#7c3aed', title:'Conversão do funil', text:'De 908 leads que entraram no funil, <strong>181 viraram representantes</strong> — taxa de conversão geral de <strong>19.9%</strong>.'},
+        {ico:'#ef4444', title:'Maior gargalo', text:'A maior queda acontece entre <strong>Representante Novo</strong> e <strong>Atendimento IA</strong>, perdendo cerca de <strong>36%</strong> dos leads logo na entrada do funil.'},
+        {ico:'#0891b2', title:'Velocidade de ativação', text:'A maioria dos representantes que avança passa da etapa <strong>2º Dia</strong> para <strong>4º Dia</strong> dentro da primeira semana.'},
+        {ico:'#b45309', title:'Onde mais se perde', text:'Entre o <strong>6º Dia</strong> e o <strong>8º Dia</strong> há a maior perda proporcional da fase intermediária do funil.'},
+        {ico:'#ef4444', title:'Cobertura da integração', text:'<strong>109</strong> leads preencheram o formulário mas não têm negócio correspondente no Pipedrive.'},
+        {ico:'#f59e0b', title:'Campo de qualificação no Pipedrive', text:'<strong>589</strong> negócios no Pipedrive não têm cadastro correspondente no Portal — vale revisar a integração.'},
+        {ico:'#10b981', title:'Ritmo de entrada', text:'Julho foi o mês com mais leads entrando no funil (<strong>227</strong>), quase o dobro da média dos últimos 6 meses.'},
+        {ico:'#10b981', title:'Leads esfriando', text:'Parte dos leads parados na etapa <strong>Break Up</strong> já passou de 90 dias sem interação.'}
+      ];
+      document.getElementById('insights').innerHTML = INSIGHTS.map(function (i) {
+        return '<div class="acq-insight"><span class="acq-insight-ico" style="color:' + i.ico + ';background:' + i.ico + '14;">●</span>' +
+          '<div><div class="acq-insight-title">' + i.title + '</div><div class="acq-insight-text">' + i.text + '</div></div></div>';
+      }).join('');
+    </script>
+  </body>
+</html>

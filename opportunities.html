@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>CRM / Oportunidades — Portal de Representantes | Cardápio Web</title>
+    <link rel="icon" type="image/jpeg" href="/assets/cw-logo-dark-e78e4446.jpg">
+    <link rel="stylesheet" href="/assets/application-cc2f1a53.css" />
+    <style>
+      .avatar-circle{width:34px;height:34px;border-radius:50%;background:#5b21b6;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;}
+    </style>
+  </head>
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar" id="sidebar"></aside>
+      <div class="main-wrapper">
+        <header class="top-header" id="top-header"></header>
+        <main class="page-content">
+          <div class="opp-tabs">
+            <button class="opp-tab active" onclick="showOppTab('pipeline')">📋 Pipeline</button>
+            <button class="opp-tab" onclick="showOppTab('atividades')">☑ Atividades <span class="tab-badge">126</span></button>
+            <button class="btn btn-primary btn-sm">+ Nova Oportunidade</button>
+          </div>
+          <div class="kb-controls" id="kb-controls">
+            <div class="kb-search">🔍 <input placeholder="Buscar lead, contato, telefone, e-mail..."> <button>×</button></div>
+            <select class="kb-select"><option>👤 Todos os representantes</option><option>Rodrigo Almeida Santos</option><option>Diego Martins Rocha</option></select>
+            <label style="font-size:.8rem;"><input type="checkbox"> Estagnação</label>
+          </div>
+          <div class="tab-content active" id="tab-pipeline">
+            <div class="kanban-stats">
+              <div class="kanban-stat"><span class="kanban-stat-value">67</span><span class="kanban-stat-label">Novo Lead</span></div>
+              <div class="kanban-stat"><span class="kanban-stat-value">27</span><span class="kanban-stat-label">Contato Feito</span></div>
+              <div class="kanban-stat"><span class="kanban-stat-value">9</span><span class="kanban-stat-label">Visita Agendada</span></div>
+              <div class="kanban-stat"><span class="kanban-stat-value">9</span><span class="kanban-stat-label">Proposta Enviada</span></div>
+              <div class="kanban-stat-divider"></div>
+              <div class="kanban-stat kb-src-tile"><span class="kanban-stat-value">63</span><span class="kanban-stat-label">✎ Manual</span></div>
+              <div class="kanban-stat kb-src-tile"><span class="kanban-stat-value">23</span><span class="kanban-stat-label">📄 Captura</span></div>
+              <div class="kanban-stat kb-src-tile"><span class="kanban-stat-value">73</span><span class="kanban-stat-label">🗺️ Mapa</span></div>
+            </div>
+            <div class="kanban-board" id="board"></div>
+          </div>
+          <div class="tab-content" id="tab-atividades" style="display:none;">
+            <div class="tasks-deadline-board" id="taskboard"></div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <script src="/assets/shell.js" data-title="CRM / Oportunidades"></script>
+    <script>
+      var COLS = [
+        {title:'Novo Lead', stale:'0', count:67, cards:[
+          {biz:'Cantina do Vale', rep:'Marcos Silveira Nunes', badge:'Novo Lead', days:'0d', src:'🗺️ Mapa de Prospecção', staleChip:true, task:'Contactar cliente', due:'24/08'},
+          {biz:'Churrascaria Boa Vista', rep:'Renata Castro Lima', badge:'Novo Lead', days:'3d', src:'✎ Manual', staleChip:true, task:'Contactar cliente', due:'21/08'}
+        ]},
+        {title:'Contato Feito', stale:'0', count:27, cards:[
+          {biz:'Doceria Flor de Maio', rep:'Diego Martins Rocha', badge:'Contato Feito', days:'1d', src:'🗺️ Mapa de Prospecção', task:'Ligar para gerente', due:'12/08'},
+          {biz:'Pizzaria Bella Vista', rep:'Helder Andrade', badge:'Contato Feito', days:'1d', src:'✎ Manual', task:'Contactar cliente', due:'23/08'}
+        ]},
+        {title:'Visita Agendada', stale:'0', count:9, cards:[
+          {biz:'Grill do Chef', rep:'Ezequiel Matias Souza', badge:'Visita Agendada', days:'3d', src:'✎ Manual', task:'Visita a apresentar...', due:'24/08'},
+          {biz:'Lanchonete Bela Vista', rep:'Walter Lima Pinto', badge:'Visita Agendada', days:'4d', src:'🗺️ Mapa de Prospecção', staleChip:true, task:'Contactar cliente', due:'20/08'}
+        ]},
+        {title:'Proposta Enviada', stale:'0', count:9, cards:[
+          {biz:'Açaí do Porto', rep:'Cássio Lopes Junior', badge:'Proposta Enviada', days:'1d', src:'✎ Manual', task:'Contactar cliente', due:'07/08'},
+          {biz:'Burger House Center', rep:'Ezequiel Matias Souza', badge:'Proposta Enviada', days:'4d', src:'✎ Manual', task:'Visitar Cliente e envia...', due:'14/08'}
+        ]},
+        {title:'Fechado ✓', stale:'0', count:18, cards:[
+          {biz:'Doces & Cia', rep:'Elias Coutinho', badge:'Fechado ✓', days:'2d', src:'✎ Manual', task:'Contactar cliente', due:'22/08'},
+          {biz:'Sushi Central', rep:'Wladyerson Freitas', badge:'Fechado ✓', days:'4d', src:'✎ Manual', task:'Mandar mensagem', due:'16/07'}
+        ]},
+        {title:'Perdido ✗', stale:'0', count:29, cards:[
+          {biz:'Restaurante Bom Sabor', rep:'Helder Leandro', badge:'Perdido ✗', days:'1d', src:'✎ Manual', task:'Contactar cliente', due:'22/08'},
+          {biz:'Espeto da Praça', rep:'Diego Martins Rocha', badge:'Perdido ✗', days:'16d', src:'🗺️ Mapa de Prospecção', task:'Primeiro contato par...', due:'29/07'}
+        ]}
+      ];
+      function showOppTab(t) {
+        document.querySelectorAll('.opp-tab').forEach(function (b, i) { b.classList.toggle('active', (t==='pipeline'&&i===0)||(t==='atividades'&&i===1)); });
+        document.getElementById('tab-pipeline').style.display = t === 'pipeline' ? '' : 'none';
+        document.getElementById('tab-atividades').style.display = t === 'atividades' ? '' : 'none';
+        document.getElementById('kb-controls').style.display = t === 'pipeline' ? '' : 'none';
+      }
+
+      var TASK_COLS = [
+        {cls:'col-overdue', name:'🔴 Atrasadas', count:112, cards:[{biz:'Cantina do Vale', task:'Contactar cliente', rep:'Marcos Silveira Nunes'}]},
+        {cls:'col-today', name:'🟡 Vence Hoje', count:0, cards:[]},
+        {cls:'col-week', name:'🔵 Esta Semana', count:1, cards:[{biz:'Doceria Flor de Maio', task:'Ligar para gerente', rep:'Diego Martins Rocha'}]},
+        {cls:'col-next-week', name:'🟣 Próxima Semana', count:1, cards:[{biz:'Grill do Chef', task:'Visita a apresentar...', rep:'Ezequiel Matias Souza'}]},
+        {cls:'col-later', name:'⚪ +2 Semanas', count:9, cards:[{biz:'Açaí do Porto', task:'Contactar cliente', rep:'Cássio Lopes Junior'}]},
+        {cls:'col-no-tasks', name:'Sem Atividades', count:24, cards:[]}
+      ];
+      var taskboard = document.getElementById('taskboard');
+      TASK_COLS.forEach(function (col) {
+        var colEl = document.createElement('div');
+        colEl.className = 'tasks-deadline-col ' + col.cls;
+        var cardsHtml = col.cards.map(function (c) {
+          return '<div class="kanban-card"><div class="kanban-card-header"><strong>' + c.biz + '</strong></div>' +
+            '<div class="kanban-card-meta"><span>👤 ' + c.rep + '</span></div>' +
+            '<div class="kanban-card-task"><span class="kc-task-toggle"><span class="kc-task-circle"></span></span><span class="kc-task-title">' + c.task + '</span></div>' +
+            '</div>';
+        }).join('') || '<div class="kanban-empty">Nenhuma atividade</div>';
+        colEl.innerHTML = '<div class="tasks-deadline-header"><span class="tasks-deadline-name">' + col.name + '</span><span class="tasks-deadline-count">' + col.count + '</span></div>' +
+          '<div class="tasks-deadline-body">' + cardsHtml + '</div>';
+        taskboard.appendChild(colEl);
+      });
+
+      var board = document.getElementById('board');
+      COLS.forEach(function (col) {
+        var colEl = document.createElement('div');
+        colEl.className = 'kanban-column';
+        var cardsHtml = col.cards.map(function (c) {
+          return '<div class="kanban-card"><div class="kanban-card-header"><strong>' + c.biz + '</strong></div>' +
+            '<div class="kanban-card-meta"><span>👤 ' + c.rep + '</span>' +
+            '<span><span class="status-badge">' + c.badge + '</span> · 🕒 <span class="kc-days">' + c.days + '</span></span>' +
+            '<span class="source-badge">' + c.src + '</span>' +
+            (c.staleChip ? '<span class="kanban-stale-chip">⏰ estagnado</span>' : '') +
+            '</div>' +
+            '<div class="kanban-card-footer"><div class="kanban-card-footer-left"></div><span class="kanban-pending-badge"><span class="kanban-pending-dot"></span> 1 pendente</span></div>' +
+            '<div class="kanban-card-task"><span class="kc-task-toggle"><span class="kc-task-circle"></span></span><span class="kc-task-title">' + c.task + '</span><span class="task-deadline-time normal">' + c.due + '</span></div>' +
+            '</div>';
+        }).join('');
+        colEl.innerHTML = '<div class="kanban-column-header"><span class="kanban-column-title">' + col.title + '</span><span class="kanban-column-count">' + col.count + '</span></div>' +
+          '<div class="kanban-column-body">' + cardsHtml + '</div>';
+        board.appendChild(colEl);
+      });
+    </script>
+  </body>
+</html>

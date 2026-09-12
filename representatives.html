@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Representantes — Portal de Representantes | Cardápio Web</title>
+    <link rel="icon" type="image/jpeg" href="/assets/cw-logo-dark-e78e4446.jpg">
+    <link rel="stylesheet" href="/assets/application-cc2f1a53.css" />
+    <style>
+      .avatar-circle{width:34px;height:34px;border-radius:50%;background:#5b21b6;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;}
+      .rep-avatar-sm{width:32px;height:32px;border-radius:50%;background:#ede9fe;color:#5b21b6;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.75rem;}
+    </style>
+  </head>
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar" id="sidebar"></aside>
+      <div class="main-wrapper">
+        <header class="top-header" id="top-header"></header>
+        <main class="page-content">
+          <div class="rp-periodbar">
+            <form class="rp-periodbar-form">
+              <span class="rp-periodbar-label">📅 Período</span>
+              <select class="rp-field-select"><option>Todo o período</option><option>Últimos 7 dias</option><option>Este mês</option><option>Mês passado</option></select>
+              <span class="rp-periodbar-total"><strong>366</strong> cadastros no recorte</span>
+            </form>
+          </div>
+
+          <section class="rp-panel open">
+            <button type="button" class="rp-panel-head" onclick="this.closest('.rp-panel').classList.toggle('open')">Visão geral do funil <span style="font-weight:400;color:#9ca3af;font-size:.8rem;">cadastro → aprovação → ativação · reps externos</span></button>
+            <div class="rp-panel-body">
+              <div class="rp-grid">
+                <article class="rp-card">
+                  <header class="rp-card-head"><h3>Funil de Representantes</h3><span class="rp-chip">366 no funil</span></header>
+                  <div class="rp-funnel">
+                    <div class="rp-funnel-step">
+                      <div class="rp-funnel-row"><span class="rp-funnel-label">Se cadastraram</span><span class="rp-funnel-nums"><strong>366</strong><em>100%</em></span></div>
+                      <div class="rp-funnel-track"><div class="rp-funnel-fill" style="width:100.0%;"></div></div>
+                      <span class="rp-funnel-hint">todos os cadastros recebidos</span>
+                    </div>
+                    <div class="rp-funnel-link"><span>34% avançaram</span><span class="rp-funnel-lost">242 parados</span></div>
+                    <div class="rp-funnel-step">
+                      <div class="rp-funnel-row"><span class="rp-funnel-label">Aprovados</span><span class="rp-funnel-nums"><strong>124</strong><em>34%</em></span></div>
+                      <div class="rp-funnel-track"><div class="rp-funnel-fill" style="width:33.9%;"></div></div>
+                      <span class="rp-funnel-hint">liberados para vender</span>
+                    </div>
+                    <div class="rp-funnel-link"><span>24% avançaram</span><span class="rp-funnel-lost">94 parados</span></div>
+                    <div class="rp-funnel-step">
+                      <div class="rp-funnel-row"><span class="rp-funnel-label">Ativaram</span><span class="rp-funnel-nums"><strong>30</strong><em>8,2%</em></span></div>
+                      <div class="rp-funnel-track"><div class="rp-funnel-fill" style="width:8.2%;"></div></div>
+                      <span class="rp-funnel-hint">colocaram o 1º cliente</span>
+                    </div>
+                  </div>
+                  <div style="display:flex;gap:18px;font-size:.8rem;margin-top:12px;flex-wrap:wrap;">
+                    <div><b>21</b><br><small>ativos (60d)</small></div>
+                    <div><b>227</b><br><small>na fila de aprovação</small></div>
+                    <div><b>275</b><br><small>clientes na base</small></div>
+                    <div><b>2.2</b><br><small>clientes / rep</small></div>
+                  </div>
+                </article>
+
+                <article class="rp-card">
+                  <header class="rp-card-head"><h3>Total por Qualificação</h3><span class="rp-chip">366 cadastros</span></header>
+                  <div class="rp-rank" id="qualifRank"></div>
+                </article>
+
+                <article class="rp-card">
+                  <header class="rp-card-head"><h3>Previsibilidade de Ativação <span class="rp-chip rp-chip-purple" style="margin-left:6px;">bloco D da ficha</span></h3></header>
+                  <div class="rp-forecast-hero"><div class="rp-forecast-n">~9</div><div class="rp-forecast-cap">ativações previstas dos 166 pendentes aproveitáveis<br>61 descartados (agências/eliminados) fora da conta<br>36 já têm cliente pronto para fechar</div></div>
+                  <div class="rp-fc-list" id="forecastList"></div>
+                </article>
+              </div>
+            </div>
+          </section>
+
+          <div class="rp-banner">
+            <span>🔗 <strong>2</strong> representantes ativos ainda sem ID do Portal de Parceiros.</span>
+            <button class="rp-btn rp-btn-indigo">🔄 Cadastrar no Portal e vincular ID</button>
+          </div>
+
+          <div class="rp-filters">
+            <div class="rp-filters-row">
+              <div class="rp-seg" id="segRow"></div>
+              <input placeholder="Buscar por nome ou e-mail..." style="padding:8px;border:1px solid #ddd;border-radius:8px;">
+            </div>
+          </div>
+
+          <div class="table-card">
+            <div class="table-responsive">
+              <table class="data-table reps-compact-table">
+                <thead>
+                  <tr>
+                    <th>NOME / E-MAIL</th><th>PERFIL / STATUS</th><th>FUNIL PIPEDRIVE</th><th>CIDADE / CLIENTES / ÚLT. CLIENTE</th><th>CADASTRO / APROVAÇÃO / LOGIN</th><th>ID DO PORTAL</th><th>AÇÕES</th>
+                  </tr>
+                </thead>
+                <tbody id="reps-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script src="/assets/shell.js" data-title="Representantes"></script>
+    <script>
+      var QUALIF = [
+        {label:'Média Prioridade', n:118, pct:'32%', pend:'102 pendentes →', w:100},
+        {label:'Sem ficha', n:90, pct:'25%', pend:'3 pendentes →', w:76.3},
+        {label:'Alta Prioridade', n:73, pct:'20%', pend:'47 pendentes →', w:61.9},
+        {label:'Excluído C1', n:65, pct:'18%', pend:'61 pendentes →', w:55.1},
+        {label:'Baixa Prioridade', n:19, pct:'5,2%', pend:'14 pendentes →', w:16.1},
+        {label:'Eliminado', n:1, pct:'0,3%', pend:null, w:0.8}
+      ];
+      document.getElementById('qualifRank').innerHTML = QUALIF.map(function (q) {
+        return '<a class="rp-rank-row"><span class="rp-rank-head"><span class="rp-rank-label"><span class="rp-dot"></span>' + q.label + '</span>' +
+          '<span class="rp-rank-nums"><strong>' + q.n + '</strong><em>' + q.pct + '</em></span></span>' +
+          '<span class="rp-rank-track"><span class="rp-rank-fill" style="width:' + q.w + '%;"></span></span>' +
+          (q.pend ? '<span class="rp-rank-pend">' + q.pend + '</span>' : '') + '</a>';
+      }).join('');
+
+      var FORECAST = [
+        {n:36, label:'Já tem cliente pronto', rate:'22%', tag:'real', hint:'fecha o 1º em até 10 dias', est:'≈ 8,0 ativações'},
+        {n:107, label:'Vai prospectar do zero', rate:'0%', tag:'real', hint:'consegue, mas sem cliente na mão', est:'≈ 0,0 ativações'},
+        {n:20, label:'Sem condições no prazo', rate:'2%', tag:'estim.', hint:'não ativa nos primeiros 10 dias', est:'≈ 0,4 ativações'},
+        {n:3, label:'Sem resposta no bloco D', rate:'9%', tag:'real', hint:'cadastro sem ficha preenchida', est:'≈ 0,3 ativações'}
+      ];
+      document.getElementById('forecastList').innerHTML = FORECAST.map(function (f) {
+        return '<div class="rp-fc-row"><span class="rp-fc-count">' + f.n + '</span><div class="rp-fc-body">' +
+          '<div class="rp-fc-top"><span class="rp-fc-label">' + f.label + '</span><span class="rp-fc-rate ' + (f.tag==='real'?'is-real':'') + '">' + f.rate + ' <small>' + f.tag + '</small></span></div>' +
+          '<div class="rp-fc-track"><div class="rp-fc-fill" style="width:' + f.rate + ';"></div></div>' +
+          '<span class="rp-fc-hint">' + f.hint + ' · ' + f.est + '</span></div></div>';
+      }).join('');
+
+      var SEGS = [['Todos',134,true],['Ativados',21],['Em risco',9],['Sem ativação',104],['Pendentes',227],['Perdidos',15],['Divergências',null]];
+      document.getElementById('segRow').innerHTML = SEGS.map(function (s) {
+        return '<a class="rp-seg-item' + (s[2]?' is-active':'') + '"><span class="rp-dot"></span>' + s[0] + (s[1]!==null?' <span class="rp-seg-count">'+s[1]+'</span>':'') + '</a>';
+      }).join('');
+
+      var REPS = [
+        {name:'Bruno Cardoso Lima', email:'bruno.lima@exemplo.com', stage:'2° Cliente', city:'Duque de Caxias / RJ', clients:'6 ativos', cadastro:'16/06/26', id:'21001'},
+        {name:'Diego Martins Rocha', email:'diego.rocha@exemplo.com', stage:'2° Cliente', city:'Timon / MA', clients:'6 ativos', cadastro:'16/04/26', id:'18620'},
+        {name:'Camila Souza Pereira', email:'camila.pereira@exemplo.com', stage:'Aguardando Onboarding', city:'Olímpia / SP', clients:'1 ativo', cadastro:'23/07/26', id:'25201'},
+        {name:'Thiago Costa Ribeiro', email:'thiago.ribeiro@exemplo.com', stage:'Reunião Agendada', city:'Vitória de Santo Antão / PE', clients:'2 ativos', cadastro:'18/07/26', id:'24788'},
+        {name:'Paulo Andrade Vieira', email:'paulo.vieira@exemplo.com', stage:'1° Follow-up', city:'Salinópolis / PA', clients:'1 ativo +1 cancel.', cadastro:'23/06/26', id:'22450'},
+        {name:'Gustavo Moreira Barbosa', email:'gustavo.barbosa@exemplo.com', stage:'1° Cliente', city:'Quixeramobim / CE', clients:'10 ativos', cadastro:'22/07/26', id:'24601'},
+        {name:'Leandro Souza Farias', email:'leandro.farias@exemplo.com', stage:'2° Cliente', city:'Caruaru / PE', clients:'6 ativos', cadastro:'12/05/26', id:'19870'},
+        {name:'Vinícius Nogueira Pinto', email:'vinicius.pinto@exemplo.com', stage:'1° Cliente', city:'Feira de Santana / BA', clients:'5 ativos · 2 cancel.', cadastro:'02/06/26', id:'20544'}
+      ];
+      var tbody = document.getElementById('reps-tbody');
+      REPS.forEach(function (r) {
+        var initials = r.name.split(' ').map(function(w){return w[0];}).slice(0,2).join('').toUpperCase();
+        var tr = document.createElement('tr');
+        tr.innerHTML =
+          '<td><div class="cell-name"><div class="cell-avatar rep-avatar-clickable"><div class="rep-avatar-sm">' + initials + '</div></div>' +
+          '<div class="rep-name-stack"><span class="rep-name-main">' + r.name + '</span><span class="rep-name-sub">' + r.email + '</span></div></div></td>' +
+          '<td><div class="rep-badge-stack"><span class="status-badge">REP. ADMIN</span><span class="status-badge status-active">ATIVO</span></div></td>' +
+          '<td><span class="status-badge">' + r.stage + '</span></td>' +
+          '<td><div class="rep-loc-stack"><div class="rep-name-main">' + r.city + '</div><span class="badge badge-green">' + r.clients + '</span></div></td>' +
+          '<td><div class="rep-name-sub">' + r.cadastro + '</div></td>' +
+          '<td class="portal-id-cell"><div class="portal-id-display"><span class="portal-id-val">' + r.id + '</span></div></td>' +
+          '<td class="text-center"><div class="action-buttons">' +
+          '<button class="action-btn action-view" title="Ver">👁</button>' +
+          '<button class="action-btn action-edit" title="Editar">✎</button>' +
+          '</div></td>';
+        tbody.appendChild(tr);
+      });
+    </script>
+  </body>
+</html>

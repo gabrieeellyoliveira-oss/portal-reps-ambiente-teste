@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Calculadora de Comissão — Portal de Representantes | Cardápio Web</title>
+    <link rel="icon" type="image/jpeg" href="/assets/cw-logo-dark-e78e4446.jpg">
+    <link rel="stylesheet" href="/assets/application-cc2f1a53.css" />
+    <style>
+      .avatar-circle{width:34px;height:34px;border-radius:50%;background:#5b21b6;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;}
+    </style>
+  </head>
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar" id="sidebar"></aside>
+      <div class="main-wrapper">
+        <header class="top-header" id="top-header"></header>
+        <main class="page-content">
+          <div class="calc-page">
+            <div class="calc-main-grid">
+              <div class="calc-form-area">
+                <div class="calc-section">
+                  <div class="calc-section-header"><span class="calc-section-number">1</span><div><div class="calc-section-title">Escolha o Plano</div><div class="calc-section-subtitle">Selecione o plano base que será vendido</div></div></div>
+                  <div class="calc-plans-grid" id="plans">
+                    <label class="calc-plan-card" data-price="169.99"><input class="calc-plan-radio" type="radio" name="p"><div class="calc-plan-icon">🍽</div><div class="calc-plan-name">Plano Mesas</div><div class="calc-plan-label">PLANO A</div><div class="calc-plan-price">R$ 169,99<span>/mês</span></div></label>
+                    <label class="calc-plan-card" data-price="209.99"><input class="calc-plan-radio" type="radio" name="p"><div class="calc-plan-icon">🛵</div><div class="calc-plan-name">Plano Delivery</div><div class="calc-plan-label">PLANO B</div><div class="calc-plan-price">R$ 209,99<span>/mês</span></div></label>
+                    <label class="calc-plan-card featured selected" data-price="269.99"><input class="calc-plan-radio" type="radio" name="p" checked><div class="calc-plan-badge">⭐ Mais vendido</div><div class="calc-plan-icon">👑</div><div class="calc-plan-name">Plano Premium</div><div class="calc-plan-label">PLANO A+B</div><div class="calc-plan-price">R$ 269,99<span>/mês</span></div></label>
+                  </div>
+                </div>
+                <div class="calc-section">
+                  <div class="calc-section-header"><span class="calc-section-number">2</span><div><div class="calc-section-title">Módulos Adicionais</div><div class="calc-section-subtitle">Selecione os módulos extras para aumentar o ticket</div></div></div>
+                  <div class="calc-addons-grid" id="addons">
+                    <label class="calc-addon-card"><input class="calc-addon-check" type="checkbox" data-price="29.99"><div class="calc-addon-info"><span class="calc-addon-icon">🛒</span><div><div class="calc-addon-name">Marketplace</div><div class="calc-addon-price">+ R$ 29,99/mês</div></div></div></label>
+                    <label class="calc-addon-card"><input class="calc-addon-check" type="checkbox" data-price="29.99"><div class="calc-addon-info"><span class="calc-addon-icon">📦</span><div><div class="calc-addon-name">Estoque Avançado</div><div class="calc-addon-price">+ R$ 29,99/mês</div></div></div></label>
+                    <label class="calc-addon-card"><input class="calc-addon-check" type="checkbox" data-price="54.99"><div class="calc-addon-info"><span class="calc-addon-icon">🗺</span><div><div class="calc-addon-name">Roteirização de Entregas</div><div class="calc-addon-price">+ R$ 54,99/mês</div></div></div></label>
+                    <label class="calc-addon-card"><input class="calc-addon-check" type="checkbox" data-price="69.99"><div class="calc-addon-info"><span class="calc-addon-icon">🧾</span><div><div class="calc-addon-name">Módulo Fiscal</div><div class="calc-addon-price">+ R$ 69,99/mês</div></div></div></label>
+                    <label class="calc-addon-card"><input class="calc-addon-check" type="checkbox" data-price="69.99"><div class="calc-addon-info"><span class="calc-addon-icon">💰</span><div><div class="calc-addon-name">Financeiro</div><div class="calc-addon-price">+ R$ 69,99/mês</div></div></div></label>
+                  </div>
+                  <div class="calc-ticket-summary">Ticket médio estimado: <b id="r-ticket">R$ 269,99</b></div>
+                </div>
+                <div class="calc-section">
+                  <div class="calc-section-header"><span class="calc-section-number">3</span><div><div class="calc-section-title">Comissão do Rep</div><div class="calc-section-subtitle">Marque os serviços que o Rep prestará para definir sua comissão</div></div></div>
+                  <div class="calc-commission-checks">
+                    <label class="calc-commission-item"><input type="checkbox" class="comm-cb" checked data-pct="10"><div class="calc-commission-info"><span class="calc-commission-label">Rep faz o suporte</span><span class="calc-commission-value">+10%</span></div></label>
+                    <label class="calc-commission-item"><input type="checkbox" class="comm-cb" checked data-pct="10"><div class="calc-commission-info"><span class="calc-commission-label">Rep faz a implantação</span><span class="calc-commission-value">+10%</span></div></label>
+                    <label class="calc-commission-item"><input type="checkbox" class="comm-cb" checked data-pct="10"><div class="calc-commission-info"><span class="calc-commission-label">Rep alcançou 50 clientes + cancelamento &lt; 8%</span><span class="calc-commission-value">+10%</span></div></label>
+                  </div>
+                  <div class="calc-commission-total-row">
+                    <label>Comissão total (%):</label>
+                    <div class="calc-commission-input-group"><input class="calc-input-number calc-commission-input" id="r-commpct" value="30"><span class="calc-input-suffix">%</span></div>
+                    <span class="calc-commission-edit-hint">✏️ Editável para simular</span>
+                  </div>
+                </div>
+                <div class="calc-section">
+                  <div class="calc-section-header"><span class="calc-section-number">4</span><div><div class="calc-section-title">Projeção de Crescimento</div><div class="calc-section-subtitle">Defina os parâmetros para a projeção de 24 meses</div></div></div>
+                  <div class="calc-params-grid">
+                    <div class="calc-param-field">
+                      <label>Novas vendas por mês</label>
+                      <div class="calc-input-wrapper"><span class="calc-input-icon">📁</span><input class="calc-input-number" id="p-vendas" value="5"><span class="calc-input-suffix">clientes</span></div>
+                      <div class="calc-param-hint">Quantos novos clientes por mês</div>
+                    </div>
+                    <div class="calc-param-field">
+                      <label>Taxa de cancelamento mensal</label>
+                      <div class="calc-input-wrapper"><span class="calc-input-icon">📉</span><input class="calc-input-number" id="p-churn" value="5"><span class="calc-input-suffix">%</span></div>
+                      <div class="calc-param-hint recommended">Recomendado: 2% a 10%</div>
+                    </div>
+                  </div>
+                  <button class="calc-generate-btn" onclick="gerarProjecao()"><span class="calc-btn-icon">🚀</span><span class="calc-btn-text">Gerar Projeção de 24 Meses</span></button>
+                </div>
+                <div class="calc-results-area" id="proj-result"></div>
+              </div>
+              <div class="calc-sidebar">
+                <div class="calc-sidebar-header"><h3>📂 Últimas Simulações</h3></div>
+                <div class="calc-snapshots-list">
+                  <div class="calc-snapshots-empty">
+                    <div class="calc-empty-icon">📊</div>
+                    <p>Nenhuma simulação salva.</p>
+                    <p class="calc-empty-hint">Gere uma projeção e clique em "Salvar" para guardar.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <script src="/assets/shell.js" data-title="Calculadora de Comissão"></script>
+    <script>
+      var selectedPlan = document.querySelector('.calc-plan-card.selected');
+      function recalcTicket() {
+        var base = parseFloat(selectedPlan.dataset.price);
+        var mods = 0;
+        document.querySelectorAll('.calc-addon-check:checked').forEach(function (cb) { mods += parseFloat(cb.dataset.price); });
+        document.getElementById('r-ticket').textContent = 'R$ ' + (base + mods).toFixed(2).replace('.', ',');
+      }
+      document.querySelectorAll('.calc-plan-card').forEach(function (el) {
+        el.addEventListener('click', function () {
+          document.querySelectorAll('.calc-plan-card').forEach(function (p) { p.classList.remove('selected'); });
+          el.classList.add('selected');
+          selectedPlan = el;
+          recalcTicket();
+        });
+      });
+      document.querySelectorAll('.calc-addon-check').forEach(function (cb) { cb.addEventListener('change', recalcTicket); });
+      document.querySelectorAll('.comm-cb').forEach(function (cb) {
+        cb.addEventListener('change', function () {
+          var total = 0;
+          document.querySelectorAll('.comm-cb:checked').forEach(function (c) { total += parseFloat(c.dataset.pct); });
+          document.getElementById('r-commpct').value = total;
+        });
+      });
+
+      function gerarProjecao() {
+        var ticket = parseFloat(selectedPlan.dataset.price);
+        document.querySelectorAll('.calc-addon-check:checked').forEach(function (cb) { ticket += parseFloat(cb.dataset.price); });
+        var commPct = parseFloat(document.getElementById('r-commpct').value) / 100;
+        var novasPorMes = parseFloat(document.getElementById('p-vendas').value) || 0;
+        var churn = (parseFloat(document.getElementById('p-churn').value) || 0) / 100;
+
+        var clientes = 0, rows = '';
+        for (var m = 1; m <= 24; m++) {
+          clientes = clientes * (1 - churn) + novasPorMes;
+          var mrr = clientes * ticket;
+          var comissao = mrr * commPct;
+          rows += '<tr><td>Mês ' + m + '</td><td>' + clientes.toFixed(1) + '</td><td>R$ ' + mrr.toFixed(2).replace('.', ',') + '</td><td>R$ ' + comissao.toFixed(2).replace('.', ',') + '</td></tr>';
+        }
+        document.getElementById('proj-result').innerHTML =
+          '<table class="data-table" style="width:100%;"><thead><tr><th>Período</th><th>Clientes ativos</th><th>MRR</th><th>Comissão do Rep</th></tr></thead><tbody>' + rows + '</tbody></table>';
+      }
+    </script>
+  </body>
+</html>

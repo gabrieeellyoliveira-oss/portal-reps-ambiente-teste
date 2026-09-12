@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Indicadores CRM — Portal de Representantes | Cardápio Web</title>
+    <link rel="icon" type="image/jpeg" href="/assets/cw-logo-dark-e78e4446.jpg">
+    <link rel="stylesheet" href="/assets/application-cc2f1a53.css" />
+    <style>
+      .avatar-circle{width:34px;height:34px;border-radius:50%;background:#5b21b6;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;}
+    </style>
+  </head>
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar" id="sidebar"></aside>
+      <div class="main-wrapper">
+        <header class="top-header" id="top-header"></header>
+        <main class="page-content">
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+              <div><h1>Indicadores CRM</h1><p>Visão consolidada de leads, clientes e desempenho</p></div>
+              <div><label style="font-size:.85rem;">Representante: </label><select class="form-input"><option>Todos</option></select></div>
+            </div>
+            <div class="crm-kpi-grid">
+              <div class="crm-kpi-card"><div class="crm-kpi-icon">▦</div><div class="crm-kpi-data"><span class="crm-kpi-value">141</span><span class="crm-kpi-label">Total de Leads</span></div></div>
+              <div class="crm-kpi-card"><div class="crm-kpi-icon">⏱</div><div class="crm-kpi-data"><span class="crm-kpi-value">97</span><span class="crm-kpi-label">Leads Ativos</span></div></div>
+              <div class="crm-kpi-card"><div class="crm-kpi-icon">✓</div><div class="crm-kpi-data"><span class="crm-kpi-value">16</span><span class="crm-kpi-label">Leads Convertidos</span></div></div>
+              <div class="crm-kpi-card"><div class="crm-kpi-icon">📈</div><div class="crm-kpi-data"><span class="crm-kpi-value">36.4%</span><span class="crm-kpi-label">Taxa de Conversão</span></div></div>
+            </div>
+            <div class="crm-kpi-grid">
+              <div class="crm-kpi-card"><div class="crm-kpi-icon">👥</div><div class="crm-kpi-data"><span class="crm-kpi-value">195</span><span class="crm-kpi-label">Clientes Ativos</span></div></div>
+              <div class="crm-kpi-card"><div class="crm-kpi-icon">💳</div><div class="crm-kpi-data"><span class="crm-kpi-value">195</span><span class="crm-kpi-label">Clientes Pagos</span></div></div>
+              <div class="crm-kpi-card"><div class="crm-kpi-icon">🏬</div><div class="crm-kpi-data"><span class="crm-kpi-value">110</span><span class="crm-kpi-label">Total de Lojas</span></div></div>
+              <div class="crm-kpi-card"><div class="crm-kpi-icon">⏳</div><div class="crm-kpi-data"><span class="crm-kpi-value">14.6 dias</span><span class="crm-kpi-label">Tempo Médio de Conversão</span></div></div>
+              <div class="crm-kpi-card"><div class="crm-kpi-icon">💰</div><div class="crm-kpi-data"><span class="crm-kpi-value">R$ 56.896</span><span class="crm-kpi-label">MRR — Receita Mensal</span></div></div>
+            </div>
+            <div class="crm-kpi-grid">
+              <div class="crm-kpi-card"><div class="crm-kpi-icon">⛔</div><div class="crm-kpi-data"><span class="crm-kpi-value">108</span><span class="crm-kpi-label">Atividades Atrasadas</span></div></div>
+              <div class="crm-kpi-card"><div class="crm-kpi-icon">⚠</div><div class="crm-kpi-data"><span class="crm-kpi-value">15</span><span class="crm-kpi-label">Leads sem Atividades</span></div></div>
+              <div class="crm-kpi-card"><div class="crm-kpi-icon">🕒</div><div class="crm-kpi-data"><span class="crm-kpi-value">28</span><span class="crm-kpi-label">Leads Perdidos</span></div></div>
+            </div>
+            <div class="crm-charts-row" style="display:flex;gap:16px;flex-wrap:wrap;">
+              <div class="crm-chart-card" style="flex:1;min-width:320px;">
+                <h3 class="crm-chart-title">🔻 Funil de Vendas</h3>
+                <div class="crm-funnel">
+                  <div class="crm-funnel-row"><div class="crm-funnel-bar" style="width:100%;background:#6b7280;"><span class="crm-funnel-count">63</span></div><span class="crm-funnel-label">Novo Lead</span></div>
+                  <div class="crm-funnel-row"><div class="crm-funnel-bar" style="width:37%;background:#3b82f6;"><span class="crm-funnel-count">23</span></div><span class="crm-funnel-label">Contato Feito</span></div>
+                  <div class="crm-funnel-row"><div class="crm-funnel-bar" style="width:8%;background:#f59e0b;"><span class="crm-funnel-count">5</span></div><span class="crm-funnel-label">Visita Agendada</span></div>
+                  <div class="crm-funnel-row"><div class="crm-funnel-bar" style="width:10%;background:#8b5cf6;"><span class="crm-funnel-count">6</span></div><span class="crm-funnel-label">Proposta Enviada</span></div>
+                  <div class="crm-funnel-row"><div class="crm-funnel-bar" style="width:25%;background:#10b981;"><span class="crm-funnel-count">16</span></div><span class="crm-funnel-label">Fechado ✓</span></div>
+                </div>
+                <div style="text-align:center;margin-top:12px;padding:8px;background:rgba(239,68,68,0.06);border-radius:4px;">28 perdidos</div>
+              </div>
+              <div class="crm-chart-card" style="flex:1;min-width:320px;">
+                <h3 class="crm-chart-title">📊 Leads vs Clientes (12 meses)</h3>
+                <div class="crm-bar-chart">
+                  <div class="crm-chart-bars" id="chart"></div>
+                  <div class="crm-chart-legend">
+                    <span class="crm-legend-item"><span class="crm-legend-dot"></span> Leads</span>
+                    <span class="crm-legend-item"><span class="crm-legend-dot"></span> Clientes</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="crm-chart-card" style="margin-top:16px;">
+              <h3 class="crm-chart-title">🏆 Top Representantes por Leads</h3>
+              <div id="topReps" style="display:flex;flex-direction:column;gap:2px;"></div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <script src="/assets/shell.js" data-title="Indicadores CRM"></script>
+    <script>
+      var DATA = [
+        ['out/25',0,0],['nov/25',0,0],['dez/25',0,0],['jan/26',0,0],['fev/26',0,0],['mar/26',0,0],
+        ['abr/26',24,21],['mai/26',26,42],['jun/26',31,64],['jul/26',19,67],['ago/26',30,63],['set/26',11,18]
+      ];
+      var max = 67, scale = 140/max;
+      document.getElementById('chart').innerHTML = DATA.map(function (d) {
+        var h1 = Math.round(d[1]*scale), h2 = Math.round(d[2]*scale);
+        return '<div class="crm-chart-col"><div class="crm-chart-bar-group">' +
+          '<div class="crm-chart-bar leads" style="height:' + h1 + 'px;" title="' + d[1] + ' leads"></div>' +
+          '<div class="crm-chart-bar clients" style="height:' + h2 + 'px;" title="' + d[2] + ' clientes"></div>' +
+          '</div><span class="crm-chart-label">' + d[0] + '</span></div>';
+      }).join('');
+      var TOP_REPS = [
+        ['Klewerton André Macedo Santos','20 leads'],
+        ['Marco Aurélio Melo Luna','18 leads'],
+        ['Rafael Patrício Ferreira','15 leads'],
+        ['Isac Augusto Bezerra de Barros','8 leads'],
+        ['Ezequias dos Santos Ferreira Matsudo','7 leads']
+      ];
+      document.getElementById('topReps').innerHTML = TOP_REPS.map(function (r, i) {
+        return '<div style="display:flex;align-items:center;gap:10px;padding:6px 0;border-top:1px solid #eee;font-size:.85rem;">' +
+          '<span style="width:18px;color:#9ca3af;">' + (i+1) + '</span>' +
+          '<span style="flex:1;font-weight:600;">' + r[0] + '</span>' +
+          '<span style="color:#9ca3af;">' + r[1] + '</span></div>';
+      }).join('');
+    </script>
+  </body>
+</html>

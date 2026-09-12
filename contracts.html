@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Gestão de Contratos — Portal de Representantes | Cardápio Web</title>
+    <link rel="icon" type="image/jpeg" href="/assets/cw-logo-dark-e78e4446.jpg">
+    <link rel="stylesheet" href="/assets/application-cc2f1a53.css" />
+    <style>
+      .avatar-circle{width:34px;height:34px;border-radius:50%;background:#5b21b6;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;}
+      .dashboard-grid .dash-card{padding:24px;border:1px solid #e2e8f0;border-radius:4px;}
+      .dashboard-grid .dash-card-header{display:flex;justify-content:space-between;align-items:center;}
+      .dashboard-grid .dash-card-icon span{font-size:13px;font-weight:800;}
+      .sit-signers{display:flex;flex-direction:column;gap:2px;margin-top:2px;}
+      .sit-signers span{font-size:.7rem;}
+    </style>
+  </head>
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar" id="sidebar"></aside>
+      <div class="main-wrapper">
+        <header class="top-header" id="top-header"></header>
+        <main class="page-content">
+          <div class="ct-page-header">
+            <div><h1 class="ct-page-title">Gestão de Contratos</h1><p class="ct-page-subtitle">Todos os representantes aprovados e o status de cada contrato</p></div>
+            <div class="ct-header-actions">
+              <button class="btn btn-outline btn-sm">⚙ Configurações</button>
+              <a class="btn btn-outline btn-sm">Documento Geral</a>
+              <a class="btn btn-primary btn-sm">+ Novo Contrato</a>
+            </div>
+          </div>
+          <div class="dashboard-grid">
+            <div class="dash-card"><div class="dash-card-header"><span class="dash-card-title">Total de Reps</span><div class="dash-card-icon" style="color:#7c3aed;"><span>124</span></div></div></div>
+            <div class="dash-card"><div class="dash-card-header"><span class="dash-card-title">Sem Contrato</span><div class="dash-card-icon" style="color:#ef4444;"><span>21</span></div></div></div>
+            <div class="dash-card"><div class="dash-card-header"><span class="dash-card-title">Rascunho</span><div class="dash-card-icon" style="color:#9ca3af;"><span>0</span></div></div></div>
+            <div class="dash-card"><div class="dash-card-header"><span class="dash-card-title">Aguard. Assinaturas</span><div class="dash-card-icon" style="color:#3b82f6;"><span>59</span></div></div></div>
+            <div class="dash-card"><div class="dash-card-header"><span class="dash-card-title">Rep assinou — aguard. demais</span><div class="dash-card-icon" style="color:#8b5cf6;"><span>43</span></div></div></div>
+            <div class="dash-card"><div class="dash-card-header"><span class="dash-card-title">Pendente CW</span><div class="dash-card-icon" style="color:#f59e0b;"><span>0</span></div></div></div>
+            <div class="dash-card"><div class="dash-card-header"><span class="dash-card-title">Assinados</span><div class="dash-card-icon" style="color:#10b981;"><span>1</span></div></div></div>
+          </div>
+          <div class="table-toolbar">
+            <div class="table-toolbar-left">
+              <form class="search-form"><div class="search-input-wrapper">🔍 <input class="search-input" placeholder="Buscar representante..."></div></form>
+              <div>
+                <a class="active">Todos</a><a>Sem Contrato</a><a>Rascunho</a><a>Aguard. Assinaturas</a><a>Rep assinou — aguard. demais</a><a>Aguard. Rep (legado)</a><a>Pendente CW</a><a>Assinado</a>
+              </div>
+            </div>
+            <div class="table-toolbar-right"><button class="btn btn-sm btn-outline">↻ Sincronizar ZapSign</button></div>
+          </div>
+          <div class="table-card">
+            <table class="data-table">
+              <thead><tr><th>Representante</th><th>Status</th><th>Último Evento</th><th>Situação</th><th>Ações</th></tr></thead>
+              <tbody id="tbody"></tbody>
+            </table>
+          </div>
+        </main>
+      </div>
+    </div>
+    <script src="/assets/shell.js" data-title="Gestão de Contratos"></script>
+    <script>
+      var BADGE = {
+        'Aguard. Assinaturas': {bg:'rgb(219,234,254)', color:'rgb(59,130,246)'},
+        'Sem Contrato': {bg:'rgb(254,242,242)', color:'rgb(239,68,68)'},
+        'Rep assinou — aguard. demais': {bg:'rgb(237,233,254)', color:'rgb(139,92,246)'}
+      };
+      var ROWS = [
+        {name:'Adriano Bruno Santos de Melo', email:'adriano.melo@exemplo.com', status:'Aguard. Assinaturas', evt:'Enviado para assinatura (ZapSign)', when:'21/08 09:34', progress:'0/3 assinaram', signed:[]},
+        {name:'Alessandro Rodrigues da Silva', email:'alessandro.silva@exemplo.com', status:'Aguard. Assinaturas', evt:'Enviado para assinatura (ZapSign)', when:'19/08 12:21', progress:'0/3 assinaram', signed:[]},
+        {name:'Alex Salomão dos Anjos', email:'alex.anjos@exemplo.com', status:'Aguard. Assinaturas', evt:'Enviado para assinatura (ZapSign)', when:'19/08 10:14', progress:'0/3 assinaram', signed:[]},
+        {name:'Alexssander Rodrigo de Oliveira', email:'alexssrodrigo@exemplo.com', status:'Sem Contrato', evt:null, when:null, progress:null, signed:[]},
+        {name:'Alisson Gomes dos Santos', email:'alisson.santos@exemplo.com', status:'Aguard. Assinaturas', evt:'Enviado para assinatura (ZapSign)', when:'19/08 10:15', progress:'0/3 assinaram', signed:[]},
+        {name:'Anderson Rodrigo Andrade do Nascimento', email:'anderson.nascimento@exemplo.com', status:'Rep assinou — aguard. demais', evt:'Enviado para assinatura (ZapSign)', when:'19/08 10:37', progress:'1/3 assinaram', signed:['Parceiro']}
+      ];
+      var SIGNERS = ['Cardápio Web','Parceiro','Testemunha'];
+      document.getElementById('tbody').innerHTML = ROWS.map(function (r) {
+        var initials = r.name.split(' ').slice(0,2).map(function(w){return w[0];}).join('').toUpperCase();
+        var b = BADGE[r.status];
+        var sitHtml = r.evt === null && r.progress === null
+          ? '<span class="rep-name-sub">—</span>'
+          : '<div>ZapSign · ' + r.progress + '</div><div class="sit-signers">' + SIGNERS.map(function(s){
+              var ok = r.signed.indexOf(s) > -1;
+              return '<span style="color:' + (ok ? 'rgb(5,150,105)' : 'rgb(156,163,175)') + ';">' + (ok ? '✓' : '○') + ' ' + s + '</span>';
+            }).join('') + '</div>';
+        var actionsHtml = r.status === 'Sem Contrato'
+          ? '<div class="action-buttons"><a class="action-btn">➕</a></div>'
+          : '<div class="action-buttons"><a class="action-btn action-view">👁</a><a class="action-btn action-delete">🗑</a></div>';
+        return '<tr><td><div class="cell-name"><div class="cell-avatar">' + initials + '</div><div class="rep-name-stack"><span class="rep-name-main">' + r.name + '</span><span class="rep-name-sub">' + r.email + '</span></div></div></td>' +
+          '<td><span class="status-badge" style="background:' + b.bg + ';color:' + b.color + ';">' + r.status + '</span></td>' +
+          '<td>' + (r.evt === null ? '<span class="rep-name-sub">—</span>' : '<div>' + r.evt + '</div><div>' + r.when + '</div>') + '</td>' +
+          '<td>' + sitHtml + '</td>' +
+          '<td class="text-center">' + actionsHtml + '</td></tr>';
+      }).join('');
+    </script>
+  </body>
+</html>

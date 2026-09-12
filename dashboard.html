@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Dashboard — Portal de Representantes | Cardápio Web</title>
+    <link rel="icon" type="image/jpeg" href="/assets/cw-logo-dark-e78e4446.jpg">
+    <link rel="stylesheet" href="/assets/application-cc2f1a53.css" />
+    <style>
+      .avatar-circle{width:34px;height:34px;border-radius:50%;background:#5b21b6;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;}
+      .pod-av img, .pod-row-av img{display:none;}
+    </style>
+  </head>
+  <body>
+
+    <div class="app-layout">
+      <aside class="sidebar" id="sidebar"></aside>
+
+      <div class="main-wrapper">
+        <header class="top-header" id="top-header"></header>
+
+        <main class="page-content">
+          <div class="adm-flat">
+            <div class="adm-kpi-grid">
+              <div class="adm-kpi-tile"><div class="adm-kpi-tile-body"><div class="adm-kpi-tile-value">366</div><div class="adm-kpi-tile-label">Partners</div><div class="adm-kpi-tile-sub positive">124 aprovados · 227 pend.</div></div></div>
+              <div class="adm-kpi-tile"><div class="adm-kpi-tile-body"><div class="adm-kpi-tile-value">21</div><div class="adm-kpi-tile-label">Ativados</div><div class="adm-kpi-tile-sub">17% · cliente nos últ. 60d</div></div></div>
+              <div class="adm-kpi-tile"><div class="adm-kpi-tile-body"><div class="adm-kpi-tile-value">9</div><div class="adm-kpi-tile-label">Em Risco</div><div class="adm-kpi-tile-sub">últ. cliente há +60d</div></div></div>
+              <div class="adm-kpi-tile"><div class="adm-kpi-tile-body"><div class="adm-kpi-tile-value">94</div><div class="adm-kpi-tile-label">s/ Ativação</div><div class="adm-kpi-tile-sub">nunca colocou cliente</div></div></div>
+              <div class="adm-kpi-tile"><div class="adm-kpi-tile-body"><div class="adm-kpi-tile-value">110</div><div class="adm-kpi-tile-label">Lojas Ativas</div><div class="adm-kpi-tile-sub">195 clientes · +14 mês</div></div></div>
+              <div class="adm-kpi-tile"><div class="adm-kpi-tile-body"><div class="adm-kpi-tile-value">195</div><div class="adm-kpi-tile-label">Clientes Pagos</div><div class="adm-kpi-tile-sub">100% dos ativos</div></div></div>
+              <div class="adm-kpi-tile"><div class="adm-kpi-tile-body"><div class="adm-kpi-tile-value">R$ 56.895</div><div class="adm-kpi-tile-label">MRR</div><div class="adm-kpi-tile-sub">TM R$ 291</div></div></div>
+              <div class="adm-kpi-tile"><div class="adm-kpi-tile-body"><div class="adm-kpi-tile-value">2.5%</div><div class="adm-kpi-tile-label">Churn</div><div class="adm-kpi-tile-sub">5 canc. este mês hist.: 50 canc.</div></div></div>
+              <div class="adm-kpi-tile"><div class="adm-kpi-tile-body"><div class="adm-kpi-tile-value">5</div><div class="adm-kpi-tile-label">Early Churn ≤ 45d</div><div class="adm-kpi-tile-sub">100% dos canc. do mês hist.: 31 de 50 (62%)</div></div></div>
+            </div>
+
+            <div style="display:flex;gap:16px;margin-top:16px;flex-wrap:wrap;">
+              <div class="adm-card pod-card" style="flex:1;min-width:320px;">
+                <div class="pod-head">
+                  <div class="pod-head-left">
+                    <span class="pod-head-ico pod-head-ico--purple">
+                      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path></svg>
+                    </span>
+                    <div>
+                      <h3 class="pod-title">Ranking de Reps — Setembro de 2026</h3>
+                      <div class="pod-subtitle">Desempenho baseado em novos clientes no mês</div>
+                    </div>
+                  </div>
+                  <button type="button" class="pod-eye" onclick="document.body.classList.toggle('hide-sensitive')" title="Mostrar/ocultar valores (R$)">👁</button>
+                </div>
+                <div class="pod-stage">
+                  <span class="pod-conf pod-conf-1"></span><span class="pod-conf pod-conf-2"></span><span class="pod-conf pod-conf-3"></span><span class="pod-conf pod-conf-4"></span><span class="pod-conf pod-conf-5"></span><span class="pod-conf pod-conf-6"></span>
+                  <div class="pod-col pod-col--p2">
+                    <div class="pod-av pod-av--p2"><span class="pod-medal pod-medal--p2">2</span></div>
+                    <div class="pod-name">Rodrigo Rosa Nunes</div>
+                    <div class="pod-count">2 clientes</div>
+                    <span class="pod-money pod-money--purple pod-sensitive">R$ 559</span>
+                    <div class="pod-block pod-block--purple pod-block--p2"><span>2</span></div>
+                  </div>
+                  <div class="pod-col pod-col--p1">
+                    <div class="pod-av pod-av--p1"><span class="pod-medal pod-medal--p1">1</span></div>
+                    <div class="pod-name">Rafael Patrício Ferreira</div>
+                    <div class="pod-count">8 clientes</div>
+                    <span class="pod-money pod-money--purple pod-sensitive">R$ 2.549</span>
+                    <div class="pod-block pod-block--purple pod-block--p1"><span>1</span></div>
+                  </div>
+                  <div class="pod-col pod-col--p3">
+                    <div class="pod-av pod-av--p3"><span class="pod-medal pod-medal--p3">3</span></div>
+                    <div class="pod-name">Isac Augusto Bezerra de Barros</div>
+                    <div class="pod-count">2 clientes</div>
+                    <span class="pod-money pod-money--purple pod-sensitive">R$ 509</span>
+                    <div class="pod-block pod-block--purple pod-block--p3"><span>3</span></div>
+                  </div>
+                </div>
+                <div class="pod-rows">
+                  <div class="pod-row">
+                    <span class="pod-row-pos">4</span>
+                    <span class="pod-row-av"><span class="pod-av-initials">EM</span></span>
+                    <span class="pod-row-who"><span class="pod-row-name">Ezequias dos Santos Ferreira Matsudo</span><span class="pod-row-sub">1 cliente</span></span>
+                    <span class="pod-row-track"><span class="pod-row-fill pod-row-fill--purple"></span></span>
+                    <span class="pod-row-val pod-sensitive">R$ 239</span>
+                    <span class="pod-row-delta"><span class="pod-delta pod-delta--flat">—</span></span>
+                  </div>
+                  <div class="pod-row">
+                    <span class="pod-row-pos">5</span>
+                    <span class="pod-row-av"><span class="pod-av-initials">MA</span></span>
+                    <span class="pod-row-who"><span class="pod-row-name">Marco Aurélio Melo Luna</span><span class="pod-row-sub">1 cliente</span></span>
+                    <span class="pod-row-track"><span class="pod-row-fill pod-row-fill--purple"></span></span>
+                    <span class="pod-row-val pod-sensitive">R$ 209</span>
+                    <span class="pod-row-delta"><span class="pod-delta pod-delta--flat">—</span></span>
+                  </div>
+                  <div class="pod-row">
+                    <span class="pod-row-pos">6</span>
+                    <span class="pod-row-av"><span class="pod-av-initials">FB</span></span>
+                    <span class="pod-row-who"><span class="pod-row-name">Fernando Braga de Sousa</span><span class="pod-row-sub">0 clientes</span></span>
+                    <span class="pod-row-track"><span class="pod-row-fill pod-row-fill--purple"></span></span>
+                    <span class="pod-row-val pod-sensitive">R$ 0</span>
+                    <span class="pod-row-delta"><span class="pod-delta pod-delta--flat">—</span></span>
+                  </div>
+                </div>
+                <div class="pod-more pod-more--purple"><a href="#">Ver ranking completo →</a></div>
+              </div>
+
+              <div class="adm-card pod-card" style="flex:1;min-width:320px;">
+                <div class="pod-head">
+                  <div class="pod-head-left">
+                    <span class="pod-head-ico pod-head-ico--purple">🌐</span>
+                    <div>
+                      <h3 class="pod-title">Ranking Global</h3>
+                      <div class="pod-subtitle">Desempenho acumulado no período</div>
+                    </div>
+                  </div>
+                  <button type="button" class="pod-eye" onclick="document.body.classList.toggle('hide-sensitive')" title="Mostrar/ocultar valores (R$)">👁</button>
+                </div>
+                <div class="pod-stage">
+                  <span class="pod-conf pod-conf-1"></span><span class="pod-conf pod-conf-2"></span><span class="pod-conf pod-conf-3"></span><span class="pod-conf pod-conf-4"></span><span class="pod-conf pod-conf-5"></span><span class="pod-conf pod-conf-6"></span>
+                  <div class="pod-col pod-col--p2">
+                    <div class="pod-av pod-av--p2"><span class="pod-medal pod-medal--p2">2</span></div>
+                    <div class="pod-name">Marco Aurélio Melo Luna</div>
+                    <div class="pod-count">41 clientes · 14 canc.</div>
+                    <div class="pod-block pod-block--purple pod-block--p2"><span>2</span></div>
+                  </div>
+                  <div class="pod-col pod-col--p1">
+                    <div class="pod-av pod-av--p1"><span class="pod-medal pod-medal--p1">1</span></div>
+                    <div class="pod-name">Rafael Patrício Ferreira</div>
+                    <div class="pod-count">85 clientes · 23 canc.</div>
+                    <div class="pod-block pod-block--purple pod-block--p1"><span>1</span></div>
+                  </div>
+                  <div class="pod-col pod-col--p3">
+                    <div class="pod-av pod-av--p3"><span class="pod-medal pod-medal--p3">3</span></div>
+                    <div class="pod-name">Fernando Braga de Sousa</div>
+                    <div class="pod-count">14 clientes</div>
+                    <div class="pod-block pod-block--purple pod-block--p3"><span>3</span></div>
+                  </div>
+                </div>
+                <div class="pod-rows">
+                  <div class="pod-row">
+                    <span class="pod-row-pos">4</span>
+                    <span class="pod-row-av"><span class="pod-av-initials">AL</span></span>
+                    <span class="pod-row-who"><span class="pod-row-name">Arenilton Lima E Silva Assunção</span><span class="pod-row-sub">5 clientes · 1 canc.</span></span>
+                    <span class="pod-row-track"><span class="pod-row-fill pod-row-fill--purple"></span></span>
+                    <span class="pod-row-val pod-sensitive">R$ 1.584</span>
+                  </div>
+                  <div class="pod-row">
+                    <span class="pod-row-pos">5</span>
+                    <span class="pod-row-av"><span class="pod-av-initials">FS</span></span>
+                    <span class="pod-row-who"><span class="pod-row-name">Filipe Sales Freire</span><span class="pod-row-sub">5 clientes</span></span>
+                    <span class="pod-row-track"><span class="pod-row-fill pod-row-fill--purple"></span></span>
+                    <span class="pod-row-val pod-sensitive">R$ 1.394</span>
+                  </div>
+                  <div class="pod-row">
+                    <span class="pod-row-pos">6</span>
+                    <span class="pod-row-av"><span class="pod-av-initials">KA</span></span>
+                    <span class="pod-row-who"><span class="pod-row-name">Klewerton André Macedo Santos</span><span class="pod-row-sub">5 clientes · 2 canc.</span></span>
+                    <span class="pod-row-track"><span class="pod-row-fill pod-row-fill--purple"></span></span>
+                    <span class="pod-row-val pod-sensitive">R$ 1.269</span>
+                  </div>
+                </div>
+                <div class="pod-more pod-more--purple"><a href="#">Ver ranking completo →</a></div>
+              </div>
+            </div>
+
+            <div class="adm-card">
+              <div class="adm-card-header">
+                <h3 class="adm-card-title2">📊 Evolução Mensal</h3>
+                <div class="adm-card-actions"><button class="adm-maximize-btn">⤢</button></div>
+              </div>
+              <div class="adm-chart-legend2">
+                <span class="adm-legend2-item"><span class="adm-legend2-bar" style="background:rgba(124,58,237,.75);"></span>Novos Clientes</span>
+                <span class="adm-legend2-item"><span class="adm-legend2-bar adm-legend2-proj" style="background:rgba(124,58,237,.22);"></span>Projeção do mês</span>
+                <span class="adm-legend2-item"><span class="adm-legend2-bar" style="background:rgba(59,130,246,.55);"></span>Novos Reps</span>
+                <span class="adm-legend2-item"><span class="adm-legend2-bar" style="background:rgba(20,184,166,.6);"></span>Reps Ativados</span>
+                <span class="adm-legend2-item"><span class="adm-legend2-line" style="background:#f59e0b;"></span>nMRR (R$)</span>
+                <span class="adm-legend2-item"><span class="adm-legend2-line" style="background:#10b981;"></span>MRR (R$)</span>
+                <span class="adm-legend2-item"><span class="adm-legend2-line adm-legend2-dash" style="background:#ef4444;"></span>Churn</span>
+              </div>
+              <div class="adm-chart-wrap"><canvas id="adminComboChart" height="90"></canvas></div>
+            </div>
+
+            <div class="adm-churn-row">
+              <div class="adm-card adm-churn-card">
+                <div class="adm-card-header"><h3 class="adm-card-title2">Churn por Categoria</h3><div class="adm-card-subtitle">Total: 55 cancelamentos</div></div>
+                <div class="adm-chart-wrap"><canvas id="churnCatChart" height="180"></canvas></div>
+              </div>
+              <div class="adm-card adm-churn-card">
+                <div class="adm-card-header"><h3 class="adm-card-title2">Churn por Motivo Detalhado</h3><div class="adm-card-subtitle">13 de 55 com motivo registrado</div></div>
+                <div class="adm-chart-wrap"><canvas id="churnReasonChart" height="180"></canvas></div>
+              </div>
+              <div class="adm-card adm-churn-insight">
+                <h3 class="adm-card-title2">Análise de Churn</h3>
+                <p style="font-size:.72rem;color:#9ca3af;margin:4px 0;">Meta: abaixo de 4.0%</p>
+                <p style="font-size:.8rem;color:#dc2626;font-weight:700;margin:6px 0 4px;">Churn crítico: 20.0% — 16.0pp acima da meta de 4.0%</p>
+                <p style="font-size:.8rem;color:#4b5563;">Churn em nível crítico. Prioridade máxima de intervenção. 8 cancelamentos por "Outro" — maior grupo de saída. Implemente um processo de customer success: contato ativo com clientes em risco antes do cancelamento, NPS recorrente e revisões de contrato periódicas. Meta: reduzir o churn em pelo menos 2pp no próximo trimestre.</p>
+                <p style="font-size:.72rem;color:#9ca3af;margin-top:10px;">Top motivos: Outro motivo 62% · Dificuldade de uso 31% · Falta de treinamento 8%</p>
+              </div>
+            </div>
+
+            <div class="adm-card">
+              <div class="adm-card-header"><h3 class="adm-card-title2">📈 Métricas de Performance</h3></div>
+              <div class="adm-metrics-grid" id="metrics"></div>
+            </div>
+
+            <div class="adm-card">
+              <div class="adm-card-header"><h3 class="adm-card-title2">💡 Insights</h3></div>
+              <div class="adm-insights-grid" id="insights"></div>
+            </div>
+
+            <div class="adm-card">
+              <div class="adm-card-header"><h3 class="adm-card-title2">🎓 Ranking — Engajamento em Treinamentos</h3></div>
+              <div class="adm-ranking-list" id="trainingRank"></div>
+            </div>
+
+            <div class="adm-card">
+              <div class="adm-card-header"><h3 class="adm-card-title2">Perfil dos Representantes</h3><div class="adm-card-subtitle">Distribuição por tipo de perfil</div></div>
+              <div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;">
+                <div style="position:relative;width:200px;flex-shrink:0;">
+                  <canvas id="repProfileDonut" height="200"></canvas>
+                  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;">
+                    <div style="font-size:1.4rem;font-weight:800;">201</div>
+                    <div style="font-size:.7rem;color:#9ca3af;">reps</div>
+                  </div>
+                </div>
+                <div id="profileLegend" style="flex:1;min-width:220px;font-size:.8rem;"></div>
+              </div>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap;">
+              <div class="adm-card" style="flex:1;min-width:280px;">
+                <div class="adm-card-header"><h3 class="adm-card-title2">Distribuição por Período</h3><div class="adm-card-subtitle">Clientes pagos por tipo de cobrança — 195 pagos</div></div>
+                <div class="adm-chart-wrap"><canvas id="periodDonutChart" height="140"></canvas></div>
+              </div>
+              <div class="adm-card" style="flex:1;min-width:280px;">
+                <div class="adm-card-header"><h3 class="adm-card-title2">Ticket Médio Mensalizado por Período</h3><div class="adm-card-subtitle">Valor mensal médio (plan_value) por tipo de plano</div></div>
+                <div id="ticketList" style="font-size:.8rem;"></div>
+              </div>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap;">
+              <div class="adm-card" style="flex:1;min-width:280px;">
+                <div class="adm-card-header"><h3 class="adm-card-title2">📦 Módulos</h3><div class="adm-card-subtitle">Adicionais contratados</div></div>
+                <div style="font-size:1.4rem;font-weight:800;">0.7 <span style="font-size:.72rem;font-weight:400;color:#9ca3af;">módulos / cliente</span></div>
+                <div style="font-size:.8rem;margin:10px 0;">Com módulos <b>76</b> · Sem módulos <b>119</b><div style="height:6px;background:#f3f4f6;border-radius:4px;margin-top:6px;overflow:hidden;"><div style="width:39%;height:100%;background:#7c3aed;"></div></div><div style="color:#7c3aed;margin-top:4px;">39% tem módulo ativo</div></div>
+              </div>
+              <div class="adm-card" style="flex:1;min-width:280px;">
+                <div class="adm-card-header"><h3 class="adm-card-title2">Módulos Mais Contratados</h3><div class="adm-card-subtitle">Entre clientes pagos com módulos registrados</div></div>
+                <div id="modulesList"></div>
+              </div>
+            </div>
+
+            <div class="adm-agenda-wrap">
+              <div class="adm-section-header"><h3>📅 Agenda de Atividades</h3><p>Tarefas pendentes dos representantes</p></div>
+              <div class="adm-agenda-strip">
+                <div class="adm-agenda-cell adm-agenda-overdue"><span>⛔</span><div class="adm-agenda-num">108</div><div class="adm-agenda-lbl">Atrasadas</div></div>
+                <div class="adm-agenda-cell adm-agenda-today"><span>🕒</span><div class="adm-agenda-num">0</div><div class="adm-agenda-lbl">Vencem Hoje</div></div>
+                <div class="adm-agenda-cell adm-agenda-week"><span>📆</span><div class="adm-agenda-num">1</div><div class="adm-agenda-lbl">Esta Semana</div></div>
+                <div class="adm-agenda-cell adm-agenda-nextweek"><span>📅</span><div class="adm-agenda-num">1</div><div class="adm-agenda-lbl">Próx. Semana</div></div>
+                <div class="adm-agenda-cell"><span>📋</span><div class="adm-agenda-num">0</div><div class="adm-agenda-lbl">+2 Semanas</div></div>
+                <div class="adm-agenda-cell"><span>❔</span><div class="adm-agenda-num">9</div><div class="adm-agenda-lbl">Sem Data</div></div>
+              </div>
+            </div>
+
+            <div class="adm-agenda-ranks">
+              <div class="adm-card2">
+                <div class="adm-card2-header"><h4>Top 5 — Mais Atividades a Vencer</h4></div>
+                <table class="adm-rank-table"><thead><tr><th>#</th><th>Representante</th><th>Atividades</th></tr></thead><tbody id="rankVencer"></tbody></table>
+              </div>
+              <div class="adm-card2">
+                <div class="adm-card2-header"><h4>Top 5 — Mais Atividades Atrasadas</h4></div>
+                <table class="adm-rank-table"><thead><tr><th>#</th><th>Representante</th><th>Atrasadas</th></tr></thead><tbody id="rankAtrasadas"></tbody></table>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+    <script src="/assets/shell.js" data-title="Dashboard"></script>
+    <script>
+      var MONTHS = ['out/25','nov/25','dez/25','jan/26','fev/26','mar/26','abr/26','mai/26','jun/26','jul/26','ago/26','set/26'];
+
+      new Chart(document.getElementById('adminComboChart'), {
+        data: {
+          labels: MONTHS,
+          datasets: [
+            {label:'Novos Clientes', type:'bar', data:[0,0,0,0,0,0,25,39,68,45,58,14], backgroundColor:'rgba(124,58,237,0.75)', borderColor:'rgba(124,58,237,1)'},
+            {label:'Projeção do mês', type:'bar', data:[0,0,0,0,0,0,0,0,0,0,0,29], backgroundColor:'rgba(124,58,237,0.22)', borderColor:'rgba(124,58,237,0.85)'},
+            {label:'Novos Reps', type:'bar', data:[0,0,0,0,0,0,17,8,30,12,46,11], backgroundColor:'rgba(59,130,246,0.55)', borderColor:'rgba(59,130,246,1)'},
+            {label:'Reps Ativados', type:'bar', data:[0,0,0,0,0,0,4,4,8,7,5,1], backgroundColor:'rgba(20,184,166,0.6)', borderColor:'rgba(20,184,166,1)'},
+            {label:'nMRR (R$)', type:'line', yAxisID:'y1', data:[0,0,0,0,0,0,7104.50,11509.08,19988.45,13253.92,15728.91,4069.69], backgroundColor:'rgba(245,158,11,0.07)', borderColor:'#f59e0b'},
+            {label:'MRR (R$)', type:'line', yAxisID:'y1', data:[0,0,0,0,0,0,5609.59,13923.95,27437.86,38326.96,52825.94,56895.63], backgroundColor:'rgba(16,185,129,0.06)', borderColor:'#10b981'},
+            {label:'Churn', type:'line', yAxisID:'y1', data:[0,0,0,0,0,0,0,0,5,16,23,5], borderColor:'#ef4444', borderDash:[4,3]}
+          ]
+        },
+        options: { responsive:true, scales: { y:{beginAtZero:true}, y1:{position:'right', beginAtZero:true, grid:{drawOnChartArea:false}} }, plugins:{legend:{display:false}} }
+      });
+
+      new Chart(document.getElementById('churnCatChart'), {
+        type:'doughnut',
+        data: { labels:['Produto','Suporte','Outro'], datasets:[{data:[4,1,8], backgroundColor:['#7c3aed','#ef4444','#f59e0b']}] }
+      });
+      new Chart(document.getElementById('churnReasonChart'), {
+        type:'doughnut',
+        data: { labels:['Outro motivo','Dificuldade de uso','Falta de treinamento'], datasets:[{data:[8,4,1], backgroundColor:['#7c3aed','#ef4444','#f59e0b']}] }
+      });
+      var PROFILE = [['Empreendedor',11,'#7c3aed'],['Cliente CW',6,'#2563eb'],['Renda Extra',17,'#059669'],['Adjacente',5,'#d97706'],['Profissional de Software',24,'#dc2626'],['Outros',110,'#6b7280'],['Não informado',28,'#9ca3af']];
+      new Chart(document.getElementById('repProfileDonut'), {
+        type:'doughnut',
+        data: { labels:PROFILE.map(p=>p[0]), datasets:[{data:PROFILE.map(p=>p[1]), backgroundColor:PROFILE.map(p=>p[2])}] },
+        options:{plugins:{legend:{display:false}}, cutout:'65%'}
+      });
+      document.getElementById('profileLegend').innerHTML = PROFILE.map(function(p){
+        var pct = Math.round(p[1]/201*100);
+        return '<div style="display:flex;align-items:center;gap:8px;padding:4px 0;"><span style="width:9px;height:9px;border-radius:50%;background:'+p[2]+';flex-shrink:0;"></span><span style="flex:1;">'+p[0]+'</span><span style="font-weight:700;">'+p[1]+'</span><span style="color:#9ca3af;width:34px;text-align:right;">'+pct+'%</span></div>';
+      }).join('');
+
+      var TICKET = [['Mensal','R$ 291,32','193 clientes'],['Trimestral','—','0 clientes'],['Semestral','R$ 389,95','1 cliente'],['Anual','R$ 279,97','1 cliente']];
+      document.getElementById('ticketList').innerHTML = TICKET.map(function(t){
+        return '<div style="display:flex;justify-content:space-between;padding:6px 0;border-top:1px solid #eee;"><span>'+t[0]+'</span><span>'+t[1]+' /mês · '+t[2]+'</span></div>';
+      }).join('');
+      new Chart(document.getElementById('periodDonutChart'), {
+        type:'doughnut',
+        data: { labels:['Mensal','Trimestral','Semestral','Anual'], datasets:[{data:[193,0,1,1], backgroundColor:['#7c3aed','#2563eb','#059669','#d97706']}] }
+      });
+
+      document.getElementById('metrics').innerHTML = [
+        ['⏱','24.0 dias','Tempo médio para 1º cliente'],
+        ['👥','1.8 clientes','Média de clientes por rep'],
+        ['📊','0 clientes','Mediana de clientes por rep'],
+        ['💰','R$ 291','Ticket Médio dos Partners']
+      ].map(function(m){
+        return '<div class="adm-metric-box2"><span class="adm-metric-icon2">'+m[0]+'</span><div class="adm-metric2-data"><span class="adm-metric2-value">'+m[1]+'</span><span class="adm-metric2-label">'+m[2]+'</span></div></div>';
+      }).join('');
+
+      document.getElementById('insights').innerHTML = [
+        ['#10b981','🏆','Maior Faturamento','Rafael Patrício Ferreira lidera com R$ 25.273 em receita recorrente mensal.'],
+        ['#f59e0b','⚠','Aprovados sem Ativação','94 representantes aprovados ainda não colocou o 1º cliente. Priorize-os no Pipeline Onboarding.'],
+        ['#ef4444','📉','Reps em Risco','9 representantes já colocou cliente, mas está há mais de 60 dias sem cliente novo. Hora de reengajar.']
+      ].map(function(i){
+        return '<div class="adm-insight-card2"><span class="adm-insight-icon2" style="background:'+i[0]+'15;color:'+i[0]+';">'+i[1]+'</span><div class="adm-insight-content"><div class="adm-insight-title2">'+i[2]+'</div><div class="adm-insight-text2">'+i[3]+'</div></div></div>';
+      }).join('');
+
+      var TRAINING_RANK = [
+        {name:'Marco Aurélio Melo Luna', xp:740, nivel:7, cont:'35/35', pct:100},
+        {name:'Paulo Henrique Dias Torres', xp:700, nivel:7, cont:'35/35', pct:100},
+        {name:'Helber Leandro', xp:685, nivel:6, cont:'35/35', pct:100},
+        {name:'Tiago Bernardes Ferreira', xp:655, nivel:6, cont:'35/35', pct:100},
+        {name:'Fernando Braga de Sousa', xp:550, nivel:5, cont:'25/35', pct:71},
+        {name:'Vivianna Maria Costa do Nascimento', xp:550, nivel:5, cont:'25/35', pct:71},
+        {name:'Márcio Samuel Mendes Sousa', xp:340, nivel:3, cont:'23/35', pct:66},
+        {name:'Rafael Patrício Ferreira', xp:480, nivel:4, cont:'20/35', pct:57},
+        {name:'Guilherme do Amaral Silveira', xp:370, nivel:3, cont:'17/35', pct:49},
+        {name:'Thiago Francisco Vargas', xp:280, nivel:2, cont:'17/35', pct:49}
+      ];
+      document.getElementById('trainingRank').innerHTML = TRAINING_RANK.map(function(r,i){
+        var initials = r.name.split(' ').slice(0,2).map(function(w){return w[0];}).join('').toUpperCase();
+        return '<div class="adm-rank-item2"><span class="adm-rank2-pos"><span class="adm-rank2-num">'+(i+1)+'</span></span>'+
+          '<span class="adm-rank2-avatar">'+initials+'</span>'+
+          '<div class="adm-rank2-info"><span class="adm-rank2-name">'+r.name+'</span><span class="adm-rank2-stats">'+r.xp+' XP · Nível '+r.nivel+' · '+r.cont+' conteúdos</span></div>'+
+          '<span class="adm-rank2-sep"></span>'+
+          '<span class="adm-rank2-bar-wrap"><span class="adm-rank2-bar" style="width:'+r.pct+'%;"></span></span>'+
+          '<span class="adm-rank2-pct-badge">'+r.pct+'%</span></div>';
+      }).join('');
+
+      document.getElementById('modulesList').innerHTML = [
+        ['Marketplace',67,34],['Fiscal',33,17],['Roteirização',19,10],['Estoque Avançado',17,9],['Financeiro',4,2],['Totem x2',2,1],['Totem',1,1]
+      ].map(function(m,i){
+        return '<div style="display:flex;align-items:center;gap:8px;font-size:.78rem;padding:4px 0;"><span style="color:#9ca3af;">'+(i+1)+'</span><span style="flex:1;">'+m[0]+'</span><span>'+m[1]+'</span><span style="color:#9ca3af;">'+m[2]+'%</span></div>';
+      }).join('');
+
+      var VENCER = [['Rafael Patrício Ferreira',1],['Sandro Vieira de Lima',1]];
+      document.getElementById('rankVencer').innerHTML = VENCER.map(function(r,i){
+        return '<tr><td class="adm-rank-pos-cell"><span class="adm-rank-pos-num">'+(i+1)+'</span></td><td>'+r[0]+'</td><td><span class="adm-rank-count blue">'+r[1]+'</span></td></tr>';
+      }).join('');
+      var ATRASADAS = [['Klewerton André Macedo Santos',19],['Marco Aurélio Melo Luna',13],['Rafael Patrício Ferreira',10],['Isac Augusto Bezerra de Barros',7],['Rodrigo Tadeu de Souza',6]];
+      document.getElementById('rankAtrasadas').innerHTML = ATRASADAS.map(function(r,i){
+        return '<tr><td class="adm-rank-pos-cell"><span class="adm-rank-pos-num">'+(i+1)+'</span></td><td>'+r[0]+'</td><td><span class="adm-rank-count blue">'+r[1]+'</span></td></tr>';
+      }).join('');
+    </script>
+  </body>
+</html>

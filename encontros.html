@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Encontros — Portal de Representantes | Cardápio Web</title>
+    <link rel="icon" type="image/jpeg" href="/assets/cw-logo-dark-e78e4446.jpg">
+    <link rel="stylesheet" href="/assets/application-cc2f1a53.css" />
+    <style>
+      .avatar-circle{width:34px;height:34px;border-radius:50%;background:#5b21b6;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;}
+    </style>
+  </head>
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar" id="sidebar"></aside>
+      <div class="main-wrapper">
+        <header class="top-header" id="top-header"></header>
+        <main class="page-content">
+          <div class="mt-head">
+            <div><h1 class="mt-title">Encontros</h1><p class="mt-sub">Calendário de encontros da comunidade de representantes — participe e suba no ranking.</p></div>
+            <a class="mt-btn mt-btn-primary">⚙ Gerenciar Encontros</a>
+          </div>
+          <div class="mt-layout">
+            <div class="mt-main">
+              <div class="mt-empty">
+                <span class="mt-empty-icon">🗓</span>
+                <h3>Nenhum encontro agendado</h3>
+                <p>Assim que a agenda for publicada, os próximos encontros aparecem aqui.</p>
+              </div>
+              <div class="mt-month">
+                <div class="mt-month-head"><span class="mt-month-label">ENCONTROS ANTERIORES</span><span class="mt-month-line"></span></div>
+                <div class="mt-pastlist" id="past"></div>
+              </div>
+            </div>
+            <div class="mt-side">
+              <div class="mt-rankcard">
+                <div class="mt-rank-head"><span class="mt-rank-ico">🏆</span><div><h3>Ranking de Participação</h3><p>Presenças confirmadas nos encontros</p></div></div>
+                <div class="mt-rank-list" id="rank"></div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <script src="/assets/shell.js" data-title="Encontros"></script>
+    <script>
+      var PAST = [
+        {date:'08/09/26', title:'Mentoria dos Representantes - Tira Dúvidas', n:12},
+        {date:'25/08/26', title:'Treinamento: Portal CW', n:3},
+        {date:'24/08/26', title:'Como criar um Cardápio Campeão', n:13},
+        {date:'17/08/26', title:'Guia Prático de Vendas: Do 0 ao 1° Cliente', n:8},
+        {date:'10/08/26', title:'Cardápio Web como Ecommerce do Restaurantes', n:6}
+      ];
+      document.getElementById('past').innerHTML = PAST.map(function (e) {
+        return '<div class="mt-pastrow"><span class="mt-past-date">' + e.date + '</span><span class="mt-past-kind">🎥</span>' +
+          '<span class="mt-past-title">' + e.title + '</span><span class="mt-past-count">✓ ' + e.n + ' participaram</span>' +
+          '<a class="mt-past-manage">Check-in →</a></div>';
+      }).join('');
+
+      var RANK = [
+        {name:'Ezequias dos Santos Ferreira Matsudo', n:5, pos:'p1'},
+        {name:'Peter Robson Russo', n:5, pos:'p1'},
+        {name:'Wdeyverson Madeira de Freitas', n:4, pos:'p3'},
+        {name:'Cássio Luiz Lopes Junior', n:2, pos:'pn'},
+        {name:'Eliab Américo Coutinho', n:2, pos:'pn'}
+      ];
+      document.getElementById('rank').innerHTML = RANK.map(function (r, i) {
+        var initials = r.name.split(' ').slice(0,2).map(function(w){return w[0];}).join('').toUpperCase();
+        return '<div class="mt-rank-row"><span class="mt-rank-pos ' + r.pos + '">' + (i+1) + 'º</span><span class="mt-rank-avatar">' + initials + '</span><span class="mt-rank-name">' + r.name + '</span><span class="mt-rank-count"><strong>' + r.n + '</strong> presenças</span></div>';
+      }).join('');
+    </script>
+  </body>
+</html>

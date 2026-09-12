@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Clientes — Portal de Representantes | Cardápio Web</title>
+    <link rel="icon" type="image/jpeg" href="/assets/cw-logo-dark-e78e4446.jpg">
+    <link rel="stylesheet" href="/assets/application-cc2f1a53.css" />
+    <style>
+      .avatar-circle{width:34px;height:34px;border-radius:50%;background:#5b21b6;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;}
+      .clients-avatar{width:30px;height:30px;border-radius:50%;background:#ede9fe;color:#5b21b6;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.72rem;}
+      .clients-name-cell{display:flex;align-items:center;gap:8px;}
+    </style>
+  </head>
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar" id="sidebar"></aside>
+      <div class="main-wrapper">
+        <header class="top-header" id="top-header"></header>
+        <main class="page-content">
+          <div class="clients-page">
+            <div class="cv-header">
+              <div class="cv-header-left"><h1 class="cv-title">Clientes</h1><span class="cv-total-badge">275</span></div>
+              <div class="cv-header-right">
+                <button class="btn btn-sm btn-outline">↻ <span>Sincronizar</span></button>
+                <button class="btn btn-sm btn-export-xlsx">⬇ <span class="export-btn-text">Exportar Excel</span></button>
+                <div class="cv-view-toggle">
+                  <button class="cv-vbtn active">☰ Tabela</button>
+                  <button class="cv-vbtn">▦ Kanban</button>
+                  <button class="cv-vbtn">📊 Estatísticas</button>
+                </div>
+                <button class="btn btn-primary btn-sm" style="background:#16a34a;">+ Nova Assinatura</button>
+              </div>
+            </div>
+            <div class="cv-status-bar" id="statusbar"></div>
+            <div class="clients-toolbar">
+              <div class="clients-filters">
+                <div class="clients-search-input-wrap">🔍 <input class="clients-search-input" placeholder="Buscar por nome, email ou telefone..."></div>
+                <select class="form-input clients-rep-select"><option>Todos Representantes</option></select>
+              </div>
+            </div>
+            <div class="dash-card">
+              <table class="clients-table" style="width:100%;">
+                <thead><tr><th>Cliente</th><th>Assinatura</th><th>Mensalidade</th><th>Comissão</th><th>Fatura</th><th>Representante</th><th>Cidade</th><th class="text-center">Ações</th></tr></thead>
+                <tbody id="tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <script src="/assets/shell.js" data-title="Clientes"></script>
+    <script>
+      var SPILLS = [
+        {icon:'', label:'Todos', n:275, active:true},
+        {icon:'✅ ', label:'Ativas', n:195},
+        {icon:'💳 ', label:'Fatura Aberta', n:122},
+        {icon:'🔴 ', label:'Inadimplentes', n:72},
+        {icon:'', label:'Canceladas', n:55},
+        {icon:'', label:'Abandono', n:25},
+        {icon:'📝 ', label:'Manuais', n:0}
+      ];
+      document.getElementById('statusbar').innerHTML = SPILLS.map(function (s) {
+        return '<a class="cv-spill' + (s.active?' active':'') + '"><span class="cv-spill-dot"></span>' + s.icon + s.label + ' <span class="cv-spill-n">' + s.n + '</span></a>';
+      }).join('');
+
+      var ROWS = [
+        {name:'Pizza Napolitana Real', plan:'Ativa', planTag:'Plano Premium (Mesas + Delivery)', mensal:'R$ 299,98', comissao:'—', fatura:'Em dia', rep:'Rodrigo Almeida Santos', city:'—'},
+        {name:'Império Burger House', plan:'Ativa', planTag:'Plano Delivery', mensal:'R$ 209,99', comissao:'—', fatura:'Em dia', rep:'Rodrigo Almeida Santos', city:'—'},
+        {name:'Novo Burguer Artesanal', plan:'Abandono', planTag:'Plano Premium (Mesas + Delivery)', mensal:'R$ 369,97', comissao:'R$ 147,99', fatura:'R$ 369,97 vence 20/08', rep:'Elias Fontoura', city:'Carpina / PE'},
+        {name:'Comida Rápida Express', plan:'Ativa', planTag:'Plano Delivery', mensal:'R$ 209,99', comissao:'R$ 84,00', fatura:'Em dia', rep:'Diego Martins Rocha', city:'—'},
+        {name:'Sabor da Casa Resto', plan:'Ativa', planTag:'Plano Delivery', mensal:'R$ 209,99', comissao:'R$ 84,00', fatura:'Em dia', rep:'Diego Martins Rocha', city:'—'},
+        {name:'Divina Cozinha Restaurante', plan:'Ativa', planTag:'Plano Delivery', mensal:'R$ 209,99', comissao:'R$ 84,00', fatura:'Em dia', rep:'Diego Martins Rocha', city:'—'},
+        {name:'Pizzaria Nova Estrela', plan:'Ativa', planTag:'Plano Delivery', mensal:'R$ 239,98', comissao:'—', fatura:'Em dia', rep:'Vitor Freitas Fernandes', city:'Osasco / SP'}
+      ];
+      var tbody = document.getElementById('tbody');
+      ROWS.forEach(function (r) {
+        var initials = r.name.split(' ').slice(0,2).map(function(w){return w[0];}).join('').toUpperCase();
+        var badgeCls = r.plan === 'Ativa' ? 'status-badge status-active' : 'status-badge';
+        var tr = document.createElement('tr');
+        tr.innerHTML =
+          '<td><div class="clients-name-cell"><div class="clients-avatar">' + initials + '</div><div><div class="clients-name" style="font-weight:600;">' + r.name + '</div><div style="color:var(--cw-gray-500);font-size:.75rem;">' + r.city + '</div></div></div></td>' +
+          '<td><span class="' + badgeCls + '">' + r.plan + '</span><div style="color:var(--cw-gray-500);font-size:.72rem;margin-top:2px;">' + r.planTag + '</div></td>' +
+          '<td><span class="clients-value">' + r.mensal + '</span></td>' +
+          '<td><span class="clients-value">' + r.comissao + '</span></td>' +
+          '<td>' + r.fatura + '</td>' +
+          '<td><span class="clients-rep-badge">👤 ' + r.rep + '</span></td>' +
+          '<td>' + r.city + '</td>' +
+          '<td class="text-center"><div class="clients-actions"><a class="clients-action-btn">👁</a><a class="clients-action-btn">✎</a></div></td>';
+        tbody.appendChild(tr);
+      });
+    </script>
+  </body>
+</html>

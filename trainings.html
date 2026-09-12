@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Treinamentos Online — Portal de Representantes | Cardápio Web</title>
+    <link rel="icon" type="image/jpeg" href="/assets/cw-logo-dark-e78e4446.jpg">
+    <link rel="stylesheet" href="/assets/application-cc2f1a53.css" />
+    <style>
+      .avatar-circle{width:34px;height:34px;border-radius:50%;background:#5b21b6;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;}
+    </style>
+  </head>
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar" id="sidebar"></aside>
+      <div class="main-wrapper">
+        <header class="top-header" id="top-header"></header>
+        <main class="page-content">
+          <div class="tr-page">
+            <div class="tr-hero">
+              <div class="tr-hero-bg-shapes"><span class="tr-shape tr-shape-1"></span><span class="tr-shape tr-shape-2"></span><span class="tr-shape tr-shape-3"></span></div>
+              <div class="tr-hero-content">
+                <div class="tr-hero-text">
+                  <div class="tr-hero-badge">🎓 Academia CW-Rev</div>
+                  <h1 class="tr-hero-title">Treinamentos Online</h1>
+                  <p class="tr-hero-subtitle">Aprenda, evolua e domine — cada aula te leva mais longe.</p>
+                </div>
+                <div class="tr-hero-stats">
+                  <div class="tr-stat-card tr-stat-xp"><div class="tr-stat-icon">⚡</div><div class="tr-stat-info"><div class="tr-stat-value">0</div><div class="tr-stat-label">XP Total</div></div><div class="tr-xp-mini-bar"><div class="tr-xp-mini-fill"></div></div><div class="tr-stat-sublabel">Nível 0 — 0/100 XP</div></div>
+                  <div class="tr-stat-card"><div class="tr-stat-icon">✅</div><div class="tr-stat-info"><div class="tr-stat-value">0<span class="tr-stat-total">/35</span></div><div class="tr-stat-label">Concluídos</div></div></div>
+                  <div class="tr-stat-card"><div class="tr-stat-icon">📊</div><div class="tr-stat-info"><div class="tr-stat-value">0%</div><div class="tr-stat-label">Progresso</div></div></div>
+                </div>
+              </div>
+              <div class="tr-hero-progress">
+                <div class="tr-hero-progress-bar"><div class="tr-hero-progress-fill" style="width:0%;"></div></div>
+                <div class="tr-hero-progress-labels"><span>Trilha de Aprendizado</span><span>0 de 35 concluídos</span></div>
+              </div>
+            </div>
+            <a class="tr-next-up-card">
+              <div class="tr-next-up-left">
+                <div class="tr-next-up-icon">▶</div>
+                <div class="tr-next-up-info">
+                  <span class="tr-next-up-label">Continuar de onde parou</span>
+                  <span class="tr-next-up-title">Como Conectar a API Oficial do WhatsApp Business na Cardápio Web</span>
+                  <span class="tr-next-up-meta">📚 Conhecendo o Sistema · +40 XP</span>
+                </div>
+              </div>
+              <div class="tr-next-up-right"><span class="tr-next-up-btn">Assistir Agora →</span></div>
+            </a>
+            <div class="tr-admin-bar">
+              <button class="tr-btn tr-btn-primary"><span>＋</span> Novo Conteúdo</button>
+              <button class="tr-btn tr-btn-outline"><span>📂</span> Nova Categoria</button>
+            </div>
+            <div class="tr-category-section">
+              <div class="tr-category-header">
+                <div class="tr-category-info"><span class="tr-category-icon">📚</span><div><h2 class="tr-category-title">Mentorias e Encontros dos Representantes</h2><p class="tr-category-desc">Local onde os vídeos dos encontros e mentorias semanais estarão armazenados.</p></div></div>
+                <div class="tr-category-stats"><span class="tr-category-progress-label">0/8</span><div class="tr-category-progress-bar"><div class="tr-category-progress-fill" style="width:0%;"></div></div></div>
+              </div>
+              <div class="tr-cards-scroll" id="cards"></div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <script src="/assets/shell.js" data-title="Treinamentos Online"></script>
+    <script>
+      var CARDS = [
+        {n:1, xp:30, title:'3º Encontro de Representantes: estudo sobre objeções'},
+        {n:2, xp:10, title:'10º Encontro: Mentoria sobre o CRM'},
+        {n:3, xp:50, title:'7º Encontro de Representantes: Por dentro do sistema da Cardápio Web'},
+        {n:4, xp:50, title:'5º Encontro de Representantes: Tira dúvidas e Conversa sobre processos'},
+        {n:5, xp:20, title:'11º Encontro de Representantes: estudo sobre Cardápio Web completo'}
+      ];
+      document.getElementById('cards').innerHTML = CARDS.map(function (c) {
+        return '<div class="tr-card-wrapper"><a class="tr-card">' +
+          '<div class="tr-card-thumb"><div class="tr-card-thumb-icon tr-thumb-link">🔗<span>Link</span></div>' +
+          '<div class="tr-card-badge tr-badge-progress">◐ Em progresso</div><div class="tr-card-badge tr-badge-xp">+' + c.xp + ' XP</div><div class="tr-card-number">' + c.n + '</div></div>' +
+          '<div class="tr-card-body"><div class="tr-card-type-tag"><span>🔗 Link Externo</span></div><h3 class="tr-card-title">' + c.title + '</h3></div>' +
+          '</a></div>';
+      }).join('');
+    </script>
+  </body>
+</html>

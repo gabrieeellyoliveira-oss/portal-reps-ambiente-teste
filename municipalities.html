@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Estudo de Região — Portal de Representantes | Cardápio Web</title>
+    <link rel="icon" type="image/jpeg" href="/assets/cw-logo-dark-e78e4446.jpg">
+    <link rel="stylesheet" href="/assets/application-cc2f1a53.css" />
+    <style>
+      .avatar-circle{width:34px;height:34px;border-radius:50%;background:#5b21b6;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;}
+    </style>
+  </head>
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar" id="sidebar"></aside>
+      <div class="main-wrapper">
+        <header class="top-header" id="top-header"></header>
+        <main class="page-content">
+          <div class="region-page">
+            <div class="insight-chips">
+              <span class="insight-chip warn">🎯 8.7% coberto</span>
+              <button class="btn-settings">⚙ Configurações</button>
+            </div>
+            <div class="region-kpis">
+              <div class="region-kpi"><div class="region-kpi-val">5.571</div><div class="region-kpi-lbl">Total de Municípios</div><div class="region-kpi-sub">Base completa do Brasil</div></div>
+              <div class="region-kpi kpi-green"><div class="region-kpi-val">12</div><div class="region-kpi-lbl">Com Rep Alocado</div><div class="region-kpi-sub">0.2% do total</div></div>
+              <div class="region-kpi kpi-orange"><div class="region-kpi-val">5.559</div><div class="region-kpi-lbl">Sem Cobertura</div><div class="region-kpi-sub">Oportunidade de expansão</div></div>
+              <div class="region-kpi kpi-purple"><div class="region-kpi-val">8.7%</div><div class="region-kpi-lbl">Cobertura Populacional</div><div class="region-kpi-sub">Meta: 80%</div></div>
+            </div>
+            <div class="coverage-card">
+              <h4>Distribuição por porte · cobertura vs meta</h4>
+              <div class="tier-bars" id="dist"></div>
+            </div>
+            <div class="tier-pills" id="pills"></div>
+            <div class="region-toolbar">
+              <input placeholder="Buscar município..." style="padding:8px;border:1px solid #ddd;border-radius:8px;">
+              <select style="padding:8px;border:1px solid #ddd;border-radius:8px;"><option>Todos os estados</option></select>
+              <div class="with-reps-toggle"><span class="wrt-btn active">Com Reps</span><span class="wrt-btn">Sem Reps</span><span class="wrt-btn">Todos</span></div>
+              <button class="btn btn-primary btn-sm">Filtrar</button>
+            </div>
+            <div style="font-size:.8rem;margin:8px 0;">12 municípios</div>
+            <div class="muni-table-wrap">
+              <table class="muni-table">
+                <thead><tr><th>Município</th><th>Região</th><th>População</th><th>Porte</th><th>Reps Alocados</th><th>Cap.</th><th>Exclus.</th><th>Status</th></tr></thead>
+                <tbody id="tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <script src="/assets/shell.js" data-title="Estudo de Região"></script>
+    <script>
+      var DIST = [
+        {lbl:'Até 20k', frac:'0/3771', pct:0, color:'#94a3b8', meta:'meta 10%'},
+        {lbl:'20k–50k', frac:'1/1120', pct:0, color:'#3b82f6', meta:'meta 50%'},
+        {lbl:'50k–100k', frac:'3/354', pct:1, color:'#10b981', meta:'meta 70%'},
+        {lbl:'100k–250k', frac:'3/210', pct:1, color:'#f59e0b', meta:'meta 85%'},
+        {lbl:'250k–500k', frac:'0/67', pct:0, color:'#f97316', meta:'meta 90%'},
+        {lbl:'500k–1MM', frac:'2/32', pct:6, color:'#ef4444', meta:'meta 95%'},
+        {lbl:'1MM–2MM', frac:'1/10', pct:10, color:'#a855f7', meta:'meta 100%'},
+        {lbl:'Acima 2MM', frac:'2/7', pct:29, color:'#7c3aed', meta:'meta 100%'}
+      ];
+      document.getElementById('dist').innerHTML = DIST.map(function (d) {
+        return '<div class="tier-bar-row"><span class="tier-bar-label">' + d.lbl + '</span>' +
+          '<div class="tier-bar-track"><div class="tier-bar-fill" style="width:' + d.pct + '%;background:' + d.color + ';"></div></div>' +
+          '<span class="tier-bar-meta">' + d.frac + ' (' + d.pct + '%)</span><span>' + d.meta + '</span></div>';
+      }).join('');
+
+      var PILLS = [['Até 20k',3771],['20k–50k',1120],['50k–100k',354],['100k–250k',210],['250k–500k',67],['500k–1MM',32],['1MM–2MM',10],['Acima 2MM',7]];
+      document.getElementById('pills').innerHTML = '<a class="tier-all-pill active">Todos</a>' + PILLS.map(function (p) {
+        return '<a class="tier-pill">' + p[0] + '<span class="tier-pill-count">' + p[1] + '</span></a>';
+      }).join('');
+
+      var ROWS = [
+        {mun:'Capim Grosso', uf:'BA', reg:'Nordeste', pop:'31.055', porte:'20k–50k', rep:'Alê Tecnologia Digital', cap:'1/1', excl:'exclusive'},
+        {mun:'Ilhéus', uf:'BA', reg:'Nordeste', pop:'157.639', porte:'100k–250k', rep:'Walter Alves da Silva Filho', cap:'1/2', excl:'exclusive'},
+        {mun:'Luís Eduardo Magalhães', uf:'BA', reg:'Nordeste', pop:'92.671', porte:'50k–100k', rep:'Klewerton André Macedo Santos', cap:'1/1', excl:'exclusive'},
+        {mun:'Fortaleza', uf:'CE', reg:'Nordeste', pop:'2.703.391', porte:'Acima 2MM', rep:'Rafael Patrício Ferreira', cap:'1/15', excl:'shared'},
+        {mun:'Açailândia', uf:'MA', reg:'Nordeste', pop:'113.783', porte:'100k–250k', rep:'Paulo Vinicius Cavalcante Macedo', cap:'1/2', excl:'exclusive'},
+        {mun:'São Luís', uf:'MA', reg:'Nordeste', pop:'1.115.932', porte:'1MM–2MM', rep:'Marco Aurélio Melo Luna', cap:'1/8', excl:'shared'},
+        {mun:'Timon', uf:'MA', reg:'Nordeste', pop:'171.317', porte:'100k–250k', rep:'Arenilton Lima E Silva Assunção', cap:'1/2', excl:'exclusive'},
+        {mun:'Picos', uf:'PI', reg:'Nordeste', pop:'78.627', porte:'50k–100k', rep:'Mozart Moura', cap:'1/1', excl:'exclusive'},
+        {mun:'Guapimirim', uf:'RJ', reg:'Sudeste', pop:'62.225', porte:'50k–100k', rep:'Guilherme do Amaral Silveira', cap:'1/1', excl:'exclusive'},
+        {mun:'Natal', uf:'RN', reg:'Nordeste', pop:'896.708', porte:'500k–1MM', rep:'Alessandro Rodrigues da Silva', cap:'1/5', excl:'shared'},
+        {mun:'Osasco', uf:'SP', reg:'Sudeste', pop:'701.428', porte:'500k–1MM', rep:'Victor Oliveira de Freitas Fernandes de Assis', cap:'1/5', excl:'shared'},
+        {mun:'São Paulo', uf:'SP', reg:'Sudeste', pop:'12.396.372', porte:'Acima 2MM', rep:'Carlos Eduardo', cap:'1/15', excl:'shared'}
+      ];
+      document.getElementById('tbody').innerHTML = ROWS.map(function (r) {
+        return '<tr><td><span class="muni-name">' + r.mun + '</span><span class="muni-state">' + r.uf + '</span></td><td>' + r.reg + '</td><td>' + r.pop + '</td>' +
+          '<td><span class="tier-badge">' + r.porte + '</span></td>' +
+          '<td><div class="rep-chips"><span class="rep-chip full"><span>★</span>' + r.rep + '<span class="rep-chip-del">×</span></span></div></td>' +
+          '<td><span class="cap-badge">' + r.cap + '</span></td>' +
+          '<td><span class="excl-badge excl-' + r.excl + '">🔒 Excl.</span></td>' +
+          '<td><span class="status-cell"><span class="status-dot"></span> Coberto</span></td></tr>';
+      }).join('');
+    </script>
+  </body>
+</html>

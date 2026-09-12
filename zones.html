@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Zonas dos Representantes — Portal de Representantes | Cardápio Web</title>
+    <link rel="icon" type="image/jpeg" href="/assets/cw-logo-dark-e78e4446.jpg">
+    <link rel="stylesheet" href="/assets/application-cc2f1a53.css" />
+    <style>
+      .avatar-circle{width:34px;height:34px;border-radius:50%;background:#5b21b6;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;}
+      .zones-map-wrapper{flex:1;background:repeating-linear-gradient(45deg,#f3f0fa,#f3f0fa 10px,#ece7f8 10px,#ece7f8 20px);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--cw-gray-500);font-size:.82rem;text-align:center;padding:20px;min-height:75vh;}
+      .zone-form .form-group{margin-bottom:10px;}
+      .zones-list{max-height:520px;overflow-y:auto;margin-top:10px;}
+      .zones-more{text-align:center;padding:10px;font-size:.78rem;color:#9ca3af;}
+    </style>
+  </head>
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar" id="sidebar"></aside>
+      <div class="main-wrapper">
+        <header class="top-header" id="top-header"></header>
+        <main class="page-content">
+          <div class="zones-page">
+            <div class="zones-layout">
+              <div class="zones-sidebar">
+                <div class="dash-card">
+                  <h3 class="section-title">⊕ Nova Zona</h3>
+                  <div class="zone-form">
+                    <div class="form-group"><label>Nome da zona</label><input class="form-input" placeholder="Ex: Zona Leste SP"></div>
+                    <div class="form-group"><label>Representante</label><select class="form-input" id="repSelect"></select></div>
+                    <div class="form-group"><label>Raio (km)</label><input class="form-input" value="5"></div>
+                    <p style="font-size:.72rem;color:var(--cw-gray-500);">Clique no mapa para definir o centro da zona.</p>
+                    <button class="btn btn-primary btn-sm">+ Salvar Zona</button>
+                  </div>
+                </div>
+                <div class="dash-card">
+                  <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <h3 class="section-title">📐 Zonas Existentes</h3>
+                    <button class="status-badge" style="background:#fef3c7;color:#a16207;"><span>20</span> Reps sem Zona</button>
+                  </div>
+                  <div>
+                    <p style="font-size:.75rem;color:var(--cw-gray-500);margin:8px 0 4px;">Representantes sem zona cadastrada:</p>
+                    <ul style="list-style:none;padding:0;margin:0;font-size:.8rem;max-height:180px;overflow-y:auto;">
+                      <li style="padding:4px 0;">👤 <a>Andre Henrique Cunha</a> <span style="color:var(--cw-gray-500);"> · Marechal Deodoro/AL</span></li>
+                      <li style="padding:4px 0;">👤 <a>Antonio Joilson Ferreira de Castro</a> <span style="color:var(--cw-gray-500);"> · Maranguape/CE</span></li>
+                      <li style="padding:4px 0;">👤 <a>Braulio Amorim</a> <span style="color:var(--cw-gray-500);"> · Iguatu/CE</span></li>
+                      <li style="padding:4px 0;">👤 <a>Diego Leal dos Santos</a> <span style="color:var(--cw-gray-500);"> · Ponta Grossa/PR</span></li>
+                      <li style="padding:4px 0;">👤 <a>Edvaldo Santana Lima</a> <span style="color:var(--cw-gray-500);"> · Linhares/ES</span></li>
+                      <li style="padding:4px 0;">👤 <a>Eli Alves</a> <span style="color:var(--cw-gray-500);"> · São José dos Pinhais/PR</span></li>
+                      <li style="padding:4px 0;">👤 <a>Francisco Eder Santos Gualberto</a> <span style="color:var(--cw-gray-500);"> · Fortaleza/CE</span></li>
+                      <li style="padding:4px 0;">👤 <a>Gabriel Rodrigues Brumato</a> <span style="color:var(--cw-gray-500);"> · São Tomé/PR</span></li>
+                      <li style="padding:4px 0;">👤 <a>Geison Cardoso</a> <span style="color:var(--cw-gray-500);"> · Montes Claros/MG</span></li>
+                      <li style="padding:4px 0;">👤 <a>Walyson Ferreira de Oliveira Santos</a> <span style="color:var(--cw-gray-500);"> · Barra/BA</span></li>
+                    </ul>
+                  </div>
+                  <div class="zones-list" id="zonesList"></div>
+                  <div class="zones-more">+ 89 outras zonas cadastradas</div>
+                </div>
+              </div>
+              <div class="zones-map-wrapper">
+                [Mapa interativo (Leaflet + CARTO) com pontos de prospecção por zona — não replicado neste clone estático, pois depende de tiles externos e dados reais de localização de terceiros.]
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <script src="/assets/shell.js" data-title="Zonas dos Representantes"></script>
+    <script>
+      var REPS = ['Adiel Bruno Santos de Melo (Recife/PE)','Alessandro Rodrigues da Silva (Natal/RN)','Alex Salomão dos Anjos (Curitiba/PR)','Alexssander Rodrigo de Oliveira (Natal/RN)','Alisson Gomes dos Santos (Barra dos Coqueiros/SE)','Anderson Rodrigo Andrade do Nascimento (Duque de Caxias/RJ)'];
+      document.getElementById('repSelect').innerHTML = REPS.map(function(r){ return '<option>'+r+'</option>'; }).join('');
+
+      var ZONES = [
+        {name:'Zona Victor', rep:'Victor Oliveira de Freitas Fernandes de Assis', km:'10.0', locais:290, date:'11/06/2026 15:28'},
+        {name:'Zona Klewerton', rep:'Klewerton André Macedo Santos', km:'20.0', locais:108, date:'13/07/2026 20:34'},
+        {name:'Zona Carlos Eduardo - Ituiutaba', rep:'Carlos Eduardo', km:'5.0', locais:93, date:'17/08/2026 14:40'},
+        {name:'Zona Antônio', rep:'Netplug Tecnologia A2 Tecnologia', km:'10.0', locais:11, date:'31/07/2026 20:32'},
+        {name:'Zona Paulo', rep:'Paulo Vinicius Cavalcante Macedo', km:'10.0', locais:16, date:'11/06/2026 15:27'},
+        {name:'Zona Paulo', rep:'Paulo Vinicius Cavalcante Macedo', km:'10.0', locais:26, date:'23/06/2026 12:27'},
+        {name:'São Luís - MA', rep:'Marco Aurélio Melo Luna', km:'25.0', locais:285, date:'11/06/2026 15:27'},
+        {name:'Fortaleza Centro', rep:'Rafael Patrício Ferreira', km:'5.0', locais:793, date:'11/06/2026 15:29'},
+        {name:'Fortaleza', rep:'Rafael Patrício Ferreira', km:'25.0', locais:1637, date:'11/06/2026 15:28'},
+        {name:'Zona Guilherme', rep:'Guilherme do Amaral Silveira', km:'10.0', locais:29, date:'11/06/2026 15:29'},
+        {name:'Zona Walter', rep:'Walter Alves da Silva Filho', km:'10.0', locais:120, date:'12/06/2026 13:13'},
+        {name:'Zona de Picos', rep:'Mozart Moura', km:'20.0', locais:446, date:'11/06/2026 15:28'},
+        {name:'Parnaíba', rep:'Arenilton Lima E Silva Assunção', km:'5.0', locais:103, date:'31/07/2026 20:46'},
+        {name:'Zona Nilton', rep:'Arenilton Lima E Silva Assunção', km:'10.0', locais:99, date:'11/06/2026 15:09'},
+        {name:'Zona Alessandro', rep:'Alessandro Rodrigues da Silva', km:'10.0', locais:592, date:'24/05/2026 00:27'},
+        {name:'Zona Compumax', rep:'Alessandro Rodrigues da Silva', km:'10.0', locais:108, date:'11/06/2026 15:29'},
+        {name:'Zona Luiz Omar', rep:'Luiz Omar Pereira da Silva', km:'10.0', locais:114, date:'11/06/2026 15:31'},
+        {name:'Zona Fredy', rep:'Fredy Abel Giménez Villar', km:'10.0', locais:118, date:'31/07/2026 20:46'}
+      ];
+      document.getElementById('zonesList').innerHTML = ZONES.map(function (z) {
+        return '<div class="zone-item"><div class="zone-color"></div><div class="zone-info"><strong>' + z.name + '</strong><span class="text-muted">' + z.rep + ' · ' + z.km + 'km · ' + z.locais + ' locais</span><span class="enrich-date">Enriquecida: ' + z.date + '</span></div>' +
+          '<div class="zone-actions"><button class="enrich-btn">🔮 Enriquecer</button><button class="action-btn action-edit-zone">✏️</button><button class="action-btn action-deactivate">×</button></div></div>';
+      }).join('');
+    </script>
+  </body>
+</html>

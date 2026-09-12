@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Matriz RFV — Portal de Representantes | Cardápio Web</title>
+    <link rel="icon" type="image/jpeg" href="/assets/cw-logo-dark-e78e4446.jpg">
+    <link rel="stylesheet" href="/assets/application-cc2f1a53.css" />
+    <style>
+      .avatar-circle{width:34px;height:34px;border-radius:50%;background:#5b21b6;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;}
+      .hd{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:14px;}
+      .hd-sub b{color:#1f2937;}
+      .hd-panel{display:flex;gap:20px;background:#fff;border:1px solid #eef0f4;border-radius:12px;padding:12px 18px;}
+      .dim{text-align:center;font-size:.72rem;color:#6b7280;}
+      .dim-letter{font-size:1.3rem;font-weight:800;display:block;}
+      .dim-name{font-weight:700;color:#1f2937;}
+      .hs-title{font-weight:700;font-size:.8rem;}
+      .hs-chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+      .hs-chip{display:inline-flex;align-items:center;gap:5px;font-size:.75rem;font-weight:700;border-radius:20px;padding:4px 10px;background:#f4f2fb;}
+      .hs-dot{width:8px;height:8px;border-radius:50%;display:inline-block;}
+      .sumbar{display:flex;gap:14px;margin:12px 0;flex-wrap:wrap;align-items:center;}
+      .sum-chip{font-size:.8rem;color:#6b7280;}
+      .sum-chip b{color:#1f2937;}
+      .base-seg{display:flex;gap:6px;margin-left:auto;}
+      .base-seg a{border:1px solid #ddd;border-radius:8px;padding:6px 14px;font-size:.78rem;text-decoration:none;color:#374151;}
+      .base-seg a.on{background:#5b21b6;color:#fff;border-color:#5b21b6;}
+      .cfg-btn{border:1px solid #ddd;border-radius:8px;padding:6px 14px;font-size:.78rem;background:#fff;}
+      .mx-card{background:#fff;border:1px solid #eef0f4;border-radius:14px;padding:18px;margin-bottom:16px;}
+      .mx-title{margin:0 0 2px;}
+      .mx-note{font-size:.78rem;color:#9ca3af;margin:0 0 14px;}
+      .mx-wrap{display:grid;grid-template-columns:34px 1fr;grid-template-rows:1fr 26px;gap:4px;}
+      .mx-ylab{writing-mode:vertical-rl;transform:rotate(180deg);font-size:.72rem;color:#9ca3af;text-align:center;}
+      .mx-xlab{grid-column:2;text-align:center;font-size:.72rem;color:#9ca3af;}
+      .mx{grid-row:1;grid-column:2;display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(5,minmax(58px,auto));gap:6px;min-height:330px;--g-rea:#7e3ff2;--g-res:#f07020;--g-dev:#14a08a;--g-des:#e7a500;--g-ref:#22a04b;--g-pot:#1f6ff2;}
+      .mx-blk{border-radius:12px;padding:12px 14px;cursor:pointer;position:relative;display:flex;flex-direction:column;gap:3px;}
+      .mx-blk .n{font-size:1.1rem;font-weight:800;}
+      .mx-blk .c{font-weight:700;font-size:.85rem;}
+      .mx-blk .s{font-size:.7rem;opacity:.75;}
+      .b-rea{grid-area:1/1/6/2;background:color-mix(in srgb, var(--g-rea) 16%, #fff);color:#4c1d95;}
+      .b-res{grid-area:1/2/6/3;background:color-mix(in srgb, var(--g-res) 16%, #fff);color:#7c2d12;}
+      .b-dev{grid-area:1/3/4/4;background:color-mix(in srgb, var(--g-dev) 17%, #fff);color:#0f5147;}
+      .b-des{grid-area:4/3/6/4;background:color-mix(in srgb, var(--g-des) 20%, #fff);color:#713f12;}
+      .b-ref{grid-area:1/4/3/6;background:color-mix(in srgb, var(--g-ref) 22%, #fff);color:#14532d;}
+      .b-pot{grid-area:3/4/6/6;background:color-mix(in srgb, var(--g-pot) 13%, #fff);color:#1e3a8a;}
+      .onb{background:#5b21b6;color:#fff;border-radius:12px;padding:14px 18px;}
+      .onb-badge{background:rgba(255,255,255,.15);border-radius:8px;padding:3px 10px;font-size:.72rem;font-weight:800;}
+      .onb-reps{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;}
+      .onb-rep{background:rgba(255,255,255,.12);border-radius:16px;padding:5px 12px;font-size:.75rem;}
+      .onb-rep small{opacity:.7;}
+      .tb-card{background:#fff;border:1px solid #eef0f4;border-radius:18px;box-shadow:0 6px 24px rgba(30,15,80,.05);overflow:hidden;margin-bottom:26px;}
+      .tb-tools{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:15px 20px;border-bottom:1px solid #eef0f4;}
+      .tb-search{display:flex;align-items:center;gap:7px;border:1px solid #eef0f4;border-radius:999px;padding:7px 14px;flex:0 1 300px;color:#9ca3af;}
+      .tb-search svg{width:14px;height:14px;stroke:#9ca3af;fill:none;stroke-width:2;flex:none;}
+      .tb-search input{border:none;outline:none;flex:1;font-size:.8rem;background:transparent;color:#1f2937;}
+      .gchips{display:flex;gap:6px;flex-wrap:wrap;}
+      .gchip{border:1px solid #eef0f4;background:#fff;border-radius:999px;padding:5px 13px;font-size:.72rem;font-weight:700;color:#4b5563;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:.13s;}
+      .gchip.on{background:#1f2937;color:#fff;border-color:#1f2937;}
+      .gchip .gd{width:8px;height:8px;border-radius:50%;}
+      .tb-count{margin-left:auto;font-size:.74rem;color:#9ca3af;}
+      .tb-collapse{border:1px solid #eef0f4;background:#fff;border-radius:999px;padding:5px 14px;font-size:.72rem;font-weight:700;color:#4b5563;cursor:pointer;display:inline-flex;align-items:center;gap:6px;}
+      .tb-pager{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 20px;border-top:1px solid #eef0f4;flex-wrap:wrap;}
+      .tb-pager-info{font-size:.74rem;color:#9ca3af;}
+      .tb-pager-btns{display:flex;gap:4px;}
+      .pg-btn{min-width:30px;height:30px;border:1px solid #eef0f4;background:#fff;border-radius:8px;font-size:.74rem;font-weight:700;color:#4b5563;cursor:pointer;padding:0 8px;}
+      .pg-btn.cur{background:#5b21b6;border-color:#5b21b6;color:#fff;}
+      .pg-btn:disabled{opacity:.4;cursor:default;}
+      .rfv-page table{width:100%;border-collapse:collapse;}
+      .rfv-page th{text-align:left;font-size:.66rem;letter-spacing:.7px;text-transform:uppercase;color:#9ca3af;padding:11px 14px;border-bottom:1px solid #eef0f4;background:#fbfaff;}
+      .rfv-page td{padding:11px 14px;border-bottom:1px solid #f1eef9;font-size:.82rem;vertical-align:middle;}
+      .rfv-page tr:last-child td{border-bottom:none;}
+      .rfv-page tr.rrow:hover td{background:#faf8ff;}
+      .rep-cell{display:flex;align-items:center;gap:10px;}
+      .rep-av{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.72rem;font-weight:800;flex:none;}
+      .rep-nm{font-weight:700;font-size:.84rem;text-decoration:none;color:#1f2937;}
+      .rep-nm:hover{color:#5b21b6;}
+      .rep-city{font-size:.68rem;color:#9ca3af;}
+      .days-chip{display:inline-flex;align-items:center;gap:4px;font-size:.72rem;font-weight:500;}
+      .scores{display:inline-flex;gap:4px;}
+      .sc{width:24px;height:24px;border-radius:7px;display:inline-flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:800;color:#fff;}
+      .gbadge{display:inline-flex;align-items:center;gap:5px;font-size:.72rem;font-weight:800;padding:4px 11px;border-radius:999px;color:#fff;white-space:nowrap;}
+      .hbadge{display:inline-flex;font-size:.68rem;font-weight:800;padding:3px 10px;border-radius:999px;color:#fff;letter-spacing:.3px;text-transform:uppercase;}
+      .psm{font-size:.74rem;color:#4b5563;max-width:230px;cursor:help;}
+      .psm b{color:#1f2937;}
+      .psm span{color:#9ca3af;}
+      .gd-head{display:flex;align-items:center;gap:12px;margin:26px 0 12px;}
+      .gd-title{margin:0;font-weight:700;font-size:.85rem;flex:1;}
+    </style>
+  </head>
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar" id="sidebar"></aside>
+      <div class="main-wrapper">
+        <header class="top-header" id="top-header"></header>
+        <main class="page-content">
+          <div class="hd">
+            <div class="hd-left">
+              <h1>CLASSIFICAÇÃO DO RFV — REPRESENTANTES</h1>
+              <p class="hd-sub">Cada representante é avaliado por 3 dimensões: há quanto tempo ativou (<b class="r">R</b>), quantas ativações realizou (<b class="f">F</b>) e qual a qualidade dessas ativações (<b class="v">V</b>). Daí sai o grupo e a ação do PSM.</p>
+            </div>
+            <div class="hd-panel">
+              <div class="dim"><span class="dim-letter">R</span><span class="dim-name">RECÊNCIA</span><br>Tempo desde a última ativação</div>
+              <div class="hd-divider"></div>
+              <div class="dim"><span class="dim-letter">F</span><span class="dim-name">FREQUÊNCIA</span><br>Quantidade de ativações (12m)</div>
+              <div class="hd-divider"></div>
+              <div class="dim"><span class="dim-letter">V</span><span class="dim-name">VALOR</span><br>Qualidade das ativações (ticket)</div>
+            </div>
+            <div class="hs-box">
+              <div class="hs-title">HEALTH SCORE <small style="font-weight:400;">(Tempo desde a última ativação)</small></div>
+              <div class="hs-chips">
+                <span class="hs-chip"><span class="hs-dot" style="background:#16a34a;"></span>0-30 Saudável</span>
+                <span class="hs-chip"><span class="hs-dot" style="background:#f59e0b;"></span>31-60 Atenção</span>
+                <span class="hs-chip"><span class="hs-dot" style="background:#ea580c;"></span>61-90 Risco</span>
+                <span class="hs-chip"><span class="hs-dot" style="background:#dc2626;"></span>+90 Inativo</span>
+              </div>
+            </div>
+          </div>
+          <div class="sumbar">
+            <span class="sum-chip"><span class="sum-dot" style="color:#22a04b;">●</span> Saudável <b>15</b></span>
+            <span class="sum-chip"><span class="sum-dot" style="color:#e7a500;">●</span> Atenção <b>6</b></span>
+            <span class="sum-chip"><span class="sum-dot" style="color:#f07020;">●</span> Risco <b>4</b></span>
+            <span class="sum-chip"><span class="sum-dot" style="color:#e11d1d;">●</span> Inativo <b>89</b></span>
+            <span class="sum-chip"><span class="sum-dot" style="color:#6d28d9;">●</span> Onboarding <b>10</b></span>
+            <span class="sum-chip">Total avaliado <b>114</b></span>
+            <div class="base-seg"><a class="on" href="#">Toda a base</a><a href="#">Só os novos ≤10d</a></div>
+            <button class="cfg-btn">⚙ Editar Parâmetros RFV</button>
+          </div>
+          <div class="mx-card">
+            <h4 class="mx-title">Análise de classificação RFV</h4>
+            <p class="mx-note">Clique em um grupo para filtrar a lista · % sobre 114 representantes avaliados</p>
+            <div class="mx-wrap">
+              <div class="mx-ylab">Frequência e Valor (média) →</div>
+              <div class="mx">
+                <div class="mx-blk b-rea"><span class="n">89</span><span class="c">💤 Reativação</span><span class="s">78,07% · Reativar ou automatizar contato</span></div>
+                <div class="mx-blk b-res"><span class="n">4</span><span class="c">🛟 Resgate</span><span class="s">3,51% · Recuperar com prioridade</span></div>
+                <div class="mx-blk b-dev"><span class="n">6</span><span class="c">🌱 Desenvolvimento</span><span class="s">5,26% · Desenvolver consistência</span></div>
+                <div class="mx-blk b-des"><span class="n">0</span><span class="c">⚠ Desaceleração</span><span class="s">0,0% · Atuar para evitar queda</span></div>
+                <div class="mx-blk b-ref"><span class="n">3</span><span class="c">🏆 Referência</span><span class="s">2,63% · Manter e fortalecer</span></div>
+                <div class="mx-blk b-pot"><span class="n">12</span><span class="c">🚀 Potencial</span><span class="s">10,53% · Acelerar resultados</span></div>
+              </div>
+              <div class="mx-xlab">Recência →</div>
+            </div>
+          </div>
+          <div class="onb">
+            <span class="onb-badge">📘 ONBOARDING — 0 a 10 DIAS</span>
+            <p style="margin:8px 0 0;font-size:.85rem;">Novos representantes ficam nessa fase. Foco em concluir capacitação e realizar a primeira ativação. <b>Após a primeira ativação, entram oficialmente na classificação RFV.</b></p>
+            <div class="onb-reps" id="onb"></div>
+          </div>
+          <div class="tb-card rfv-page">
+            <div class="tb-tools">
+              <div class="tb-search">
+                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input placeholder="Buscar representante...">
+              </div>
+              <div class="gchips" id="gchips"></div>
+              <span class="tb-count">114 de 114</span>
+            </div>
+            <div id="rfvTableWrap">
+              <table>
+                <thead><tr><th>Representante</th><th>Última ativação</th><th>Ativações 12m</th><th>Ticket médio</th><th>R · F · V</th><th>Classificação</th><th>Health</th><th>Ação do PSM</th></tr></thead>
+                <tbody id="rfvRows"></tbody>
+              </table>
+            </div>
+            <div class="tb-pager">
+              <span class="tb-pager-info">Mostrando 1–25 de 114</span>
+              <div class="tb-pager-btns">
+                <button class="pg-btn" disabled>‹</button>
+                <button class="pg-btn cur">1</button>
+                <button class="pg-btn">2</button>
+                <button class="pg-btn">3</button>
+                <button class="pg-btn">›</button>
+              </div>
+            </div>
+          </div>
+          <div class="gd-head">
+            <div class="gd-title">Guia — como cada grupo é definido e o que o PSM faz</div>
+            <button class="tb-collapse"><span>Mostrar guia</span></button>
+          </div>
+        </main>
+      </div>
+    </div>
+    <script src="/assets/shell.js" data-title="Matriz RFV"></script>
+    <script>
+      var NAMES = ['Elias Amorim Coutinho','Felipe Soares Lima','Francisco Bruno Neto','Jeferson Campolo Silva','José Carlos Martins Júnior','José Jorge Vianna Junior','José Ricardo Fiuza Silva','Júlio César Pereira Costa','Márcio Samuel Mendes','Mateus Pereira Gomes','Natal Fausto Lima','Rogério Ramos Souza','Salvador Galdino Gomes','Tarcísio Carvalho Silva','Thiago Marcone Reis','Vinícius Gonçalves Reis','Walter Lima Pinto'];
+      document.getElementById('onb').innerHTML = NAMES.map(function (n) {
+        return '<span class="onb-rep">' + n + ' <small>' + (1 + Math.floor(Math.random()*10)) + 'd</small></span>';
+      }).join('');
+
+      var GROUPS = [
+        {key:'Todos', n:114, on:true},
+        {key:'🏆 Referência', label:'Referência', n:3},
+        {key:'🚀 Potencial', label:'Potencial', n:12},
+        {key:'🌱 Desenvolvimento', label:'Desenvolvimento', n:6},
+        {key:'⚠ Desaceleração', label:'Desaceleração', n:0},
+        {key:'🛟 Resgate', label:'Resgate', n:4},
+        {key:'💤 Reativação', label:'Reativação', n:89}
+      ];
+      var GDOT = {'Referência':'#22a04b','Potencial':'#1f6ff2','Desenvolvimento':'#14a08a','Desaceleração':'#e7a500','Resgate':'#f07020','Reativação':'#7e3ff2'};
+      document.getElementById('gchips').innerHTML = GROUPS.map(function (g) {
+        if (g.key === 'Todos') return '<button class="gchip on">Todos</button>';
+        return '<button class="gchip"><span class="gd" style="background:' + GDOT[g.label] + ';"></span>' + g.label + ' <span>' + g.n + '</span></button>';
+      }).join('');
+
+      var GCOLOR = {'🏆 Referência':'#22a04b','🚀 Potencial':'#1f6ff2','🌱 Desenvolvimento':'#14a08a','🛟 Resgate':'#f07020','💤 Reativação':'#7e3ff2'};
+      var HCOLOR = {'Saudável':'#22a04b','Atenção':'#e7a500','Risco':'#f07020','Inativo':'#e11d1d'};
+      var SCOLOR = {1:'#ef4444',2:'#f97316',3:'#eab308',4:'#84cc16',5:'#22a04b'};
+      var PSM = {'🏆 Referência':'Reconhecer e parabenizar','🚀 Potencial':'Acompanhar de perto','🌱 Desenvolvimento':'Orientar e treinar','🛟 Resgate':'Resgate ativo e prioritário','💤 Reativação':'Disparo automático de campanhas'};
+      var REPS = [
+        {name:'Rafael Patrício Ferreira', city:'Fortaleza / CE', days:'🕐 3d', freq:91, ticket:'R$ 292,34', rfv:[5,5,5], g:'🏆 Referência', h:'Saudável'},
+        {name:'Marco Aurélio Melo Luna', city:'São Luís / MA', days:'🕐 5d', freq:53, ticket:'R$ 306,58', rfv:[5,5,5], g:'🏆 Referência', h:'Saudável'},
+        {name:'Fernando Braga de Sousa', city:'Quixeramobim / CE', days:'🕐 5d', freq:10, ticket:'R$ 224,49', rfv:[5,4,4], g:'🏆 Referência', h:'Saudável'},
+        {name:'Fredy Abel Giménez Villar', city:'Rio Verde / GO', days:'🕐 23d', freq:3, ticket:'R$ 319,98', rfv:[4,2,5], g:'🚀 Potencial', h:'Saudável'},
+        {name:'Wdeyverson Madeira de Freitas', city:'Rio Branco / AC', days:'🕐 23d', freq:1, ticket:'R$ 209,99', rfv:[4,1,4], g:'🚀 Potencial', h:'Saudável'},
+        {name:'Luciana Ferreira Batista', city:'Aracaju / SE', days:'🕐 19d', freq:2, ticket:'R$ 261,50', rfv:[4,2,4], g:'🚀 Potencial', h:'Saudável'},
+        {name:'Everton Barbosa Nogueira', city:'Cuiabá / MT', days:'🕐 27d', freq:2, ticket:'R$ 239,98', rfv:[4,1,5], g:'🚀 Potencial', h:'Saudável'},
+        {name:'Camila dos Santos Prado', city:'Vitória / ES', days:'🕐 21d', freq:3, ticket:'R$ 289,90', rfv:[4,2,4], g:'🚀 Potencial', h:'Saudável'},
+        {name:'Paulo Henrique Dias Torres', city:'Imperatriz / MA', days:'🕐 46d', freq:4, ticket:'R$ 343,72', rfv:[3,2,5], g:'🌱 Desenvolvimento', h:'Atenção'},
+        {name:'Rogério Carlos Cristianini Junior', city:'Francisco Alves / PR', days:'🕐 37d', freq:4, ticket:'R$ 261,23', rfv:[3,2,5], g:'🌱 Desenvolvimento', h:'Atenção'},
+        {name:'Adriana Souza Meireles', city:'Juiz de Fora / MG', days:'🕐 41d', freq:3, ticket:'R$ 254,00', rfv:[3,1,4], g:'🌱 Desenvolvimento', h:'Atenção'},
+        {name:'Gabriel Coelho', city:'São Paulo / SP', days:'🕐 81d', freq:1, ticket:'R$ 299,98', rfv:[2,1,5], g:'🛟 Resgate', h:'Risco'},
+        {name:'Paulo Vinicius Cavalcante Macedo', city:'Açailândia / MA', days:'🕐 76d', freq:1, ticket:'R$ 209,99', rfv:[2,1,4], g:'🛟 Resgate', h:'Risco'},
+        {name:'Simone Rocha Albuquerque', city:'Teresina / PI', days:'🕐 68d', freq:1, ticket:'R$ 219,90', rfv:[2,1,4], g:'🛟 Resgate', h:'Risco'},
+        {name:'Adiel Bruno Santos de Melo', city:'Recife / PE', days:'nunca ativou', freq:0, ticket:'—', rfv:[1,1,1], g:'💤 Reativação', h:'Inativo'},
+        {name:'Alessandro Rodrigues da Silva', city:'Natal / RN', days:'nunca ativou', freq:0, ticket:'—', rfv:[1,1,1], g:'💤 Reativação', h:'Inativo'},
+        {name:'Alex Salomão dos Anjos', city:'Curitiba / PR', days:'nunca ativou', freq:0, ticket:'—', rfv:[1,1,1], g:'💤 Reativação', h:'Inativo'},
+        {name:'André Ângelo Ferreira da Silva', city:'Bofete / SP', days:'nunca ativou', freq:0, ticket:'—', rfv:[1,1,1], g:'💤 Reativação', h:'Inativo'},
+        {name:'David Antônio Borges', city:'Brasília de Minas / MG', days:'nunca ativou', freq:0, ticket:'—', rfv:[1,1,1], g:'💤 Reativação', h:'Inativo'},
+        {name:'Elaine Cristina Nascimento', city:'Manaus / AM', days:'nunca ativou', freq:0, ticket:'—', rfv:[1,1,1], g:'💤 Reativação', h:'Inativo'},
+        {name:'Emerson Luiz Cavalcanti', city:'Belém / PA', days:'nunca ativou', freq:0, ticket:'—', rfv:[1,1,1], g:'💤 Reativação', h:'Inativo'},
+        {name:'Fabiana Rezende Costa', city:'Goiânia / GO', days:'nunca ativou', freq:0, ticket:'—', rfv:[1,1,1], g:'💤 Reativação', h:'Inativo'},
+        {name:'Geraldo Henrique Vale', city:'João Pessoa / PB', days:'nunca ativou', freq:0, ticket:'—', rfv:[1,1,1], g:'💤 Reativação', h:'Inativo'},
+        {name:'Igor Machado Peixoto', city:'Campo Grande / MS', days:'nunca ativou', freq:0, ticket:'—', rfv:[1,1,1], g:'💤 Reativação', h:'Inativo'},
+        {name:'Jaqueline Moraes Tavares', city:'Florianópolis / SC', days:'nunca ativou', freq:0, ticket:'—', rfv:[1,1,1], g:'💤 Reativação', h:'Inativo'}
+      ];
+      document.getElementById('rfvRows').innerHTML = REPS.map(function (r) {
+        var initials = r.name.split(' ').slice(0,2).map(function(w){return w[0];}).join('').toUpperCase();
+        var psmText = PSM[r.g];
+        return '<tr class="rrow">' +
+          '<td><div class="rep-cell"><span class="rep-av" style="background:' + GCOLOR[r.g] + ';">' + initials + '</span><div><a class="rep-nm">' + r.name + '</a><div class="rep-city">' + r.city + '</div></div></div></td>' +
+          '<td><span class="days-chip">' + r.days + '</span></td>' +
+          '<td>' + r.freq + '</td>' +
+          '<td>' + r.ticket + '</td>' +
+          '<td><span class="scores">' + r.rfv.map(function(v){ return '<span class="sc" style="background:' + SCOLOR[v] + ';">' + v + '</span>'; }).join('') + '</span></td>' +
+          '<td><span class="gbadge" style="background:' + GCOLOR[r.g] + ';">' + r.g + '</span></td>' +
+          '<td><span class="hbadge" style="background:' + HCOLOR[r.h] + ';">' + r.h + '</span></td>' +
+          '<td><span class="psm"><b>' + psmText + '</b> <span>+3</span></span></td>' +
+        '</tr>';
+      }).join('');
+    </script>
+  </body>
+</html>

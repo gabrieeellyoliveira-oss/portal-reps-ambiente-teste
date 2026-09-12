@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Pipeline Onboarding — Portal de Representantes | Cardápio Web</title>
+    <link rel="icon" type="image/jpeg" href="/assets/cw-logo-dark-e78e4446.jpg">
+    <link rel="stylesheet" href="/assets/application-cc2f1a53.css" />
+    <style>
+      .avatar-circle{width:34px;height:34px;border-radius:50%;background:#5b21b6;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;}
+    </style>
+  </head>
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar" id="sidebar"></aside>
+      <div class="main-wrapper">
+        <header class="top-header" id="top-header"></header>
+        <main class="page-content">
+          <div class="obp-pipebar">
+            <div class="obp-pipeselect">
+              <button class="obp-pipeselect-btn"><span class="obp-pipeselect-ico">🧭</span><span class="obp-pipeselect-name">Onboarding de Representantes</span><span class="obp-pipe-default">padrão</span></button>
+            </div>
+          </div>
+          <div class="obp-toolbar">
+            <input placeholder="Buscar rep..." style="padding:6px;border:1px solid #ddd;border-radius:8px;">
+            <span style="margin-left:auto;color:#7c3aed;font-weight:700;">68 reps no pipeline</span>
+          </div>
+          <div class="obp-board" id="board"></div>
+        </main>
+      </div>
+    </div>
+    <script src="/assets/shell.js" data-title="Pipeline Onboarding"></script>
+    <script>
+      var COLS = [
+        {name:'Ag. assinatura', count:22, cards:[
+          {name:'Tiago Marcone', score:30, tag:'10d', cadastro:'5d', aprov:'3d', city:'Rio de Janeiro / RJ', act:'Mensagem de boas vindas', due:'27/08', days:'2d'},
+          {name:'José Carlos Martins', score:28, tag:'10d', cadastro:'5d', aprov:null, city:'Florianópolis / SC', act:'Mensagem de boas vindas', due:'27/08', days:'2d'}
+        ]},
+        {name:'Boas-vindas', count:1, cards:[
+          {name:'Elias Amorim Coutinho', score:25, tag:'10d', cadastro:'6d', aprov:null, city:'Carpina / PE', act:'Alinhamento inicial', due:'25/08', days:'1d'}
+        ]},
+        {name:'Alinhamento', count:2, cards:[
+          {name:'Leonardo Orth', score:45, tag:'30d', cadastro:'24d', aprov:'12d', city:'Cascavel / PR', act:'Apresentação do sistema', due:'28/08', days:'10d'}
+        ]},
+        {name:'Acompanhamento', count:35, cards:[
+          {name:'Felipe Matheus Guimarães', score:41, tag:'30d', cadastro:'36d', aprov:'30d', city:'Teresina / PI', act:'Treinamento módulo 1', due:'26/08', days:'15d'},
+          {name:'Paulo Henrique da Silva', score:38, tag:'30d', cadastro:'31d', aprov:null, city:'Ananindeua / PA', act:'Treinamento módulo 2', due:'24/08', days:'15d'}
+        ]},
+        {name:'1º Ativação', count:8, cards:[
+          {name:'Paulo Vinícius Cavalcanti', score:120, tag:'120d', cadastro:'128d', aprov:null, city:'Açailândia / MA', act:'Primeira ativação', due:'—', days:'17d'}
+        ]},
+        {name:'Cancelados', count:0, cards:[]}
+      ];
+      var board = document.getElementById('board');
+      var PSM = ['Ana Beatriz Souza','Carla Mendes Rocha','Renata Alencar','Vinícius Fontoura'];
+      COLS.forEach(function (col) {
+        var colEl = document.createElement('div');
+        colEl.className = 'obp-col';
+        var cardsHtml = col.cards.map(function (c) {
+          var initials = c.name.split(' ').slice(0,2).map(function(w){return w[0];}).join('').toUpperCase();
+          return '<div class="obp-card">' +
+            '<div class="obp-card-top"><a class="obp-card-name">' + c.name + '</a><button class="obp-tag-btn">🏷</button><span class="obp-card-score">' + c.score + '</span></div>' +
+            '<div class="obp-card-tags"><span class="cwtag-pill"><span class="cwtag-pill-dot"></span>' + c.tag + '</span></div>' +
+            '<div class="obp-card-ages"><span class="obp-age">🗓 Cadastro <strong>' + c.cadastro + '</strong></span>' +
+            (c.aprov ? '<span class="obp-age obp-age-ok">✓ Aprovação <strong>' + c.aprov + '</strong></span>' : '') + '</div>' +
+            '<div class="obp-card-meta"><span class="obp-meta-line">📍 ' + c.city + '</span></div>' +
+            '<div class="obp-card-act"><button class="obp-act-check"></button><span class="obp-act-title">' + c.act + '</span><span class="obp-act-date">' + c.due + '</span></div>' +
+            '<div class="obp-card-foot"><select class="obp-psm-select"><option>— sem PSM —</option>' + PSM.map(function(p){return '<option>'+p+'</option>';}).join('') + '</select><span class="obp-days">' + c.days + '</span></div>' +
+            '</div>';
+        }).join('');
+        colEl.innerHTML = '<div class="obp-col-head"><span class="obp-col-dot"></span><span class="obp-col-name">' + col.name + '</span><span class="obp-col-count">' + col.count + '</span></div>' +
+          '<div class="obp-cards">' + cardsHtml + '</div>';
+        board.appendChild(colEl);
+      });
+    </script>
+  </body>
+</html>

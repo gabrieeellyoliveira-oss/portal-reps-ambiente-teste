@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Calculadora de Proposta — Portal de Representantes | Cardápio Web</title>
+    <link rel="icon" type="image/jpeg" href="/assets/cw-logo-dark-e78e4446.jpg">
+    <link rel="stylesheet" href="/assets/application-cc2f1a53.css" />
+    <style>
+      .avatar-circle{width:34px;height:34px;border-radius:50%;background:#5b21b6;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;}
+    </style>
+  </head>
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar" id="sidebar"></aside>
+      <div class="main-wrapper">
+        <header class="top-header" id="top-header"></header>
+        <main class="page-content">
+          <div class="pc-page">
+            <div class="pc-topbar">
+              <div><strong>Calculadora de Proposta</strong><div>Configure os módulos e gere a proposta comercial</div></div>
+              <div><button class="btn btn-primary btn-sm">💳 Gerar Link de Pagamento</button> <button class="btn btn-sm">🖥 Tela Cheia</button></div>
+            </div>
+            <div class="pc-grid">
+              <div class="pc-config">
+                <div class="pc-config-section pc-client-id-section">
+                  <div class="pc-config-label"><span>👤</span><div><strong>Identificação do Cliente</strong> <span>OPCIONAL</span></div></div>
+                  <div class="pc-client-fields">
+                    <div class="pc-field-wrap"><span class="pc-field-label">NOME DO CONTATO</span><input class="pc-field-input" id="f-nome" value="João Silva"></div>
+                    <div class="pc-field-wrap"><span class="pc-field-label">TELEFONE</span><input class="pc-field-input" value="(41) 90000-0000"></div>
+                    <div class="pc-field-wrap"><span class="pc-field-label">EMPRESA / ESTABELECIMENTO</span><input class="pc-field-input" id="f-empresa" value="Restaurante do João"></div>
+                    <div class="pc-field-wrap"><span class="pc-field-label">CPF / CNPJ</span><input class="pc-field-input" value="00.000.000/0001-00"></div>
+                    <div class="pc-field-wrap"><span class="pc-field-label">E-MAIL</span><input class="pc-field-input" value="joao@restaurante.com"></div>
+                    <div class="pc-field-wrap"><span class="pc-field-label">CEP</span><input class="pc-field-input" value="00000-000"></div>
+                    <div class="pc-field-wrap"><span class="pc-field-label">ENDEREÇO</span><input class="pc-field-input" value="Rua das Flores, 123"></div>
+                    <div class="pc-field-wrap"><span class="pc-field-label">CIDADE</span><input class="pc-field-input" value="Curitiba"></div>
+                    <div class="pc-field-wrap pc-field-wrap--uf"><span class="pc-field-label">UF</span><input class="pc-field-input" value="PR"></div>
+                  </div>
+                </div>
+                <div class="pc-config-section pc-period-section">
+                  <div class="pc-config-label"><span>📅</span><div><strong>Período de Contratação</strong><span>Cobrança mês a mês</span></div></div>
+                  <div class="pc-period-switch" id="periods">
+                    <button class="pc-period-btn active" data-mult="1">Mensal</button>
+                    <button class="pc-period-btn" data-mult="0.95">Trimestral</button>
+                    <button class="pc-period-btn" data-mult="0.9">Semestral</button>
+                    <button class="pc-period-btn" data-mult="0.85">Anual</button>
+                  </div>
+                </div>
+                <div class="pc-config-section">
+                  <div class="pc-config-label"><span class="pc-step-num">1</span><div><strong>Plano Base</strong><span>Selecione o plano principal</span></div></div>
+                  <div class="pc-plans-grid" id="plans">
+                    <label class="pc-plan-card" data-price="169.99" data-name="Plano Mesas (Plano A)"><input type="radio" name="plan"><div class="pc-plan-icon">🍽</div><div class="pc-plan-name">Plano Mesas</div><div class="pc-plan-sub">Plano A</div><div class="pc-plan-price"><span>R$ 169,99</span><span>/mês</span></div></label>
+                    <label class="pc-plan-card" data-price="209.99" data-name="Plano Delivery (Plano B)"><input type="radio" name="plan"><div class="pc-plan-icon">🛵</div><div class="pc-plan-name">Plano Delivery</div><div class="pc-plan-sub">Plano B</div><div class="pc-plan-price"><span>R$ 209,99</span><span>/mês</span></div></label>
+                    <label class="pc-plan-card selected" data-price="269.99" data-name="Plano Premium (Plano A+B)"><input type="radio" name="plan" checked><div class="pc-plan-icon">👑</div><div class="pc-plan-name">Plano Premium</div><div class="pc-plan-sub">Plano A+B</div><div class="pc-plan-price"><span>R$ 269,99</span><span>/mês</span></div></label>
+                  </div>
+                </div>
+                <div class="pc-config-section">
+                  <div class="pc-config-label"><span class="pc-step-num">2</span><div><strong>Módulos Adicionais</strong><span>Selecione os extras contratados</span></div></div>
+                  <div class="pc-addons-list" id="addons">
+                    <label class="pc-addon-item" data-price="29.99"><input type="checkbox" class="mod-cb" data-price="29.99"><span class="pc-addon-icon">🛒</span><div class="pc-addon-info"><span class="pc-addon-name">Marketplace</span></div><span class="pc-addon-price">+ R$ 29,99/mês</span></label>
+                    <label class="pc-addon-item"><input type="checkbox" class="mod-cb" data-price="29.99"><span class="pc-addon-icon">📦</span><div class="pc-addon-info"><span class="pc-addon-name">Estoque Avançado</span></div><span class="pc-addon-price">+ R$ 29,99/mês</span></label>
+                    <label class="pc-addon-item"><input type="checkbox" class="mod-cb" data-price="54.99"><span class="pc-addon-icon">🗺</span><div class="pc-addon-info"><span class="pc-addon-name">Roteirização</span></div><span class="pc-addon-price">+ R$ 54,99/mês</span></label>
+                    <label class="pc-addon-item"><input type="checkbox" class="mod-cb" data-price="69.99"><span class="pc-addon-icon">🧾</span><div class="pc-addon-info"><span class="pc-addon-name">Fiscal</span></div><span class="pc-addon-price">+ R$ 69,99/mês</span></label>
+                    <label class="pc-addon-item"><input type="checkbox" class="mod-cb" data-price="69.99"><span class="pc-addon-icon">💰</span><div class="pc-addon-info"><span class="pc-addon-name">Financeiro</span></div><span class="pc-addon-price">+ R$ 69,99/mês</span></label>
+                    <label class="pc-addon-item pc-addon-totem-wrap"><input type="checkbox"><span class="pc-addon-icon">🖥</span><span class="pc-addon-totem-label">Totem</span><span class="pc-addon-price">+ R$ 99,99/unid.</span></label>
+                  </div>
+                </div>
+                <div class="pc-config-section">
+                  <div class="pc-config-label"><span class="pc-step-num">3</span><div><strong>Taxa de Implantação</strong><span>Valor único cobrado na adesão (0 = gratuita)</span></div></div>
+                  <div class="pc-impl-wrap"><span class="pc-impl-prefix">R$</span><input class="pc-impl-input" id="f-impl" value="600,00"></div>
+                </div>
+                <div class="pc-config-section">
+                  <div class="pc-config-label"><span class="pc-step-num">4</span><div><strong>Validade da Proposta</strong><span>Dias corridos a partir da emissão</span></div></div>
+                  <div class="pc-validity-wrap"><input class="pc-validity-input" value="15"><span class="pc-validity-unit">dias corridos</span></div>
+                </div>
+              </div>
+
+              <div class="pc-canvas pc-proposal-canvas">
+                <div class="pc-proposal-header">
+                  <div class="pc-proposal-badge">PROPOSTA COMERCIAL</div>
+                  <div class="pc-proposal-company">Cardápio Web — Sistema de Gestão para Restaurantes</div>
+                  <div class="pc-proposal-date" id="f-date"></div>
+                </div>
+                <div class="pc-proposal-section pc-client-info-section">
+                  <div class="pc-client-info-badge">👤 Cliente</div>
+                  <div class="pc-client-info-company" id="r-empresa">Restaurante do João</div>
+                  <div class="pc-client-info-contact"><span class="pc-client-info-name" id="r-nome">João Silva</span></div>
+                </div>
+                <div class="pc-proposal-section">
+                  <div class="pc-proposal-section-title">SOLUÇÃO PROPOSTA</div>
+                  <div class="pc-line-items"><div class="pc-line-item"><span class="pc-line-name" id="r-planname">Plano Premium (Plano A+B)</span><span class="pc-line-value" id="r-planprice">R$ 269,99/mês</span></div></div>
+                </div>
+                <div class="pc-proposal-divider"></div>
+                <div class="pc-inv-wrap">
+                  <div class="pc-inv-label">MENSALIDADE TOTAL</div>
+                  <div class="pc-inv-hero"><span class="pc-inv-price" id="r-total">R$ 269,99</span><span class="pc-inv-per">/mês</span></div>
+                </div>
+                <div class="pc-proposal-section pc-impl-section">
+                  <div class="pc-proposal-section-title">TAXA DE IMPLANTAÇÃO</div>
+                  <div class="pc-impl-display"><span class="pc-impl-value" id="r-impl">R$ 600,00</span><span class="pc-impl-note">pagamento único na adesão</span></div>
+                </div>
+                <ul class="pc-conditions-list">
+                  <li>✅ Suporte técnico incluso</li>
+                  <li>✅ Atualizações do sistema inclusas</li>
+                  <li>✅ Treinamento de implantação incluso</li>
+                </ul>
+                <div class="pc-proposal-section pc-features-section">
+                  <div class="pc-feat-plan-header">✅ Funcionalidades Incluídas — <span id="r-planlabel">Plano Premium</span></div>
+                  <div class="pc-feat-grid">
+                    <div class="pc-feat-col">
+                      <div class="pc-feat-item"><span class="pc-feat-check">✔</span> Cardápio Web para delivery, visualização e balcão</div>
+                      <div class="pc-feat-item"><span class="pc-feat-check">✔</span> Cardápio Web para mesas com pedidos</div>
+                      <div class="pc-feat-item"><span class="pc-feat-check">✔</span> Controle de mesas e garçons</div>
+                      <div class="pc-feat-item"><span class="pc-feat-check">✔</span> Adição de pedidos (delivery + mesas)</div>
+                      <div class="pc-feat-item"><span class="pc-feat-check">✔</span> Sistema de caixa</div>
+                    </div>
+                    <div class="pc-feat-col">
+                      <div class="pc-feat-item"><span class="pc-feat-check">✔</span> Gestão de cupons e avisos</div>
+                      <div class="pc-feat-item"><span class="pc-feat-check">✔</span> Múltiplos usuários com permissões</div>
+                      <div class="pc-feat-item"><span class="pc-feat-check">✔</span> Impressão automática de comandas</div>
+                      <div class="pc-feat-item"><span class="pc-feat-check">✔</span> Múltiplas impressoras</div>
+                      <div class="pc-feat-item"><span class="pc-feat-check">✔</span> Controle de entregadores</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="pc-legal-footer"><p>Ao aceitar esta proposta, o Cliente declara estar ciente e de acordo com os Termos de Uso e a Política de Privacidade da Cardápio Web.</p></div>
+                <div style="display:flex;gap:10px;margin-top:14px;">
+                  <button class="btn btn-primary" style="flex:1;">📄 Gerar PDF</button>
+                  <button class="btn" style="flex:1;background:#16a34a;color:#fff;">💬 WhatsApp</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <script src="/assets/shell.js" data-title="Calculadora de Proposta"></script>
+    <script>
+      document.getElementById('f-date').textContent = new Date().toLocaleDateString('pt-BR');
+      var selectedPlan = document.querySelector('.pc-plan-card input[checked]')?.closest('.pc-plan-card') || document.querySelectorAll('.pc-plan-card')[2];
+      var periodMult = 1;
+
+      function recalc() {
+        var base = parseFloat(selectedPlan.dataset.price);
+        var mods = 0;
+        document.querySelectorAll('.mod-cb:checked').forEach(function (cb) { mods += parseFloat(cb.dataset.price); });
+        var total = (base + mods) * periodMult;
+        document.getElementById('r-planname').textContent = selectedPlan.dataset.name;
+        document.getElementById('r-planprice').textContent = 'R$ ' + base.toFixed(2).replace('.', ',') + '/mês';
+        document.getElementById('r-planlabel').textContent = selectedPlan.dataset.name.split(' (')[0];
+        document.getElementById('r-total').textContent = 'R$ ' + total.toFixed(2).replace('.', ',');
+        document.getElementById('r-nome').textContent = document.getElementById('f-nome').value;
+        document.getElementById('r-empresa').textContent = document.getElementById('f-empresa').value;
+      }
+      document.querySelectorAll('.pc-plan-card').forEach(function (el) {
+        el.addEventListener('click', function () {
+          document.querySelectorAll('.pc-plan-card').forEach(function (p) { p.classList.remove('selected'); });
+          el.classList.add('selected');
+          selectedPlan = el;
+          recalc();
+        });
+      });
+      document.querySelectorAll('.mod-cb').forEach(function (cb) { cb.addEventListener('change', recalc); });
+      document.querySelectorAll('.pc-period-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          document.querySelectorAll('.pc-period-btn').forEach(function (b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          periodMult = parseFloat(btn.dataset.mult);
+          recalc();
+        });
+      });
+      document.getElementById('f-nome').addEventListener('input', recalc);
+      document.getElementById('f-empresa').addEventListener('input', recalc);
+      recalc();
+    </script>
+  </body>
+</html>

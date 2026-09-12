@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Controle de Inadimplência — Portal de Representantes | Cardápio Web</title>
+    <link rel="icon" type="image/jpeg" href="/assets/cw-logo-dark-e78e4446.jpg">
+    <link rel="stylesheet" href="/assets/application-cc2f1a53.css" />
+    <style>
+      .avatar-circle{width:34px;height:34px;border-radius:50%;background:#5b21b6;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;}
+      .dq-act{display:flex;gap:6px;}
+      .dq-btn{border:1px solid #ddd;border-radius:6px;padding:4px 10px;font-size:.72rem;background:#fff;text-decoration:none;color:#374151;cursor:pointer;}
+      .dq-btn-wa{background:#16a34a;color:#fff;border-color:#16a34a;}
+      .dq-alert td{color:#dc2626;}
+    </style>
+  </head>
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar" id="sidebar"></aside>
+      <div class="main-wrapper">
+        <header class="top-header" id="top-header"></header>
+        <main class="page-content">
+          <div class="opp-detail">
+            <div class="fc-filters">
+              <span style="font-size:.75rem;color:#9ca3af;">👤 Representante</span>
+              <select style="padding:8px;border:1px solid #ddd;border-radius:8px;margin-top:4px;max-width:320px;"><option>Todos os representantes</option></select>
+            </div>
+            <div class="dashboard-grid dq-kpis">
+              <div class="dash-card"><div class="dash-card-header"><span class="dash-card-title">Taxa de Cancelamento</span></div><div class="dash-card-value" style="color:#dc2626;">29.1%</div><div>meta: abaixo de 4% · 80 de 275 cancelados</div></div>
+              <div class="dash-card"><div class="dash-card-header"><span class="dash-card-title">Inadimplência</span></div><div class="dash-card-value" style="color:#f59e0b;">19.5%</div><div>38 de 195 assinaturas ativas</div></div>
+              <div class="dash-card"><div class="dash-card-header"><span class="dash-card-title">MRR em Risco</span></div><div class="dash-card-value">R$ 22.488,35</div><div>vencendo + inadimplente</div></div>
+              <div class="dash-card"><div class="dash-card-header"><span class="dash-card-title">Para Contatar Hoje</span></div><div class="dash-card-value" style="color:#7c3aed;">79</div><div>38 vencidos · 41 vencendo</div></div>
+            </div>
+            <div class="dash-card">
+              ⚠️ Sua taxa de cancelamento (29.1%) está acima da referência de 4%. Foque em retenção.<br>
+              Você tem 38 clientes inadimplentes e 41 vencendo em até 7 dias. Enviar o link de pagamento hoje pelo WhatsApp é a forma mais rápida de evitar cancelamentos — R$ 22.488,35/mês em risco agora.
+            </div>
+            <div class="dash-card">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                <h3 style="margin:0;color:#dc2626;">🔴 Inadimplentes <span style="color:#374151;">38</span></h3>
+                <span style="margin-left:auto;font-size:.72rem;color:#9ca3af;">atraso de até 45 dias · acima disso é cancelamento</span>
+              </div>
+              <div class="dq-table-wrap">
+                <table class="data-table dq-table" style="width:100%;">
+                  <thead><tr><th>Cliente</th><th>Rep</th><th>Valor</th><th>Vencida desde</th><th>Ações de cobrança</th></tr></thead>
+                  <tbody id="rows"></tbody>
+                </table>
+              </div>
+            </div>
+            <div class="dash-card">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                <h3 style="margin:0;color:#f59e0b;">🟠 Vencendo nos próximos 7 dias <span style="color:#374151;">41</span></h3>
+              </div>
+              <div class="dq-table-wrap">
+                <table class="data-table dq-table" style="width:100%;">
+                  <thead><tr><th>Cliente</th><th>Rep</th><th>Valor</th><th>Vence em</th><th>Ações de cobrança</th></tr></thead>
+                  <tbody id="rows2"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <script src="/assets/shell.js" data-title="Controle de Inadimplência"></script>
+    <script>
+      var ROWS = [
+        {biz:'Só Massa Delivery', city:'Maracanaú/CE', phone:'(85) 99000-0001', rep:'Rodrigo Almeida Santos', val:'R$ 729,96', due:'08/07/2026', days:'45 dias em atraso'},
+        {biz:'Só Massa Express', city:'Fortaleza/CE', phone:'(85) 99000-0002', rep:'Rodrigo Almeida Santos', val:'R$ 729,96', due:'08/07/2026', days:'45 dias em atraso'},
+        {biz:'Pizza da Praça', city:'Maracanaú/CE', phone:'(85) 99000-0003', rep:'Rodrigo Almeida Santos', val:'R$ 729,96', due:'08/07/2026', days:'45 dias em atraso'},
+        {biz:'Pastelaria do Zé', city:'Fortaleza/CE', phone:'(85) 98000-0004', rep:'Rodrigo Almeida Santos', val:'R$ 269,97', due:'11/07/2026', days:'42 dias em atraso'},
+        {biz:'Pizzaria Bonna', city:'Rolante/RS', phone:'(54) 99000-0005', rep:'Paulo Sérgio Andrade', val:'R$ 209,99', due:'11/07/2026', days:'42 dias em atraso'},
+        {biz:'Macarronada Real', city:'São Luís/MA', phone:'(98) 99000-0006', rep:'Diego Martins Rocha', val:'R$ 239,98', due:'11/07/2026', days:'42 dias em atraso'}
+      ];
+      document.getElementById('rows').innerHTML = ROWS.map(function (r) {
+        return '<tr class="dq-alert"><td><a>' + r.biz + '</a><div class="rep-name-sub">' + r.city + ' · ' + r.phone + '</div></td>' +
+          '<td><span class="clients-rep-badge">👤 ' + r.rep + '</span></td>' +
+          '<td><span>' + r.val + '</span></td>' +
+          '<td><span>' + r.due + '</span><div>⚠ ' + r.days + '</div></td>' +
+          '<td><div class="dq-act"><a class="dq-btn">💳 Fatura</a><button class="dq-btn">📋 Copiar</button><a class="dq-btn dq-btn-wa">💬 WhatsApp</a></div></td></tr>';
+      }).join('');
+
+      var ROWS2 = [
+        {biz:'Temaki Roll', city:'São Luís/MA', phone:'(98) 99224-2941', rep:'Marco Aurélio Melo Luna', val:'R$ 371,68', due:'23/08/2026', when:'vence hoje'},
+        {biz:'Cantina do Vale', city:'Recife/PE', phone:'(81) 99000-0007', rep:'Diego Martins Rocha', val:'R$ 209,99', due:'26/08/2026', when:'vence em 3 dias'},
+        {biz:'Doceria Flor de Maio', city:'Salvador/BA', phone:'(71) 99000-0008', rep:'Bruno Cardoso Lima', val:'R$ 269,97', due:'28/08/2026', when:'vence em 5 dias'}
+      ];
+      document.getElementById('rows2').innerHTML = ROWS2.map(function (r) {
+        return '<tr><td><a>' + r.biz + '</a><div class="rep-name-sub">' + r.city + ' · ' + r.phone + '</div></td>' +
+          '<td><span class="clients-rep-badge">👤 ' + r.rep + '</span></td>' +
+          '<td><span>' + r.val + '</span></td>' +
+          '<td><span>' + r.due + '</span><div style="color:#f59e0b;">' + r.when + '</div></td>' +
+          '<td><div class="dq-act"><a class="dq-btn">💳 Fatura</a><button class="dq-btn">📋 Copiar</button><a class="dq-btn dq-btn-wa">💬 WhatsApp</a></div></td></tr>';
+      }).join('');
+    </script>
+  </body>
+</html>
