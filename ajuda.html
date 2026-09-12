@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Central de Ajuda — Portal de Representantes | Cardápio Web</title>
+    <link rel="icon" type="image/jpeg" href="/assets/cw-logo-dark-e78e4446.jpg">
+    <link rel="stylesheet" href="/assets/application-cc2f1a53.css" />
+    <style>
+      .avatar-circle{width:34px;height:34px;border-radius:50%;background:#5b21b6;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;}
+      .help-wrap{display:flex;flex-direction:column;height:calc(100vh - 100px);}
+      .help-bar{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:#fff;border:1px solid #eef0f4;border-radius:14px 14px 0 0;}
+      .help-bar-title{display:flex;align-items:center;gap:10px;}
+      .help-bar-title strong{font-size:1rem;}
+      .help-bar-title span{font-size:.78rem;color:#9ca3af;}
+      .help-bar a{font-size:.82rem;color:#7c3aed;text-decoration:none;font-weight:700;}
+      .help-frame-box{flex:1;border:1px solid #eef0f4;border-top:none;border-radius:0 0 14px 14px;overflow:hidden;display:flex;align-items:center;justify-content:center;color:#9ca3af;font-size:.85rem;}
+      .help-frame-box iframe{width:100%;height:100%;border:none;}
+    </style>
+  </head>
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar" id="sidebar"></aside>
+      <div class="main-wrapper">
+        <header class="top-header" id="top-header"></header>
+        <main class="page-content">
+          <div class="help-wrap">
+            <div class="help-bar">
+              <div class="help-bar-title"><strong>🛟 Central de Ajuda</strong><span>artigos, tutoriais e dúvidas frequentes da Cardápio Web</span></div>
+              <a href="https://ajuda.cardapioweb.com" target="_blank" rel="noopener">Abrir em nova aba</a>
+            </div>
+            <div class="help-frame-box">
+              <iframe src="https://ajuda.cardapioweb.com" title="Central de Ajuda"></iframe>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <script src="/assets/shell.js" data-title="Central de Ajuda"></script>
+  </body>
+</html>
