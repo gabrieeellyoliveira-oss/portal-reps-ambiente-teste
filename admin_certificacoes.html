@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Certificações — Portal de Representantes | Cardápio Web</title>
+    <link rel="icon" type="image/jpeg" href="/assets/cw-logo-dark-e78e4446.jpg">
+    <link rel="stylesheet" href="/assets/application-cc2f1a53.css" />
+    <style>
+      .avatar-circle{width:34px;height:34px;border-radius:50%;background:#5b21b6;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;}
+      .ac-hero { display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap; margin-bottom:20px; }
+      .ac-hero h2 { margin:0 0 6px; }
+      .ac-hero p { margin:0; color:#6b7280; font-size:.85rem; max-width:640px; }
+      .ac-hero-actions { display:flex; gap:8px; flex-wrap:wrap; }
+      .ac-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:18px; }
+      .ac-card { background:#fff; border:1px solid #eef0f4; border-radius:16px; overflow:hidden; }
+      .ac-thumb { position:relative; height:130px; background:#f4f0fb; display:flex; align-items:center; justify-content:center; }
+      .ac-thumb img { width:60px; opacity:.6; }
+      .ac-thumb .badge { position:absolute; top:10px; right:10px; background:#dcfce7; color:#15803d; font-size:.68rem; font-weight:700; padding:3px 10px; border-radius:999px; }
+      .ac-body { padding:16px 18px; }
+      .ac-body h3 { margin:0 0 6px; font-size:.98rem; }
+      .ac-body p { margin:0 0 12px; font-size:.8rem; color:#6b7280; line-height:1.5; }
+      .ac-meta { display:flex; gap:10px; flex-wrap:wrap; font-size:.72rem; color:#6b7280; margin-bottom:14px; }
+      .ac-actions { display:flex; gap:8px; flex-wrap:wrap; }
+      .ac-btn { border-radius:8px; padding:7px 14px; font-size:.78rem; font-weight:700; text-decoration:none; cursor:pointer; border:1px solid #ddd; }
+      .ac-btn-ghost { background:#fff; color:#374151; }
+      .ac-btn-primary { background:#7c3aed; color:#fff; border-color:#7c3aed; }
+      .ac-btn-danger { background:#fff; color:#dc2626; border-color:#fecaca; }
+    </style>
+  </head>
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar" id="sidebar"></aside>
+      <div class="main-wrapper">
+        <header class="top-header" id="top-header"></header>
+        <main class="page-content">
+          <div class="ac-hero">
+            <div>
+              <h2>🎓 Certificações</h2>
+              <p>Crie certificações para os representantes: aulas gravadas (Google Drive), prova cronometrada com alternativas e o certificado personalizado com o nome do Rep. Só o admin cria; os Reps veem em Capacitação → Certificações.</p>
+            </div>
+            <div class="ac-hero-actions">
+              <button class="ac-btn ac-btn-ghost">🧪 Criar Certificação Teste</button>
+              <a class="ac-btn ac-btn-ghost">📊 Relatório</a>
+              <button class="ac-btn ac-btn-primary">＋ Nova certificação</button>
+            </div>
+          </div>
+          <div class="ac-grid" id="acGrid"></div>
+        </main>
+      </div>
+    </div>
+    <script src="/assets/shell.js" data-title="Certificações"></script>
+    <script>
+      var CERTS = [
+        {title:'Certificação Implementação Cardápio Web', desc:'Certificado de conclusão do módulo de Implementação Cardápio Web, obtido mediante aprovação na avaliação prática do treinamento. Habilita o representante a executar o processo de implementação de novos clientes de forma independente, seguindo o playbook oficial do Programa de Representantes.', aulas:5, cert:19},
+        {title:'Certificação Suporte Cardápio Web', desc:'Treinamento de Suporte Cardápio Web, destinado a representantes do Programa de Representantes. Capacita o representante a atuar no atendimento pós-implementação: identificação e resolução de problemas recorrentes, orientação ao cliente no uso da plataforma e escalonamento correto de chamados que exigem suporte técnico especializado, garantindo continuidade operacional e retenção do cliente.', aulas:13, cert:10}
+      ];
+      document.getElementById('acGrid').innerHTML = CERTS.map(function (c) {
+        return '<div class="ac-card"><div class="ac-thumb"><img src="/assets/cw-logo-dark-e78e4446.jpg"><span class="badge">● Publicada</span></div>' +
+          '<div class="ac-body"><h3>' + c.title + '</h3><p>' + c.desc + '</p>' +
+          '<div class="ac-meta"><span>🎬 ' + c.aulas + ' aulas</span><span>❓ 10 perguntas</span><span>🎯 aprova com ≥ 7 de 10 pts</span><span>⏱ 50 min</span><span>🏅 ' + c.cert + ' certificados</span></div>' +
+          '<div class="ac-actions"><a class="ac-btn ac-btn-ghost">✎ Editar</a><a class="ac-btn ac-btn-primary">📝 Editar teste de certificação</a><button class="ac-btn ac-btn-danger">Excluir</button></div></div></div>';
+      }).join('');
+    </script>
+  </body>
+</html>
