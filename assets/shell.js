@@ -6,6 +6,46 @@
   //   return;
   // }
 
+  // Cores oficiais do Manual da Marca Cardápio Web (2023), aplicadas só ao
+  // menu/header via escopo #sidebar/#top-header — não mexe no resto das páginas.
+  var brandCss = '' +
+    '#sidebar, #top-header {' +
+      '--cw-purple-50: #F4EDF7; --cw-purple-100: #ecd8fb; --cw-purple-300: #d2a3f7;' +
+      '--cw-purple-400: #c67bfb; --cw-purple-500: #b35cf9; --cw-purple-600: #A543FA;' +
+      '--cw-purple-700: #8b32d6; --cw-purple-800: #59327A; --cw-orange: #FFB600;' +
+      '--cw-orange-light: #ffc933; --cw-red: #FF5959;' +
+    '}' +
+    '#sidebar { background: linear-gradient(180deg, #faf5fd 0%, #f4ecf9 100%); border-right-color: #ecdcf5; }' +
+    '#sidebar .sidebar-user-avatar { background: linear-gradient(135deg, #c67bfb, #A543FA); box-shadow: 0 0 0 2px #F4EDF7, 0 2px 8px rgba(165,67,250,0.25); }' +
+    '#sidebar .sidebar-user-toggle:hover { background: #F4EDF7; }' +
+    '#sidebar .nav-item.active { background: #F4EDF7; color: #8b32d6; }' +
+    '#sidebar .nav-item.active::before { background: #A543FA; }' +
+    '#sidebar .nav-item-icon { background: #F4EDF7; color: #59327A; }' +
+    '#sidebar .nav-item:hover .nav-item-icon { background: #ecd8fb; }' +
+    '#sidebar .nav-item.active .nav-item-icon { background: #e4c9fb; color: #59327A; }' +
+    '#sidebar .nav-badge { background: #A543FA; box-shadow: 0 3px 8px rgba(165,67,250,0.3); }' +
+    '#sidebar .nav-badge--warn { background: #FFB600; box-shadow: 0 3px 8px rgba(255,182,0,0.35); color: #59327A; }' +
+    '#sidebar .nav-badge--info { background: #A543FA; }' +
+    '#sidebar .sum-item:hover { background: #fff0ef; color: #FF5959; }' +
+    '#sidebar .sum-item:hover .sum-icon { background: #ffe4e2; }' +
+    '#sidebar .sidebar-footer a:hover { color: #FF5959; }' +
+    '#sidebar .sidebar-footer a:hover .nav-icon { background: #fff0ef; border-color: #ffd6d3; color: #FF5959; }' +
+    '#sidebar .ssb-bar { border-color: #e4c9fb; background: linear-gradient(135deg, #f8f1fc, #eeddf9); color: #59327A; }' +
+    '#sidebar .ssb-bar-icon { background: #A543FA; box-shadow: 0 4px 10px rgba(165,67,250,0.3); }' +
+    '#sidebar .ssb-bar-chevron { color: #A543FA; }' +
+    '#sidebar .sidebar-suggest-box { background: linear-gradient(160deg, #f8f1fc, #f0e2f9); border-color: #e6cff5; }' +
+    '#sidebar .ssb-icon-circle { background: #A543FA; box-shadow: 0 6px 14px rgba(165,67,250,0.32); }' +
+    '#sidebar .ssb-title, #sidebar .ssb-text { color: #59327A; }' +
+    '#sidebar .ssb-btn, #sidebar .ssb-btn-sm { background: #A543FA; box-shadow: 0 6px 14px rgba(165,67,250,0.28); }' +
+    '#sidebar .ssb-btn:hover, #sidebar .ssb-btn-sm:hover { background: #8b32d6; }' +
+    '#sidebar .ssb-link { color: #8b32d6 !important; border-color: #e4c9fb; }' +
+    '#sidebar .ssb-link:hover { background: #F4EDF7; }' +
+    '#sidebar .ssb-mascot { width: 84px; top: -18px; }' +
+    '#top-header .header-xp-fill { background: linear-gradient(90deg, #FFB600, #A543FA); }';
+  var brandStyleEl = document.createElement('style');
+  brandStyleEl.textContent = brandCss;
+  document.head.appendChild(brandStyleEl);
+
   var NAV = [
     { href: '/dashboard.html', label: 'Dashboard', icon: 'grid' },
     { href: '/opportunities.html', label: 'Quadro de Leads', icon: 'columns', badge: '99+' },
@@ -101,13 +141,13 @@
     '<div class="sidebar-avatar-overlay"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg></div>' +
     '</div>' +
     '<div class="sidebar-user-info"><div class="sidebar-user-name">' + USER_NAME + '</div>' +
-    '<span class="sidebar-user-role" style="background:#7c3aed;">🛡 ' + USER_ROLE + '</span></div>' +
+    '<span class="sidebar-user-role" style="background:#A543FA;">🛡 ' + USER_ROLE + '</span></div>' +
     '<button type="button" class="sidebar-user-toggle" id="sidebar-user-toggle"><svg class="sidebar-user-chevron" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></button>' +
     '<div class="sidebar-user-menu" id="sidebar-user-menu"><a class="sum-item" href="/index.html" onclick="sessionStorage.removeItem(\'cw_test_authorized\');"><span class="sum-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg></span>Sair da conta</a></div>' +
     '</div>';
 
   var sidebarSuggestHtml = '<div class="sidebar-suggest"><div class="ssb-body"><div class="ssb-body-inner">' +
-    '<div class="sidebar-suggest-box"><span class="ssb-mascot">💡</span><span class="ssb-text">Sua ideia molda o futuro da plataforma. Compartilhe e vote!</span>' +
+    '<div class="sidebar-suggest-box"><img class="ssb-mascot" src="/assets/mascots/cardapinho.png" alt="Cardapinho"><span class="ssb-text">Sua ideia molda o futuro da plataforma. Compartilhe e vote!</span>' +
     '<div class="ssb-row"><a class="ssb-link" href="#">Ver Sugestões</a><a class="ssb-btn-sm" href="#">+ Sugerir</a></div></div>' +
     '</div></div><div class="ssb-bar"><span class="ssb-bar-icon">💡</span><span class="ssb-bar-label">Ideias &amp; Produto</span></div></div>';
 
