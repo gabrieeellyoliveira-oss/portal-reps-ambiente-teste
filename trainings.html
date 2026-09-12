@@ -58,26 +58,132 @@
               </div>
               <div class="tr-cards-scroll" id="cards"></div>
             </div>
+            <div class="tr-category-section">
+              <div class="tr-category-header">
+                <div class="tr-category-info"><span class="tr-category-icon">📚</span><div><h2 class="tr-category-title">Conhecendo o Sistema</h2><p class="tr-category-desc">Tutoriais e novidades das funcionalidades da Cardápio Web.</p></div></div>
+                <div class="tr-category-stats"><span class="tr-category-progress-label">0/21</span><div class="tr-category-progress-bar"><div class="tr-category-progress-fill" style="width:0%;"></div></div></div>
+              </div>
+              <div class="tr-cards-scroll" id="cards2"></div>
+            </div>
+            <div class="tr-category-section">
+              <div class="tr-category-header">
+                <div class="tr-category-info"><span class="tr-category-icon">📚</span><div><h2 class="tr-category-title">Capacitação Comercial</h2><p class="tr-category-desc">Materiais de apoio comercial para representantes.</p></div></div>
+                <div class="tr-category-stats"><span class="tr-category-progress-label">0/6</span><div class="tr-category-progress-bar"><div class="tr-category-progress-fill" style="width:0%;"></div></div></div>
+              </div>
+              <div class="tr-cards-scroll" id="cards3"></div>
+            </div>
+            <div class="tr-bottom-grid">
+              <div class="tr-activity-card">
+                <h3 class="tr-section-heading">💬 Últimos Comentários</h3>
+                <div class="tr-activity-list" id="comments1"></div>
+              </div>
+              <div class="tr-activity-card">
+                <h3 class="tr-section-heading">💬 Mais Comentários</h3>
+                <div class="tr-activity-list" id="comments2"></div>
+              </div>
+            </div>
           </div>
         </main>
       </div>
     </div>
     <script src="/assets/shell.js" data-title="Treinamentos Online"></script>
     <script>
+      function renderCards(id, cards, type) {
+        var icon = type === '🎬 Vídeo' ? '🎬' : (type === '📄 PDF' ? '📄' : '🔗');
+        var thumbClass = type === '🎬 Vídeo' ? 'tr-thumb-video' : (type === '📄 PDF' ? 'tr-thumb-pdf' : 'tr-thumb-link');
+        var thumbLabel = type === '🎬 Vídeo' ? 'Vídeo' : (type === '📄 PDF' ? 'PDF' : 'Link');
+        document.getElementById(id).innerHTML = cards.map(function (c, i) {
+          return '<div class="tr-card-wrapper"><a class="tr-card">' +
+            '<div class="tr-card-thumb"><div class="tr-card-thumb-icon ' + thumbClass + '">' + icon + '<span>' + thumbLabel + '</span></div>' +
+            '<div class="tr-card-badge tr-badge-progress">◐ Em progresso</div><div class="tr-card-badge tr-badge-xp">+' + c.xp + ' XP</div><div class="tr-card-number">' + (i + 1) + '</div></div>' +
+            '<div class="tr-card-body"><div class="tr-card-type-tag"><span>' + type + '</span></div><h3 class="tr-card-title">' + c.title + '</h3></div>' +
+            '</a></div>';
+        }).join('');
+      }
+
       var CARDS = [
-        {n:1, xp:30, title:'3º Encontro de Representantes: estudo sobre objeções'},
-        {n:2, xp:10, title:'10º Encontro: Mentoria sobre o CRM'},
-        {n:3, xp:50, title:'7º Encontro de Representantes: Por dentro do sistema da Cardápio Web'},
-        {n:4, xp:50, title:'5º Encontro de Representantes: Tira dúvidas e Conversa sobre processos'},
-        {n:5, xp:20, title:'11º Encontro de Representantes: estudo sobre Cardápio Web completo'}
+        {xp:50, title:'5º Encontro de Representantes: Tira dúvidas e Conversa sobre processos'},
+        {xp:10, title:'10º Encontro: Mentoria sobre o CRM'},
+        {xp:50, title:'3º Encontro de Representantes: estudo sobre objeções'},
+        {xp:20, title:'12 º Encontro: Guia Prático de Vendas: Do 0 ao 1º Cliente'},
+        {xp:50, title:'7º Encontro de Representantes: Por dentro do sistema da Cardápio Web'},
+        {xp:20, title:'11º Encontro de Representantes: Cardápio Web como Ecommerce dos Restaurantes'},
+        {xp:50, title:'4º Encontro de Representantes: Como realizar uma implementação de sucesso'},
+        {xp:10, title:'13º Encontro: Como Criar um Cardápio Campeão (Engenharia de Cardápio na Prática)'}
       ];
-      document.getElementById('cards').innerHTML = CARDS.map(function (c) {
+      renderCards('cards', CARDS, '🔗 Link Externo');
+
+      var CARDS2 = [
+        {xp:10, title:'Conheça a CW App Store: a loja de aplicativos da Cardápio Web para o Food Service', yt:'pgteS0M_WCI'},
+        {xp:10, title:'Como Conectar a API Oficial do WhatsApp Business na Cardápio Web', yt:'gHRbstTn-ck'},
+        {xp:10, title:'TRÁFEGO PAGO PARA DELIVERY: O QUE NINGUÉM TE CONTA!', yt:'Ei3O9qR0KMU'},
+        {xp:10, title:'PREPARE SEU DELIVERY PARA A BLACK FRIDAY: DICAS QUE VENDEM!', yt:'rdj709hDSdc'},
+        {xp:10, title:'Integração com Balança na Cardápio Web', yt:'0XXjpH1-T2w'},
+        {xp:10, title:'COMO ACEITAR UM PEDIDO EM DELIVERY, MESAS E COMANDAS - CARDÁPIO WEB', yt:'16w--yrEKF8'},
+        {xp:20, title:'RESOLVA TODOS OS PROBLEMAS DE ENTREGAS DO SEU DELIVERY - CARDÁPIO WEB', yt:'b-Bnb1VME1g'},
+        {xp:10, title:'VENDA MAIS NO SEU DELIVERY INTEGRANDO O SEU CARDÁPIO WEB AO FACEBOOK', yt:'0x5j9dJOYiU'},
+        {xp:25, title:'NOVIDADE: Conheça a ferramenta de gestão financeira da Cardápio Web!', yt:'RsZcWFtvv1I'},
+        {xp:40, title:'Tutorial Completo de Funcionalidades da Cardápio Web', yt:'q4c9DqztkGs'},
+        {xp:10, title:'PASSO A PASSO PARA DEIXAR SEU CARDÁPIO DIGITAL MAIS ATRATIVO - CARDÁPIO DIGITAL', yt:'KlhQEcbweh8'},
+        {xp:15, title:'Conheça o Cardápio Digital', yt:'ZZ9FtF9pRCo'},
+        {xp:15, title:'Gerenciar o Seu Negócio', yt:'HZhXWcTu-CE'},
+        {xp:10, title:'Chatbot para Delivery', yt:'CbvPxNlvs7s'},
+        {xp:10, title:'Disparador de WhatsApp', yt:'klfC64XpFys'},
+        {xp:10, title:'Cadastrar Produtos', yt:'sjBBXTuxGsg'},
+        {xp:10, title:'Atendimento de Mesas', yt:'YSjPYjjwJtU'},
+        {xp:10, title:'Módulo KDS', yt:'PwFtxd9Up1E'},
+        {xp:15, title:'Usar o RFV para Vendas', yt:'6RLSRrxGnWo'},
+        {xp:10, title:'Configurar Áreas de Entregas', yt:'asxxRIdJw9I'},
+        {xp:15, title:'Centralizar Lojas (Franquia)', yt:'NTKItaAzbwY'}
+      ];
+      document.getElementById('cards2').innerHTML = CARDS2.map(function (c, i) {
         return '<div class="tr-card-wrapper"><a class="tr-card">' +
-          '<div class="tr-card-thumb"><div class="tr-card-thumb-icon tr-thumb-link">🔗<span>Link</span></div>' +
-          '<div class="tr-card-badge tr-badge-progress">◐ Em progresso</div><div class="tr-card-badge tr-badge-xp">+' + c.xp + ' XP</div><div class="tr-card-number">' + c.n + '</div></div>' +
-          '<div class="tr-card-body"><div class="tr-card-type-tag"><span>🔗 Link Externo</span></div><h3 class="tr-card-title">' + c.title + '</h3></div>' +
+          '<div class="tr-card-thumb"><img src="https://img.youtube.com/vi/' + c.yt + '/hqdefault.jpg" alt="' + c.title + '" loading="lazy">' +
+          '<div class="tr-card-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg></div>' +
+          '<div class="tr-card-badge tr-badge-progress">◐ Em progresso</div><div class="tr-card-badge tr-badge-xp">+' + c.xp + ' XP</div><div class="tr-card-number">' + (i + 1) + '</div></div>' +
+          '<div class="tr-card-body"><div class="tr-card-type-tag"><span>🎬 Vídeo</span></div><h3 class="tr-card-title">' + c.title + '</h3></div>' +
           '</a></div>';
       }).join('');
+
+      var CARDS3 = [
+        {xp:10, title:'[REP] Regras Comerciais - Representante', type:'🔗 Link Externo'},
+        {xp:30, title:'[REP] Matriz de Concorrentes', type:'📄 PDF'},
+        {xp:10, title:'[PDF][PAR] Abecedário dos Módulos e Planos', type:'📄 PDF'},
+        {xp:10, title:'[SLIDE][PAR] APRESENTAÇÃO DA CARDÁPIO WEB', type:'📄 PDF'},
+        {xp:30, title:'[REP][PDF] FOLDER REPRESENTANTE', type:'📄 PDF'},
+        {xp:20, title:'Estudo de ICP (Perfil de Cliente Ideal)', type:'🔗 Link Externo'}
+      ];
+      document.getElementById('cards3').innerHTML = CARDS3.map(function (c, i) {
+        var isPdf = c.type === '📄 PDF';
+        var icon = isPdf ? '📄' : '🔗';
+        var thumbClass = isPdf ? 'tr-thumb-pdf' : 'tr-thumb-link';
+        var thumbLabel = isPdf ? 'PDF' : 'Link';
+        return '<div class="tr-card-wrapper"><a class="tr-card">' +
+          '<div class="tr-card-thumb"><div class="tr-card-thumb-icon ' + thumbClass + '">' + icon + '<span>' + thumbLabel + '</span></div>' +
+          '<div class="tr-card-badge tr-badge-progress">◐ Em progresso</div><div class="tr-card-badge tr-badge-xp">+' + c.xp + ' XP</div><div class="tr-card-number">' + (i + 1) + '</div></div>' +
+          '<div class="tr-card-body"><div class="tr-card-type-tag"><span>' + c.type + '</span></div><h3 class="tr-card-title">' + c.title + '</h3></div>' +
+          '</a></div>';
+      }).join('');
+
+      var COMMENTS1 = [
+        {name:'Diego Martins Rocha', video:'10º Encontro: Mentoria sobr...', text:'Tirei minhas duvidas.', when:'aproximadamente 1 mês atrás'},
+        {name:'Diego Martins Rocha', video:'3º Encontro de Representant...', text:'Gostei bastante.', when:'aproximadamente 1 mês atrás'}
+      ];
+      var COMMENTS2 = [
+        {name:'Isac Augusto Bezerra de Barros', video:'Tutorial Completo de Funcio...', text:'Excelente tour do sistema, muito minucioso e educativo.', when:'aproximadamente 1 mês atrás'},
+        {name:'Walter Alves da Silva Filho', video:'Tutorial Completo de Funcio...', text:'muito bom parabens', when:'aproximadamente 2 meses atrás'},
+        {name:'Thiago Francisco Vargas', video:'RESOLVA TODOS OS PROBLEMAS ...', text:'Uma boa ferramento de gestão', when:'3 meses atrás'}
+      ];
+      function renderComments(id, list) {
+        document.getElementById(id).innerHTML = list.map(function (c) {
+          var initials = c.name.split(' ').slice(0,2).map(function(w){return w[0];}).join('').toUpperCase();
+          return '<a class="tr-activity-item"><div class="tr-activity-avatar"><span>' + initials + '</span></div>' +
+            '<div class="tr-activity-content"><div class="tr-activity-header"><strong>' + c.name + '</strong> <span>em "' + c.video + '"</span></div>' +
+            '<p class="tr-activity-text">' + c.text + '</p><span class="tr-activity-time">' + c.when + '</span></div></a>';
+        }).join('');
+      }
+      renderComments('comments1', COMMENTS1);
+      renderComments('comments2', COMMENTS2);
     </script>
   </body>
 </html>
