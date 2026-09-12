@@ -45,30 +45,28 @@
 
           <div id="saques-panel">
             <div class="dash-card">
-              <div class="fc-empty">
-                <div style="font-size:2rem;">🏦</div>
-                <h3>Nenhum saque ainda</h3>
-                <p>Os saques de comissão solicitados no Portal aparecem aqui com seus status.</p>
-              </div>
+              <table class="data-table" style="width:100%;">
+                <thead><tr><th>Saque</th><th>Valor</th><th>Status</th><th>Pago em</th><th>Comissões incluídas</th><th></th></tr></thead>
+                <tbody id="saqueRows"></tbody>
+              </table>
             </div>
           </div>
 
           <div id="comissoes-panel" style="display:none;">
             <div class="fc-totals">
-              <a class="fc-total-card fc-total-on"><span class="fc-total-count">0</span><span class="fc-total-label">Todas</span></a>
-              <a class="fc-total-card"><span class="fc-total-count">0</span><span class="fc-total-label">Pendente</span></a>
+              <a class="fc-total-card fc-total-on"><span class="fc-total-count">20</span><span class="fc-total-label">Todas</span></a>
+              <a class="fc-total-card"><span class="fc-total-count">4</span><span class="fc-total-label">Pendente</span></a>
               <a class="fc-total-card"><span class="fc-total-count">0</span><span class="fc-total-label">Processando</span></a>
-              <a class="fc-total-card"><span class="fc-total-count">0</span><span class="fc-total-label">Pago</span></a>
+              <a class="fc-total-card"><span class="fc-total-count">16</span><span class="fc-total-label">Pago</span></a>
               <a class="fc-total-card"><span class="fc-total-count">0</span><span class="fc-total-label">Erro</span></a>
-              <div class="fc-total-card fc-total-money"><span class="fc-total-count">R$  0,00</span><span class="fc-total-label">Total Pago no período</span></div>
-              <div class="fc-total-card fc-total-money"><span class="fc-total-count">R$  0,00</span><span class="fc-total-label">Total de comissões</span></div>
+              <div class="fc-total-card fc-total-money"><span class="fc-total-count">R$ 1.546,49</span><span class="fc-total-label">Total Pago no período</span></div>
+              <div class="fc-total-card fc-total-money"><span class="fc-total-count">R$ 1.993,71</span><span class="fc-total-label">Total de comissões</span></div>
             </div>
             <div class="dash-card">
-              <div class="fc-empty">
-                <div style="font-size:2rem;">💸</div>
-                <h3>Nenhuma comissão no período</h3>
-                <p>Ajuste o período ou o status acima. Comissões aparecem conforme os estabelecimentos deste rep geram cobranças no Portal.</p>
-              </div>
+              <table class="data-table" style="width:100%;">
+                <thead><tr><th>Estabelecimento</th><th>Valor</th><th>Status</th><th>Assinatura</th><th>Próxima fatura do cliente</th><th>Data de liberação</th><th>Data do pagamento</th></tr></thead>
+                <tbody id="commRows"></tbody>
+              </table>
             </div>
           </div>
         </main>
@@ -81,8 +79,42 @@
         document.getElementById('saques-panel').style.display = t === 'saques' ? '' : 'none';
         document.getElementById('comissoes-panel').style.display = t === 'comissoes' ? '' : 'none';
       }
-      var REPS = ['Adiel Bruno Santos de Melo (#22249)','Alessandro Rodrigues da Silva (#16804)','Alex Salomão dos Anjos (#23273)','Alexssander Rodrigo de Oliveira (#20402)','Alisson Gomes dos Santos (#23272)','Anderson Rodrigo Andrade do Nascimento (#21787)','André Ângelo Ferreira da Silva (#22484)','Andre Luis Magrini Tietz (#25648)','Antonio Jean da Silva (#22250)'];
-      document.getElementById('repSelect').innerHTML = REPS.map(function(r){ return '<option>'+r+'</option>'; }).join('');
+      var REPS = ['Adiel Bruno Santos de Melo (#22249)','Alessandro Rodrigues da Silva (#16804)','Alex Salomão dos Anjos (#23273)','Alexssander Rodrigo de Oliveira (#20402)','Alisson Gomes dos Santos (#23272)','Anderson Rodrigo Andrade do Nascimento (#21787)','André Ângelo Ferreira da Silva (#22484)','Andre Luis Magrini Tietz (#25648)','Antonio Jean da Silva (#22250)','Marco Aurélio Melo Luna (#16408)'];
+      document.getElementById('repSelect').innerHTML = REPS.map(function(r){ return '<option' + (r.indexOf('Marco Aurélio')===0 ? ' selected' : '') + '>'+r+'</option>'; }).join('');
+
+      var COMM_ROWS = [
+        {biz:'Grill do Vale | Vila Nova República', val:'R$ 147,99', status:'Pendente', fatura:'✓ Em dia', liber:'10/09/2026', pag:'Não pago'},
+        {biz:'Pão de Alho do Zé | Cohab Anil IV', val:'R$ 17,80', status:'Pendente', fatura:'✓ Em dia', liber:'10/09/2026', pag:'Não pago'},
+        {biz:'Folks Burger', val:'R$ 135,99', status:'Pendente', fatura:'✓ Em dia', liber:'10/09/2026', pag:'Não pago'},
+        {biz:'Bravus Hambúrgueria', val:'R$ 145,44', status:'Pendente', fatura:'✓ Em dia', liber:'10/09/2026', pag:'Não pago'},
+        {biz:'Santo Toro Burger', val:'R$ 119,99', status:'Pago', fatura:'✓ Em dia', liber:'09/09/2026', pag:'10/09/2026'},
+        {biz:'Frazão Burguer Grill', val:'R$ 84,00', status:'Pago', fatura:'✓ Em dia', liber:'09/09/2026', pag:'10/09/2026'},
+        {biz:'Pepê Burger | Cohatrac I', val:'R$ 95,99', status:'Pago', fatura:'✓ Em dia', liber:'08/09/2026', pag:'10/09/2026'},
+        {biz:'Oi Churros | Newton Bello', val:'R$ 155,98', status:'Pago', fatura:'✓ Em dia', liber:'08/09/2026', pag:'10/09/2026'},
+        {biz:'Burger & Cream Cohatrac', val:'R$ 4,40', status:'Pago', fatura:'16/09/2026 ⏳ vence já R$ 354,97', liber:'08/09/2026', pag:'10/09/2026'},
+        {biz:'Dom Marmita', val:'R$ 37,80', status:'Pago', fatura:'✓ Em dia', liber:'07/09/2026', pag:'10/09/2026'},
+        {biz:'Yallah | Culinária Árabe', val:'R$ 145,98', status:'Pago', fatura:'✓ Em dia', liber:'06/09/2026', pag:'10/09/2026'}
+      ];
+      document.getElementById('commRows').innerHTML = COMM_ROWS.map(function (r) {
+        var statusColor = r.status === 'Pago' ? 'status-active' : '';
+        return '<tr><td>' + r.biz + '</td><td>' + r.val + '</td>' +
+          '<td><span class="status-badge ' + statusColor + '">' + r.status + '</span></td>' +
+          '<td>🔗 Ativa</td><td>' + r.fatura + '</td><td>' + r.liber + '</td><td>' + r.pag + '</td></tr>';
+      }).join('');
+
+      var SAQUE_ROWS = [
+        {id:'01a08bea…', val:'R$ 5.116,62', pago:'10/09/2026', qtd:45},
+        {id:'019ff90d…', val:'R$ 440,30', pago:'12/08/2026', qtd:3},
+        {id:'019fecd2…', val:'R$ 5.129,41', pago:'10/08/2026', qtd:43},
+        {id:'a41bfdee…', val:'R$ 4.929,41', pago:'10/07/2026', qtd:44},
+        {id:'8b05c646…', val:'R$ 2.676,25', pago:'10/06/2026', qtd:24},
+        {id:'5b4e9af5…', val:'R$ 492,62', pago:'11/05/2026', qtd:6}
+      ];
+      document.getElementById('saqueRows').innerHTML = SAQUE_ROWS.map(function (s) {
+        return '<tr><td>🏦 Programa de parcerias recorrente Cardápio Web ' + s.id + '</td><td>' + s.val + '</td>' +
+          '<td><span class="status-badge status-active">Concluído</span></td><td>' + s.pago + '</td>' +
+          '<td>💰 ' + s.qtd + ' pagamentos</td><td><a href="#">Ver detalhes →</a></td></tr>';
+      }).join('');
     </script>
   </body>
 </html>
