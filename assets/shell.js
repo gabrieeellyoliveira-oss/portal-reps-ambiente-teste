@@ -24,7 +24,9 @@
     ]},
     { group: 'capacitacao', label: 'Capacitação', icon: 'circle', items: [
       { href: '/encontros.html', label: 'Encontros' },
-      { href: '/trainings.html', label: 'Treinamentos Online' }
+      { href: '/trainings.html', label: 'Treinamentos Online' },
+      { href: '/estudo-concorrentes.html', label: 'Estudo de Concorrentes' },
+      { href: '/certificacoes.html', label: 'Certificações' }
     ]},
     { group: 'administracao', label: 'Administração', icon: 'shield', items: [
       { href: '/representatives.html', label: 'Representantes' },
@@ -35,12 +37,15 @@
       { href: '/gestao-encontros.html', label: 'Gestão de Encontros' },
       { href: '/onboarding_dashboard.html', label: 'Dashboard Capacitação' },
       { href: '/onboarding_templates.html', label: 'Templates Onboarding' },
+      { href: '/admin_certificacoes.html', label: 'Certificações (gestão)' },
+      { href: '/admin_certificacoes_relatorio.html', label: 'Relatório de Certificações' },
       { href: '/pipeline-onboarding.html', label: 'Pipeline Onboarding' },
       { href: '/roleplays.html', label: 'Avaliações Roleplay' },
       { href: '/locations.html', label: 'Base de Leads' },
       { href: '/zones.html', label: 'Zonas dos Reps' },
       { href: '/municipalities.html', label: 'Estudo de Região' }
-    ]}
+    ]},
+    { href: '/ajuda.html', label: 'Central de Ajuda', icon: 'circle' }
   ];
 
   var ICONS = {
