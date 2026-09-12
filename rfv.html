@@ -178,6 +178,7 @@
         </main>
       </div>
     </div>
+    <script src="/assets/fakedata.js"></script>
     <script src="/assets/shell.js" data-title="Matriz RFV"></script>
     <script>
       var NAMES = ['Elias Amorim Coutinho','Felipe Soares Lima','Francisco Bruno Neto','Jeferson Campolo Silva','José Carlos Martins Júnior','José Jorge Vianna Junior','José Ricardo Fiuza Silva','Júlio César Pereira Costa','Márcio Samuel Mendes','Mateus Pereira Gomes','Natal Fausto Lima','Rogério Ramos Souza','Salvador Galdino Gomes','Tarcísio Carvalho Silva','Thiago Marcone Reis','Vinícius Gonçalves Reis','Walter Lima Pinto'];
@@ -231,6 +232,25 @@
         {name:'Igor Machado Peixoto', city:'Campo Grande / MS', days:'nunca ativou', freq:0, ticket:'—', rfv:[1,1,1], g:'💤 Reativação', h:'Inativo'},
         {name:'Jaqueline Moraes Tavares', city:'Florianópolis / SC', days:'nunca ativou', freq:0, ticket:'—', rfv:[1,1,1], g:'💤 Reativação', h:'Inativo'}
       ];
+      // Completa cada grupo até o total real, com dados fictícios gerados
+      var GROUP_TARGETS = [
+        {g:'🚀 Potencial', h:'Saudável', target:12, days:function(i){return '🕐 ' + (15+i) + 'd';}, freq:function(i){return 2 + (i%3);}, ticket:function(i){return 'R$ ' + (199 + i*7) + ',99';}, rfv:[4,2,4]},
+        {g:'🌱 Desenvolvimento', h:'Atenção', target:6, days:function(i){return '🕐 ' + (30+i*3) + 'd';}, freq:function(i){return 3 + (i%2);}, ticket:function(i){return 'R$ ' + (240 + i*9) + ',00';}, rfv:[3,2,4]},
+        {g:'🛟 Resgate', h:'Risco', target:4, days:function(i){return '🕐 ' + (60+i*7) + 'd';}, freq:function(){return 1;}, ticket:function(i){return 'R$ ' + (200 + i*11) + ',00';}, rfv:[2,1,4]},
+        {g:'💤 Reativação', h:'Inativo', target:89, days:function(){return 'nunca ativou';}, freq:function(){return 0;}, ticket:function(){return '—';}, rfv:[1,1,1]}
+      ];
+      GROUP_TARGETS.forEach(function (spec) {
+        var have = REPS.filter(function (r) { return r.g === spec.g; }).length;
+        for (var i = 0; have + i < spec.target; i++) {
+          var idx = 1000 + i;
+          var city = FakeData.genCity(idx);
+          REPS.push({
+            name: FakeData.genPerson(idx), city: city[0] + ' / ' + city[1],
+            days: spec.days(i), freq: spec.freq(i), ticket: spec.ticket(i),
+            rfv: spec.rfv, g: spec.g, h: spec.h
+          });
+        }
+      });
       document.getElementById('rfvRows').innerHTML = REPS.map(function (r) {
         var initials = r.name.split(' ').slice(0,2).map(function(w){return w[0];}).join('').toUpperCase();
         var psmText = PSM[r.g];
