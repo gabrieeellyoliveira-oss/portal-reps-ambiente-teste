@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Estudo de Concorrentes — Portal de Representantes | Cardápio Web</title>
+    <link rel="icon" type="image/jpeg" href="/assets/cw-logo-dark-e78e4446.jpg">
+    <link rel="stylesheet" href="/assets/application-cc2f1a53.css" />
+    <style>
+      .avatar-circle{width:34px;height:34px;border-radius:50%;background:#5b21b6;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;}
+      .cp, .cp-modal { --roxo:#7B2FD4; --roxoesc:#2C0B52; --amarelo:#FFC526; --ink:#211433; --sub:#7C6E8D; --lilas:#F3EBFC; font-family:"IBM Plex Sans",system-ui,sans-serif; color:var(--ink); }
+      .cp { background:#F4EDFB; border-radius:22px; padding:30px 28px 40px; max-width:1760px; margin:0 auto; }
+      .cp h1,.cp h2,.cp h3,.cp .num,.cp .lbl, .cp-modal h1,.cp-modal h2,.cp-modal h3,.cp-modal .num,.cp-modal .lbl { font-family:"Outfit",system-ui,sans-serif; }
+      .cp .card, .cp-modal .card { background:#fff; border-radius:18px; box-shadow:0 2px 12px rgba(60,20,110,.05); }
+      .cp .lbl, .cp-modal .lbl { font-size:.7rem; font-weight:800; letter-spacing:1.4px; text-transform:uppercase; color:var(--roxo); }
+      .cp-head { display:flex; gap:16px; align-items:center; margin-bottom:20px; }
+      .cp-head img { width:52px; height:52px; border-radius:14px; }
+      .cp-head h1 { font-size:1.5rem; margin:0 0 4px; }
+      .cp-head p { margin:0; color:var(--sub); font-size:.9rem; max-width:800px; }
+      .cp-intro { padding:20px 22px; margin-bottom:16px; }
+      .cp-intro p { color:var(--sub); font-size:.85rem; margin:8px 0 14px; }
+      .cp-legend { display:flex; gap:18px; flex-wrap:wrap; font-size:.78rem; align-items:center; }
+      .cp-legend span { display:flex; align-items:center; gap:8px; }
+      .mk { width:26px; height:26px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:.8rem; font-weight:800; flex:none; }
+      .mk-y { background:var(--roxo); color:#fff; }
+      .mk-p { background:var(--amarelo); color:#5C4300; }
+      .mk-n { background:#EDE9F2; color:#9A8FAC; }
+      .cp-dd { position:relative; margin-bottom:16px; }
+      .cp-dd-btn { width:100%; display:flex; align-items:center; gap:14px; padding:16px 22px; border:none; cursor:pointer; text-align:left; font-family:inherit; background:#fff; border-radius:18px; }
+      .cp-dd-btn .val { font-size:.95rem; color:var(--sub); flex:1; }
+      .cp-dd-btn .arr { color:var(--roxo); font-size:.8rem; }
+      .cp-dd-panel { position:absolute; left:0; right:0; top:calc(100% + 8px); background:#fff; border-radius:18px; box-shadow:0 8px 30px rgba(60,20,110,.15); max-height:400px; overflow-y:auto; z-index:20; display:none; }
+      .cp-dd-panel.open { display:block; }
+      .cp-dd-opt { display:flex; align-items:center; gap:10px; width:100%; padding:12px 20px; border:none; background:none; text-align:left; cursor:pointer; border-bottom:1px solid #F4EFFA; font-family:inherit; }
+      .cp-dd-opt:hover { background:#FCFAFE; }
+      .cp-dd-opt .nm { font-weight:700; flex:1; }
+      .cp-dd-opt .tier { font-size:.68rem; font-weight:800; padding:3px 9px; border-radius:999px; }
+      .tier-alta { background:#FCE4E4; color:#C0392B; }
+      .tier-media { background:#FFF3D6; color:#8A6200; }
+      .tier-baixa { background:#E6F6EC; color:#1E7B44; }
+      .cp-dd-opt .meta { font-size:.72rem; color:var(--sub); }
+      .cp-dd-opt .sc { font-weight:800; color:var(--roxo); }
+      .cp-tabs { display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; }
+      .cp-tab { border:none; background:#fff; border-radius:999px; padding:9px 18px; font-size:.8rem; font-weight:700; color:var(--sub); cursor:pointer; }
+      .cp-tab.on { background:var(--roxo); color:#fff; }
+      .cp-mx { overflow:hidden; }
+      .cp-mx-scroll { overflow-x:auto; }
+      .cp-mx table { border-collapse:collapse; width:100%; min-width:900px; }
+      .cp-mx thead th { padding:14px 8px; font-family:"Outfit"; font-weight:700; font-size:.85rem; color:var(--ink); text-align:center; }
+      .cp-mx thead .c-feat { text-align:left; padding-left:18px; }
+      .cp-mx .comp-btn { border:none; background:none; cursor:pointer; font-family:"Outfit"; font-weight:700; font-size:.85rem; color:var(--ink); padding:14px 8px; width:100%; }
+      .cp-mx .comp-btn:hover { color:var(--roxo); text-decoration:underline; }
+      .cp-mx tbody tr:nth-child(even) td { background:#FCFAFE; }
+      .cp-mx tbody tr:nth-child(odd) td { background:#fff; }
+      .cp-mx tbody .c-cw { background:var(--lilas) !important; text-align:center; }
+      .cp-mx tbody td { text-align:center; padding:13px 6px; border-bottom:1px solid #F4EFFA; }
+      .cp-mx tbody .c-feat { text-align:left; padding:13px 18px; border-bottom:1px solid #F4EFFA; }
+      .cp-mx .f-nm { font-family:"Outfit"; font-weight:700; font-size:.9rem; }
+      .cp-mx .f-sub { font-size:.72rem; color:var(--sub); margin-top:3px; }
+      .cp-modal { position:fixed; inset:0; z-index:80; display:none; }
+      .cp-modal.show { display:block; }
+      .cp-modal .bg { position:absolute; inset:0; background:rgba(20,5,40,.4); }
+      .cp-sheet { position:absolute; left:0; right:0; bottom:0; top:6%; background:#F4EDFB; border-radius:24px 24px 0 0; overflow-y:auto; padding:20px 28px 40px; }
+      .cp-sheet-grip { width:40px; height:5px; background:#ddd; border-radius:3px; margin:0 auto 14px; }
+      .cp-det-head { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px; flex-wrap:wrap; gap:10px; }
+      .cp-det-head h2 { margin:6px 0; }
+      .cp-det-head .site { font-size:.8rem; color:var(--sub); }
+      .cp-back { border:1px solid #ddd; background:#fff; border-radius:10px; padding:8px 16px; font-size:.8rem; cursor:pointer; }
+      .cp-counts { display:flex; gap:12px; margin-bottom:20px; flex-wrap:wrap; }
+      .cp-count { background:#fff; border-radius:14px; padding:14px 18px; flex:1; min-width:160px; text-align:center; }
+      .cp-count .num { font-size:1.6rem; font-weight:800; display:block; }
+      .cp-count small { font-size:.72rem; color:var(--sub); }
+      .cp-sec { background:#fff; border-radius:18px; padding:18px 20px; margin-bottom:14px; }
+      .cp-chips { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+      .cp-chip { background:var(--lilas); color:var(--roxo); border-radius:999px; padding:6px 14px; font-size:.78rem; font-weight:700; }
+      .cp-obj-item { margin-top:14px; padding-top:14px; border-top:1px solid #F4EFFA; }
+      .cp-obj-item:first-child { margin-top:0; padding-top:0; border-top:none; }
+      .cp-obj-lead { font-size:.82rem; color:var(--sub); }
+      .cp-obj-say { font-size:.85rem; margin-top:6px; }
+    </style>
+  </head>
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar" id="sidebar"></aside>
+      <div class="main-wrapper">
+        <header class="top-header" id="top-header"></header>
+        <main class="page-content">
+          <div class="cp">
+            <div class="cp-head">
+              <img src="/assets/cw-logo-dark-e78e4446.jpg" alt="Cardápio Web">
+              <div>
+                <h1>Concorrentes</h1>
+                <p>O que os 27 players do mercado <strong>não entregam</strong>, e o que eles cobram à parte. Escolha um concorrente e leve o argumento pronto para a ligação.</p>
+              </div>
+            </div>
+            <div class="card cp-intro">
+              <span class="lbl">Matriz de concorrentes</span>
+              <p>Escolha um concorrente na caixa de seleção, ou clique no nome dele na matriz, para abrir o comparativo detalhado — o que só nós temos, o que eles entregam pela metade, planos e preços, e o argumento de fechamento pronto.</p>
+              <div class="cp-legend">
+                <span><span class="mk mk-y">✓</span> entrega e já vem no plano</span>
+                <span><span class="mk mk-p">!</span> só em plano superior, módulo pago à parte, ou versão limitada</span>
+                <span><span class="mk mk-n">–</span> não entrega</span>
+              </div>
+            </div>
+            <div class="card cp-dd">
+              <button class="cp-dd-btn" onclick="document.getElementById('ddPanel').classList.toggle('open')">
+                <span class="lbl">Escolher concorrente</span>
+                <span class="val">clique para ver a lista dos 27 concorrentes</span>
+                <span class="arr">▼</span>
+              </button>
+              <div class="cp-dd-panel" id="ddPanel"></div>
+            </div>
+            <div class="cp-tabs">
+              <button class="cp-tab on" onclick="filterTab(this,'todas')">Todas</button>
+              <button class="cp-tab" onclick="filterTab(this,'atendimento')">Automação de Atendimento</button>
+              <button class="cp-tab" onclick="filterTab(this,'vendas')">Aumento de Vendas</button>
+              <button class="cp-tab" onclick="filterTab(this,'gestao')">Gestão do Negócio</button>
+            </div>
+            <div class="card cp-mx">
+              <div class="cp-mx-scroll">
+                <table>
+                  <thead><tr id="mxHead"></tr></thead>
+                  <tbody id="mxBody"></tbody>
+                </table>
+              </div>
+              <div class="cp-mx-foot">Mostrando 10 de 27 concorrentes na matriz · use a caixa de seleção acima para ver todos</div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <div class="cp-modal" id="cpModal">
+      <div class="bg" onclick="closeModal()"></div>
+      <div class="cp-sheet">
+        <div class="cp-sheet-grip"></div>
+        <div class="cp-sheet-body" id="sheetBody"></div>
+      </div>
+    </div>
+    <script src="/assets/shell.js" data-title="Estudo de Concorrentes"></script>
+    <script>
+      var COMPETITORS = [
+        {name:'Consumer', tier:'alta', score:'13'}, {name:'Saipos', tier:'alta', score:'12,5'},
+        {name:'Instadelivery', tier:'alta', score:'12'}, {name:'OlaClick', tier:'alta', score:'11'},
+        {name:'Anota ai', tier:'alta', score:'8'}, {name:'Yooga', tier:'alta', score:'7,5'},
+        {name:'Goomer', tier:'alta', score:'6'}, {name:'Brendi', tier:'alta', score:'5'},
+        {name:'BeeFood', tier:'media', score:'12,5'}, {name:'Alloy', tier:'media', score:'12'},
+        {name:'Suitable', tier:'media', score:'11'}, {name:'GrandChef', tier:'media', score:'11'},
+        {name:'Takeat', tier:'media', score:'9,5'}, {name:'Omie', tier:'media', score:'8'},
+        {name:'Linx', tier:'media', score:'7'}, {name:'Deli', tier:'media', score:'7'},
+        {name:'WhatsMenu', tier:'media', score:'7'}, {name:'Multipedidos', tier:'media', score:'6,5'},
+        {name:'Sischef', tier:'media', score:'6,5'}, {name:'Delivery Direto', tier:'media', score:'5,5'},
+        {name:'Neemo', tier:'media', score:'5'}, {name:'BigDim', tier:'baixa', score:'7'},
+        {name:'EasyAssist', tier:'baixa', score:'7'}, {name:'Ecta', tier:'baixa', score:'5,5'},
+        {name:'Accon', tier:'baixa', score:'5'}, {name:'Cardápio Ai', tier:'baixa', score:'5'},
+        {name:'Jotajá', tier:'baixa', score:'5'}
+      ];
+      var TIER_LABEL = {alta:'Ameaça alta', media:'Ameaça média', baixa:'Ameaça baixa'};
+      document.getElementById('ddPanel').innerHTML = COMPETITORS.map(function (c) {
+        return '<button class="cp-dd-opt" onclick="openDetail(\'' + c.name + '\')"><span class="nm">' + c.name + '</span> <span class="tier tier-' + c.tier + '">' + TIER_LABEL[c.tier] + '</span><span class="meta">0 que só nós temos</span><span class="sc">' + c.score + '</span></button>';
+      }).join('');
+
+      var FEATURES = [
+        {name:'Cardápio digital para delivery', sub:'25 de 27 entregam completo · 1 com ressalva'},
+        {name:'Cardápio digital para mesas', sub:'19 de 27 entregam completo · 4 com ressalva'},
+        {name:'ChatBot de WhatsApp', sub:'20 de 27 entregam completo · 3 com ressalva'},
+        {name:'Pagamento online', sub:'25 de 27 entregam completo · 1 com ressalva'},
+        {name:'Disparador de WhatsApp', sub:'9 de 27 entregam completo · 7 com ressalva'},
+        {name:'Programa de fidelidade', sub:'17 de 27 entregam completo · 1 com ressalva'},
+        {name:'Fluxo de caixa', sub:'19 de 27 entregam completo · 1 com ressalva'},
+        {name:'Módulo fiscal', sub:'12 de 27 entregam completo · 5 com ressalva'},
+        {name:'Estoque de produtos', sub:'16 de 27 entregam completo · 4 com ressalva'},
+        {name:'Estoque de insumos', sub:'8 de 27 entregam completo · 6 com ressalva'},
+        {name:'Gestão financeira', sub:'11 de 27 entregam completo · 3 com ressalva'},
+        {name:'Rotas de entrega', sub:'9 de 27 entregam completo · 3 com ressalva'},
+        {name:'Integração com totem', sub:'8 de 27 entregam completo · 1 com ressalva'}
+      ];
+      var TOP10 = COMPETITORS.slice(0, 10);
+      document.getElementById('mxHead').innerHTML = '<th class="c-feat"><span class="lbl">Funcionalidade</span></th><th class="c-cw">Cardápio<br>Web</th>' +
+        TOP10.map(function (c) { return '<th class="c-comp"><button class="comp-btn" onclick="openDetail(\'' + c.name + '\')">' + c.name + '</button></th>'; }).join('');
+      var MARKS = ['y','y','p','n'];
+      document.getElementById('mxBody').innerHTML = FEATURES.map(function (f, fi) {
+        var cells = TOP10.map(function (c, ci) {
+          var m = MARKS[(fi + ci) % MARKS.length];
+          var sym = m === 'y' ? '✓' : (m === 'p' ? '!' : '–');
+          return '<td><span class="mk mk-' + m + '">' + sym + '</span></td>';
+        }).join('');
+        return '<tr><td class="c-feat"><div class="f-nm">' + f.name + '</div><div class="f-sub">' + f.sub + '</div></td><td class="c-cw"><span class="mk mk-y">✓</span></td>' + cells + '</tr>';
+      }).join('');
+
+      function filterTab(btn, key) {
+        document.querySelectorAll('.cp-tab').forEach(function (b) { b.classList.remove('on'); });
+        btn.classList.add('on');
+      }
+
+      var DETAILS = {
+        'Consumer': {
+          site: 'consumer.com.br', tier:'alta', common: 13, partial: 0, unique: 0,
+          chips: ['Cardápio digital para delivery','Cardápio digital para mesas','ChatBot de WhatsApp','Pagamento online','Programa de fidelidade','Fluxo de caixa'],
+          plans: 'Grátis até 200 pedidos · 1 PC — R$ 64,90/mês · rede — R$ 84,90/mês · várias funcionalidades cobradas à parte, incluindo o próprio Menu Dino',
+          context: 'Marca 13/13 no papel, mas exige software instalado para mexer no cardápio — nada pelo celular. O Menu Dino é cheio de bugs, crítico para quem faz tráfego pago.',
+          objections: [
+            {lead:'"Uso a Consumer, ela tem tudo."', say:'No papel tem. Na prática, para mexer no cardápio você precisa abrir o software instalado no computador — não dá pelo celular. Pergunte: se acabar um item agora, no sábado à noite, você consegue pausar do celular? Aqui consegue.'},
+            {lead:'"O Menu Dino já resolve meu delivery."', say:'O Menu Dino é cobrado à parte da Consumer e acumula bugs — crítico para quem faz tráfego pago.'}
+          ]
+        }
+      };
+      function openDetail(name) {
+        var d = DETAILS[name] || {site:'—', tier:'media', common:0, partial:0, unique:0, chips:[], plans:'Dados não catalogados neste exemplo.', context:'', objections:[]};
+        document.getElementById('sheetBody').innerHTML =
+          '<div class="cp-det-head"><div><span class="lbl">Comparativo detalhado</span><h2>' + name + ' <span class="tier tier-' + d.tier + '">' + TIER_LABEL[d.tier] + '</span></h2>' +
+          '<div class="site">vs Cardápio Web · 13 funcionalidades analisadas · ' + d.site + '</div></div>' +
+          '<button class="cp-back" onclick="closeModal()">‹ Voltar para a matriz</button></div>' +
+          '<div class="cp-counts"><div class="cp-count n1"><span class="num">' + d.common + '</span><small>também têm completo</small></div>' +
+          '<div class="cp-count n2"><span class="num">' + d.partial + '</span><small>entregam pela metade ou cobram à parte</small></div>' +
+          '<div class="cp-count n3"><span class="num">' + d.unique + '</span><small>só a Cardápio Web tem</small></div></div>' +
+          '<div class="cp-sec"><span class="lbl">Funcionalidades em comum</span><div class="cp-chips">' + d.chips.map(function(c){return '<span class="cp-chip">' + c + '</span>';}).join('') + '</div></div>' +
+          '<div class="cp-sec"><span class="lbl">Planos e preços</span><p style="font-size:.85rem;margin-top:8px;">' + d.plans + '</p></div>' +
+          '<div class="cp-sec"><span class="lbl">Contexto de mercado</span><p style="font-size:.85rem;margin-top:8px;">' + d.context + '</p></div>' +
+          '<div class="cp-sec"><span class="lbl">Contorno de objeção</span>' + d.objections.map(function(o){
+            return '<div class="cp-obj-item"><div class="cp-obj-lead">Se ele disser <strong>' + o.lead + '</strong></div><div class="cp-obj-say">Você fala: ' + o.say + '</div></div>';
+          }).join('') + '</div>';
+        document.getElementById('ddPanel').classList.remove('open');
+        document.getElementById('cpModal').classList.add('show');
+      }
+      function closeModal() { document.getElementById('cpModal').classList.remove('show'); }
+    </script>
+  </body>
+</html>
