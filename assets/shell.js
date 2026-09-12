@@ -6,64 +6,71 @@
   //   return;
   // }
 
-  // Cores oficiais do Manual da Marca Cardápio Web (2023), aplicadas só ao
-  // menu/header via escopo #sidebar/#top-header — não mexe no resto das páginas.
+  // Tokens exatos do Manual da Marca "Central Dev · Cardápio Web" (manual-marca-cardapio-web.html,
+  // extraído da tela Início) — aplicados só ao menu/header via escopo #sidebar/#top-header,
+  // sem mexer no resto das páginas.
   var brandCss = '' +
     '#sidebar, #top-header {' +
-      '--cw-purple-50: #F4EDF7; --cw-purple-100: #ecd8fb; --cw-purple-300: #d2a3f7;' +
-      '--cw-purple-400: #c67bfb; --cw-purple-500: #b35cf9; --cw-purple-600: #A543FA;' +
-      '--cw-purple-700: #8b32d6; --cw-purple-800: #59327A; --cw-orange: #FFB600;' +
+      '--roxo-primario:#8B2FF7; --roxo-vibrante:#A543F9; --roxo-texto-ativo:#8A55D3;' +
+      '--roxo-profundo:#5A3279; --roxo-eyebrow:#732DEC; --dourado:#FEB500; --grafite:#17102B;' +
+      '--cinza-arroxeado:#55536B; --cinza-claro:#8B899E; --lavanda-bg:#F3EDFB;' +
+      '--lavanda-destaque:#EADFFA; --borda:#E7DFF5; --shadow-manual: 0 10px 30px rgba(107, 63, 160, 0.10);' +
+      /* aliases para os nomes de variável que o CSS de produção já usa */
+      '--cw-purple-50: #F3EDFB; --cw-purple-100: #EADFFA; --cw-purple-300: #cfa3f7;' +
+      '--cw-purple-400: #b478f8; --cw-purple-500: #9d54f8; --cw-purple-600: #8B2FF7;' +
+      '--cw-purple-700: #732DEC; --cw-purple-800: #5A3279; --cw-orange: #FEB500;' +
       '--cw-orange-light: #ffc933; --cw-red: #FF5959;' +
     '}' +
-    '#sidebar { background: linear-gradient(180deg, #faf5fd 0%, #f4ecf9 100%); border-right-color: #ecdcf5; }' +
-    '#sidebar .sidebar-user-avatar { background: linear-gradient(135deg, #c67bfb, #A543FA); box-shadow: 0 0 0 2px #F4EDF7, 0 2px 8px rgba(165,67,250,0.25); }' +
-    '#sidebar .sidebar-user-toggle:hover { background: #F4EDF7; }' +
-    '#sidebar .nav-item.active { background: #F4EDF7; color: #8b32d6; }' +
-    '#sidebar .nav-item.active::before { background: #A543FA; }' +
-    '#sidebar .nav-item-icon { background: #F4EDF7; color: #59327A; }' +
-    '#sidebar .nav-item:hover .nav-item-icon { background: #ecd8fb; }' +
-    '#sidebar .nav-item.active .nav-item-icon { background: #e4c9fb; color: #59327A; }' +
-    '#sidebar .nav-badge { background: #A543FA; box-shadow: 0 3px 8px rgba(165,67,250,0.3); }' +
-    '#sidebar .nav-badge--warn { background: #FFB600; box-shadow: 0 3px 8px rgba(255,182,0,0.35); color: #59327A; }' +
-    '#sidebar .nav-badge--info { background: #A543FA; }' +
+    '#sidebar { background: var(--lavanda-bg); border-right-color: var(--borda); }' +
+    '#sidebar .sidebar-user { box-shadow: var(--shadow-manual); }' +
+    '#sidebar .sidebar-user-avatar { background: linear-gradient(135deg,#f6c6b8,#f3a8c9); box-shadow: 0 0 0 2px var(--lavanda-bg), 0 2px 8px rgba(107,63,160,0.2); }' +
+    '#sidebar .sidebar-user-logout { width: 34px; height: 34px; border-radius: 50%; border: 0; background: var(--lavanda-bg); color: var(--roxo-primario); display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: background-color .15s ease; }' +
+    '#sidebar .sidebar-user-logout:hover { background: var(--lavanda-destaque); }' +
+    '#sidebar .nav-item.active { background: linear-gradient(180deg,#EFE7FB,var(--lavanda-destaque)); color: var(--roxo-texto-ativo); }' +
+    '#sidebar .nav-item.active::before { background: var(--roxo-primario); }' +
+    '#sidebar .nav-item-icon { background: var(--lavanda-bg); color: var(--roxo-vibrante); border-radius: 12px; }' +
+    '#sidebar .nav-item:hover .nav-item-icon { background: var(--lavanda-destaque); }' +
+    '#sidebar .nav-item.active .nav-item-icon { background: #fff; color: var(--roxo-vibrante); box-shadow: 0 3px 8px rgba(107,63,160,.18); }' +
+    '#sidebar .nav-chevron, #sidebar .nav-group-trigger { color: var(--cinza-claro); }' +
+    '#sidebar .nav-divider { background: var(--borda); }' +
+    '#sidebar .nav-badge { background: linear-gradient(90deg,#7B2FF7,#9C3CF9); box-shadow: 0 3px 8px rgba(139,47,247,0.3); }' +
+    '#sidebar .nav-badge--warn { background: var(--dourado); box-shadow: 0 3px 8px rgba(254,181,0,0.35); color: var(--roxo-profundo); }' +
+    '#sidebar .nav-badge--info { background: linear-gradient(90deg,#7B2FF7,#9C3CF9); }' +
     '#sidebar .sum-item:hover { background: #fff0ef; color: #FF5959; }' +
     '#sidebar .sum-item:hover .sum-icon { background: #ffe4e2; }' +
     '#sidebar .sidebar-footer a:hover { color: #FF5959; }' +
     '#sidebar .sidebar-footer a:hover .nav-icon { background: #fff0ef; border-color: #ffd6d3; color: #FF5959; }' +
-    '#sidebar .ssb-bar { border-color: #e4c9fb; background: linear-gradient(135deg, #f8f1fc, #eeddf9); color: #59327A; }' +
-    '#sidebar .ssb-bar-icon { background: #A543FA; box-shadow: 0 4px 10px rgba(165,67,250,0.3); }' +
-    '#sidebar .ssb-bar-chevron { color: #A543FA; }' +
-    '#sidebar .sidebar-suggest-box { background: linear-gradient(160deg, #f8f1fc, #f0e2f9); border-color: #e6cff5; }' +
-    '#sidebar .ssb-icon-circle { background: #A543FA; box-shadow: 0 6px 14px rgba(165,67,250,0.32); }' +
-    '#sidebar .ssb-title, #sidebar .ssb-text { color: #59327A; }' +
-    '#sidebar .ssb-btn, #sidebar .ssb-btn-sm { background: #A543FA; box-shadow: 0 6px 14px rgba(165,67,250,0.28); }' +
-    '#sidebar .ssb-btn:hover, #sidebar .ssb-btn-sm:hover { background: #8b32d6; }' +
-    '#sidebar .ssb-link { color: #8b32d6 !important; border-color: #e4c9fb; }' +
-    '#sidebar .ssb-link:hover { background: #F4EDF7; }' +
+    '#sidebar .ssb-bar { border-color: var(--borda); background: linear-gradient(135deg, #FBF8FF, #F4EEFC); color: var(--roxo-profundo); box-shadow: var(--shadow-manual); }' +
+    '#sidebar .ssb-bar-icon { background: var(--roxo-primario); box-shadow: 0 4px 10px rgba(139,47,247,0.3); }' +
+    '#sidebar .ssb-bar-chevron { color: var(--roxo-primario); }' +
+    '#sidebar .sidebar-suggest-box { background: linear-gradient(120deg,#FBF8FF,#F4EEFC); border-color: var(--borda); box-shadow: var(--shadow-manual); }' +
+    '#sidebar .ssb-icon-circle { background: var(--roxo-primario); box-shadow: 0 6px 14px rgba(139,47,247,0.32); }' +
+    '#sidebar .ssb-title, #sidebar .ssb-text { color: var(--roxo-profundo); }' +
+    '#sidebar .ssb-btn, #sidebar .ssb-btn-sm { background: linear-gradient(90deg,#7B2FF7,#9C3CF9); box-shadow: 0 6px 14px rgba(139,47,247,0.28); }' +
+    '#sidebar .ssb-btn:hover, #sidebar .ssb-btn-sm:hover { background: var(--roxo-primario); }' +
+    '#sidebar .ssb-link { color: var(--roxo-primario) !important; border-color: var(--borda); }' +
+    '#sidebar .ssb-link:hover { background: var(--lavanda-bg); }' +
     '#sidebar .ssb-mascot { width: 84px; top: -18px; }' +
-    '#top-header .header-xp-fill { background: linear-gradient(90deg, #FFB600, #A543FA); }' +
+    '#top-header .header-xp-fill { background: linear-gradient(90deg, var(--dourado), var(--roxo-primario)); }' +
     /* ── Onda branca entre a logo e o cartão do usuário ── */
     '#sidebar .sidebar-topwave { display: block; width: 100%; height: 22px; margin-top: -4px; }' +
-    /* ── Cartão do usuário: botão de sair direto, sem dropdown ── */
-    '#sidebar .sidebar-user-logout { width: 34px; height: 34px; border-radius: 50%; border: 0; background: #F4EDF7; color: #A543FA; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: background-color .15s ease; }' +
-    '#sidebar .sidebar-user-logout:hover { background: #e4c9fb; }' +
-    /* ── Primeiro item (Início/Dashboard) com ícone em destaque amarelo ── */
+    /* ── Primeiro item (Início/Dashboard) com ícone em destaque dourado ── */
     '#sidebar .sidebar-nav > .nav-item:first-child .nav-item-icon { background: #FFF3D6; color: #b3790a; }' +
     '#sidebar .sidebar-nav > .nav-item:first-child.active .nav-item-icon, #sidebar .sidebar-nav > .nav-item:first-child:hover .nav-item-icon { background: #FFE9AD; color: #8a5c06; }' +
     /* ── Onda roxa do rodapé com o mascote cardapinho ── */
     '#sidebar .sidebar-wave { height: 112px; overflow: visible; }' +
-    '#sidebar .sidebar-wave .sw-back { height: 92px; fill: #59327A; }' +
-    '#sidebar .sidebar-wave .sw-front { height: 72px; fill: #A543FA; }' +
-    '#sidebar .sidebar-wave .sw-spark { color: #FFD166; opacity: 0.95; }' +
+    '#sidebar .sidebar-wave .sw-back { height: 92px; fill: var(--roxo-profundo); }' +
+    '#sidebar .sidebar-wave .sw-front { height: 72px; fill: var(--roxo-primario); }' +
+    '#sidebar .sidebar-wave .sw-spark { color: var(--dourado); opacity: 0.95; }' +
     '#sidebar .sidebar-wave .sw-cloche { width: 108px; right: 14px; bottom: 0; opacity: 1; filter: drop-shadow(0 6px 10px rgba(46,16,101,0.35)); }';
   var brandStyleEl = document.createElement('style');
   brandStyleEl.textContent = brandCss;
   document.head.appendChild(brandStyleEl);
 
   var NAV = [
-    { href: '/dashboard.html', label: 'Dashboard', icon: 'grid' },
-    { href: '/opportunities.html', label: 'Quadro de Leads', icon: 'columns', badge: '99+' },
-    { href: '/map.html', label: 'Mapa de Prospecção', icon: 'circle', badge: '99+' },
+    { href: '/dashboard.html', label: 'Dashboard', icon: 'grid', dividerAfter: true },
+    { href: '/opportunities.html', label: 'Quadro de Leads', icon: 'columns', badge: '99+', dividerAfter: true },
+    { href: '/map.html', label: 'Mapa de Prospecção', icon: 'circle', badge: '99+', dividerAfter: true },
     { group: 'clientes', label: 'Clientes', icon: 'building', items: [
       { href: '/clients.html', label: 'Assinantes' },
       { href: '/faturas-comissoes.html', label: 'Faturas e Comissões' },
@@ -98,7 +105,7 @@
       { href: '/locations.html', label: 'Base de Leads' },
       { href: '/zones.html', label: 'Zonas dos Reps' },
       { href: '/municipalities.html', label: 'Estudo de Região' }
-    ]},
+    ], dividerAfter: true },
     { href: '/ajuda.html', label: 'Central de Ajuda', icon: 'circle' }
   ];
 
@@ -143,6 +150,7 @@
         '<div class="nav-sub" id="navsub-' + entry.group + '"><ul class="nav-sub-inner">' + subHtml + '</ul></div>' +
         '</div>';
     }
+    if (entry.dividerAfter) navHtml += '<div class="nav-divider"></div>';
   });
 
   var USER_NAME = 'Gabrielly Oliveira';
@@ -155,7 +163,7 @@
     '<div class="sidebar-avatar-overlay"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg></div>' +
     '</div>' +
     '<div class="sidebar-user-info"><div class="sidebar-user-name">' + USER_NAME + '</div>' +
-    '<span class="sidebar-user-role" style="background:#A543FA;">🛡 ' + USER_ROLE + '</span></div>' +
+    '<span class="sidebar-user-role" style="background:#8B2FF7;">🛡 ' + USER_ROLE + '</span></div>' +
     '<button type="button" class="sidebar-user-logout" title="Sair da conta" onclick="sessionStorage.removeItem(\'cw_test_authorized\'); window.location=\'/index.html\';"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg></button>' +
     '</div>';
 
