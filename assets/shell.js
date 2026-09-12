@@ -41,7 +41,21 @@
     '#sidebar .ssb-link { color: #8b32d6 !important; border-color: #e4c9fb; }' +
     '#sidebar .ssb-link:hover { background: #F4EDF7; }' +
     '#sidebar .ssb-mascot { width: 84px; top: -18px; }' +
-    '#top-header .header-xp-fill { background: linear-gradient(90deg, #FFB600, #A543FA); }';
+    '#top-header .header-xp-fill { background: linear-gradient(90deg, #FFB600, #A543FA); }' +
+    /* ── Onda branca entre a logo e o cartão do usuário ── */
+    '#sidebar .sidebar-topwave { display: block; width: 100%; height: 22px; margin-top: -4px; }' +
+    /* ── Cartão do usuário: botão de sair direto, sem dropdown ── */
+    '#sidebar .sidebar-user-logout { width: 34px; height: 34px; border-radius: 50%; border: 0; background: #F4EDF7; color: #A543FA; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: background-color .15s ease; }' +
+    '#sidebar .sidebar-user-logout:hover { background: #e4c9fb; }' +
+    /* ── Primeiro item (Início/Dashboard) com ícone em destaque amarelo ── */
+    '#sidebar .sidebar-nav > .nav-item:first-child .nav-item-icon { background: #FFF3D6; color: #b3790a; }' +
+    '#sidebar .sidebar-nav > .nav-item:first-child.active .nav-item-icon, #sidebar .sidebar-nav > .nav-item:first-child:hover .nav-item-icon { background: #FFE9AD; color: #8a5c06; }' +
+    /* ── Onda roxa do rodapé com o mascote cardapinho ── */
+    '#sidebar .sidebar-wave { height: 112px; overflow: visible; }' +
+    '#sidebar .sidebar-wave .sw-back { height: 92px; fill: #59327A; }' +
+    '#sidebar .sidebar-wave .sw-front { height: 72px; fill: #A543FA; }' +
+    '#sidebar .sidebar-wave .sw-spark { color: #FFD166; opacity: 0.95; }' +
+    '#sidebar .sidebar-wave .sw-cloche { width: 108px; right: 14px; bottom: 0; opacity: 1; filter: drop-shadow(0 6px 10px rgba(46,16,101,0.35)); }';
   var brandStyleEl = document.createElement('style');
   brandStyleEl.textContent = brandCss;
   document.head.appendChild(brandStyleEl);
@@ -142,18 +156,25 @@
     '</div>' +
     '<div class="sidebar-user-info"><div class="sidebar-user-name">' + USER_NAME + '</div>' +
     '<span class="sidebar-user-role" style="background:#A543FA;">🛡 ' + USER_ROLE + '</span></div>' +
-    '<button type="button" class="sidebar-user-toggle" id="sidebar-user-toggle"><svg class="sidebar-user-chevron" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></button>' +
-    '<div class="sidebar-user-menu" id="sidebar-user-menu"><a class="sum-item" href="/index.html" onclick="sessionStorage.removeItem(\'cw_test_authorized\');"><span class="sum-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg></span>Sair da conta</a></div>' +
+    '<button type="button" class="sidebar-user-logout" title="Sair da conta" onclick="sessionStorage.removeItem(\'cw_test_authorized\'); window.location=\'/index.html\';"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg></button>' +
     '</div>';
+
+  var sidebarTopWaveHtml = '<svg class="sidebar-topwave" viewBox="0 0 264 22" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,0 C 60,22 200,22 264,0 L264,22 L0,22 Z" fill="#fff"></path></svg>';
 
   var sidebarSuggestHtml = '<div class="sidebar-suggest"><div class="ssb-body"><div class="ssb-body-inner">' +
     '<div class="sidebar-suggest-box"><img class="ssb-mascot" src="/assets/mascots/cardapinho.png" alt="Cardapinho"><span class="ssb-text">Sua ideia molda o futuro da plataforma. Compartilhe e vote!</span>' +
     '<div class="ssb-row"><a class="ssb-link" href="#">Ver Sugestões</a><a class="ssb-btn-sm" href="#">+ Sugerir</a></div></div>' +
     '</div></div><div class="ssb-bar"><span class="ssb-bar-icon">💡</span><span class="ssb-bar-label">Ideias &amp; Produto</span></div></div>';
 
-  var sidebarWaveHtml = '<div class="sidebar-wave"></div>';
+  var sidebarWaveHtml = '<div class="sidebar-wave">' +
+    '<svg class="sw-back" viewBox="0 0 264 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,100 L0,45 C 40,10 90,0 140,15 C 190,30 230,55 264,35 L264,100 Z"></path></svg>' +
+    '<svg class="sw-front" viewBox="0 0 264 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,100 L0,60 C 50,35 100,25 150,40 C 200,55 230,70 264,55 L264,100 Z"></path></svg>' +
+    '<svg class="sw-spark" style="left:16%;top:8px;width:16px;height:16px;" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 0 L14.5 9.5 L24 12 L14.5 14.5 L12 24 L9.5 14.5 L0 12 L9.5 9.5 Z"></path></svg>' +
+    '<img class="sw-cloche" src="/assets/mascots/cardapinho-loja.png" alt="Cardapinho">' +
+    '</div>';
 
   var sidebarHtml = '<div class="sidebar-logo"><img alt="CW-Rev" src="/assets/logo-menu-new-fcfaf4fe.png" /></div>' +
+    sidebarTopWaveHtml +
     sidebarUserHtml +
     '<nav class="sidebar-nav">' + navHtml + '</nav>' +
     sidebarSuggestHtml +
@@ -188,18 +209,12 @@
       });
     });
 
-    var userToggle = document.getElementById('sidebar-user-toggle');
-    var userMenu = document.getElementById('sidebar-user-menu');
-    if (userToggle) {
-      userToggle.addEventListener('click', function () { userMenu.classList.toggle('open'); });
-    }
     var profileDropdown = document.getElementById('profile-dropdown');
     var profileTrigger = document.getElementById('profile-dropdown-trigger');
     if (profileTrigger) {
       profileTrigger.addEventListener('click', function () { profileDropdown.classList.toggle('open'); });
     }
     document.addEventListener('click', function (e) {
-      if (userMenu && !e.target.closest('.sidebar-user')) userMenu.classList.remove('open');
       if (profileDropdown && !e.target.closest('.profile-dropdown')) profileDropdown.classList.remove('open');
     });
   });
