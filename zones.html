@@ -40,21 +40,9 @@
                   </div>
                   <div>
                     <p style="font-size:.75rem;color:var(--cw-gray-500);margin:8px 0 4px;">Representantes sem zona cadastrada:</p>
-                    <ul style="list-style:none;padding:0;margin:0;font-size:.8rem;max-height:180px;overflow-y:auto;">
-                      <li style="padding:4px 0;">👤 <a>Andre Henrique Cunha</a> <span style="color:var(--cw-gray-500);"> · Marechal Deodoro/AL</span></li>
-                      <li style="padding:4px 0;">👤 <a>Antonio Joilson Ferreira de Castro</a> <span style="color:var(--cw-gray-500);"> · Maranguape/CE</span></li>
-                      <li style="padding:4px 0;">👤 <a>Braulio Amorim</a> <span style="color:var(--cw-gray-500);"> · Iguatu/CE</span></li>
-                      <li style="padding:4px 0;">👤 <a>Diego Leal dos Santos</a> <span style="color:var(--cw-gray-500);"> · Ponta Grossa/PR</span></li>
-                      <li style="padding:4px 0;">👤 <a>Edvaldo Santana Lima</a> <span style="color:var(--cw-gray-500);"> · Linhares/ES</span></li>
-                      <li style="padding:4px 0;">👤 <a>Eli Alves</a> <span style="color:var(--cw-gray-500);"> · São José dos Pinhais/PR</span></li>
-                      <li style="padding:4px 0;">👤 <a>Francisco Eder Santos Gualberto</a> <span style="color:var(--cw-gray-500);"> · Fortaleza/CE</span></li>
-                      <li style="padding:4px 0;">👤 <a>Gabriel Rodrigues Brumato</a> <span style="color:var(--cw-gray-500);"> · São Tomé/PR</span></li>
-                      <li style="padding:4px 0;">👤 <a>Geison Cardoso</a> <span style="color:var(--cw-gray-500);"> · Montes Claros/MG</span></li>
-                      <li style="padding:4px 0;">👤 <a>Walyson Ferreira de Oliveira Santos</a> <span style="color:var(--cw-gray-500);"> · Barra/BA</span></li>
-                    </ul>
+                    <ul style="list-style:none;padding:0;margin:0;font-size:.8rem;max-height:180px;overflow-y:auto;" id="semZonaList"></ul>
                   </div>
                   <div class="zones-list" id="zonesList"></div>
-                  <div class="zones-more">+ 89 outras zonas cadastradas</div>
                 </div>
               </div>
               <div class="zones-map-wrapper">
@@ -65,6 +53,7 @@
         </main>
       </div>
     </div>
+    <script src="/assets/fakedata.js"></script>
     <script src="/assets/shell.js" data-title="Zonas dos Representantes"></script>
     <script>
       var REPS = ['Adiel Bruno Santos de Melo (Recife/PE)','Alessandro Rodrigues da Silva (Natal/RN)','Alex Salomão dos Anjos (Curitiba/PR)','Alexssander Rodrigo de Oliveira (Natal/RN)','Alisson Gomes dos Santos (Barra dos Coqueiros/SE)','Anderson Rodrigo Andrade do Nascimento (Duque de Caxias/RJ)'];
@@ -90,6 +79,29 @@
         {name:'Zona Luiz Omar', rep:'Luiz Omar Pereira da Silva', km:'10.0', locais:114, date:'11/06/2026 15:31'},
         {name:'Zona Fredy', rep:'Fredy Abel Giménez Villar', km:'10.0', locais:118, date:'31/07/2026 20:46'}
       ];
+      var SEM_ZONA = [];
+      for (var szi = 0; szi < 20; szi++) {
+        var szCity = FakeData.genCity(3000 + szi);
+        SEM_ZONA.push({name: FakeData.genPerson(3000 + szi), city: szCity[0] + '/' + szCity[1]});
+      }
+      document.getElementById('semZonaList').innerHTML = SEM_ZONA.map(function (r) {
+        return '<li style="padding:4px 0;">👤 <a>' + r.name + '</a> <span style="color:var(--cw-gray-500);"> · ' + r.city + '</span></li>';
+      }).join('');
+
+      // Completa até o total real de 107 zonas com dados fictícios gerados
+      var MONTHS_PT = ['01','02','03','04','05','06','07','08'];
+      for (var zi = 0; ZONES.length < 107; zi++) {
+        var idx = 2000 + zi;
+        var person = FakeData.genPerson(idx);
+        var city = FakeData.genCity(idx);
+        ZONES.push({
+          name: 'Zona ' + person.split(' ')[0] + (zi % 5 === 0 ? ' - ' + city[0] : ''),
+          rep: person,
+          km: (5 + (zi % 4) * 5) + '.0',
+          locais: 15 + (zi * 37) % 500,
+          date: (10 + zi % 18) + '/' + MONTHS_PT[zi % MONTHS_PT.length] + '/2026 ' + (9 + zi % 12) + ':' + (10 + zi % 49)
+        });
+      }
       document.getElementById('zonesList').innerHTML = ZONES.map(function (z) {
         return '<div class="zone-item"><div class="zone-color"></div><div class="zone-info"><strong>' + z.name + '</strong><span class="text-muted">' + z.rep + ' · ' + z.km + 'km · ' + z.locais + ' locais</span><span class="enrich-date">Enriquecida: ' + z.date + '</span></div>' +
           '<div class="zone-actions"><button class="enrich-btn">🔮 Enriquecer</button><button class="action-btn action-edit-zone">✏️</button><button class="action-btn action-deactivate">×</button></div></div>';
