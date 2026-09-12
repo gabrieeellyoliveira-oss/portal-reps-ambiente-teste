@@ -25,9 +25,9 @@
                 <button class="btn btn-sm btn-outline">↻ <span>Sincronizar</span></button>
                 <button class="btn btn-sm btn-export-xlsx">⬇ <span class="export-btn-text">Exportar Excel</span></button>
                 <div class="cv-view-toggle">
-                  <button class="cv-vbtn active">☰ Tabela</button>
-                  <button class="cv-vbtn">▦ Kanban</button>
-                  <button class="cv-vbtn">📊 Estatísticas</button>
+                  <button class="cv-vbtn active" onclick="showView('tabela')">☰ Tabela</button>
+                  <button class="cv-vbtn" onclick="showView('kanban')">▦ Kanban</button>
+                  <button class="cv-vbtn" onclick="showView('stats')">📊 Estatísticas</button>
                 </div>
                 <button class="btn btn-primary btn-sm" style="background:#16a34a;">+ Nova Assinatura</button>
               </div>
@@ -39,11 +39,38 @@
                 <select class="form-input clients-rep-select"><option>Todos Representantes</option></select>
               </div>
             </div>
-            <div class="dash-card">
+            <div class="dash-card" id="view-tabela">
               <table class="clients-table" style="width:100%;">
                 <thead><tr><th>Cliente</th><th>Assinatura</th><th>Mensalidade</th><th>Comissão</th><th>Fatura</th><th>Representante</th><th>Cidade</th><th class="text-center">Ações</th></tr></thead>
                 <tbody id="tbody"></tbody>
               </table>
+            </div>
+            <div class="cv-kanban-board" id="view-kanban" style="display:none;"></div>
+            <div id="view-stats" style="display:none;">
+              <div class="cv-stats-grid" id="statsGrid"></div>
+              <div class="clients-chart-row">
+                <div class="dash-card clients-chart-card">
+                  <h3 class="section-title">Novos Clientes por Mês</h3>
+                  <div class="chart-bars-placeholder" style="display:flex;align-items:flex-end;gap:6px;height:140px;padding-top:10px;">
+                    <div style="flex:1;background:#7c3aed;height:20%;border-radius:4px 4px 0 0;"></div>
+                    <div style="flex:1;background:#7c3aed;height:35%;border-radius:4px 4px 0 0;"></div>
+                    <div style="flex:1;background:#7c3aed;height:55%;border-radius:4px 4px 0 0;"></div>
+                    <div style="flex:1;background:#7c3aed;height:70%;border-radius:4px 4px 0 0;"></div>
+                    <div style="flex:1;background:#7c3aed;height:90%;border-radius:4px 4px 0 0;"></div>
+                    <div style="flex:1;background:#7c3aed;height:60%;border-radius:4px 4px 0 0;"></div>
+                  </div>
+                </div>
+                <div class="dash-card clients-city-ranking-card">
+                  <h3 class="section-title">Top Cidades</h3>
+                  <div id="topCities"></div>
+                  <a href="#" style="font-size:.78rem;">Ver todas as cidades →</a>
+                </div>
+                <div class="dash-card clients-city-ranking-card">
+                  <h3 class="section-title">Top Estados</h3>
+                  <div id="topStates"></div>
+                  <a href="#" style="font-size:.78rem;">Ver todos os estados →</a>
+                </div>
+              </div>
             </div>
           </div>
         </main>
@@ -89,6 +116,61 @@
           '<td class="text-center"><div class="clients-actions"><a class="clients-action-btn">👁</a><a class="clients-action-btn">✎</a></div></td>';
         tbody.appendChild(tr);
       });
+
+      function showView(v) {
+        document.querySelectorAll('.cv-vbtn').forEach(function (b, i) {
+          b.classList.toggle('active', (v==='tabela'&&i===0)||(v==='kanban'&&i===1)||(v==='stats'&&i===2));
+        });
+        document.getElementById('view-tabela').style.display = v === 'tabela' ? '' : 'none';
+        document.getElementById('view-kanban').style.display = v === 'kanban' ? '' : 'none';
+        document.getElementById('view-stats').style.display = v === 'stats' ? '' : 'none';
+      }
+
+      var KANBAN = [
+        {status:'Pendente', count:2, cards:[
+          {name:'Frangão do Bairro', val:'R$ 209,99', rep:'Rafael Patrício Ferreira'},
+          {name:'Pizzaria Della Roma Unidade Ceilândia', val:'R$ 239,98', rep:'Filipe Sales Freire'}
+        ]},
+        {status:'Pago', count:195, cards:[
+          {name:'Chefs da Obra', val:'R$ 239,98', rep:'Ezequias dos Santos Ferreira Matsudo'},
+          {name:'Propp Açaí', val:'R$ 279,98', rep:'Rodrigo Rosa Nunes'},
+          {name:'Galeteria e Peixaria Tio Flávio', val:'R$ 209,99', rep:'Isac Augusto Bezerra de Barros'}
+        ]},
+        {status:'Cancelado', count:54, cards:[
+          {name:'Pizzaria Nossa Pizza Osasco', val:'R$ 239,98', rep:'Victor Oliveira de Freitas Fernandes de Assis'},
+          {name:'Churrasco do Zé', val:'R$ 269,99', rep:'Marco Aurélio Melo Luna'}
+        ]},
+        {status:'Desistiu', count:1, cards:[
+          {name:'Sushi Love Maracanaú', val:'R$ 209,99', rep:'Rafael Patrício Ferreira'}
+        ]}
+      ];
+      document.getElementById('view-kanban').innerHTML = KANBAN.map(function (col) {
+        var cardsHtml = col.cards.map(function (c) {
+          return '<div class="kanban-card"><div class="kanban-card__name">' + c.name + '</div><div class="kanban-card__company">' + c.name + '</div>' +
+            '<div class="kanban-card__meta"><span>' + c.val + '</span><span class="kanban-card__status">' + col.status + '</span></div>' +
+            '<div>👤 ' + c.rep + '</div>' +
+            '<div class="kanban-card__actions"><a class="kanban-action-btn">👁</a><a class="kanban-action-btn">✎</a></div></div>';
+        }).join('');
+        return '<div class="kanban-column"><div class="kanban-column-header"><span>' + col.status + '</span><span>' + col.count + '</span></div>' +
+          '<div class="kanban-cards">' + cardsHtml + '</div></div>';
+      }).join('');
+
+      var STATS = [
+        ['2', 'Pendentes', '0.7%'], ['195', 'Pagos', '70.4%'], ['54', 'Cancelados', '19.5%'], ['1', 'Desistiram', '0.4%'],
+        ['277', 'Total', '+14 este mês'], ['161', 'Total de Lojas', '277 clientes']
+      ];
+      document.getElementById('statsGrid').innerHTML = STATS.map(function (s) {
+        return '<div class="cv-stat-card"><div><div class="cv-stat-value">' + s[0] + '</div><div class="cv-stat-label">' + s[1] + '</div></div><div class="cv-stat-pct">' + s[2] + '</div></div>';
+      }).join('');
+
+      var CITIES = [['São Luís/MA', 11, 28], ['Fortaleza/CE', 7, 24], ['Luís Eduardo Magalhães/BA', 2, 4], ['Rio Verde/GO', 1, 3], ['São Paulo/SP', 0, 3]];
+      document.getElementById('topCities').innerHTML = CITIES.map(function (c, i) {
+        return '<div style="display:flex;justify-content:space-between;padding:6px 0;border-top:1px solid #eee;font-size:.82rem;"><span>' + (i+1) + ' ' + c[0] + '</span><span style="color:#9ca3af;">' + c[1] + ' canc. · ' + c[2] + ' pagos</span></div>';
+      }).join('');
+      var STATES = [['MA', 11, 39], ['CE', 16, 28], ['SP', 3, 9], ['PE', 1, 9], ['BA', 2, 5]];
+      document.getElementById('topStates').innerHTML = STATES.map(function (s, i) {
+        return '<div style="display:flex;justify-content:space-between;padding:6px 0;border-top:1px solid #eee;font-size:.82rem;"><span>' + (i+1) + ' ' + s[0] + '</span><span style="color:#9ca3af;">' + s[1] + ' canc. · ' + s[2] + ' pagos</span></div>';
+      }).join('');
     </script>
   </body>
 </html>
