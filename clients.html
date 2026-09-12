@@ -76,6 +76,7 @@
         </main>
       </div>
     </div>
+    <script src="/assets/fakedata.js"></script>
     <script src="/assets/shell.js" data-title="Clientes"></script>
     <script>
       var SPILLS = [
@@ -100,6 +101,24 @@
         {name:'Divina Cozinha Restaurante', plan:'Ativa', planTag:'Plano Delivery', mensal:'R$ 209,99', comissao:'R$ 84,00', fatura:'Em dia', rep:'Diego Martins Rocha', city:'—'},
         {name:'Pizzaria Nova Estrela', plan:'Ativa', planTag:'Plano Delivery', mensal:'R$ 239,98', comissao:'—', fatura:'Em dia', rep:'Vitor Freitas Fernandes', city:'Osasco / SP'}
       ];
+      // Completa para o total real de 275 clientes (195 Ativa, 25 Abandono, 55 Cancelada) com dados ficticios
+      var PLAN_TAGS = ['Plano Delivery','Plano Mesas','Plano Premium (Mesas + Delivery)'];
+      var PLAN_PRICE = {'Plano Delivery':'R$ 209,99','Plano Mesas':'R$ 169,99','Plano Premium (Mesas + Delivery)':'R$ 269,99'};
+      var PLAN_TARGETS = [{plan:'Ativa', target:195}, {plan:'Abandono', target:25}, {plan:'Cancelada', target:55}];
+      PLAN_TARGETS.forEach(function (spec) {
+        var have = ROWS.filter(function (r) { return r.plan === spec.plan; }).length;
+        for (var i = 0; have + i < spec.target; i++) {
+          var idx = 4000 + PLAN_TARGETS.indexOf(spec) * 300 + i;
+          var city = FakeData.genCity(idx);
+          var tag = PLAN_TAGS[idx % PLAN_TAGS.length];
+          ROWS.push({
+            name: FakeData.genBiz(idx), plan: spec.plan, planTag: tag, mensal: PLAN_PRICE[tag],
+            comissao: (idx % 3 === 0) ? '—' : 'R$ ' + (60 + idx % 40) + ',00',
+            fatura: spec.plan === 'Ativa' ? 'Em dia' : (spec.plan === 'Abandono' ? PLAN_PRICE[tag] + ' vence ' + (10 + idx % 18) + '/' + (1 + idx % 12) : '—'),
+            rep: FakeData.genPerson(idx + 500), city: city[0] + ' / ' + city[1]
+          });
+        }
+      });
       var tbody = document.getElementById('tbody');
       ROWS.forEach(function (r) {
         var initials = r.name.split(' ').slice(0,2).map(function(w){return w[0];}).join('').toUpperCase();
