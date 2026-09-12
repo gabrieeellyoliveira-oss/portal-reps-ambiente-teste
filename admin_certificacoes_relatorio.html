@@ -69,11 +69,11 @@
               <thead><tr><th>Rep</th><th>Conta</th><th>Status</th><th>Aulas</th><th>Início</th><th>Conclusão</th><th>Nota</th><th>Tentativas</th></tr></thead>
               <tbody id="repRows"></tbody>
             </table>
-            <div style="text-align:center;padding:10px;font-size:.78rem;color:#9ca3af;">+ 97 outros representantes</div>
           </div>
         </main>
       </div>
     </div>
+    <script src="/assets/fakedata.js"></script>
     <script src="/assets/shell.js" data-title="Relatório de Certificações"></script>
     <script>
       var SUMMARY = [
@@ -97,6 +97,23 @@
         {name:'Guilherme do Amaral Silveira', city:'—', status:'Iniciou', aulas:'1/5', ini:'11/09/2026', fim:'—', nota:'—', tent:0},
         {name:'Wdeyverson Madeira de Freitas', city:'—', status:'Não iniciou', aulas:'0/5', ini:'—', fim:'—', nota:'—', tent:0}
       ];
+      // Completa para os 107 reps ativos reais (16 Concluiu, 2 Iniciou, 89 Nao iniciou)
+      var REP_TARGETS = [
+        {status:'Concluiu', target:16},
+        {status:'Não iniciou', target:89}
+      ];
+      REP_TARGETS.forEach(function (spec) {
+        var have = REPS.filter(function (r) { return r.status === spec.status; }).length;
+        for (var i = 0; have + i < spec.target; i++) {
+          var idx = 5000 + REP_TARGETS.indexOf(spec) * 200 + i;
+          var city = FakeData.genCity(idx);
+          if (spec.status === 'Concluiu') {
+            REPS.push({name: FakeData.genPerson(idx), city: city[0] + '/' + city[1], status:'Concluiu', aulas:'5/5', ini:(1 + idx%28)+'/09/2026', fim:(1 + idx%28)+'/09/2026', nota:(7 + idx%4)+'/10', tent:1});
+          } else {
+            REPS.push({name: FakeData.genPerson(idx), city:'—', status:'Não iniciou', aulas:'0/5', ini:'—', fim:'—', nota:'—', tent:0});
+          }
+        }
+      });
       document.getElementById('repRows').innerHTML = REPS.map(function (r) {
         var initials = r.name.split(' ').slice(0,2).map(function(w){return w[0];}).join('').toUpperCase();
         return '<tr><td><span class="cr-avatar-sm">' + initials + '</span>' + r.name + '</td><td>' + r.city + '</td><td>' + r.status + '</td><td>' + r.aulas + '</td><td>' + r.ini + '</td><td>' + r.fim + '</td><td>' + r.nota + '</td><td>' + r.tent + '</td></tr>';
