@@ -16,6 +16,12 @@
   </head>
 
   <body class="auth-page">
+    <script>
+      // Login desativado temporariamente (2026-09-12) — pula direto pro dashboard.
+      // Para reativar: apague este bloco <script>.
+      sessionStorage.setItem('cw_test_authorized', '1');
+      window.location.replace('/dashboard.html');
+    </script>
     <div class="auth-card">
       <div class="auth-logo">
         <img alt="Cardápio Web" src="/assets/cw-logo-ee22739a.webp" />
