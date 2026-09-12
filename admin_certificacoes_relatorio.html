@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Relatório de Certificações — Portal de Representantes | Cardápio Web</title>
+    <link rel="icon" type="image/jpeg" href="/assets/cw-logo-dark-e78e4446.jpg">
+    <link rel="stylesheet" href="/assets/application-cc2f1a53.css" />
+    <style>
+      .avatar-circle{width:34px;height:34px;border-radius:50%;background:#5b21b6;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;}
+      .cr-head { margin-bottom:6px; }
+      .cr-head h2 { margin:0 0 4px; }
+      .cr-head p { margin:0 0 6px; color:#6b7280; font-size:.82rem; max-width:760px; }
+      .cr-head a { font-size:.8rem; }
+      .cr-filter { display:flex; gap:12px; margin:14px 0 18px; flex-wrap:wrap; }
+      .cr-filter select { padding:7px 12px; border:1px solid #ddd; border-radius:8px; font-size:.82rem; }
+      .cr-kpis { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:18px; }
+      .cr-kpi { background:#fff; border:1px solid #eef0f4; border-radius:14px; padding:16px 18px; }
+      .cr-kpi .n { font-size:1.6rem; font-weight:800; }
+      .cr-kpi .l { font-size:.75rem; color:#6b7280; margin-top:2px; }
+      .cr-kpi .s { font-size:.68rem; color:#9ca3af; margin-top:4px; }
+      .cr-legend { display:flex; gap:20px; align-items:center; font-size:.8rem; color:#4b5563; margin-bottom:18px; }
+      .cr-card { background:#fff; border:1px solid #eef0f4; border-radius:16px; padding:18px; margin-bottom:18px; overflow-x:auto; }
+      .cr-card h3 { margin:0 0 12px; font-size:1rem; }
+      .cr-card h3 small { color:#9ca3af; font-weight:400; }
+      table.cr-table { width:100%; border-collapse:collapse; font-size:.82rem; }
+      table.cr-table th { text-align:left; font-size:.7rem; color:#9ca3af; text-transform:uppercase; padding:8px; border-bottom:1px solid #eef0f4; }
+      table.cr-table th.num, table.cr-table td.num { text-align:right; }
+      table.cr-table td { padding:9px 8px; border-bottom:1px solid #f4f4f6; }
+      table.cr-table tr.sel { background:#faf5ff; }
+      .cr-mini { display:inline-block; width:50px; height:6px; background:#f3f4f6; border-radius:3px; overflow:hidden; margin-right:6px; vertical-align:middle; }
+      .cr-mini i { display:block; height:100%; background:#7c3aed; }
+      .cr-avatar-sm{width:26px;height:26px;border-radius:50%;background:#ede9fe;color:#5b21b6;display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:.62rem;margin-right:6px;vertical-align:middle;}
+    </style>
+  </head>
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar" id="sidebar"></aside>
+      <div class="main-wrapper">
+        <header class="top-header" id="top-header"></header>
+        <main class="page-content">
+          <div class="cr-head">
+            <h2>Relatório de Certificações</h2>
+            <p>Quantos Reps ativos ainda não iniciaram, iniciaram e concluíram cada certificação. Considera usuários Rep. Admin e Rep. Suporte de contas ativas (exclui pendentes, desativados e a conta demo).</p>
+            <a href="/admin_certificacoes.html">Gestão de certificações →</a>
+          </div>
+          <form class="cr-filter">
+            <select><option>Todo o período</option><option>Últimos 30 dias</option><option>Últimos 90 dias</option></select>
+          </form>
+          <div class="cr-kpis">
+            <div class="cr-kpi"><div class="n">107</div><div class="l">Reps ativos</div><div class="s">base do relatório · Todo o período</div></div>
+            <div class="cr-kpi"><div class="n">89</div><div class="l">Não iniciaram</div><div class="s">83% dos Reps ativos</div></div>
+            <div class="cr-kpi"><div class="n">2</div><div class="l">Iniciaram</div><div class="s">2% · assistiram aula ou começaram a prova</div></div>
+            <div class="cr-kpi"><div class="n">16</div><div class="l">Concluíram</div><div class="s">15% · aprovados e certificados</div></div>
+          </div>
+          <div class="cr-legend">
+            <span>🟣 Concluíram 16</span><span>⚪ Iniciaram 2</span><span>◽ Não iniciaram 89</span><span>Taxa de conclusão: 15%</span>
+          </div>
+          <div class="cr-card">
+            <h3>Todas as certificações <small>· Todo o período</small></h3>
+            <table class="cr-table">
+              <thead><tr><th>Certificação</th><th class="num">Reps ativos</th><th class="num">Não iniciaram</th><th class="num">Iniciaram</th><th class="num">Concluíram</th><th>Conclusão</th></tr></thead>
+              <tbody id="certSummary"></tbody>
+            </table>
+          </div>
+          <div class="cr-card">
+            <h3 id="detailTitle">Certificação Implementação Cardápio Web · 107 Reps</h3>
+            <table class="cr-table">
+              <thead><tr><th>Rep</th><th>Conta</th><th>Status</th><th>Aulas</th><th>Início</th><th>Conclusão</th><th>Nota</th><th>Tentativas</th></tr></thead>
+              <tbody id="repRows"></tbody>
+            </table>
+            <div style="text-align:center;padding:10px;font-size:.78rem;color:#9ca3af;">+ 97 outros representantes</div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <script src="/assets/shell.js" data-title="Relatório de Certificações"></script>
+    <script>
+      var SUMMARY = [
+        {title:'Certificação Implementação Cardápio Web', ativos:107, nao:89, ini:2, con:16, pct:15, sel:true},
+        {title:'Certificação Suporte Cardápio Web', ativos:107, nao:94, ini:4, con:9, pct:8, sel:false}
+      ];
+      document.getElementById('certSummary').innerHTML = SUMMARY.map(function (s) {
+        return '<tr' + (s.sel ? ' class="sel"' : '') + '><td><a>' + s.title + '</a></td><td class="num">' + s.ativos + '</td><td class="num">' + s.nao + '</td><td class="num">' + s.ini + '</td><td class="num">' + s.con + '</td>' +
+          '<td><span class="cr-mini"><i style="width:' + s.pct + '%;"></i></span><span class="text-muted">' + s.pct + '%</span></td></tr>';
+      }).join('');
+
+      var REPS = [
+        {name:'Sandro Vieira de Lima', city:'Paulista/PE', status:'Concluiu', aulas:'5/5', ini:'11/09/2026', fim:'11/09/2026', nota:'9/10', tent:1},
+        {name:'Rafael Patrício Ferreira', city:'Fortaleza/CE', status:'Concluiu', aulas:'5/5', ini:'11/09/2026', fim:'11/09/2026', nota:'9/10', tent:1},
+        {name:'Alisson Gomes dos Santos', city:'Barra dos Coqueiros/SE', status:'Concluiu', aulas:'5/5', ini:'11/09/2026', fim:'11/09/2026', nota:'8/10', tent:1},
+        {name:'Rogério Carlos Cristianini Junior', city:'Francisco Alves/PR', status:'Concluiu', aulas:'5/5', ini:'10/09/2026', fim:'10/09/2026', nota:'8/10', tent:1},
+        {name:'Marco Aurélio Melo Luna', city:'São Luís/MA', status:'Concluiu', aulas:'5/5', ini:'10/09/2026', fim:'10/09/2026', nota:'10/10', tent:1},
+        {name:'Isac Augusto Bezerra de Barros', city:'Recife/PE', status:'Concluiu', aulas:'5/5', ini:'09/09/2026', fim:'09/09/2026', nota:'7/10', tent:1},
+        {name:'Fernando Braga de Sousa', city:'Quixeramobim/CE', status:'Concluiu', aulas:'5/5', ini:'08/09/2026', fim:'08/09/2026', nota:'8/10', tent:1},
+        {name:'Klewerton André Macedo Santos', city:'—', status:'Iniciou', aulas:'3/5', ini:'12/09/2026', fim:'—', nota:'—', tent:0},
+        {name:'Guilherme do Amaral Silveira', city:'—', status:'Iniciou', aulas:'1/5', ini:'11/09/2026', fim:'—', nota:'—', tent:0},
+        {name:'Wdeyverson Madeira de Freitas', city:'—', status:'Não iniciou', aulas:'0/5', ini:'—', fim:'—', nota:'—', tent:0}
+      ];
+      document.getElementById('repRows').innerHTML = REPS.map(function (r) {
+        var initials = r.name.split(' ').slice(0,2).map(function(w){return w[0];}).join('').toUpperCase();
+        return '<tr><td><span class="cr-avatar-sm">' + initials + '</span>' + r.name + '</td><td>' + r.city + '</td><td>' + r.status + '</td><td>' + r.aulas + '</td><td>' + r.ini + '</td><td>' + r.fim + '</td><td>' + r.nota + '</td><td>' + r.tent + '</td></tr>';
+      }).join('');
+    </script>
+  </body>
+</html>
