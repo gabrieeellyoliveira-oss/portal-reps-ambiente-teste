@@ -6,9 +6,9 @@
   //   return;
   // }
 
-  // Tokens exatos do Manual da Marca "Central Dev · Cardápio Web" (manual-marca-cardapio-web.html,
-  // extraído da tela Início) — aplicados só ao menu/header via escopo #sidebar/#top-header,
-  // sem mexer no resto das páginas.
+  // Menu redesenhado a partir do projeto Claude Design "Dashboard Reps.dc.html"
+  // (cards brancos flutuantes, ícones em tile roxo alternado, fundo do menu transparente).
+  // Aplicado só ao menu/header via escopo #sidebar/#top-header — nada mais foi alterado.
   var brandCss = '' +
     '#sidebar, #top-header {' +
       '--roxo-primario:#8B2FF7; --roxo-vibrante:#A543F9; --roxo-texto-ativo:#8A55D3;' +
@@ -21,25 +21,28 @@
       '--cw-purple-700: #732DEC; --cw-purple-800: #5A3279; --cw-orange: #FEB500;' +
       '--cw-orange-light: #ffc933; --cw-red: #FF5959;' +
     '}' +
-    '#sidebar { background: linear-gradient(180deg, var(--roxo-primario) 0%, var(--roxo-profundo) 100%); border-right-color: var(--roxo-profundo); }' +
-    '#sidebar .sidebar-logo { background: #fff; }' +
-    '#sidebar .sidebar-topwave { fill: var(--roxo-primario); }' +
-    '#sidebar .nav-item { color: rgba(255,255,255,0.82); }' +
-    '#sidebar .nav-item:hover { color: #fff; background: rgba(255,255,255,0.08); }' +
-    '#sidebar .nav-chevron, #sidebar .nav-group-trigger { color: rgba(255,255,255,0.65); }' +
-    '#sidebar .nav-group-trigger.has-active, #sidebar .nav-group-trigger:hover { color: #fff; }' +
-    '#sidebar .nav-sub-inner::before { background: rgba(255,255,255,0.25); }' +
-    '#sidebar .nav-subitem { color: rgba(255,255,255,0.7); }' +
-    '#sidebar .nav-divider { background: rgba(255,255,255,0.15); }' +
-    '#sidebar .sidebar-user { box-shadow: var(--shadow-manual); }' +
-    '#sidebar .sidebar-user-avatar { background: linear-gradient(135deg,#f6c6b8,#f3a8c9); box-shadow: 0 0 0 2px var(--lavanda-bg), 0 2px 8px rgba(107,63,160,0.2); }' +
+    '#sidebar { background: transparent; border-right: none; }' +
+    '#sidebar .sidebar-logo { background: transparent; }' +
+    '#sidebar .sidebar-topwave { display: none; }' +
+    '#sidebar .sidebar-user { box-shadow: var(--shadow-manual); border-radius: 18px; }' +
+    '#sidebar .sidebar-user-avatar { background: linear-gradient(135deg,#f6c6b8,#f3a8c9); box-shadow: 0 0 0 2px #fff, 0 2px 8px rgba(107,63,160,0.2); }' +
+    '#sidebar .sidebar-user-role { background: none !important; color: var(--cinza-arroxeado); padding: 0; text-transform: none; letter-spacing: normal; font-weight: 600; font-size: .78rem; }' +
     '#sidebar .sidebar-user-logout { width: 34px; height: 34px; border-radius: 50%; border: 0; background: var(--lavanda-bg); color: var(--roxo-primario); display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: background-color .15s ease; }' +
     '#sidebar .sidebar-user-logout:hover { background: var(--lavanda-destaque); }' +
-    '#sidebar .nav-item.active { background: linear-gradient(180deg,#EFE7FB,var(--lavanda-destaque)); color: var(--roxo-texto-ativo); }' +
-    '#sidebar .nav-item.active::before { background: var(--roxo-primario); }' +
-    '#sidebar .nav-item-icon { background: var(--lavanda-bg); color: var(--roxo-vibrante); border-radius: 12px; }' +
-    '#sidebar .nav-item:hover .nav-item-icon { background: var(--lavanda-destaque); }' +
-    '#sidebar .nav-item.active .nav-item-icon { background: #fff; color: var(--roxo-vibrante); box-shadow: 0 3px 8px rgba(107,63,160,.18); }' +
+    /* ── Cada item do menu é seu próprio cartão branco flutuante ── */
+    '#sidebar .sidebar-nav { display: flex; flex-direction: column; gap: 10px; }' +
+    '#sidebar .nav-item, #sidebar .nav-group { background: #fff; border-radius: 18px; box-shadow: var(--shadow-manual); }' +
+    '#sidebar .nav-item { color: var(--grafite); margin-bottom: 0; }' +
+    '#sidebar .nav-item:hover { background: #fff; color: var(--roxo-primario); }' +
+    '#sidebar .nav-item.active { background: #fff; color: var(--roxo-texto-ativo); }' +
+    '#sidebar .nav-item.active::before { background: var(--roxo-primario); left: -6px; }' +
+    '#sidebar .nav-chevron, #sidebar .nav-group-trigger { color: var(--roxo-vibrante); }' +
+    '#sidebar .nav-sub-inner::before { background: var(--borda); }' +
+    '#sidebar .nav-subitem { color: var(--cinza-arroxeado); }' +
+    /* ── Tiles de ícone alternando roxo sólido / lavanda clara (índice par/ímpar) ── */
+    '#sidebar .sidebar-nav > *:nth-child(odd) .nav-item-icon { background: var(--roxo-primario); color: #fff; }' +
+    '#sidebar .sidebar-nav > *:nth-child(even) .nav-item-icon { background: var(--lavanda-bg); color: var(--roxo-vibrante); }' +
+    '#sidebar .nav-item-icon { border-radius: 14px; }' +
     '#sidebar .nav-badge { background: linear-gradient(90deg,#7B2FF7,#9C3CF9); box-shadow: 0 3px 8px rgba(139,47,247,0.3); }' +
     '#sidebar .nav-badge--warn { background: var(--dourado); box-shadow: 0 3px 8px rgba(254,181,0,0.35); color: var(--roxo-profundo); }' +
     '#sidebar .nav-badge--info { background: linear-gradient(90deg,#7B2FF7,#9C3CF9); }' +
@@ -59,11 +62,6 @@
     '#sidebar .ssb-link:hover { background: var(--lavanda-bg); }' +
     '#sidebar .ssb-mascot { width: 84px; top: -18px; }' +
     '#top-header .header-xp-fill { background: linear-gradient(90deg, var(--dourado), var(--roxo-primario)); }' +
-    /* ── Onda branca entre a logo e o cartão do usuário ── */
-    '#sidebar .sidebar-topwave { display: block; width: 100%; height: 22px; margin-top: -4px; }' +
-    /* ── Primeiro item (Início/Dashboard) com ícone em destaque dourado ── */
-    '#sidebar .sidebar-nav > .nav-item:first-child .nav-item-icon { background: #FFF3D6; color: #b3790a; }' +
-    '#sidebar .sidebar-nav > .nav-item:first-child.active .nav-item-icon, #sidebar .sidebar-nav > .nav-item:first-child:hover .nav-item-icon { background: #FFE9AD; color: #8a5c06; }' +
     /* ── Onda roxa do rodapé com o mascote cardapinho ── */
     '#sidebar .sidebar-wave { height: 112px; overflow: visible; }' +
     '#sidebar .sidebar-wave .sw-back { height: 92px; fill: var(--roxo-profundo); }' +
@@ -75,9 +73,9 @@
   document.head.appendChild(brandStyleEl);
 
   var NAV = [
-    { href: '/dashboard.html', label: 'Dashboard', icon: 'grid', dividerAfter: true },
-    { href: '/opportunities.html', label: 'Quadro de Leads', icon: 'columns', badge: '99+', dividerAfter: true },
-    { href: '/map.html', label: 'Mapa de Prospecção', icon: 'circle', badge: '99+', dividerAfter: true },
+    { href: '/dashboard.html', label: 'Dashboard', icon: 'grid' },
+    { href: '/opportunities.html', label: 'Quadro de Leads', icon: 'columns', badge: '99+' },
+    { href: '/map.html', label: 'Mapa de Prospecção', icon: 'circle', badge: '99+' },
     { group: 'clientes', label: 'Clientes', icon: 'building', items: [
       { href: '/clients.html', label: 'Assinantes' },
       { href: '/faturas-comissoes.html', label: 'Faturas e Comissões' },
@@ -112,7 +110,7 @@
       { href: '/locations.html', label: 'Base de Leads' },
       { href: '/zones.html', label: 'Zonas dos Reps' },
       { href: '/municipalities.html', label: 'Estudo de Região' }
-    ], dividerAfter: true },
+    ] },
     { href: '/ajuda.html', label: 'Central de Ajuda', icon: 'circle' }
   ];
 
@@ -157,7 +155,6 @@
         '<div class="nav-sub" id="navsub-' + entry.group + '"><ul class="nav-sub-inner">' + subHtml + '</ul></div>' +
         '</div>';
     }
-    if (entry.dividerAfter) navHtml += '<div class="nav-divider"></div>';
   });
 
   var USER_NAME = 'Gabrielly Oliveira';
@@ -170,7 +167,7 @@
     '<div class="sidebar-avatar-overlay"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg></div>' +
     '</div>' +
     '<div class="sidebar-user-info"><div class="sidebar-user-name">' + USER_NAME + '</div>' +
-    '<span class="sidebar-user-role" style="background:#8B2FF7;">🛡 ' + USER_ROLE + '</span></div>' +
+    '<span class="sidebar-user-role">' + USER_ROLE + '</span></div>' +
     '<button type="button" class="sidebar-user-logout" title="Sair da conta" onclick="sessionStorage.removeItem(\'cw_test_authorized\'); window.location=\'/index.html\';"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg></button>' +
     '</div>';
 
