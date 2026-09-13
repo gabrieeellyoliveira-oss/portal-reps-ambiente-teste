@@ -34,8 +34,8 @@
     '#sidebar .sidebar-user-logout:hover { background: #EADBF4; }' +
     /* ── Cada item do menu é seu próprio cartão branco flutuante ── */
     '#sidebar .sidebar-nav { display: flex; flex-direction: column; gap: 6px; padding: 0 20px 8px; }' +
-    '#sidebar .nav-item, #sidebar .nav-group { background: #fff; border-radius: 16px; box-shadow: var(--shadow-card); }' +
-    '#sidebar .nav-item { color: var(--grafite); margin-bottom: 0; padding: 6px 12px 6px 6px; min-height: 0; font-weight: 800; font-size: 14.5px; }' +
+    '#sidebar .nav-item, #sidebar .nav-group { background: #fff; border-radius: 16px; box-shadow: var(--shadow-card); flex-shrink: 0; }' +
+    '#sidebar .nav-item { color: var(--grafite); margin-bottom: 0; padding: 6px 12px 6px 6px; min-height: 56px; flex-shrink: 0; font-weight: 800; font-size: 14.5px; }' +
     '#sidebar .nav-item:hover { background: #fff; color: var(--grafite); }' +
     '#sidebar .nav-item.active { background: #fff; color: var(--grafite); }' +
     '#sidebar .nav-item.active::before { background: var(--roxo-vibrante); left: -6px; }' +
