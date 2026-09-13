@@ -6,68 +6,69 @@
   //   return;
   // }
 
-  // Menu redesenhado a partir do projeto Claude Design "Dashboard Reps.dc.html"
-  // (cards brancos flutuantes, ícones em tile roxo alternado, fundo do menu transparente).
-  // Aplicado só ao menu/header via escopo #sidebar/#top-header — nada mais foi alterado.
+  // Menu implementado a partir do código-fonte real do artefato Claude Design
+  // (claude.ai/code/artifact/c22b3be7-dd66-4130-acaf-d90cc17ef8d7) — extraído
+  // do template do bundle, não de captura de tela. Aplicado só ao menu/header
+  // via escopo #sidebar/#top-header — nada mais foi alterado.
   var brandCss = '' +
+    "@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&display=swap');" +
     '#sidebar, #top-header {' +
-      '--roxo-primario:#8B2FF7; --roxo-vibrante:#A543F9; --roxo-texto-ativo:#8A55D3;' +
-      '--roxo-profundo:#5A3279; --roxo-eyebrow:#732DEC; --dourado:#FEB500; --grafite:#17102B;' +
-      '--cinza-arroxeado:#55536B; --cinza-claro:#8B899E; --lavanda-bg:#F3EDFB;' +
-      '--lavanda-destaque:#EADFFA; --borda:#E7DFF5; --shadow-manual: 0 10px 30px rgba(107, 63, 160, 0.10);' +
-      /* aliases para os nomes de variável que o CSS de produção já usa */
-      '--cw-purple-50: #F3EDFB; --cw-purple-100: #EADFFA; --cw-purple-300: #cfa3f7;' +
-      '--cw-purple-400: #b478f8; --cw-purple-500: #9d54f8; --cw-purple-600: #8B2FF7;' +
-      '--cw-purple-700: #732DEC; --cw-purple-800: #5A3279; --cw-orange: #FEB500;' +
-      '--cw-orange-light: #ffc933; --cw-red: #FF5959;' +
+      '--roxo-vibrante:#A543FA; --roxo-profundo:#59327A; --lavanda-bg:#F4EDF7;' +
+      '--dourado:#FFB600; --grafite:#3A1F52; --cinza-role:#8B7A98;' +
+      '--shadow-card: 0 4px 12px rgba(89,50,122,.08);' +
+      '--icon-gradient: linear-gradient(140deg,#A543FA,#59327A);' +
+      'font-family: "Nunito", "Inter", sans-serif;' +
     '}' +
     '#sidebar { background: transparent; border-right: none; }' +
     '#sidebar .sidebar-logo { background: transparent; }' +
     '#sidebar .sidebar-topwave { display: none; }' +
-    '#sidebar .sidebar-user { box-shadow: var(--shadow-manual); border-radius: 18px; }' +
-    '#sidebar .sidebar-user-avatar { background: linear-gradient(135deg,#f6c6b8,#f3a8c9); box-shadow: 0 0 0 2px #fff, 0 2px 8px rgba(107,63,160,0.2); }' +
-    '#sidebar .sidebar-user-role { background: none !important; color: var(--cinza-arroxeado); padding: 0; text-transform: none; letter-spacing: normal; font-weight: 600; font-size: .78rem; }' +
-    '#sidebar .sidebar-user-logout { width: 34px; height: 34px; border-radius: 50%; border: 0; background: var(--lavanda-bg); color: var(--roxo-primario); display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: background-color .15s ease; }' +
-    '#sidebar .sidebar-user-logout:hover { background: var(--lavanda-destaque); }' +
+    /* ── Cartão da logo ── */
+    '#sidebar .sidebar-logo { margin: 14px 20px 10px; padding: 12px 16px; border-radius: 20px; background: #fff; box-shadow: 0 8px 22px rgba(89,50,122,.10); min-height: 0; }' +
+    '#sidebar .sidebar-logo img { height: 60px; }' +
+    /* ── Cartão do usuário ── */
+    '#sidebar .sidebar-user { margin: 0 20px 12px; padding: 8px 10px; border-radius: 18px; background: #fff; box-shadow: var(--shadow-card); }' +
+    '#sidebar .sidebar-user-avatar { width: 38px; height: 38px; background: linear-gradient(135deg,#EADBF4,#C79BE8); box-shadow: none; font-size: 0; }' +
+    '#sidebar .sidebar-user-name { font-weight: 900; font-size: 14px; color: var(--grafite); }' +
+    '#sidebar .sidebar-user-role { background: none !important; color: var(--cinza-role); padding: 0; text-transform: none; letter-spacing: normal; font-weight: 600; font-size: 11.5px; }' +
+    '#sidebar .sidebar-user-logout { width: 36px; height: 36px; border-radius: 11px; border: 0; background: var(--lavanda-bg); color: var(--roxo-vibrante); display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: background-color .15s ease; }' +
+    '#sidebar .sidebar-user-logout:hover { background: #EADBF4; }' +
     /* ── Cada item do menu é seu próprio cartão branco flutuante ── */
-    '#sidebar .sidebar-nav { display: flex; flex-direction: column; gap: 10px; }' +
-    '#sidebar .nav-item, #sidebar .nav-group { background: #fff; border-radius: 18px; box-shadow: var(--shadow-manual); }' +
-    '#sidebar .nav-item { color: var(--grafite); margin-bottom: 0; }' +
-    '#sidebar .nav-item:hover { background: #fff; color: var(--roxo-primario); }' +
-    '#sidebar .nav-item.active { background: #fff; color: var(--roxo-texto-ativo); }' +
-    '#sidebar .nav-item.active::before { background: var(--roxo-primario); left: -6px; }' +
+    '#sidebar .sidebar-nav { display: flex; flex-direction: column; gap: 6px; padding: 0 20px 8px; }' +
+    '#sidebar .nav-item, #sidebar .nav-group { background: #fff; border-radius: 16px; box-shadow: var(--shadow-card); }' +
+    '#sidebar .nav-item { color: var(--grafite); margin-bottom: 0; padding: 6px 12px 6px 6px; min-height: 0; font-weight: 800; font-size: 14.5px; }' +
+    '#sidebar .nav-item:hover { background: #fff; color: var(--grafite); }' +
+    '#sidebar .nav-item.active { background: #fff; color: var(--grafite); }' +
+    '#sidebar .nav-item.active::before { background: var(--roxo-vibrante); left: -6px; }' +
     '#sidebar .nav-chevron, #sidebar .nav-group-trigger { color: var(--roxo-vibrante); }' +
-    '#sidebar .nav-sub-inner::before { background: var(--borda); }' +
-    '#sidebar .nav-subitem { color: var(--cinza-arroxeado); }' +
-    /* ── Tiles de ícone alternando roxo sólido / lavanda clara (índice par/ímpar) ── */
-    '#sidebar .sidebar-nav > *:nth-child(odd) .nav-item-icon { background: var(--roxo-primario); color: #fff; }' +
-    '#sidebar .sidebar-nav > *:nth-child(even) .nav-item-icon { background: var(--lavanda-bg); color: var(--roxo-vibrante); }' +
-    '#sidebar .nav-item-icon { border-radius: 14px; }' +
-    '#sidebar .nav-badge { background: linear-gradient(90deg,#7B2FF7,#9C3CF9); box-shadow: 0 3px 8px rgba(139,47,247,0.3); }' +
-    '#sidebar .nav-badge--warn { background: var(--dourado); box-shadow: 0 3px 8px rgba(254,181,0,0.35); color: var(--roxo-profundo); }' +
-    '#sidebar .nav-badge--info { background: linear-gradient(90deg,#7B2FF7,#9C3CF9); }' +
+    '#sidebar .nav-chevron { transform: rotate(0deg); }' +
+    '#sidebar .nav-group.open .nav-chevron { transform: rotate(90deg); }' +
+    '#sidebar .nav-sub-inner::before { background: #EADBF4; }' +
+    '#sidebar .nav-subitem { color: #7C6389; }' +
+    '#sidebar .nav-item-icon { width: 44px; height: 44px; border-radius: 14px; background: var(--icon-gradient); color: #fff; box-shadow: 0 4px 10px rgba(165,67,250,.32); }' +
+    '#sidebar .nav-item:hover .nav-item-icon, #sidebar .nav-item.active .nav-item-icon { background: var(--icon-gradient); color: #fff; box-shadow: 0 4px 10px rgba(165,67,250,.32); }' +
+    '#sidebar .nav-badge { background: var(--roxo-vibrante); box-shadow: none; font-weight: 900; font-size: 9.5px; letter-spacing: .06em; }' +
+    '#sidebar .nav-badge--warn { background: var(--roxo-vibrante); color: #fff; }' +
+    '#sidebar .nav-badge--info { background: var(--roxo-vibrante); }' +
     '#sidebar .sum-item:hover { background: #fff0ef; color: #FF5959; }' +
     '#sidebar .sum-item:hover .sum-icon { background: #ffe4e2; }' +
     '#sidebar .sidebar-footer a:hover { color: #FF5959; }' +
     '#sidebar .sidebar-footer a:hover .nav-icon { background: #fff0ef; border-color: #ffd6d3; color: #FF5959; }' +
-    '#sidebar .ssb-bar { border-color: var(--borda); background: linear-gradient(135deg, #FBF8FF, #F4EEFC); color: var(--roxo-profundo); box-shadow: var(--shadow-manual); }' +
-    '#sidebar .ssb-bar-icon { background: var(--roxo-primario); box-shadow: 0 4px 10px rgba(139,47,247,0.3); }' +
-    '#sidebar .ssb-bar-chevron { color: var(--roxo-primario); }' +
-    '#sidebar .sidebar-suggest-box { background: linear-gradient(120deg,#FBF8FF,#F4EEFC); border-color: var(--borda); box-shadow: var(--shadow-manual); }' +
-    '#sidebar .ssb-icon-circle { background: var(--roxo-primario); box-shadow: 0 6px 14px rgba(139,47,247,0.32); }' +
+    '#sidebar .ssb-bar { border-color: rgba(89,50,122,.1); background: #fff; color: var(--roxo-profundo); box-shadow: var(--shadow-card); }' +
+    '#sidebar .ssb-bar-icon { background: var(--roxo-vibrante); box-shadow: 0 4px 10px rgba(165,67,250,.3); }' +
+    '#sidebar .ssb-bar-chevron { color: var(--roxo-vibrante); }' +
+    '#sidebar .sidebar-suggest-box { background: #fff; border-color: rgba(89,50,122,.1); box-shadow: var(--shadow-card); }' +
+    '#sidebar .ssb-icon-circle { background: var(--roxo-vibrante); box-shadow: 0 6px 14px rgba(165,67,250,.32); }' +
     '#sidebar .ssb-title, #sidebar .ssb-text { color: var(--roxo-profundo); }' +
-    '#sidebar .ssb-btn, #sidebar .ssb-btn-sm { background: linear-gradient(90deg,#7B2FF7,#9C3CF9); box-shadow: 0 6px 14px rgba(139,47,247,0.28); }' +
-    '#sidebar .ssb-btn:hover, #sidebar .ssb-btn-sm:hover { background: var(--roxo-primario); }' +
-    '#sidebar .ssb-link { color: var(--roxo-primario) !important; border-color: var(--borda); }' +
+    '#sidebar .ssb-btn, #sidebar .ssb-btn-sm { background: var(--roxo-vibrante); box-shadow: 0 6px 14px rgba(165,67,250,.28); }' +
+    '#sidebar .ssb-btn:hover, #sidebar .ssb-btn-sm:hover { background: var(--roxo-profundo); }' +
+    '#sidebar .ssb-link { color: var(--roxo-vibrante) !important; border-color: rgba(89,50,122,.1); }' +
     '#sidebar .ssb-link:hover { background: var(--lavanda-bg); }' +
     '#sidebar .ssb-mascot { width: 84px; top: -18px; }' +
-    '#top-header .header-xp-fill { background: linear-gradient(90deg, var(--dourado), var(--roxo-primario)); }' +
-    /* ── Onda roxa do rodapé com o mascote cardapinho ── */
-    '#sidebar .sidebar-wave { height: 112px; overflow: visible; }' +
-    '#sidebar .sidebar-wave .sw-back { height: 92px; fill: var(--roxo-profundo); }' +
-    '#sidebar .sidebar-wave .sw-front { height: 72px; fill: var(--roxo-primario); }' +
-    '#sidebar .sidebar-wave .sw-spark { color: var(--dourado); opacity: 0.95; }' +
-    '#sidebar .sidebar-wave .sw-cloche { width: 108px; right: 14px; bottom: 0; opacity: 1; filter: drop-shadow(0 6px 10px rgba(46,16,101,0.35)); }';
+    '#top-header .header-xp-fill { background: linear-gradient(90deg, var(--dourado), var(--roxo-vibrante)); }' +
+    /* ── Rodapé: estrelinhas + mascote sobre a onda (imagem já traz a onda) ── */
+    '#sidebar .sidebar-wave { height: 130px; overflow: hidden; flex-shrink: 0; }' +
+    '#sidebar .sw-full { display: block; width: 100%; height: auto; position: absolute; left: 0; right: 0; bottom: 0; }' +
+    '#sidebar .sw-star { position: absolute; color: var(--dourado); z-index: 2; }';
   var brandStyleEl = document.createElement('style');
   brandStyleEl.textContent = brandCss;
   document.head.appendChild(brandStyleEl);
@@ -88,7 +89,7 @@
       { href: '/calculadora-proposta.html', label: 'Calculadora de Proposta' },
       { href: '/calculator.html', label: 'Calculadora de Comissão' }
     ]},
-    { group: 'capacitacao', label: 'Capacitação', icon: 'circle', items: [
+    { group: 'capacitacao', label: 'Capacitação', icon: 'tv', items: [
       { href: '/encontros.html', label: 'Encontros' },
       { href: '/trainings.html', label: 'Treinamentos Online' },
       { href: '/estudo-concorrentes.html', label: 'Estudo de Concorrentes' },
@@ -114,17 +115,19 @@
     { href: '/ajuda.html', label: 'Central de Ajuda', icon: 'circle' }
   ];
 
+  // Ícones extraídos do template real do artefato Claude Design (paths exatos).
   var ICONS = {
-    grid: '<rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect>',
-    columns: '<rect x="3" y="3" width="5" height="18" rx="1"></rect><rect x="10" y="3" width="5" height="12" rx="1"></rect><rect x="17" y="3" width="5" height="15" rx="1"></rect>',
+    grid: '<path d="M3 11.5 12 4l9 7.5"></path><path d="M5 10v9a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9"></path>',
+    columns: '<path d="M4 20h16"></path><rect x="6" y="12" width="3.6" height="6" rx="1"></rect><rect x="11.2" y="8" width="3.6" height="10" rx="1"></rect><rect x="16.4" y="4" width="3.6" height="14" rx="1"></rect>',
     circle: '<circle cx="12" cy="12" r="10"></circle>',
-    building: '<rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><path d="M9 22v-4h6v4"></path>',
-    box: '<path d="M21 8V21H3V8"></path><path d="M1 3h22v5H1z"></path><path d="M10 12h4"></path>',
+    building: '<circle cx="9" cy="8" r="3.4"></circle><path d="M3 20a6 6 0 0 1 12 0"></path><path d="M16 6.4a3 3 0 0 1 0 5.8M18.5 20a5.4 5.4 0 0 0-2.5-4.6"></path>',
+    box: '<path d="M5 7h14l-1.4 10.2a2 2 0 0 1-2 1.8H8.4a2 2 0 0 1-2-1.8L5 7Z"></path><path d="M9 7V5.5a3 3 0 0 1 6 0V7"></path>',
+    tv: '<rect x="3" y="5" width="18" height="14" rx="3"></rect><path d="M10 9.5v5l4.5-2.5-4.5-2.5Z" fill="currentColor" stroke="none"></path>',
     shield: '<path d="M12 2l9 5v10l-9 5-9-5V7z"></path>'
   };
 
   function icon(name) {
-    return '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + (ICONS[name] || ICONS.circle) + '</svg>';
+    return '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">' + (ICONS[name] || ICONS.circle) + '</svg>';
   }
 
   var here = window.location.pathname.split('/').pop() || 'dashboard.html';
@@ -150,7 +153,7 @@
         '<button type="button" class="nav-item nav-group-trigger' + (hasActive ? ' has-active' : '') + '" aria-expanded="' + (hasActive ? 'true' : 'false') + '" aria-controls="navsub-' + entry.group + '">' +
         '<span class="nav-item-icon">' + icon(entry.icon) + '</span>' +
         '<span class="nav-item-label">' + entry.label + '</span>' +
-        '<svg class="nav-chevron" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>' +
+        '<svg class="nav-chevron" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="m9 6 6 6-6 6"></path></svg>' +
         '</button>' +
         '<div class="nav-sub" id="navsub-' + entry.group + '"><ul class="nav-sub-inner">' + subHtml + '</ul></div>' +
         '</div>';
@@ -163,12 +166,13 @@
   var USER_INITIALS = 'GO';
 
   var sidebarUserHtml = '<div class="sidebar-user">' +
-    '<div class="sidebar-user-avatar">' + USER_INITIALS +
+    '<div class="sidebar-user-avatar">' +
+    '<svg width="34" height="34" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="15" r="7" fill="#3A1F52"></circle><path d="M6 38c1.5-8 8-12 14-12s12.5 4 14 12" fill="#3A6FD3"></path><rect x="12" y="20" width="16" height="8" fill="#F4C67A" rx="1"></rect></svg>' +
     '<div class="sidebar-avatar-overlay"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg></div>' +
     '</div>' +
     '<div class="sidebar-user-info"><div class="sidebar-user-name">' + USER_NAME + '</div>' +
     '<span class="sidebar-user-role">' + USER_ROLE + '</span></div>' +
-    '<button type="button" class="sidebar-user-logout" title="Sair da conta" onclick="sessionStorage.removeItem(\'cw_test_authorized\'); window.location=\'/index.html\';"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg></button>' +
+    '<button type="button" class="sidebar-user-logout" title="Sair da conta" onclick="sessionStorage.removeItem(\'cw_test_authorized\'); window.location=\'/index.html\';"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"></path><path d="M10 8l-4 4 4 4M6 12h11"></path></svg></button>' +
     '</div>';
 
   var sidebarTopWaveHtml = '<svg class="sidebar-topwave" viewBox="0 0 264 22" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,0 C 60,22 200,22 264,0 L264,22 L0,22 Z"></path></svg>';
@@ -181,13 +185,12 @@
     '</div></div><div class="ssb-bar"><span class="ssb-bar-icon">💡</span><span class="ssb-bar-label">Sugestões</span></div></div>';
 
   var sidebarWaveHtml = '<div class="sidebar-wave">' +
-    '<svg class="sw-back" viewBox="0 0 264 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,100 L0,45 C 40,10 90,0 140,15 C 190,30 230,55 264,35 L264,100 Z"></path></svg>' +
-    '<svg class="sw-front" viewBox="0 0 264 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,100 L0,60 C 50,35 100,25 150,40 C 200,55 230,70 264,55 L264,100 Z"></path></svg>' +
-    '<svg class="sw-spark" style="left:16%;top:8px;width:16px;height:16px;" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 0 L14.5 9.5 L24 12 L14.5 14.5 L12 24 L9.5 14.5 L0 12 L9.5 9.5 Z"></path></svg>' +
-    '<img class="sw-cloche" src="/assets/mascots/cardapinho-loja.png" alt="Cardapinho">' +
+    '<span class="sw-star" style="left:22px;top:14px;font-size:16px;">✦</span>' +
+    '<span class="sw-star" style="left:46px;top:52px;font-size:10px;">✦</span>' +
+    '<img class="sw-full" src="/assets/mascots/mascote-sacola.png" alt="Cardapinho">' +
     '</div>';
 
-  var sidebarHtml = '<div class="sidebar-logo"><img alt="CW-Rev" src="/assets/logo-menu-new-fcfaf4fe.png" /></div>' +
+  var sidebarHtml = '<div class="sidebar-logo"><img alt="Cardápio Web" src="/assets/logo-stack.png" /></div>' +
     sidebarTopWaveHtml +
     sidebarUserHtml +
     '<nav class="sidebar-nav">' + navHtml + '</nav>' +
