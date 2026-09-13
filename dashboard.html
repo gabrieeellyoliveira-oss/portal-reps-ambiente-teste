@@ -9,6 +9,31 @@
     <style>
       .avatar-circle{width:34px;height:34px;border-radius:50%;background:#5b21b6;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;}
       .pod-av img, .pod-row-av img{display:none;}
+
+      /* Cores do Manual da Marca aplicadas ao Dashboard (cards arredondados
+         com sombra em vez do "flat redesign" quadrado, ícones nos KPIs que
+         já existiam no CSS real mas nunca eram usados, e paleta roxo/dourado
+         no lugar do roxo/azul/verde genéricos). Escopado a esta página. */
+      .adm-flat .adm-card, .adm-flat .adm-kpi-tile {
+        border-radius: 18px !important;
+        box-shadow: 0 4px 12px rgba(89,50,122,.08) !important;
+        border: 1px solid rgba(89,50,122,.08) !important;
+      }
+      .adm-flat .adm-kpi-tile { position: relative; }
+      .adm-kpi-tile-icon { background: #F4EDF7; color: #A543FA; position: absolute; top: 14px; right: 14px; }
+      .adm-kpi-tile-icon.warn { background: #FFF3D6; color: #B37F00; }
+      .adm-kpi-tile-icon.alert { background: #FFEAEA; color: #C23030; }
+      .pod-head-ico--purple { color: #A543FA; }
+      .pod-av--p1 { border-color: #FFB600; }
+      .pod-medal--p1 { background: linear-gradient(135deg, #FFD166, #FFB600); }
+      .pod-medal--p2 { background: linear-gradient(135deg, #cbd5e1, #94a3b8); }
+      .pod-medal--p3 { background: linear-gradient(135deg, #C79BE8, #A543FA); }
+      .pod-money--purple { background: #A543FA; }
+      .pod-block--purple { background: linear-gradient(180deg, #A543FA, #59327A); }
+      .pod-block--purple::before { background: #C79BE8; }
+      .pod-row-fill--purple { background: #A543FA; }
+      .pod-more--purple { background: #F4EDF7; color: #A543FA; }
+      .pod-more--purple:hover { background: #EADBF4; color: #59327A; }
     </style>
   </head>
   <body>
@@ -22,15 +47,15 @@
         <main class="page-content">
           <div class="adm-flat">
             <div class="adm-kpi-grid">
-              <div class="adm-kpi-tile"><div class="adm-kpi-tile-body"><div class="adm-kpi-tile-value">366</div><div class="adm-kpi-tile-label">Partners</div><div class="adm-kpi-tile-sub positive">124 aprovados · 227 pend.</div></div></div>
-              <div class="adm-kpi-tile"><div class="adm-kpi-tile-body"><div class="adm-kpi-tile-value">21</div><div class="adm-kpi-tile-label">Ativados</div><div class="adm-kpi-tile-sub">17% · cliente nos últ. 60d</div></div></div>
-              <div class="adm-kpi-tile"><div class="adm-kpi-tile-body"><div class="adm-kpi-tile-value">9</div><div class="adm-kpi-tile-label">Em Risco</div><div class="adm-kpi-tile-sub">últ. cliente há +60d</div></div></div>
-              <div class="adm-kpi-tile"><div class="adm-kpi-tile-body"><div class="adm-kpi-tile-value">94</div><div class="adm-kpi-tile-label">s/ Ativação</div><div class="adm-kpi-tile-sub">nunca colocou cliente</div></div></div>
-              <div class="adm-kpi-tile"><div class="adm-kpi-tile-body"><div class="adm-kpi-tile-value">110</div><div class="adm-kpi-tile-label">Lojas Ativas</div><div class="adm-kpi-tile-sub">195 clientes · +14 mês</div></div></div>
-              <div class="adm-kpi-tile"><div class="adm-kpi-tile-body"><div class="adm-kpi-tile-value">195</div><div class="adm-kpi-tile-label">Clientes Pagos</div><div class="adm-kpi-tile-sub">100% dos ativos</div></div></div>
-              <div class="adm-kpi-tile"><div class="adm-kpi-tile-body"><div class="adm-kpi-tile-value">R$ 56.895</div><div class="adm-kpi-tile-label">MRR</div><div class="adm-kpi-tile-sub">TM R$ 291</div></div></div>
-              <div class="adm-kpi-tile"><div class="adm-kpi-tile-body"><div class="adm-kpi-tile-value">2.5%</div><div class="adm-kpi-tile-label">Churn</div><div class="adm-kpi-tile-sub">5 canc. este mês hist.: 50 canc.</div></div></div>
-              <div class="adm-kpi-tile"><div class="adm-kpi-tile-body"><div class="adm-kpi-tile-value">5</div><div class="adm-kpi-tile-label">Early Churn ≤ 45d</div><div class="adm-kpi-tile-sub">100% dos canc. do mês hist.: 31 de 50 (62%)</div></div></div>
+              <div class="adm-kpi-tile"><span class="adm-kpi-tile-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.4"></circle><path d="M3 20a6 6 0 0 1 12 0"></path><path d="M16 6.4a3 3 0 0 1 0 5.8M18.5 20a5.4 5.4 0 0 0-2.5-4.6"></path></svg></span><div class="adm-kpi-tile-body"><div class="adm-kpi-tile-value">366</div><div class="adm-kpi-tile-label">Partners</div><div class="adm-kpi-tile-sub positive">124 aprovados · 227 pend.</div></div></div>
+              <div class="adm-kpi-tile"><span class="adm-kpi-tile-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"></path></svg></span><div class="adm-kpi-tile-body"><div class="adm-kpi-tile-value">21</div><div class="adm-kpi-tile-label">Ativados</div><div class="adm-kpi-tile-sub">17% · cliente nos últ. 60d</div></div></div>
+              <div class="adm-kpi-tile"><span class="adm-kpi-tile-icon warn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2 20h20L12 3Z"></path><path d="M12 10v4M12 17h.01"></path></svg></span><div class="adm-kpi-tile-body"><div class="adm-kpi-tile-value">9</div><div class="adm-kpi-tile-label">Em Risco</div><div class="adm-kpi-tile-sub">últ. cliente há +60d</div></div></div>
+              <div class="adm-kpi-tile"><span class="adm-kpi-tile-icon warn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.4"></circle><path d="M3 20a6 6 0 0 1 12 0"></path><path d="M17 8l4 4m0-4-4 4"></path></svg></span><div class="adm-kpi-tile-body"><div class="adm-kpi-tile-value">94</div><div class="adm-kpi-tile-label">s/ Ativação</div><div class="adm-kpi-tile-sub">nunca colocou cliente</div></div></div>
+              <div class="adm-kpi-tile"><span class="adm-kpi-tile-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 3l9 6.5"></path><path d="M5 9v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9"></path><path d="M9 20v-6h6v6"></path></svg></span><div class="adm-kpi-tile-body"><div class="adm-kpi-tile-value">110</div><div class="adm-kpi-tile-label">Lojas Ativas</div><div class="adm-kpi-tile-sub">195 clientes · +14 mês</div></div></div>
+              <div class="adm-kpi-tile"><span class="adm-kpi-tile-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"></rect><path d="M3 10h18"></path><path d="M7 15h4"></path></svg></span><div class="adm-kpi-tile-body"><div class="adm-kpi-tile-value">195</div><div class="adm-kpi-tile-label">Clientes Pagos</div><div class="adm-kpi-tile-sub">100% dos ativos</div></div></div>
+              <div class="adm-kpi-tile"><span class="adm-kpi-tile-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"></path><path d="M15 7h6v6"></path></svg></span><div class="adm-kpi-tile-body"><div class="adm-kpi-tile-value">R$ 56.895</div><div class="adm-kpi-tile-label">MRR</div><div class="adm-kpi-tile-sub">TM R$ 291</div></div></div>
+              <div class="adm-kpi-tile"><span class="adm-kpi-tile-icon alert"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l6 6 4-4 8 8"></path><path d="M21 11V17H15"></path></svg></span><div class="adm-kpi-tile-body"><div class="adm-kpi-tile-value">2.5%</div><div class="adm-kpi-tile-label">Churn</div><div class="adm-kpi-tile-sub">5 canc. este mês hist.: 50 canc.</div></div></div>
+              <div class="adm-kpi-tile"><span class="adm-kpi-tile-icon alert"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3.5 2"></path></svg></span><div class="adm-kpi-tile-body"><div class="adm-kpi-tile-value">5</div><div class="adm-kpi-tile-label">Early Churn ≤ 45d</div><div class="adm-kpi-tile-sub">100% dos canc. do mês hist.: 31 de 50 (62%)</div></div></div>
             </div>
 
             <div style="display:flex;gap:16px;margin-top:16px;flex-wrap:wrap;">
@@ -165,13 +190,13 @@
                 <div class="adm-card-actions"><button class="adm-maximize-btn">⤢</button></div>
               </div>
               <div class="adm-chart-legend2">
-                <span class="adm-legend2-item"><span class="adm-legend2-bar" style="background:rgba(124,58,237,.75);"></span>Novos Clientes</span>
-                <span class="adm-legend2-item"><span class="adm-legend2-bar adm-legend2-proj" style="background:rgba(124,58,237,.22);"></span>Projeção do mês</span>
-                <span class="adm-legend2-item"><span class="adm-legend2-bar" style="background:rgba(59,130,246,.55);"></span>Novos Reps</span>
-                <span class="adm-legend2-item"><span class="adm-legend2-bar" style="background:rgba(20,184,166,.6);"></span>Reps Ativados</span>
-                <span class="adm-legend2-item"><span class="adm-legend2-line" style="background:#f59e0b;"></span>nMRR (R$)</span>
-                <span class="adm-legend2-item"><span class="adm-legend2-line" style="background:#10b981;"></span>MRR (R$)</span>
-                <span class="adm-legend2-item"><span class="adm-legend2-line adm-legend2-dash" style="background:#ef4444;"></span>Churn</span>
+                <span class="adm-legend2-item"><span class="adm-legend2-bar" style="background:rgba(165,67,250,.8);"></span>Novos Clientes</span>
+                <span class="adm-legend2-item"><span class="adm-legend2-bar adm-legend2-proj" style="background:rgba(165,67,250,.25);"></span>Projeção do mês</span>
+                <span class="adm-legend2-item"><span class="adm-legend2-bar" style="background:rgba(89,50,122,.55);"></span>Novos Reps</span>
+                <span class="adm-legend2-item"><span class="adm-legend2-bar" style="background:rgba(199,155,232,.7);"></span>Reps Ativados</span>
+                <span class="adm-legend2-item"><span class="adm-legend2-line" style="background:#FFB600;"></span>nMRR (R$)</span>
+                <span class="adm-legend2-item"><span class="adm-legend2-line" style="background:#59327A;"></span>MRR (R$)</span>
+                <span class="adm-legend2-item"><span class="adm-legend2-line adm-legend2-dash" style="background:#FF5959;"></span>Churn</span>
               </div>
               <div class="adm-chart-wrap"><canvas id="adminComboChart" height="90"></canvas></div>
             </div>
@@ -188,7 +213,7 @@
               <div class="adm-card adm-churn-insight">
                 <h3 class="adm-card-title2">Análise de Churn</h3>
                 <p style="font-size:.72rem;color:#9ca3af;margin:4px 0;">Meta: abaixo de 4.0%</p>
-                <p style="font-size:.8rem;color:#dc2626;font-weight:700;margin:6px 0 4px;">Churn crítico: 20.0% — 16.0pp acima da meta de 4.0%</p>
+                <p style="font-size:.8rem;color:#FF5959;font-weight:700;margin:6px 0 4px;">Churn crítico: 20.0% — 16.0pp acima da meta de 4.0%</p>
                 <p style="font-size:.8rem;color:#4b5563;">Churn em nível crítico. Prioridade máxima de intervenção. 8 cancelamentos por "Outro" — maior grupo de saída. Implemente um processo de customer success: contato ativo com clientes em risco antes do cancelamento, NPS recorrente e revisões de contrato periódicas. Meta: reduzir o churn em pelo menos 2pp no próximo trimestre.</p>
                 <p style="font-size:.72rem;color:#9ca3af;margin-top:10px;">Top motivos: Outro motivo 62% · Dificuldade de uso 31% · Falta de treinamento 8%</p>
               </div>
@@ -236,7 +261,7 @@
               <div class="adm-card" style="flex:1;min-width:280px;">
                 <div class="adm-card-header"><h3 class="adm-card-title2">📦 Módulos</h3><div class="adm-card-subtitle">Adicionais contratados</div></div>
                 <div style="font-size:1.4rem;font-weight:800;">0.7 <span style="font-size:.72rem;font-weight:400;color:#9ca3af;">módulos / cliente</span></div>
-                <div style="font-size:.8rem;margin:10px 0;">Com módulos <b>76</b> · Sem módulos <b>119</b><div style="height:6px;background:#f3f4f6;border-radius:4px;margin-top:6px;overflow:hidden;"><div style="width:39%;height:100%;background:#7c3aed;"></div></div><div style="color:#7c3aed;margin-top:4px;">39% tem módulo ativo</div></div>
+                <div style="font-size:.8rem;margin:10px 0;">Com módulos <b>76</b> · Sem módulos <b>119</b><div style="height:6px;background:#f3f4f6;border-radius:4px;margin-top:6px;overflow:hidden;"><div style="width:39%;height:100%;background:#A543FA;"></div></div><div style="color:#A543FA;margin-top:4px;">39% tem módulo ativo</div></div>
               </div>
               <div class="adm-card" style="flex:1;min-width:280px;">
                 <div class="adm-card-header"><h3 class="adm-card-title2">Módulos Mais Contratados</h3><div class="adm-card-subtitle">Entre clientes pagos com módulos registrados</div></div>
@@ -280,13 +305,13 @@
         data: {
           labels: MONTHS,
           datasets: [
-            {label:'Novos Clientes', type:'bar', data:[0,0,0,0,0,0,25,39,68,45,58,14], backgroundColor:'rgba(124,58,237,0.75)', borderColor:'rgba(124,58,237,1)'},
-            {label:'Projeção do mês', type:'bar', data:[0,0,0,0,0,0,0,0,0,0,0,29], backgroundColor:'rgba(124,58,237,0.22)', borderColor:'rgba(124,58,237,0.85)'},
-            {label:'Novos Reps', type:'bar', data:[0,0,0,0,0,0,17,8,30,12,46,11], backgroundColor:'rgba(59,130,246,0.55)', borderColor:'rgba(59,130,246,1)'},
-            {label:'Reps Ativados', type:'bar', data:[0,0,0,0,0,0,4,4,8,7,5,1], backgroundColor:'rgba(20,184,166,0.6)', borderColor:'rgba(20,184,166,1)'},
-            {label:'nMRR (R$)', type:'line', yAxisID:'y1', data:[0,0,0,0,0,0,7104.50,11509.08,19988.45,13253.92,15728.91,4069.69], backgroundColor:'rgba(245,158,11,0.07)', borderColor:'#f59e0b'},
-            {label:'MRR (R$)', type:'line', yAxisID:'y1', data:[0,0,0,0,0,0,5609.59,13923.95,27437.86,38326.96,52825.94,56895.63], backgroundColor:'rgba(16,185,129,0.06)', borderColor:'#10b981'},
-            {label:'Churn', type:'line', yAxisID:'y1', data:[0,0,0,0,0,0,0,0,5,16,23,5], borderColor:'#ef4444', borderDash:[4,3]}
+            {label:'Novos Clientes', type:'bar', data:[0,0,0,0,0,0,25,39,68,45,58,14], backgroundColor:'rgba(165,67,250,0.8)', borderColor:'rgba(165,67,250,1)'},
+            {label:'Projeção do mês', type:'bar', data:[0,0,0,0,0,0,0,0,0,0,0,29], backgroundColor:'rgba(165,67,250,0.25)', borderColor:'rgba(165,67,250,0.85)'},
+            {label:'Novos Reps', type:'bar', data:[0,0,0,0,0,0,17,8,30,12,46,11], backgroundColor:'rgba(89,50,122,0.55)', borderColor:'rgba(89,50,122,1)'},
+            {label:'Reps Ativados', type:'bar', data:[0,0,0,0,0,0,4,4,8,7,5,1], backgroundColor:'rgba(199,155,232,0.7)', borderColor:'rgba(199,155,232,1)'},
+            {label:'nMRR (R$)', type:'line', yAxisID:'y1', data:[0,0,0,0,0,0,7104.50,11509.08,19988.45,13253.92,15728.91,4069.69], backgroundColor:'rgba(255,182,0,0.07)', borderColor:'#FFB600'},
+            {label:'MRR (R$)', type:'line', yAxisID:'y1', data:[0,0,0,0,0,0,5609.59,13923.95,27437.86,38326.96,52825.94,56895.63], backgroundColor:'rgba(89,50,122,0.06)', borderColor:'#59327A'},
+            {label:'Churn', type:'line', yAxisID:'y1', data:[0,0,0,0,0,0,0,0,5,16,23,5], borderColor:'#FF5959', borderDash:[4,3]}
           ]
         },
         options: { responsive:true, scales: { y:{beginAtZero:true}, y1:{position:'right', beginAtZero:true, grid:{drawOnChartArea:false}} }, plugins:{legend:{display:false}} }
@@ -294,13 +319,13 @@
 
       new Chart(document.getElementById('churnCatChart'), {
         type:'doughnut',
-        data: { labels:['Produto','Suporte','Outro'], datasets:[{data:[4,1,8], backgroundColor:['#7c3aed','#ef4444','#f59e0b']}] }
+        data: { labels:['Produto','Suporte','Outro'], datasets:[{data:[4,1,8], backgroundColor:['#A543FA','#FF5959','#FFB600']}] }
       });
       new Chart(document.getElementById('churnReasonChart'), {
         type:'doughnut',
-        data: { labels:['Outro motivo','Dificuldade de uso','Falta de treinamento'], datasets:[{data:[8,4,1], backgroundColor:['#7c3aed','#ef4444','#f59e0b']}] }
+        data: { labels:['Outro motivo','Dificuldade de uso','Falta de treinamento'], datasets:[{data:[8,4,1], backgroundColor:['#A543FA','#FF5959','#FFB600']}] }
       });
-      var PROFILE = [['Empreendedor',11,'#7c3aed'],['Cliente CW',6,'#2563eb'],['Renda Extra',17,'#059669'],['Adjacente',5,'#d97706'],['Profissional de Software',24,'#dc2626'],['Outros',110,'#6b7280'],['Não informado',28,'#9ca3af']];
+      var PROFILE = [['Empreendedor',11,'#A543FA'],['Cliente CW',6,'#59327A'],['Renda Extra',17,'#FFB600'],['Adjacente',5,'#C79BE8'],['Profissional de Software',24,'#FF5959'],['Outros',110,'#8B899E'],['Não informado',28,'#D9CCE8']];
       new Chart(document.getElementById('repProfileDonut'), {
         type:'doughnut',
         data: { labels:PROFILE.map(p=>p[0]), datasets:[{data:PROFILE.map(p=>p[1]), backgroundColor:PROFILE.map(p=>p[2])}] },
@@ -317,7 +342,7 @@
       }).join('');
       new Chart(document.getElementById('periodDonutChart'), {
         type:'doughnut',
-        data: { labels:['Mensal','Trimestral','Semestral','Anual'], datasets:[{data:[193,0,1,1], backgroundColor:['#7c3aed','#2563eb','#059669','#d97706']}] }
+        data: { labels:['Mensal','Trimestral','Semestral','Anual'], datasets:[{data:[193,0,1,1], backgroundColor:['#A543FA','#59327A','#FFB600','#C79BE8']}] }
       });
 
       document.getElementById('metrics').innerHTML = [
@@ -330,9 +355,9 @@
       }).join('');
 
       document.getElementById('insights').innerHTML = [
-        ['#10b981','🏆','Maior Faturamento','Rafael Patrício Ferreira lidera com R$ 25.273 em receita recorrente mensal.'],
-        ['#f59e0b','⚠','Aprovados sem Ativação','94 representantes aprovados ainda não colocou o 1º cliente. Priorize-os no Pipeline Onboarding.'],
-        ['#ef4444','📉','Reps em Risco','9 representantes já colocou cliente, mas está há mais de 60 dias sem cliente novo. Hora de reengajar.']
+        ['#A543FA','🏆','Maior Faturamento','Rafael Patrício Ferreira lidera com R$ 25.273 em receita recorrente mensal.'],
+        ['#FFB600','⚠','Aprovados sem Ativação','94 representantes aprovados ainda não colocou o 1º cliente. Priorize-os no Pipeline Onboarding.'],
+        ['#FF5959','📉','Reps em Risco','9 representantes já colocou cliente, mas está há mais de 60 dias sem cliente novo. Hora de reengajar.']
       ].map(function(i){
         return '<div class="adm-insight-card2"><span class="adm-insight-icon2" style="background:'+i[0]+'15;color:'+i[0]+';">'+i[1]+'</span><div class="adm-insight-content"><div class="adm-insight-title2">'+i[2]+'</div><div class="adm-insight-text2">'+i[3]+'</div></div></div>';
       }).join('');
