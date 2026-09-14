@@ -96,6 +96,7 @@
       { href: '/certificacoes.html', label: 'Certificações' }
     ]},
     { group: 'administracao', label: 'Administração', icon: 'shield', items: [
+      { href: '/metas.html', label: 'Metas' },
       { href: '/representatives.html', label: 'Representantes' },
       { href: '/painel-aquisicao.html', label: 'Painel de Aquisição' },
       { href: '/rfv.html', label: 'Matriz RFV' },
@@ -123,7 +124,8 @@
     building: '<circle cx="9" cy="8" r="3.4"></circle><path d="M3 20a6 6 0 0 1 12 0"></path><path d="M16 6.4a3 3 0 0 1 0 5.8M18.5 20a5.4 5.4 0 0 0-2.5-4.6"></path>',
     box: '<path d="M5 7h14l-1.4 10.2a2 2 0 0 1-2 1.8H8.4a2 2 0 0 1-2-1.8L5 7Z"></path><path d="M9 7V5.5a3 3 0 0 1 6 0V7"></path>',
     tv: '<rect x="3" y="5" width="18" height="14" rx="3"></rect><path d="M10 9.5v5l4.5-2.5-4.5-2.5Z" fill="currentColor" stroke="none"></path>',
-    shield: '<path d="M12 2l9 5v10l-9 5-9-5V7z"></path>'
+    shield: '<path d="M12 2l9 5v10l-9 5-9-5V7z"></path>',
+    target: '<circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="5"></circle><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"></circle>'
   };
 
   function icon(name) {

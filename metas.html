@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Metas — Portal de Representantes | Cardápio Web</title>
+    <link rel="icon" type="image/jpeg" href="/assets/cw-logo-dark-e78e4446.jpg">
+    <link rel="stylesheet" href="/assets/application-cc2f1a53.css" />
+    <style>
+      .mt-head { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:18px; }
+      .mt-title { margin:0 0 4px; font-size:1.3rem; color:#17123b; }
+      .mt-sub { margin:0; font-size:.82rem; color:#9ca3af; font-weight:600; }
+      .mt-internal-badge { display:inline-flex; align-items:center; gap:6px; font-size:.7rem; font-weight:800; letter-spacing:.04em; text-transform:uppercase; color:#6d28d9; background:#f3efff; border:1px solid #e4dcfb; border-radius:8px; padding:6px 12px; }
+      .mt-section { margin-bottom:26px; }
+      .mt-section-title { display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; font-size:1rem; color:#17123b; margin:0 0 12px; }
+      .mt-section-metric { font-size:.76rem; font-weight:700; color:#8b5cf6; background:#f3efff; padding:3px 10px; border-radius:999px; }
+      .mt-cards { display:flex; flex-direction:column; gap:14px; }
+      .mt-card { background:#fff; border:1px solid #eef0f4; border-radius:16px; padding:18px 20px; }
+      .mt-card-head { display:flex; align-items:center; gap:12px; margin-bottom:16px; flex-wrap:wrap; }
+      .mt-avatar { width:42px; height:42px; border-radius:50%; background:linear-gradient(135deg,#8b5cf6,#5b21b6); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:15px; flex-shrink:0; }
+      .mt-card-headtext { display:flex; flex-direction:column; flex:1; min-width:140px; }
+      .mt-card-name { font-weight:800; font-size:.95rem; color:#17123b; }
+      .mt-card-role { font-size:.72rem; color:#9ca3af; font-weight:600; }
+      .mt-card-current { text-align:right; }
+      .mt-card-current-num { display:block; font-size:1.6rem; font-weight:800; color:#5b21b6; line-height:1.1; }
+      .mt-card-current-label { font-size:.68rem; color:#9ca3af; font-weight:700; text-transform:uppercase; letter-spacing:.03em; }
+      .mt-track { position:relative; height:16px; background:#f4f2fb; border-radius:999px; margin:0 0 34px; }
+      .mt-fill { position:absolute; left:0; top:0; bottom:0; border-radius:999px; background:linear-gradient(90deg,#6d28d9,#8b5cf6); transition:width .3s ease; }
+      .mt-tick { position:absolute; top:-4px; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; }
+      .mt-tick-line { width:2px; height:24px; background:#c7bce8; border-radius:2px; }
+      .mt-tick.done .mt-tick-line { background:#10b981; }
+      .mt-tick-label { margin-top:4px; font-size:.65rem; font-weight:700; color:#8b7a98; text-align:center; white-space:nowrap; }
+      .mt-tick.done .mt-tick-label { color:#059669; }
+      .mt-proj-marker { position:absolute; top:-9px; width:0; height:0; transform:translateX(-50%); border-left:5px solid transparent; border-right:5px solid transparent; border-top:8px solid #FFB600; }
+      .mt-tiers { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:10px; }
+      .mt-tier { font-size:.76rem; font-weight:700; color:#8b7a98; background:#f9f8fb; border:1px solid #eee; border-radius:999px; padding:5px 12px; }
+      .mt-tier.done { color:#059669; background:#ecfdf5; border-color:#a7f3d0; }
+      .mt-status { font-size:.82rem; color:#4b5563; line-height:1.5; padding-top:10px; border-top:1px dashed #eee; }
+      .mt-status strong { color:#17123b; }
+      .mt-status.ok { color:#059669; }
+      .mt-status .mt-pace-tag { display:inline-block; font-size:.68rem; font-weight:800; border-radius:6px; padding:2px 7px; margin-left:4px; }
+      .mt-pace-tag.ok { color:#059669; background:#ecfdf5; }
+      .mt-pace-tag.bad { color:#b45309; background:#fffbeb; }
+      @media (max-width:640px) { .mt-card-current { text-align:left; } .mt-card-head { justify-content:flex-start; } }
+    </style>
+  </head>
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar" id="sidebar"></aside>
+      <div class="main-wrapper">
+        <header class="top-header" id="top-header"></header>
+        <main class="page-content">
+          <div class="mt-head">
+            <div>
+              <h2 class="mt-title">🎯 Metas</h2>
+              <p class="mt-sub" id="mt-subtitle"></p>
+            </div>
+            <span class="mt-internal-badge">🔒 Uso interno</span>
+          </div>
+
+          <section class="mt-section">
+            <h3 class="mt-section-title">CA — Aquisição de Canal <span class="mt-section-metric" id="mt-ca-metric"></span></h3>
+            <div class="mt-cards" id="mt-ca"></div>
+          </section>
+
+          <section class="mt-section">
+            <h3 class="mt-section-title">PSM — Sucesso de Parceiros <span class="mt-section-metric" id="mt-psm-metric"></span></h3>
+            <div class="mt-cards" id="mt-psm"></div>
+          </section>
+        </main>
+      </div>
+    </div>
+    <script src="/assets/shell.js" data-title="Metas"></script>
+    <script>
+      // ── Configuração do mês — atualizar aqui todo início de mês ──
+      var MES_REF = 'Setembro/2026';
+      var DIA_ATUAL = 14;    // dia de hoje dentro do mês de referência
+      var DIAS_NO_MES = 30;  // total de dias do mês de referência
+
+      // ── Metas por função/pessoa — atualizar aqui quando a Gabi mandar as metas do mês ──
+      // "atual" hoje vem dos mesmos números fictícios usados no gráfico do Dashboard
+      // (Novos Reps / Reps Ativados de set/26); não há integração real ainda.
+      var METAS = [
+        {
+          papel: 'CA',
+          papelNome: 'Aquisição de Canal',
+          metrica: 'Cadastro de Representantes',
+          pessoas: [
+            { nome: 'Gabi Oliveira', atual: 11, metas: [39, 42, 45] }
+          ]
+        },
+        {
+          papel: 'PSM',
+          papelNome: 'Sucesso de Parceiros',
+          metrica: 'Ativação de Representantes',
+          pessoas: [
+            { nome: 'Bea Andrade', atual: 1, metas: [4, 7, 10] }
+          ]
+        }
+      ];
+
+      document.getElementById('mt-subtitle').textContent = 'Acompanhamento interno · ' + MES_REF + ' · dia ' + DIA_ATUAL + ' de ' + DIAS_NO_MES;
+      document.getElementById('mt-ca-metric').textContent = METAS[0].metrica;
+      document.getElementById('mt-psm-metric').textContent = METAS[1].metrica;
+
+      function initials(name) {
+        return name.split(' ').slice(0, 2).map(function (w) { return w[0]; }).join('').toUpperCase();
+      }
+
+      function renderPessoa(grupo, p) {
+        var maxMeta = p.metas[2];
+        var scale = Math.max(maxMeta, p.atual) * 1.1;
+        var fillPct = Math.min(100, (p.atual / scale) * 100);
+        var projecao = Math.round((p.atual / DIA_ATUAL) * DIAS_NO_MES);
+        var projPct = Math.min(100, (projecao / scale) * 100);
+
+        var ticksHtml = p.metas.map(function (m, i) {
+          var left = (m / scale) * 100;
+          var done = p.atual >= m;
+          return '<div class="mt-tick' + (done ? ' done' : '') + '" style="left:' + left + '%">' +
+            '<span class="mt-tick-line"></span><span class="mt-tick-label">Meta ' + (i + 1) + '<br>' + m + '</span></div>';
+        }).join('');
+
+        var tiersHtml = p.metas.map(function (m, i) {
+          var done = p.atual >= m;
+          return '<span class="mt-tier' + (done ? ' done' : '') + '">' + (done ? '✅' : '⚪') + ' Meta ' + (i + 1) + ' — ' + m + '</span>';
+        }).join('');
+
+        var nextMeta = null, nextIdx = -1;
+        for (var i = 0; i < p.metas.length; i++) {
+          if (p.atual < p.metas[i]) { nextMeta = p.metas[i]; nextIdx = i; break; }
+        }
+        var paceOk = projecao >= p.metas[0];
+        var statusHtml;
+        if (nextMeta === null) {
+          statusHtml = '<span class="mt-status ok">🏆 Todas as metas do mês batidas!</span>';
+        } else {
+          var falta = nextMeta - p.atual;
+          statusHtml = '<span class="mt-status">Faltam <strong>' + falta + '</strong> pra bater a Meta ' + (nextIdx + 1) + ' (' + nextMeta + '). ' +
+            'Ritmo atual: ~<strong>' + projecao + '</strong> até o fim do mês' +
+            '<span class="mt-pace-tag ' + (paceOk ? 'ok' : 'bad') + '">' + (paceOk ? 'no ritmo da Meta 1' : 'abaixo da Meta 1') + '</span></span>';
+        }
+
+        return '<div class="mt-card">' +
+          '<div class="mt-card-head">' +
+            '<span class="mt-avatar">' + initials(p.nome) + '</span>' +
+            '<div class="mt-card-headtext"><span class="mt-card-name">' + p.nome + '</span>' +
+            '<span class="mt-card-role">' + grupo.papel + ' · ' + grupo.metrica + '</span></div>' +
+            '<div class="mt-card-current"><span class="mt-card-current-num">' + p.atual + '</span><span class="mt-card-current-label">até agora</span></div>' +
+          '</div>' +
+          '<div class="mt-track">' +
+            '<div class="mt-fill" style="width:' + fillPct + '%"></div>' +
+            '<div class="mt-proj-marker" style="left:' + projPct + '%" title="Projeção pro fim do mês: ' + projecao + '"></div>' +
+            ticksHtml +
+          '</div>' +
+          '<div class="mt-tiers">' + tiersHtml + '</div>' +
+          statusHtml +
+        '</div>';
+      }
+
+      document.getElementById('mt-ca').innerHTML = METAS[0].pessoas.map(function (p) { return renderPessoa(METAS[0], p); }).join('');
+      document.getElementById('mt-psm').innerHTML = METAS[1].pessoas.map(function (p) { return renderPessoa(METAS[1], p); }).join('');
+    </script>
+  </body>
+</html>
