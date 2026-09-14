@@ -75,6 +75,7 @@
 
   var NAV = [
     { href: '/dashboard.html', label: 'Dashboard', icon: 'grid' },
+    { href: '/metas.html', label: 'Metas', icon: 'target' },
     { href: '/opportunities.html', label: 'Quadro de Leads', icon: 'columns', badge: '99+' },
     { href: '/map.html', label: 'Mapa de Prospecção', icon: 'circle', badge: '99+' },
     { group: 'clientes', label: 'Clientes', icon: 'building', items: [
@@ -96,7 +97,6 @@
       { href: '/certificacoes.html', label: 'Certificações' }
     ]},
     { group: 'administracao', label: 'Administração', icon: 'shield', items: [
-      { href: '/metas.html', label: 'Metas' },
       { href: '/representatives.html', label: 'Representantes' },
       { href: '/painel-aquisicao.html', label: 'Painel de Aquisição' },
       { href: '/rfv.html', label: 'Matriz RFV' },
