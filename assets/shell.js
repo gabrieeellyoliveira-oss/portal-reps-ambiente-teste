@@ -234,5 +234,19 @@
     document.addEventListener('click', function (e) {
       if (profileDropdown && !e.target.closest('.profile-dropdown')) profileDropdown.classList.remove('open');
     });
+
+    // Carrega a assistente virtual "Luíza" em todas as páginas (widget de chat
+    // flutuante). Dados do FAQ ficam em luiza-data.js pra facilitar treinar com
+    // novas dúvidas; a lógica/UI do widget fica em luiza.js.
+    function loadScript(src, cb) {
+      var s = document.createElement('script');
+      s.src = src;
+      s.onload = cb;
+      document.head.appendChild(s);
+    }
+    if (!window.__luizaLoaded) {
+      window.__luizaLoaded = true;
+      loadScript('/assets/luiza-data.js', function () { loadScript('/assets/luiza.js'); });
+    }
   });
 })();
