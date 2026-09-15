@@ -9,98 +9,87 @@
     <style>
       @keyframes mt-fade-up { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
 
-      /* ── Hero ── */
-      .mt-hero { position:relative; overflow:hidden; border-radius:26px; padding:30px 32px; margin-bottom:18px;
-        background:linear-gradient(135deg,#9d4dff 0%,#7c3aed 45%,#4c1d95 100%);
-        box-shadow:0 22px 50px -12px rgba(109,40,217,.55); color:#fff; }
-      .mt-hero::before { content:''; position:absolute; top:-90px; right:-60px; width:260px; height:260px; border-radius:50%;
-        background:radial-gradient(circle,rgba(255,255,255,.22),transparent 70%); pointer-events:none; }
-      .mt-hero::after { content:''; position:absolute; bottom:-120px; left:20%; width:280px; height:280px; border-radius:50%;
-        background:radial-gradient(circle,rgba(255,182,0,.18),transparent 70%); pointer-events:none; }
-      .mt-hero-inner { position:relative; z-index:1; }
-      .mt-hero-top { display:flex; align-items:flex-start; justify-content:space-between; gap:14px; flex-wrap:wrap; margin-bottom:14px; }
-      .mt-hero-badge { display:inline-flex; align-items:center; gap:6px; font-size:.72rem; font-weight:800; letter-spacing:.03em;
-        background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.28); color:#fff; padding:7px 14px; border-radius:999px;
-        backdrop-filter:blur(4px); }
-      .mt-hero-actions { display:flex; gap:10px; flex-wrap:wrap; }
-      .mt-btn-ghost { display:inline-flex; align-items:center; gap:7px; font-size:.82rem; font-weight:700; color:#fff;
-        background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.32); border-radius:12px; padding:9px 16px; cursor:pointer;
-        transition:background-color .15s ease, transform .15s ease; }
-      .mt-btn-ghost:hover { background:rgba(255,255,255,.24); transform:translateY(-1px); }
-      .mt-btn-solid { display:inline-flex; align-items:center; gap:7px; font-size:.82rem; font-weight:800; color:#fff;
-        background:linear-gradient(135deg,#ff6b6b,#ff5959); border:none; border-radius:12px; padding:9px 18px; cursor:pointer;
-        box-shadow:0 10px 22px rgba(255,89,89,.45); transition:transform .15s ease, box-shadow .15s ease; }
-      .mt-btn-solid:hover { transform:translateY(-1px); box-shadow:0 12px 26px rgba(255,89,89,.55); }
-      .mt-hero-title { margin:0 0 6px; font-size:clamp(1.7rem,3.4vw,2.3rem); font-weight:900; letter-spacing:-.02em; line-height:1.1; }
-      .mt-hero-sub { margin:0 0 22px; font-size:.92rem; color:rgba(255,255,255,.82); font-weight:500; max-width:520px; }
-      .mt-hero-progress-row { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:8px; }
-      .mt-hero-progress-label { font-size:.72rem; font-weight:800; text-transform:uppercase; letter-spacing:.05em; color:rgba(255,255,255,.72); }
-      .mt-hero-progress-pct { font-size:1rem; font-weight:900; color:#fff; }
-      .mt-hero-track { height:11px; background:rgba(255,255,255,.22); border-radius:999px; overflow:hidden; }
-      .mt-hero-fill { height:100%; border-radius:999px; background:linear-gradient(90deg,#FFE27A,#FFB600); width:0%; transition:width 1s cubic-bezier(.22,.9,.3,1); }
+      .mt-pageheader { margin-bottom:18px; }
+      .mt-pageheader h1 { margin:0 0 4px; font-size:1.5rem; font-weight:900; color:#17123b; }
+      .mt-pageheader p { margin:0; font-size:.86rem; color:#9ca3af; font-weight:600; }
+
+      /* ── Painel de Comando ── */
+      .mt-command { position:relative; background:#fff; border:1px solid #f0edf6; border-radius:22px; padding:24px 26px;
+        margin-bottom:22px; box-shadow:0 6px 20px rgba(89,50,122,.07); }
+      .mt-command-top { display:flex; align-items:flex-start; justify-content:space-between; gap:14px; flex-wrap:wrap; }
+      .mt-command-eyebrow { display:block; font-size:.68rem; font-weight:800; letter-spacing:.06em; color:#8b5cf6; text-transform:uppercase; margin-bottom:6px; }
+      .mt-command-title { margin:0 0 6px; font-size:1.5rem; font-weight:900; color:#17123b; letter-spacing:-.01em; }
+      .mt-command-title span { background:linear-gradient(135deg,#8b5cf6,#6d28d9); -webkit-background-clip:text; background-clip:text; color:transparent; }
+      .mt-command-sub { margin:0; font-size:.86rem; color:#8b7a98; font-weight:500; max-width:480px; }
+      .mt-command-gear { width:38px; height:38px; border-radius:11px; border:1px solid #eee; background:#faf9fc; color:#8b7a98; cursor:pointer;
+        display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; transition:background-color .12s ease, color .12s ease; }
+      .mt-command-gear:hover { background:#f3efff; color:#6d28d9; }
+      .mt-command-pills { display:flex; gap:10px; flex-wrap:wrap; margin-top:16px; }
+      .mt-pill { display:inline-flex; align-items:center; gap:7px; font-size:.78rem; font-weight:700; color:#6d28d9; background:#f7f4fd;
+        border:1px solid #ece4fa; padding:8px 14px; border-radius:12px; }
+
+      /* ── Bloco por pessoa/papel ── */
+      .mt-block { margin-bottom:30px; }
+      .mt-block-head { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+      .mt-role-badge { display:inline-flex; align-items:center; gap:6px; font-size:.68rem; font-weight:800; letter-spacing:.04em; text-transform:uppercase;
+        padding:6px 12px; border-radius:999px; }
+      .mt-role-badge.ca { color:#6d28d9; background:#f3efff; }
+      .mt-role-badge.psm { color:#0891b2; background:#ecfeff; }
+      .mt-block-avatar { width:26px; height:26px; border-radius:50%; background:linear-gradient(135deg,#8b5cf6,#5b21b6); color:#fff;
+        display:flex; align-items:center; justify-content:center; font-weight:800; font-size:11px; flex-shrink:0; }
+      .mt-block-name { font-size:1.02rem; font-weight:800; color:#17123b; }
+      .mt-block-metric { font-size:.76rem; font-weight:700; color:#9ca3af; }
 
       /* ── Tira de KPIs ── */
-      .mt-kpis { display:flex; background:#fff; border-radius:18px; box-shadow:0 6px 20px rgba(89,50,122,.08); margin-bottom:22px; overflow:hidden; flex-wrap:wrap; }
-      .mt-kpi { flex:1 1 150px; display:flex; align-items:center; gap:11px; padding:16px 18px; border-right:1px solid #f0edf6; }
-      .mt-kpi:last-child { border-right:none; }
-      .mt-kpi-ico { width:36px; height:36px; border-radius:11px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
-      .mt-kpi-label { font-size:.66rem; font-weight:800; text-transform:uppercase; letter-spacing:.04em; color:#9ca3af; display:block; }
-      .mt-kpi-value { font-size:1.02rem; font-weight:800; color:#17123b; display:block; }
+      .mt-kpi-row { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:14px; }
+      .mt-kpi-card { background:#fff; border:1px solid #f0edf6; border-radius:16px; padding:16px 18px; box-shadow:0 4px 14px rgba(89,50,122,.05);
+        animation:mt-fade-up .35s ease backwards; }
+      .mt-kpi-top { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:10px; }
+      .mt-kpi-label { font-size:.66rem; font-weight:800; text-transform:uppercase; letter-spacing:.04em; color:#9ca3af; }
+      .mt-kpi-ico { width:30px; height:30px; border-radius:9px; display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0; }
+      .mt-kpi-value { font-size:1.3rem; font-weight:900; color:#17123b; line-height:1.1; }
+      .mt-kpi-sub { display:block; font-size:.72rem; color:#9ca3af; font-weight:700; margin-top:3px; }
+      .mt-kpi-sub.ok { color:#059669; }
+      .mt-kpi-sub.bad { color:#dc2626; }
 
-      /* ── Grid de cartões ── */
-      .mt-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:16px; }
-      .mt-card { background:#fff; border:1px solid #f0edf6; border-radius:20px; padding:20px 22px; box-shadow:0 4px 16px rgba(89,50,122,.06);
-        transition:transform .18s ease, box-shadow .18s ease; animation:mt-fade-up .35s ease backwards; }
-      .mt-card:hover { transform:translateY(-3px); box-shadow:0 14px 30px rgba(89,50,122,.14); }
-      .mt-card-head { display:flex; align-items:flex-start; gap:12px; margin-bottom:12px; }
-      .mt-avatar { width:44px; height:44px; border-radius:50%; background:linear-gradient(135deg,#8b5cf6,#5b21b6); color:#fff;
-        display:flex; align-items:center; justify-content:center; font-weight:800; font-size:15px; flex-shrink:0; }
-      .mt-card-headtext { display:flex; flex-direction:column; flex:1; min-width:100px; }
-      .mt-card-name { font-weight:800; font-size:.96rem; color:#17123b; }
-      .mt-card-role { font-size:.72rem; color:#9ca3af; font-weight:600; }
-      .mt-card-current { text-align:right; display:flex; align-items:flex-start; gap:8px; }
-      .mt-card-current-num { display:block; font-size:1.7rem; font-weight:900; color:#5b21b6; line-height:1.1; }
-      .mt-card-current-label { font-size:.64rem; color:#9ca3af; font-weight:700; text-transform:uppercase; letter-spacing:.03em; }
-      .mt-edit-btn { width:28px; height:28px; border-radius:8px; border:1px solid #eee; background:#faf9fc; color:#8b7a98; cursor:pointer;
-        display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:background-color .12s ease, color .12s ease; }
-      .mt-edit-btn:hover { background:#f3efff; color:#6d28d9; }
-      .mt-metric-pill { display:inline-flex; font-size:.72rem; font-weight:700; color:#6d28d9; background:#f3efff; border:1px solid #e9defb;
-        padding:4px 11px; border-radius:999px; margin-bottom:16px; }
-      .mt-track { position:relative; height:14px; background:#f4f2fb; border-radius:999px; margin:0 0 30px; }
-      .mt-fill { position:absolute; left:0; top:0; bottom:0; border-radius:999px; background:linear-gradient(90deg,#6d28d9,#a855f7); width:0%; transition:width .9s cubic-bezier(.22,.9,.3,1); }
-      .mt-tick { position:absolute; top:-3px; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; }
-      .mt-tick-line { width:2px; height:20px; background:#dcd2f0; border-radius:2px; }
-      .mt-tick.done .mt-tick-line { background:#10b981; }
-      .mt-tick-label { margin-top:4px; font-size:.63rem; font-weight:700; color:#8b7a98; text-align:center; white-space:nowrap; }
-      .mt-tick.done .mt-tick-label { color:#059669; }
-      .mt-proj-marker { position:absolute; top:-13px; width:0; height:0; transform:translateX(-50%); border-left:5px solid transparent;
-        border-right:5px solid transparent; border-bottom:9px solid #FF5959; filter:drop-shadow(0 2px 3px rgba(255,89,89,.4)); }
-      .mt-tiers { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px; }
-      .mt-tier { font-size:.74rem; font-weight:700; color:#8b7a98; background:#f9f8fb; border:1px solid #eee; border-radius:999px; padding:5px 12px; }
-      .mt-tier.done { color:#059669; background:#ecfdf5; border-color:#a7f3d0; }
-      .mt-status { display:flex; align-items:flex-start; gap:7px; font-size:.82rem; color:#4b5563; line-height:1.5; padding-top:12px; border-top:1px dashed #eee; }
-      .mt-status strong { color:#17123b; }
-      .mt-status.ok { color:#059669; }
-      .mt-pace-tag { display:inline-block; font-size:.66rem; font-weight:800; border-radius:6px; padding:2px 7px; margin-left:2px; white-space:nowrap; }
-      .mt-pace-tag.ok { color:#059669; background:#ecfdf5; }
-      .mt-pace-tag.bad { color:#dc2626; background:#fef2f2; }
-      .mt-empty { font-size:.85rem; color:#9ca3af; background:#fff; border:1px dashed #e4dcfb; border-radius:20px; padding:24px; margin:0; text-align:center; }
+      /* ── Progresso das Metas + Ações Rápidas ── */
+      .mt-progress-title { display:flex; align-items:center; gap:7px; font-size:.9rem; font-weight:800; color:#17123b; margin:0 0 10px; }
+      .mt-progress-grid { display:grid; grid-template-columns:repeat(3,1fr) 230px; gap:14px; align-items:stretch; }
+      .mt-meta-card { background:#fff; border:1px solid #f0edf6; border-radius:16px; padding:16px 18px; box-shadow:0 4px 14px rgba(89,50,122,.05);
+        animation:mt-fade-up .35s ease backwards; }
+      .mt-meta-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
+      .mt-meta-top strong { font-size:.86rem; color:#17123b; }
+      .mt-meta-pct { font-size:.86rem; font-weight:800; }
+      .mt-meta-pct.done { color:#059669; }
+      .mt-meta-bar-track { height:6px; background:#f4f2fb; border-radius:999px; margin-bottom:12px; overflow:hidden; }
+      .mt-meta-bar-fill { height:100%; border-radius:999px; background:linear-gradient(90deg,#6d28d9,#a855f7); width:0%; transition:width .9s cubic-bezier(.22,.9,.3,1); }
+      .mt-meta-row { display:flex; justify-content:space-between; font-size:.78rem; color:#8b7a98; margin-bottom:10px; }
+      .mt-meta-row b { display:block; color:#17123b; font-size:.86rem; font-weight:800; margin-top:2px; }
+      .mt-meta-perday { font-size:.76rem; color:#8b7a98; border-top:1px dashed #eee; padding-top:10px; }
+      .mt-meta-perday b { color:#17123b; font-weight:800; }
 
-      .mt-add-card { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; text-align:center;
-        border:2px dashed #e4dcfb; border-radius:20px; padding:30px 20px; cursor:pointer; background:#fbfaff;
-        transition:background-color .15s ease, border-color .15s ease; min-height:180px; animation:mt-fade-up .35s ease backwards; }
-      .mt-add-card:hover { background:#f3efff; border-color:#c9b6f2; }
-      .mt-add-plus { width:46px; height:46px; border-radius:50%; background:#f3efff; color:#6d28d9; font-size:22px; font-weight:800;
-        display:flex; align-items:center; justify-content:center; }
-      .mt-add-title { font-weight:800; color:#17123b; font-size:.92rem; }
-      .mt-add-sub { font-size:.76rem; color:#9ca3af; }
+      .mt-quick-card { background:#fff; border:1px solid #f0edf6; border-radius:16px; padding:16px 16px; box-shadow:0 4px 14px rgba(89,50,122,.05);
+        display:flex; flex-direction:column; animation:mt-fade-up .35s ease backwards; }
+      .mt-quick-title { display:flex; align-items:center; gap:6px; font-size:.84rem; font-weight:800; color:#17123b; margin:0 0 10px; }
+      .mt-quick-btn { display:flex; align-items:center; gap:10px; width:100%; text-align:left; background:#faf9fc; border:1px solid #f0edf6;
+        border-radius:12px; padding:10px 12px; font-size:.8rem; font-weight:700; color:#3a1f52; cursor:pointer; margin-bottom:8px;
+        transition:background-color .12s ease, border-color .12s ease; }
+      .mt-quick-btn:last-child { margin-bottom:0; }
+      .mt-quick-btn:hover { background:#f3efff; border-color:#e4dcfb; }
+      .mt-quick-ico { width:26px; height:26px; border-radius:8px; background:#f3efff; color:#6d28d9; display:flex; align-items:center; justify-content:center; font-size:13px; flex-shrink:0; }
+      .mt-quick-chevron { margin-left:auto; color:#c7bce8; }
 
-      .mt-footer-quote { text-align:center; font-size:.82rem; color:#8b7a98; font-weight:600; margin-top:22px; padding-top:18px; border-top:1px solid #f0edf6; }
+      .mt-empty { font-size:.85rem; color:#9ca3af; background:#fff; border:1px dashed #e4dcfb; border-radius:20px; padding:24px; margin:0 0 22px; text-align:center; }
+      .mt-footer-quote { text-align:center; font-size:.82rem; color:#8b7a98; font-weight:600; margin-top:8px; padding-top:18px; border-top:1px solid #f0edf6; }
 
-      @media (max-width:640px) {
-        .mt-hero { padding:24px 20px; }
-        .mt-card-current { text-align:left; }
-        .mt-kpi { flex:1 1 46%; border-right:none; border-bottom:1px solid #f0edf6; }
+      @media (max-width:900px) {
+        .mt-kpi-row { grid-template-columns:repeat(2,1fr); }
+        .mt-progress-grid { grid-template-columns:1fr 1fr; }
+        .mt-quick-card { grid-column:1 / -1; }
+      }
+      @media (max-width:560px) {
+        .mt-kpi-row { grid-template-columns:1fr; }
+        .mt-progress-grid { grid-template-columns:1fr; }
       }
 
       /* ── Modal de edição ── */
@@ -125,28 +114,27 @@
         <header class="top-header" id="top-header"></header>
         <main class="page-content">
 
-          <div class="mt-hero">
-            <div class="mt-hero-inner">
-              <div class="mt-hero-top">
-                <span class="mt-hero-badge">🔥 Seu mês em movimento</span>
-                <div class="mt-hero-actions">
-                  <button type="button" class="mt-btn-ghost" id="mt-gear">⚙️ Configurar</button>
-                  <button type="button" class="mt-btn-solid" id="mt-add-top">+ Adicionar pessoa</button>
-                </div>
+          <div class="mt-pageheader">
+            <h1>Metas do Mês</h1>
+            <p>Sua central de acompanhamento: cadastro e ativação de representantes, num só lugar.</p>
+          </div>
+
+          <div class="mt-command">
+            <div class="mt-command-top">
+              <div>
+                <span class="mt-command-eyebrow">Painel de comando</span>
+                <h2 class="mt-command-title">Metas do <span>Mês</span></h2>
+                <p class="mt-command-sub">Monitore cadastro e ativação de representantes, e mantenha o time no ritmo certo.</p>
               </div>
-              <h2 class="mt-hero-title">Minhas metas</h2>
-              <p class="mt-hero-sub" id="mt-hero-sub"></p>
-              <div class="mt-hero-progress-row">
-                <span class="mt-hero-progress-label">Progresso geral da Meta 1</span>
-                <span class="mt-hero-progress-pct" id="mt-hero-pct">0%</span>
-              </div>
-              <div class="mt-hero-track"><div class="mt-hero-fill" id="mt-hero-fill"></div></div>
+              <button type="button" class="mt-command-gear" id="mt-gear" title="Configurar">⚙️</button>
+            </div>
+            <div class="mt-command-pills">
+              <span class="mt-pill">📅 <span id="mt-pill-periodo"></span></span>
+              <span class="mt-pill">👥 <span id="mt-pill-pessoas"></span></span>
             </div>
           </div>
 
-          <div class="mt-kpis" id="mt-kpis"></div>
-
-          <div class="mt-grid" id="mt-grid"></div>
+          <div id="mt-blocks"></div>
 
           <p class="mt-footer-quote">Um passo por dia também é progresso. Continue avançando. →</p>
         </main>
@@ -228,7 +216,7 @@
 
       function allPairs() {
         var pairs = [];
-        config.grupos.forEach(function (g) { g.pessoas.forEach(function (p) { pairs.push({ g: g, p: p }); }); });
+        config.grupos.forEach(function (g, gi) { g.pessoas.forEach(function (p) { pairs.push({ g: g, gi: gi, p: p }); }); });
         return pairs;
       }
 
@@ -245,108 +233,82 @@
         requestAnimationFrame(step);
       }
 
-      function renderPessoa(grupo, p, idx) {
-        var maxMeta = p.metas[2];
-        var scale = Math.max(maxMeta, p.atual, 1) * 1.1;
-        var fillPct = Math.min(100, (p.atual / scale) * 100);
-        var projecao = Math.round((p.atual / config.diaAtual) * config.diasNoMes);
-        var projPct = Math.min(100, (projecao / scale) * 100);
-
-        var ticksHtml = p.metas.map(function (m, i) {
-          var left = (m / scale) * 100;
-          var done = p.atual >= m;
-          return '<div class="mt-tick' + (done ? ' done' : '') + '" style="left:' + left + '%">' +
-            '<span class="mt-tick-line"></span><span class="mt-tick-label">Meta ' + (i + 1) + '<br>' + m + '</span></div>';
-        }).join('');
-
-        var tiersHtml = p.metas.map(function (m, i) {
-          var done = p.atual >= m;
-          return '<span class="mt-tier' + (done ? ' done' : '') + '">' + (done ? '✅' : '⚪') + ' Meta ' + (i + 1) + ' — ' + m + '</span>';
-        }).join('');
-
+      function renderBlock(grupo, gi, p, idx) {
+        var diasRestantes = Math.max(0, config.diasNoMes - config.diaAtual);
         var nextMeta = null, nextIdx = -1;
         for (var i = 0; i < p.metas.length; i++) {
           if (p.atual < p.metas[i]) { nextMeta = p.metas[i]; nextIdx = i; break; }
         }
+        var faltaNext = nextMeta === null ? 0 : nextMeta - p.atual;
+        var metaDiaria = (nextMeta !== null && diasRestantes > 0) ? Math.ceil(faltaNext / diasRestantes) : 0;
+        var pctMeta3 = Math.round((p.atual / p.metas[2]) * 100);
+        var projecao = config.diaAtual > 0 ? Math.round((p.atual / config.diaAtual) * config.diasNoMes) : 0;
         var paceOk = projecao >= p.metas[0];
-        var statusHtml;
-        if (nextMeta === null) {
-          statusHtml = '<div class="mt-status ok">🏆 <span>Todas as metas do mês batidas!</span></div>';
-        } else {
-          var falta = nextMeta - p.atual;
-          statusHtml = '<div class="mt-status"><span>📈</span><span>Faltam <strong>' + falta + '</strong> pra bater a Meta ' + (nextIdx + 1) + ' (' + nextMeta + '). ' +
-            'Ritmo atual: ~<strong>' + projecao + '</strong> até o fim do mês' +
-            '<span class="mt-pace-tag ' + (paceOk ? 'ok' : 'bad') + '">' + (paceOk ? 'no ritmo da Meta 1' : 'abaixo da Meta 1') + '</span></span></div>';
-        }
+        var performance = Math.round((p.atual / p.metas[0]) * 100);
 
-        return '<div class="mt-card" style="animation-delay:' + (idx * 60) + 'ms">' +
-          '<div class="mt-card-head">' +
-            '<span class="mt-avatar">' + initials(p.nome) + '</span>' +
-            '<div class="mt-card-headtext"><span class="mt-card-name">' + p.nome + '</span>' +
-            '<span class="mt-card-role">' + grupo.papel + ' · ' + grupo.papelNome + '</span></div>' +
-            '<div class="mt-card-current">' +
-              '<div><span class="mt-card-current-num mt-count" data-to="' + p.atual + '">0</span><span class="mt-card-current-label">até agora</span></div>' +
-              '<button type="button" class="mt-edit-btn" title="Editar" onclick="openModal()">' +
-                '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg>' +
-              '</button>' +
-            '</div>' +
-          '</div>' +
-          '<span class="mt-metric-pill">' + grupo.metrica + '</span>' +
-          '<div class="mt-track">' +
-            '<div class="mt-fill" data-w="' + fillPct + '"></div>' +
-            '<div class="mt-proj-marker" style="left:' + projPct + '%" title="Projeção pro fim do mês: ' + projecao + '"></div>' +
-            ticksHtml +
-          '</div>' +
-          '<div class="mt-tiers">' + tiersHtml + '</div>' +
-          statusHtml +
+        var roleClass = grupo.papel === 'PSM' ? 'psm' : 'ca';
+        var roleIcon = grupo.papel === 'PSM' ? '🤝' : '🎯';
+
+        var kpiHtml = [
+          { bg: '#f3efff', fg: '#6d28d9', ico: '🎯', label: 'Meta diária', value: nextMeta === null ? '—' : metaDiaria, sub: diasRestantes + ' dias úteis restantes' },
+          { bg: '#ecfdf5', fg: '#059669', ico: '📈', label: 'Já ' + (grupo.papel === 'PSM' ? 'ativado' : 'cadastrado'), value: p.atual, sub: pctMeta3 + '% da Meta 3' },
+          { bg: '#eff6ff', fg: '#2563eb', ico: '📊', label: 'Projeção do mês', value: projecao, sub: paceOk ? 'Acima da meta' : 'Abaixo da meta', subClass: paceOk ? 'ok' : 'bad' },
+          { bg: '#fff7ed', fg: '#c2410c', ico: '↗', label: 'Performance', value: performance + '%', sub: 'Meta 3: ' + p.metas[2] }
+        ].map(function (k) {
+          return '<div class="mt-kpi-card" style="animation-delay:' + (idx * 60) + 'ms">' +
+            '<div class="mt-kpi-top"><span class="mt-kpi-label">' + k.label + '</span>' +
+            '<span class="mt-kpi-ico" style="background:' + k.bg + ';color:' + k.fg + ';">' + k.ico + '</span></div>' +
+            '<span class="mt-kpi-value">' + k.value + '</span>' +
+            '<span class="mt-kpi-sub' + (k.subClass ? ' ' + k.subClass : '') + '">' + k.sub + '</span>' +
+          '</div>';
+        }).join('');
+
+        var metaCardsHtml = p.metas.map(function (m, i) {
+          var pct = Math.min(100, Math.round((p.atual / m) * 100));
+          var falta = Math.max(0, m - p.atual);
+          var porDia = diasRestantes > 0 ? Math.ceil(falta / diasRestantes) : 0;
+          var done = p.atual >= m;
+          return '<div class="mt-meta-card" style="animation-delay:' + ((idx + i) * 60) + 'ms">' +
+            '<div class="mt-meta-top"><strong>Meta ' + (i + 1) + '</strong><span class="mt-meta-pct' + (done ? ' done' : '') + '">' + pct + '%</span></div>' +
+            '<div class="mt-meta-bar-track"><div class="mt-meta-bar-fill" data-w="' + pct + '"></div></div>' +
+            '<div class="mt-meta-row"><span>Meta<b>' + m + '</b></span><span>Falta<b>' + falta + '</b></span></div>' +
+            '<div class="mt-meta-perday">Por dia: <b>' + porDia + '</b></div>' +
+          '</div>';
+        }).join('');
+
+        var quickHtml = '<div class="mt-quick-card" style="animation-delay:' + (idx * 60 + 120) + 'ms">' +
+          '<h4 class="mt-quick-title">⚡ Ações Rápidas</h4>' +
+          '<button type="button" class="mt-quick-btn" onclick="openModal()"><span class="mt-quick-ico">✏️</span>Editar metas<span class="mt-quick-chevron">›</span></button>' +
+          '<button type="button" class="mt-quick-btn" onclick="openModalAddTo(' + gi + ')"><span class="mt-quick-ico">➕</span>Adicionar pessoa<span class="mt-quick-chevron">›</span></button>' +
+          '<button type="button" class="mt-quick-btn" id="mt-restore-' + gi + '-' + idx + '"><span class="mt-quick-ico">🔁</span>Restaurar padrão<span class="mt-quick-chevron">›</span></button>' +
         '</div>';
+
+        return '<section class="mt-block">' +
+          '<div class="mt-block-head">' +
+            '<span class="mt-role-badge ' + roleClass + '">' + roleIcon + ' ' + grupo.papel + ' — ' + grupo.papelNome + '</span>' +
+            '<span class="mt-block-avatar">' + initials(p.nome) + '</span>' +
+            '<span class="mt-block-name">' + p.nome + '</span>' +
+            '<span class="mt-block-metric">· ' + grupo.metrica + '</span>' +
+          '</div>' +
+          '<div class="mt-kpi-row">' + kpiHtml + '</div>' +
+          '<h4 class="mt-progress-title">🎯 Progresso das Metas</h4>' +
+          '<div class="mt-progress-grid">' + metaCardsHtml + quickHtml + '</div>' +
+        '</section>';
       }
 
       function render() {
         var pairs = allPairs();
 
-        document.getElementById('mt-hero-sub').textContent = pairs.length
-          ? 'Cada número conta. Continue de olho no ritmo do time em ' + config.mesRef + '.'
-          : 'Adicione as primeiras pessoas pra começar a acompanhar o mês.';
+        document.getElementById('mt-pill-periodo').textContent = config.mesRef + ' · dia ' + config.diaAtual + ' de ' + config.diasNoMes;
+        document.getElementById('mt-pill-pessoas').textContent = pairs.length + (pairs.length === 1 ? ' pessoa acompanhada' : ' pessoas acompanhadas');
 
-        var overallPct = 0;
-        if (pairs.length) {
-          var sum = 0;
-          pairs.forEach(function (pr) { sum += Math.min(1, pr.p.atual / pr.p.metas[0]); });
-          overallPct = Math.round((sum / pairs.length) * 100);
-        }
-        animateNumber(document.getElementById('mt-hero-pct'), overallPct, '%');
+        var blocksHtml = pairs.map(function (pr, i) { return renderBlock(pr.g, pr.gi, pr.p, i); }).join('');
+        document.getElementById('mt-blocks').innerHTML = blocksHtml || '<p class="mt-empty">Nenhuma pessoa cadastrada ainda. Clique na engrenagem pra adicionar.</p>';
+
+        document.querySelectorAll('[id^="mt-restore-"]').forEach(function (btn) { btn.addEventListener('click', restoreDefault); });
+
         requestAnimationFrame(function () {
-          document.getElementById('mt-hero-fill').style.width = Math.min(100, overallPct) + '%';
-        });
-
-        var noRitmo = 0;
-        pairs.forEach(function (pr) {
-          var proj = Math.round((pr.p.atual / config.diaAtual) * config.diasNoMes);
-          if (proj >= pr.p.metas[0]) noRitmo++;
-        });
-
-        document.getElementById('mt-kpis').innerHTML = [
-          ['#f3efff', '#6d28d9', '📅', 'Período', config.mesRef],
-          ['#fef2f2', '#dc2626', '🎯', 'Dia atual', config.diaAtual + ' de ' + config.diasNoMes],
-          ['#f3efff', '#6d28d9', '👥', 'Pessoas', pairs.length + ' acompanhadas'],
-          ['#ecfdf5', '#059669', '📈', 'No ritmo', noRitmo + ' de ' + pairs.length]
-        ].map(function (k) {
-          return '<div class="mt-kpi"><span class="mt-kpi-ico" style="background:' + k[0] + ';color:' + k[1] + ';">' + k[2] + '</span>' +
-            '<div><span class="mt-kpi-label">' + k[3] + '</span><span class="mt-kpi-value">' + k[4] + '</span></div></div>';
-        }).join('');
-
-        var cardsHtml = pairs.map(function (pr, i) { return renderPessoa(pr.g, pr.p, i); }).join('');
-        cardsHtml += '<div class="mt-add-card" id="mt-add-card" style="animation-delay:' + (pairs.length * 60) + 'ms">' +
-          '<span class="mt-add-plus">+</span><span class="mt-add-title">Adicionar uma nova pessoa</span>' +
-          '<span class="mt-add-sub">Crie uma meta e acompanhe o progresso</span></div>';
-        var emptyMsg = pairs.length ? '' : '<p class="mt-empty">Nenhuma pessoa cadastrada ainda. Clique em "+ Adicionar pessoa" pra começar.</p>';
-        document.getElementById('mt-grid').innerHTML = emptyMsg + cardsHtml;
-
-        document.getElementById('mt-add-card').addEventListener('click', openModal);
-        document.querySelectorAll('.mt-count').forEach(function (el) { animateNumber(el, Number(el.getAttribute('data-to'))); });
-        requestAnimationFrame(function () {
-          document.querySelectorAll('.mt-fill[data-w]').forEach(function (el) { el.style.width = el.getAttribute('data-w') + '%'; });
+          document.querySelectorAll('.mt-meta-bar-fill[data-w]').forEach(function (el) { el.style.width = el.getAttribute('data-w') + '%'; });
         });
       }
       render();
@@ -379,10 +341,17 @@
 
       function openModal() { fillForm(); modal.classList.add('open'); }
       function closeModal() { modal.classList.remove('open'); }
+      function openModalAddTo(grupoIdx) {
+        openModal();
+        var container = document.getElementById('mt-f-people-' + grupoIdx);
+        container.insertAdjacentHTML('beforeend', personRowHtml(grupoIdx, null));
+        var lastRow = container.querySelector('.mt-person-row:last-child .mt-pf-nome');
+        if (lastRow) setTimeout(function () { lastRow.focus(); }, 50);
+      }
       window.openModal = openModal;
+      window.openModalAddTo = openModalAddTo;
 
       document.getElementById('mt-gear').addEventListener('click', openModal);
-      document.getElementById('mt-add-top').addEventListener('click', openModal);
       closeBtn.addEventListener('click', closeModal);
       modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
 
@@ -430,13 +399,14 @@
         closeModal();
       });
 
-      document.getElementById('mt-restore').addEventListener('click', function () {
+      function restoreDefault() {
         if (!confirm('Restaurar os valores padrão? Isso apaga os ajustes salvos neste navegador.')) return;
         try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
         config = cloneDefault();
         render();
         fillForm();
-      });
+      }
+      document.getElementById('mt-restore').addEventListener('click', restoreDefault);
     </script>
   </body>
 </html>
