@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Metas — Portal de Representantes | Cardápio Web</title>
+    <title>Metas — Portal Bibly | Cardápio Web</title>
     <link rel="icon" type="image/jpeg" href="/assets/cw-logo-dark-e78e4446.jpg">
     <link rel="stylesheet" href="/assets/application-cc2f1a53.css" />
     <style>
@@ -86,7 +86,6 @@
       .mt-meta-card { background:#fff; border:1px solid #f0edf6; border-radius:16px; padding:16px 18px; box-shadow:0 4px 14px rgba(89,50,122,.05);
         animation:mt-fade-up .35s ease backwards; }
       .mt-meta-top { display:flex; align-items:center; gap:7px; margin-bottom:10px; }
-      .mt-meta-medal { font-size:16px; }
       .mt-meta-top strong { font-size:.84rem; color:#17123b; }
       .mt-meta-value { font-size:1.5rem; font-weight:900; color:#17123b; line-height:1.1; margin-bottom:10px; }
       .mt-meta-value span { font-size:.76rem; font-weight:700; color:#9ca3af; margin-left:5px; }
@@ -96,6 +95,13 @@
       .mt-meta-bottom b { color:#17123b; }
       .mt-meta-pct { font-weight:900; color:#6d28d9; }
       .mt-meta-pct.done { color:#059669; }
+      .mt-meta-stepper { display:flex; gap:8px; margin-top:12px; }
+      .mt-step-btn { flex:1; height:34px; border-radius:10px; border:1px solid #e4dcfb; background:#f7f4fd; color:#6d28d9;
+        font-size:18px; font-weight:900; line-height:1; cursor:pointer; transition:background-color .12s ease, transform .12s ease; }
+      .mt-step-btn:hover { background:#eee2fb; }
+      .mt-step-btn:active { transform:scale(.94); }
+      .mt-step-btn.plus { background:#A543FA; color:#fff; border-color:#A543FA; }
+      .mt-step-btn.plus:hover { background:#8b3ff0; }
 
       .mt-quick-card { background:#fff; border:1px solid #f0edf6; border-radius:16px; padding:16px 16px; box-shadow:0 4px 14px rgba(89,50,122,.05);
         display:flex; flex-direction:column; animation:mt-fade-up .35s ease backwards; }
@@ -260,7 +266,7 @@
 
       function allPairs() {
         var pairs = [];
-        config.grupos.forEach(function (g, gi) { g.pessoas.forEach(function (p) { pairs.push({ g: g, gi: gi, p: p }); }); });
+        config.grupos.forEach(function (g, gi) { g.pessoas.forEach(function (p, pi) { pairs.push({ g: g, gi: gi, pi: pi, p: p }); }); });
         return pairs;
       }
 
@@ -277,7 +283,7 @@
         requestAnimationFrame(step);
       }
 
-      function renderBlock(grupo, gi, p, idx) {
+      function renderBlock(grupo, gi, pi, p, idx) {
         var diasRestantes = Math.max(0, config.diasNoMes - config.diaAtual);
         var nextMeta = null, nextIdx = -1;
         for (var i = 0; i < p.metas.length; i++) {
@@ -308,17 +314,20 @@
           '</div>';
         }).join('');
 
-        var medals = ['🥉', '🥈', '🥇'];
         var metaCardsHtml = p.metas.map(function (m, i) {
           var pct = Math.min(100, Math.round((p.atual / m) * 100));
           var falta = Math.max(0, m - p.atual);
           var porDia = diasRestantes > 0 ? Math.ceil(falta / diasRestantes) : 0;
           var done = p.atual >= m;
           return '<div class="mt-meta-card" style="animation-delay:' + ((idx + i) * 60) + 'ms">' +
-            '<div class="mt-meta-top"><span class="mt-meta-medal">' + medals[i] + '</span><strong>Meta ' + (i + 1) + '</strong></div>' +
+            '<div class="mt-meta-top"><strong>Meta ' + (i + 1) + '</strong></div>' +
             '<div class="mt-meta-value">' + p.atual + '<span>de ' + m + '</span></div>' +
             '<div class="mt-meta-bar-track"><div class="mt-meta-bar-fill" data-w="' + pct + '"></div></div>' +
             '<div class="mt-meta-bottom"><span>Falta <b>' + falta + '</b> · <b>' + porDia + '</b>/dia</span><span class="mt-meta-pct' + (done ? ' done' : '') + '">' + pct + '%</span></div>' +
+            '<div class="mt-meta-stepper">' +
+              '<button type="button" class="mt-step-btn minus" onclick="bumpAtual(' + gi + ',' + pi + ',-1)" title="Diminuir 1">−</button>' +
+              '<button type="button" class="mt-step-btn plus" onclick="bumpAtual(' + gi + ',' + pi + ',1)" title="Adicionar 1">+</button>' +
+            '</div>' +
           '</div>';
         }).join('');
 
@@ -374,7 +383,7 @@
           return;
         }
 
-        var blocksHtml = pairs.map(function (pr, i) { return renderBlock(pr.g, pr.gi, pr.p, i); }).join('');
+        var blocksHtml = pairs.map(function (pr, i) { return renderBlock(pr.g, pr.gi, pr.pi, pr.p, i); }).join('');
         content.innerHTML = blocksHtml || '<p class="mt-empty">Nenhuma pessoa cadastrada ainda. Clique no período pra adicionar.</p>';
 
         document.querySelectorAll('[id^="mt-restore-"]').forEach(function (btn) { btn.addEventListener('click', restoreDefault); });
@@ -430,8 +439,16 @@
         var lastRow = container.querySelector('.mt-person-row:last-child .mt-pf-nome');
         if (lastRow) setTimeout(function () { lastRow.focus(); }, 50);
       }
+      function bumpAtual(gi, pi, delta) {
+        var p = config.grupos[gi] && config.grupos[gi].pessoas[pi];
+        if (!p) return;
+        p.atual = Math.max(0, (p.atual || 0) + delta);
+        saveConfig(config);
+        render();
+      }
       window.openModal = openModal;
       window.openModalAddTo = openModalAddTo;
+      window.bumpAtual = bumpAtual;
 
       document.getElementById('mt-gear').addEventListener('click', openModal);
       closeBtn.addEventListener('click', closeModal);
