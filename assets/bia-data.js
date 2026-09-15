@@ -1,4 +1,4 @@
-// Base de conhecimento da Bia (assistente virtual do Portal Bibly).
+// Base de conhecimento da Bia (assistente virtual do Bibly).
 // Cada entrada = 1 "carta" do script de chatbot: gatilhos de palavras-chave que
 // disparam a resposta, a resposta em si e os botões de continuação (que levam a
 // outra entrada pelo `targetId`). Pra treinar a Bia com mais dúvidas, só
