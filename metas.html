@@ -9,36 +9,64 @@
     <style>
       @keyframes mt-fade-up { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
 
-      .mt-pageheader { margin-bottom:18px; }
-      .mt-pageheader h1 { margin:0 0 4px; font-size:1.5rem; font-weight:900; color:#17123b; }
-      .mt-pageheader p { margin:0; font-size:.86rem; color:#9ca3af; font-weight:600; }
+      /* ── Hero ── */
+      .mt-hero { position:relative; overflow:hidden; border-radius:26px; padding:26px 30px; margin-bottom:18px;
+        background:linear-gradient(120deg,#A543FA 0%,#8b3ff0 45%,#59327A 100%); color:#fff;
+        box-shadow:0 22px 50px -14px rgba(89,50,122,.55); display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+      .mt-hero::before { content:''; position:absolute; top:-90px; right:120px; width:240px; height:240px; border-radius:50%;
+        background:radial-gradient(circle,rgba(255,182,0,.20),transparent 70%); pointer-events:none; }
+      .mt-hero-left { flex:1 1 260px; position:relative; z-index:1; }
+      .mt-hero-top { display:flex; align-items:center; gap:10px; margin-bottom:6px; }
+      .mt-hero-ico { width:34px; height:34px; border-radius:11px; background:rgba(255,255,255,.18); display:flex; align-items:center; justify-content:center; font-size:17px; }
+      .mt-hero-title { margin:0; font-size:1.6rem; font-weight:900; letter-spacing:-.01em; }
+      .mt-hero-sub { margin:0 0 12px; font-size:.86rem; color:rgba(255,255,255,.85); font-weight:500; max-width:420px; line-height:1.5; }
+      .mt-hero-quote { display:inline-flex; align-items:center; gap:9px; background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.26);
+        border-radius:14px; padding:9px 14px; font-size:.78rem; font-weight:700; max-width:360px; backdrop-filter:blur(4px); }
+      .mt-hero-quote-ico { font-size:16px; flex-shrink:0; }
 
-      /* ── Painel de Comando ── */
-      .mt-command { position:relative; background:#fff; border:1px solid #f0edf6; border-radius:22px; padding:24px 26px;
-        margin-bottom:22px; box-shadow:0 6px 20px rgba(89,50,122,.07); }
-      .mt-command-top { display:flex; align-items:flex-start; justify-content:space-between; gap:14px; flex-wrap:wrap; }
-      .mt-command-eyebrow { display:block; font-size:.68rem; font-weight:800; letter-spacing:.06em; color:#8b5cf6; text-transform:uppercase; margin-bottom:6px; }
-      .mt-command-title { margin:0 0 6px; font-size:1.5rem; font-weight:900; color:#17123b; letter-spacing:-.01em; }
-      .mt-command-title span { background:linear-gradient(135deg,#8b5cf6,#6d28d9); -webkit-background-clip:text; background-clip:text; color:transparent; }
-      .mt-command-sub { margin:0; font-size:.86rem; color:#8b7a98; font-weight:500; max-width:480px; }
-      .mt-command-gear { width:38px; height:38px; border-radius:11px; border:1px solid #eee; background:#faf9fc; color:#8b7a98; cursor:pointer;
-        display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; transition:background-color .12s ease, color .12s ease; }
-      .mt-command-gear:hover { background:#f3efff; color:#6d28d9; }
-      .mt-command-pills { display:flex; gap:10px; flex-wrap:wrap; margin-top:16px; }
-      .mt-pill { display:inline-flex; align-items:center; gap:7px; font-size:.78rem; font-weight:700; color:#6d28d9; background:#f7f4fd;
-        border:1px solid #ece4fa; padding:8px 14px; border-radius:12px; }
+      .mt-hero-mascot { flex:0 0 auto; width:120px; height:auto; align-self:flex-end; margin-bottom:-26px; filter:drop-shadow(0 14px 18px rgba(0,0,0,.28)); position:relative; z-index:1; }
+
+      .mt-hero-rank { flex:0 0 210px; background:rgba(255,255,255,.13); border:1px solid rgba(255,255,255,.24); border-radius:16px;
+        padding:14px 16px; backdrop-filter:blur(4px); position:relative; z-index:1; }
+      .mt-hero-rank-title { display:flex; align-items:center; gap:6px; font-size:.76rem; font-weight:800; margin-bottom:10px; }
+      .mt-rank-row { display:flex; align-items:center; gap:8px; font-size:.78rem; font-weight:700; padding:4px 0; }
+      .mt-rank-pos { width:18px; text-align:center; font-weight:900; color:#FFE27A; flex-shrink:0; }
+      .mt-rank-avatar { width:22px; height:22px; border-radius:50%; background:rgba(255,255,255,.22); display:flex; align-items:center; justify-content:center;
+        font-size:9px; font-weight:800; flex-shrink:0; }
+      .mt-rank-name { flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+      .mt-rank-pct { color:#FFE27A; font-weight:800; flex-shrink:0; }
+
+      .mt-hero-ring-wrap { flex:0 0 auto; display:flex; flex-direction:column; align-items:center; gap:6px; position:relative; z-index:1; }
+      .mt-ring { width:84px; height:84px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+        background:conic-gradient(#FFB600 calc(var(--pct,0)*1%), rgba(255,255,255,.25) 0); transition:background 1s ease; }
+      .mt-ring-inner { width:66px; height:66px; border-radius:50%; background:#7c3aed; display:flex; align-items:center; justify-content:center;
+        font-size:1rem; font-weight:900; color:#fff; }
+      .mt-ring-label { font-size:.68rem; font-weight:800; color:rgba(255,255,255,.85); text-align:center; }
+      .mt-ring-sub { font-size:.66rem; font-weight:700; color:rgba(255,255,255,.65); text-align:center; }
+
+      /* ── Tabs ── */
+      .mt-tabs-row { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:18px; }
+      .mt-tabs { display:inline-flex; background:#fff; border:1px solid #f0edf6; border-radius:14px; padding:5px; box-shadow:0 4px 14px rgba(89,50,122,.06); }
+      .mt-tab { display:inline-flex; align-items:center; gap:7px; font-size:.8rem; font-weight:700; color:#8b7a98; background:transparent; border:none;
+        border-radius:10px; padding:9px 16px; cursor:pointer; transition:background-color .15s ease, color .15s ease; }
+      .mt-tab.active { background:linear-gradient(135deg,#A543FA,#8b3ff0); color:#fff; }
+      .mt-period-btn { display:inline-flex; align-items:center; gap:7px; font-size:.8rem; font-weight:700; color:#6d28d9; background:#fff;
+        border:1px solid #f0edf6; border-radius:14px; padding:10px 16px; cursor:pointer; box-shadow:0 4px 14px rgba(89,50,122,.06); }
+      .mt-period-btn:hover { background:#f7f4fd; }
 
       /* ── Bloco por pessoa/papel ── */
-      .mt-block { margin-bottom:30px; }
-      .mt-block-head { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
-      .mt-role-badge { display:inline-flex; align-items:center; gap:6px; font-size:.68rem; font-weight:800; letter-spacing:.04em; text-transform:uppercase;
-        padding:6px 12px; border-radius:999px; }
-      .mt-role-badge.ca { color:#6d28d9; background:#f3efff; }
-      .mt-role-badge.psm { color:#0891b2; background:#ecfeff; }
-      .mt-block-avatar { width:26px; height:26px; border-radius:50%; background:linear-gradient(135deg,#8b5cf6,#5b21b6); color:#fff;
+      .mt-block { margin-bottom:26px; }
+      .mt-block-head { display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:14px; }
+      .mt-block-ico { width:38px; height:38px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:17px; flex-shrink:0; }
+      .mt-block-ico.ca { background:#f3efff; color:#6d28d9; }
+      .mt-block-ico.psm { background:#fff0f0; color:#dc2626; }
+      .mt-block-headtext { flex:1; min-width:160px; }
+      .mt-block-headtext h3 { margin:0; font-size:1rem; font-weight:800; color:#17123b; }
+      .mt-block-headtext p { margin:1px 0 0; font-size:.78rem; color:#9ca3af; font-weight:600; }
+      .mt-block-person { display:flex; align-items:center; gap:8px; }
+      .mt-block-avatar { width:28px; height:28px; border-radius:50%; background:linear-gradient(135deg,#A543FA,#59327A); color:#fff;
         display:flex; align-items:center; justify-content:center; font-weight:800; font-size:11px; flex-shrink:0; }
-      .mt-block-name { font-size:1.02rem; font-weight:800; color:#17123b; }
-      .mt-block-metric { font-size:.76rem; font-weight:700; color:#9ca3af; }
+      .mt-block-name { font-size:.84rem; font-weight:800; color:#17123b; }
 
       /* ── Tira de KPIs ── */
       .mt-kpi-row { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:14px; }
@@ -57,16 +85,17 @@
       .mt-progress-grid { display:grid; grid-template-columns:repeat(3,1fr) 230px; gap:14px; align-items:stretch; }
       .mt-meta-card { background:#fff; border:1px solid #f0edf6; border-radius:16px; padding:16px 18px; box-shadow:0 4px 14px rgba(89,50,122,.05);
         animation:mt-fade-up .35s ease backwards; }
-      .mt-meta-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
-      .mt-meta-top strong { font-size:.86rem; color:#17123b; }
-      .mt-meta-pct { font-size:.86rem; font-weight:800; }
+      .mt-meta-top { display:flex; align-items:center; gap:7px; margin-bottom:10px; }
+      .mt-meta-medal { font-size:16px; }
+      .mt-meta-top strong { font-size:.84rem; color:#17123b; }
+      .mt-meta-value { font-size:1.5rem; font-weight:900; color:#17123b; line-height:1.1; margin-bottom:10px; }
+      .mt-meta-value span { font-size:.76rem; font-weight:700; color:#9ca3af; margin-left:5px; }
+      .mt-meta-bar-track { height:6px; background:#f4f2fb; border-radius:999px; margin-bottom:10px; overflow:hidden; }
+      .mt-meta-bar-fill { height:100%; border-radius:999px; background:linear-gradient(90deg,#A543FA,#c084fc); width:0%; transition:width .9s cubic-bezier(.22,.9,.3,1); }
+      .mt-meta-bottom { display:flex; justify-content:space-between; align-items:center; font-size:.72rem; color:#8b7a98; font-weight:700; }
+      .mt-meta-bottom b { color:#17123b; }
+      .mt-meta-pct { font-weight:900; color:#6d28d9; }
       .mt-meta-pct.done { color:#059669; }
-      .mt-meta-bar-track { height:6px; background:#f4f2fb; border-radius:999px; margin-bottom:12px; overflow:hidden; }
-      .mt-meta-bar-fill { height:100%; border-radius:999px; background:linear-gradient(90deg,#6d28d9,#a855f7); width:0%; transition:width .9s cubic-bezier(.22,.9,.3,1); }
-      .mt-meta-row { display:flex; justify-content:space-between; font-size:.78rem; color:#8b7a98; margin-bottom:10px; }
-      .mt-meta-row b { display:block; color:#17123b; font-size:.86rem; font-weight:800; margin-top:2px; }
-      .mt-meta-perday { font-size:.76rem; color:#8b7a98; border-top:1px dashed #eee; padding-top:10px; }
-      .mt-meta-perday b { color:#17123b; font-weight:800; }
 
       .mt-quick-card { background:#fff; border:1px solid #f0edf6; border-radius:16px; padding:16px 16px; box-shadow:0 4px 14px rgba(89,50,122,.05);
         display:flex; flex-direction:column; animation:mt-fade-up .35s ease backwards; }
@@ -79,10 +108,11 @@
       .mt-quick-ico { width:26px; height:26px; border-radius:8px; background:#f3efff; color:#6d28d9; display:flex; align-items:center; justify-content:center; font-size:13px; flex-shrink:0; }
       .mt-quick-chevron { margin-left:auto; color:#c7bce8; }
 
-      .mt-empty { font-size:.85rem; color:#9ca3af; background:#fff; border:1px dashed #e4dcfb; border-radius:20px; padding:24px; margin:0 0 22px; text-align:center; }
+      .mt-empty { font-size:.85rem; color:#9ca3af; background:#fff; border:1px dashed #e4dcfb; border-radius:20px; padding:30px 24px; margin:0 0 22px; text-align:center; }
       .mt-footer-quote { text-align:center; font-size:.82rem; color:#8b7a98; font-weight:600; margin-top:8px; padding-top:18px; border-top:1px solid #f0edf6; }
 
       @media (max-width:900px) {
+        .mt-hero-mascot, .mt-hero-rank, .mt-hero-ring-wrap { display:none; }
         .mt-kpi-row { grid-template-columns:repeat(2,1fr); }
         .mt-progress-grid { grid-template-columns:1fr 1fr; }
         .mt-quick-card { grid-column:1 / -1; }
@@ -114,27 +144,40 @@
         <header class="top-header" id="top-header"></header>
         <main class="page-content">
 
-          <div class="mt-pageheader">
-            <h1>Metas do Mês</h1>
-            <p>Sua central de acompanhamento: cadastro e ativação de representantes, num só lugar.</p>
-          </div>
-
-          <div class="mt-command">
-            <div class="mt-command-top">
-              <div>
-                <span class="mt-command-eyebrow">Painel de comando</span>
-                <h2 class="mt-command-title">Metas do <span>Mês</span></h2>
-                <p class="mt-command-sub">Monitore cadastro e ativação de representantes, e mantenha o time no ritmo certo.</p>
+          <div class="mt-hero">
+            <div class="mt-hero-left">
+              <div class="mt-hero-top">
+                <span class="mt-hero-ico">🎯</span>
+                <h1 class="mt-hero-title">Metas</h1>
               </div>
-              <button type="button" class="mt-command-gear" id="mt-gear" title="Configurar">⚙️</button>
+              <p class="mt-hero-sub">Acompanhe seu desempenho, acompanhe suas conquistas e siga firme na sua jornada com a <strong>Cardápio Web</strong>!</p>
+              <span class="mt-hero-quote"><span class="mt-hero-quote-ico">🏆</span>Seu esforço hoje resulta em grandes conquistas amanhã!</span>
             </div>
-            <div class="mt-command-pills">
-              <span class="mt-pill">📅 <span id="mt-pill-periodo"></span></span>
-              <span class="mt-pill">👥 <span id="mt-pill-pessoas"></span></span>
+
+            <img class="mt-hero-mascot" src="/assets/mascots/cardapinho-trofeu.png" alt="Cardapinho comemorando com um troféu">
+
+            <div class="mt-hero-rank">
+              <div class="mt-hero-rank-title">🏆 Ranking do Time</div>
+              <div id="mt-rank-list"></div>
+            </div>
+
+            <div class="mt-hero-ring-wrap">
+              <div class="mt-ring" id="mt-ring"><div class="mt-ring-inner" id="mt-ring-pct">0%</div></div>
+              <span class="mt-ring-label">Desempenho total</span>
+              <span class="mt-ring-sub" id="mt-ring-sub">Meta geral: 0/0</span>
             </div>
           </div>
 
-          <div id="mt-blocks"></div>
+          <div class="mt-tabs-row">
+            <div class="mt-tabs" id="mt-tabs">
+              <button type="button" class="mt-tab active" data-tab="minhas">🎯 Minhas Metas</button>
+              <button type="button" class="mt-tab" data-tab="todas">▦ Todas as Metas</button>
+              <button type="button" class="mt-tab" data-tab="historico">🕐 Histórico</button>
+            </div>
+            <button type="button" class="mt-period-btn" id="mt-gear">📅 <span id="mt-pill-periodo"></span> ⌄</button>
+          </div>
+
+          <div id="mt-tab-content"></div>
 
           <p class="mt-footer-quote">Um passo por dia também é progresso. Continue avançando. →</p>
         </main>
@@ -209,6 +252,7 @@
       }
 
       var config = loadConfig();
+      var currentTab = 'minhas';
 
       function initials(name) {
         return (name || '?').split(' ').slice(0, 2).map(function (w) { return w[0]; }).join('').toUpperCase();
@@ -246,12 +290,13 @@
         var paceOk = projecao >= p.metas[0];
         var performance = Math.round((p.atual / p.metas[0]) * 100);
 
-        var roleClass = grupo.papel === 'PSM' ? 'psm' : 'ca';
-        var roleIcon = grupo.papel === 'PSM' ? '🤝' : '🎯';
+        var isPsm = grupo.papel === 'PSM';
+        var blockIco = isPsm ? '🤝' : '👥';
+        var blockSub = isPsm ? 'Acompanhe e ative os representantes cadastrados.' : 'Encontre novos parceiros e amplie o time.';
 
         var kpiHtml = [
           { bg: '#f3efff', fg: '#6d28d9', ico: '🎯', label: 'Meta diária', value: nextMeta === null ? '—' : metaDiaria, sub: diasRestantes + ' dias úteis restantes' },
-          { bg: '#ecfdf5', fg: '#059669', ico: '📈', label: 'Já ' + (grupo.papel === 'PSM' ? 'ativado' : 'cadastrado'), value: p.atual, sub: pctMeta3 + '% da Meta 3' },
+          { bg: '#ecfdf5', fg: '#059669', ico: '📈', label: 'Já ' + (isPsm ? 'ativado' : 'cadastrado'), value: p.atual, sub: pctMeta3 + '% da Meta 3' },
           { bg: '#eff6ff', fg: '#2563eb', ico: '📊', label: 'Projeção do mês', value: projecao, sub: paceOk ? 'Acima da meta' : 'Abaixo da meta', subClass: paceOk ? 'ok' : 'bad' },
           { bg: '#fff7ed', fg: '#c2410c', ico: '↗', label: 'Performance', value: performance + '%', sub: 'Meta 3: ' + p.metas[2] }
         ].map(function (k) {
@@ -263,16 +308,17 @@
           '</div>';
         }).join('');
 
+        var medals = ['🥉', '🥈', '🥇'];
         var metaCardsHtml = p.metas.map(function (m, i) {
           var pct = Math.min(100, Math.round((p.atual / m) * 100));
           var falta = Math.max(0, m - p.atual);
           var porDia = diasRestantes > 0 ? Math.ceil(falta / diasRestantes) : 0;
           var done = p.atual >= m;
           return '<div class="mt-meta-card" style="animation-delay:' + ((idx + i) * 60) + 'ms">' +
-            '<div class="mt-meta-top"><strong>Meta ' + (i + 1) + '</strong><span class="mt-meta-pct' + (done ? ' done' : '') + '">' + pct + '%</span></div>' +
+            '<div class="mt-meta-top"><span class="mt-meta-medal">' + medals[i] + '</span><strong>Meta ' + (i + 1) + '</strong></div>' +
+            '<div class="mt-meta-value">' + p.atual + '<span>de ' + m + '</span></div>' +
             '<div class="mt-meta-bar-track"><div class="mt-meta-bar-fill" data-w="' + pct + '"></div></div>' +
-            '<div class="mt-meta-row"><span>Meta<b>' + m + '</b></span><span>Falta<b>' + falta + '</b></span></div>' +
-            '<div class="mt-meta-perday">Por dia: <b>' + porDia + '</b></div>' +
+            '<div class="mt-meta-bottom"><span>Falta <b>' + falta + '</b> · <b>' + porDia + '</b>/dia</span><span class="mt-meta-pct' + (done ? ' done' : '') + '">' + pct + '%</span></div>' +
           '</div>';
         }).join('');
 
@@ -285,10 +331,9 @@
 
         return '<section class="mt-block">' +
           '<div class="mt-block-head">' +
-            '<span class="mt-role-badge ' + roleClass + '">' + roleIcon + ' ' + grupo.papel + ' — ' + grupo.papelNome + '</span>' +
-            '<span class="mt-block-avatar">' + initials(p.nome) + '</span>' +
-            '<span class="mt-block-name">' + p.nome + '</span>' +
-            '<span class="mt-block-metric">· ' + grupo.metrica + '</span>' +
+            '<span class="mt-block-ico ' + (isPsm ? 'psm' : 'ca') + '">' + blockIco + '</span>' +
+            '<div class="mt-block-headtext"><h3>' + (isPsm ? 'PSM' : 'CA') + ' — ' + grupo.metrica + '</h3><p>' + blockSub + '</p></div>' +
+            '<div class="mt-block-person"><span class="mt-block-avatar">' + initials(p.nome) + '</span><span class="mt-block-name">' + p.nome + '</span></div>' +
           '</div>' +
           '<div class="mt-kpi-row">' + kpiHtml + '</div>' +
           '<h4 class="mt-progress-title">🎯 Progresso das Metas</h4>' +
@@ -296,14 +341,41 @@
         '</section>';
       }
 
+      function renderHero(pairs) {
+        document.getElementById('mt-pill-periodo').textContent = config.mesRef + ' · dia ' + config.diaAtual + ' de ' + config.diasNoMes;
+
+        var sumAtual = 0, sumMeta1 = 0;
+        pairs.forEach(function (pr) { sumAtual += pr.p.atual; sumMeta1 += pr.p.metas[0]; });
+        var overallPct = sumMeta1 > 0 ? Math.round((sumAtual / sumMeta1) * 100) : 0;
+        document.getElementById('mt-ring-sub').textContent = 'Meta geral: ' + sumAtual + '/' + sumMeta1;
+        animateNumber(document.getElementById('mt-ring-pct'), Math.min(100, overallPct), '%');
+        requestAnimationFrame(function () {
+          document.getElementById('mt-ring').style.setProperty('--pct', Math.min(100, overallPct));
+        });
+
+        var ranked = pairs.slice().sort(function (a, b) {
+          return (b.p.atual / b.p.metas[0]) - (a.p.atual / a.p.metas[0]);
+        }).slice(0, 5);
+        document.getElementById('mt-rank-list').innerHTML = ranked.length ? ranked.map(function (pr, i) {
+          var pct = Math.round((pr.p.atual / pr.p.metas[0]) * 100);
+          return '<div class="mt-rank-row"><span class="mt-rank-pos">' + (i + 1) + '</span>' +
+            '<span class="mt-rank-avatar">' + initials(pr.p.nome) + '</span>' +
+            '<span class="mt-rank-name">' + pr.p.nome + '</span><span class="mt-rank-pct">' + pct + '%</span></div>';
+        }).join('') : '<div class="mt-rank-row">Ninguém cadastrado ainda</div>';
+      }
+
       function render() {
         var pairs = allPairs();
+        renderHero(pairs);
 
-        document.getElementById('mt-pill-periodo').textContent = config.mesRef + ' · dia ' + config.diaAtual + ' de ' + config.diasNoMes;
-        document.getElementById('mt-pill-pessoas').textContent = pairs.length + (pairs.length === 1 ? ' pessoa acompanhada' : ' pessoas acompanhadas');
+        var content = document.getElementById('mt-tab-content');
+        if (currentTab === 'historico') {
+          content.innerHTML = '<p class="mt-empty">📜 Ainda não há histórico — <strong>' + config.mesRef + '</strong> é o primeiro mês acompanhado por aqui. No fim do mês, este espaço vai guardar o retrospecto de cada período.</p>';
+          return;
+        }
 
         var blocksHtml = pairs.map(function (pr, i) { return renderBlock(pr.g, pr.gi, pr.p, i); }).join('');
-        document.getElementById('mt-blocks').innerHTML = blocksHtml || '<p class="mt-empty">Nenhuma pessoa cadastrada ainda. Clique na engrenagem pra adicionar.</p>';
+        content.innerHTML = blocksHtml || '<p class="mt-empty">Nenhuma pessoa cadastrada ainda. Clique no período pra adicionar.</p>';
 
         document.querySelectorAll('[id^="mt-restore-"]').forEach(function (btn) { btn.addEventListener('click', restoreDefault); });
 
@@ -311,6 +383,16 @@
           document.querySelectorAll('.mt-meta-bar-fill[data-w]').forEach(function (el) { el.style.width = el.getAttribute('data-w') + '%'; });
         });
       }
+
+      document.querySelectorAll('.mt-tab').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          document.querySelectorAll('.mt-tab').forEach(function (b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          currentTab = btn.getAttribute('data-tab');
+          render();
+        });
+      });
+
       render();
 
       // ── Modal de edição ──
